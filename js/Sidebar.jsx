@@ -83,7 +83,7 @@ class Sidebar extends React.Component{
     render(){
         const CurrentComponent = this.state.currentOption.component;
         return(
-            <div className="navbar main-menu">
+            <div className="navbar bc-sidebar">
                 <h2><BreadCrumb levels={this.state.levels} onClick={this.onMenuSelect.bind(this)}  mobile={this.state.collapsed} /></h2>
                 <CurrentComponent mobile={this.state.collapsed} onClick={this.onMenuSelect.bind(this)} data={this.state.currentOption.data} />
             </div>
