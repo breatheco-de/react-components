@@ -10,7 +10,7 @@ class Sidebar extends React.Component{
             levels: [],
             currentOption: null,
             collapsed: false
-        }
+        };
     }
     
     toggle(newCollapsedState){
@@ -68,7 +68,7 @@ class Sidebar extends React.Component{
             else
             {
                 const levels = this.props.menuItems.filter((level)=>{
-                    return (level.slug == this.props.baseLevel.slug || level.slug == option)
+                    return (level.slug == this.props.baseLevel.slug || level.slug == option);
                 });
                 const currentOption = this.getMenuOption(option);
                 this.setState({ levels, currentOption });
@@ -87,7 +87,7 @@ class Sidebar extends React.Component{
                 <h2><BreadCrumb levels={this.state.levels} onClick={this.onMenuSelect.bind(this)}  mobile={this.state.collapsed} /></h2>
                 <CurrentComponent mobile={this.state.collapsed} onClick={this.onMenuSelect.bind(this)} data={this.state.currentOption.data} />
             </div>
-        )
+        );
     }
 }
 Sidebar.propTypes = {
