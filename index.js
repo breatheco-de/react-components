@@ -14,3 +14,5 @@ export var Sidebar = require('./js/Sidebar').default;
 export var ProgressKPI = require('./js/ProgressKPI').default;
 export var PrivateRoute = require('./js/PrivateRoute').default;
 export var MenuItem = require('./js/MenuItem').default;
+export var Modal = require('./js/Modal').default;
+export class UserError extends Error{}

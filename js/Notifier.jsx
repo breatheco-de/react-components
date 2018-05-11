@@ -2,23 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-let Message = (props) => (
-  <li className={`alert ${props.typeClass}`}
-    style={{
-      height: (confirm) ? 'inherit' : '0'
-    }}
-  >
-    {props.noti.msg}
-    {
-      (props.confirm) ? 
-        (<p>
-          <button className="btn btn-light" onClick={() => props.noti.onConfirm(false)}>Cancel</button>
-          <button className="btn btn-success ml-2" onClick={() => props.noti.onConfirm(true)}>Confirm</button>
-        </p>)
-        : ''
-    }
-  </li>
-);
+let Message = (props) => { 
+  const Msg = props.noti.msg;
+  return (
+    <li className={`alert ${props.typeClass}`}
+      style={{
+        height: (confirm) ? 'inherit' : '0'
+      }}
+    >
+      { (typeof Msg !== 'string') ? <Msg onConfirm={props.noti.onConfirm} /> : props.noti.msg }
+      { (props.confirm && typeof Msg === 'string') ? 
+          (<p>
+            <button className="btn btn-light" onClick={() => props.noti.onConfirm(false)}>Cancel</button>
+            <button className="btn btn-success ml-2" onClick={() => props.noti.onConfirm(true)}>Confirm</button>
+          </p>)
+          : ''
+      }
+    </li>
+  );
+};
 
 class Notifier extends React.Component{
 
