@@ -38,15 +38,40 @@ import { Panel, DropLink } from '../path/to/library/index.js';
 | BreatheCrumb  |Show the path were the user is standing and allos the user to go back to previous levels   | 
 
 ### Actionable
-![alt text](https://breatheco-de.github.io/react-components/img/actionable.png "Logo Title Text 1")
+A label that has a check on the right depending if its done or not.
+
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/actionable.png "Logo Title Text 1") |
+|---|----|
+
+Properties
+```js
+{
+  label: PropTypes.string.isRequired,
+  dropdown: PropTypes.array,
+  isSelected: PropTypes.bool,
+  onDropdownSelect: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['lesson', 'replit', 'quiz', 'assignment']),
+}
+```
+
+```html
+    <ActionableItem key={i} type={l.type} 
+        done={(l.status === "done")} 
+        label={(typeof l.title !== 'undefined') ? l.title : l.associated_slug} 
+        dropdown={l.menu} 
+        onDropdownSelect={(option)=>this.actionableSelected(l,option)} 
+      />;
+```
 
 ### Checkbox
-![alt text](https://breatheco-de.github.io/react-components/img/checkbox.png "Logo Title Text 1")
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/checkbox.png "Logo Title Text 1") |
+|---|----|
 
 ### Droplink
 It displays a list of options when you click on it
-> Demo:
-> ![alt text](https://breatheco-de.github.io/react-components/img/droplink.png "Logo Title Text 1")
+
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/droplink.png "Logo Title Text 1") |
+|---|----|
 
 ```html
         <DropLink
@@ -62,22 +87,75 @@ It displays a list of options when you click on it
 ```
 
 ### List
-![alt text](https://breatheco-de.github.io/react-components/img/list.png "Logo Title Text 1")
+It displays a ul with LIs or OLs depending on if it is ordered or not.
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/list.png "Logo Title Text 1") |
+|---|----|
 
+```html
+    <List className="any-class" ordered={true}>
+        <ActionableItem key={i} label="Make the bed" done={false} />
+        <ActionableItem key={i} label="Make the bed" done={false} />
+        <ActionableItem key={i} label="Make the bed" done={false} />
+        <ActionableItem key={i} label="Make the bed" done={false} />
+    </List>
+```
 ### Loading
-![alt text](https://breatheco-de.github.io/react-components/img/loading.png "Logo Title Text 1")
+Show or hides a loadbar on the center of the screen
 
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/loading.png "Logo Title Text 1") |
+|---|----|
+
+```html
+    <Loading show={true} />
+```
 ### Modal
-![alt text](https://breatheco-de.github.io/react-components/img/modal.png "Logo Title Text 1")
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/modal.png "Logo Title Text 1") |
+|---|----|
 
 ### Notifier
-![alt text](https://breatheco-de.github.io/react-components/img/notifier.png "Logo Title Text 1")
+Displays a notification message on the top of the screen, you can specify if you want your
+notification to prompt the user for confirmation or not.
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/notifier.png "Logo Title Text 1") |
+|---|----|
 
+```js
+    let notifications = [{
+        id: 1, //unique identifier
+        msg: 'Are you sure you want to delete?', //message to display
+        type: 'info', //info, error, success or warning
+        onConfirm: confirm //this callback will be called on user confirmation 
+    }];
+```
+```html
+    <Notifier notifications={notifications} />
+```
 ### PrivateRoute
+
+It behaves like a normal react-router Route but with the addition 
+that it redirects the user to /login if it loggedIn = false
+
+```html
+    <BrowserRouter>
+            <Switch>
+                <Route exact path='/login' component={LoginView} />
+                <PrivateRoute exact path='/' loggedIn={this.state.loggedIn} component={AnyPrivateView} />
+                <Route render={() => (<p className="text-center mt-5">Not found</p>)} />
+            </Switch>
+        </div>
+    </BrowserRouter>
+```
 ### ProgressKPI
-![alt text](https://breatheco-de.github.io/react-components/img/progress_kpi.png "Logo Title Text 1")
+Displays the percentage of progress from 0 to 100%
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/progress_kpi.png "Logo Title Text 1") |
+|---|----|
+
+```html
+    <ProgressKPI progress={76} />
+```
 ### Sidebar
-![alt text](https://breatheco-de.github.io/react-components/img/sidebar.png "Logo Title Text 1")
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/sidebar.png "Logo Title Text 1") |
+|---|----|
 ### BreatheCrumb
-![alt text](https://breatheco-de.github.io/react-components/img/breadcrump.png "Logo Title Text 1")
+| Demo | ![alt text](https://breatheco-de.github.io/react-components/img/breadcrumb.png "Logo Title Text 1") |
+|---|----|
 
