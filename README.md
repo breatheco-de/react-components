@@ -38,6 +38,7 @@ import { Panel, DropLink } from '../path/to/library/index.js';
 | BreatheCrumb  |Show the path were the user is standing and allos the user to go back to previous levels   | 
 
 ### Actionable
+
 A label that has a check on the right depending if its done or not.
 
 | Demo | ![alt text](https://breatheco-de.github.io/react-components/img/actionable.png "Logo Title Text 1") |
@@ -64,11 +65,14 @@ Properties
 ```
 
 ### Checkbox
+
 | Demo | ![alt text](https://breatheco-de.github.io/react-components/img/checkbox.png "Logo Title Text 1") |
 |---|----|
 
 ### Droplink
+
 It displays a list of options when you click on it
+
 | Demo | ![alt text](https://breatheco-de.github.io/react-components/img/droplink.png "Logo Title Text 1") |
 |---|----|
 =======
@@ -88,7 +92,9 @@ It displays a list of options when you click on it
 ```
 
 ### List
+
 It displays a ul with LIs or OLs depending on if it is ordered or not.
+
 | Demo | ![alt text](https://breatheco-de.github.io/react-components/img/list.png "Logo Title Text 1") |
 |---|----|
 
@@ -110,12 +116,14 @@ Show or hides a loadbar on the center of the screen
     <Loading show={true} />
 ```
 ### Modal
+
 | Demo | ![alt text](https://breatheco-de.github.io/react-components/img/modal.png "Logo Title Text 1") |
 |---|----|
 
 ### Notifier
 Displays a notification message on the top of the screen, you can specify if you want your
 notification to prompt the user for confirmation or not.
+
 | Demo | ![alt text](https://breatheco-de.github.io/react-components/img/notifier.png "Logo Title Text 1") |
 |---|----|
 
@@ -147,6 +155,7 @@ that it redirects the user to /login if it loggedIn = false
 ```
 ### ProgressKPI
 Displays the percentage of progress from 0 to 100%
+
 | Demo | ![alt text](https://breatheco-de.github.io/react-components/img/progress_kpi.png "Logo Title Text 1") |
 |---|----|
 
@@ -154,9 +163,11 @@ Displays the percentage of progress from 0 to 100%
     <ProgressKPI progress={76} />
 ```
 ### Sidebar
+
 | Demo | ![alt text](https://breatheco-de.github.io/react-components/img/sidebar.png "Logo Title Text 1") |
 |---|----|
 ### BreatheCrumb
+
 | Demo | ![alt text](https://breatheco-de.github.io/react-components/img/breadcrumb.png "Logo Title Text 1") |
 |---|----|
 
