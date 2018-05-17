@@ -45,9 +45,11 @@ import { Panel, DropLink } from '../path/to/library/index.js';
 
 ### Droplink
 It displays a list of options when you click on it
-> Demo:
-> ![alt text](https://breatheco-de.github.io/react-components/img/droplink.png "Logo Title Text 1")
 
+**Preview**
+![alt text](https://breatheco-de.github.io/react-components/img/droplink.png "Logo Title Text 1")
+
+**Usage**
 ```html
         <DropLink
             className='list_card' 
