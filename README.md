@@ -24,8 +24,8 @@ import { Panel, DropLink } from '../path/to/library/index.js';
 | Component     | Description                                                                               |
 |---------------|-------------------------------------------------------------------------------------------|
 | Button        |Simple button                                                                              | 
-| Checkbot      |It's a very simple checkbot                                                                | 
-| Droplink      |It's a very simple bootstrap                                                               | 
+| Checkbox      |It's a very simple checkbot                                                                | 
+| Droplink      |It's a minimalist bootstrap dropdown                                                       | 
 | List          |Just a list of stuff                                                                       | 
 | Loading       |Loading animation                                                                          | 
 | MenuItem      |Item on the left sidebar                                                                   | 
@@ -37,14 +37,29 @@ import { Panel, DropLink } from '../path/to/library/index.js';
 | Sidebar       |The Main Navegation component in BreatheCode's UI                                          | 
 | BreatheCrumb  |Show the path were the user is standing and allos the user to go back to previous levels   | 
 
-### Button
+### Actionable
 ![alt text](https://breatheco-de.github.io/react-components/img/actionable.png "Logo Title Text 1")
 
 ### Checkbox
 ![alt text](https://breatheco-de.github.io/react-components/img/checkbox.png "Logo Title Text 1")
 
 ### Droplink
-![alt text](https://breatheco-de.github.io/react-components/img/droplink.png "Logo Title Text 1")
+It displays a list of options when you click on it
+> Demo:
+> ![alt text](https://breatheco-de.github.io/react-components/img/droplink.png "Logo Title Text 1")
+
+```html
+        <DropLink
+            className='list_card' 
+            dropdown={[
+                { label: 'review students', slug: 'cohort_students', to: `/manage/student/?cohort=${data.slug}`},
+                { label: 'change cohort stage', slug: 'change_stage', data: someData }
+            ])}
+            onSelect={(opt) => onEntitySelect(opt)}
+        >
+        Click me
+        </DropLink>
+```
 
 ### List
 ![alt text](https://breatheco-de.github.io/react-components/img/list.png "Logo Title Text 1")
