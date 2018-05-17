@@ -8,6 +8,17 @@ This is the main UI Library used in all BreatheCode interfaces based on react.
 The BreatheCode UX is based on Markdown, it mainly relys on typography to create
 a neat experience but with a very minimalis approach.
 
+## Instalation
+
+1. Clone the repository
+```
+$ git clone https://github.com/breatheco-de/react-components.git
+```
+2. Import any component that you want to use
+```
+import { Panel, DropLink } from '../path/to/library/index.js';
+```
+
 ## Component Table of Contents:
 
 | Component     | Description                                                                               |
@@ -27,31 +38,31 @@ a neat experience but with a very minimalis approach.
 | BreatheCrumb  |Show the path were the user is standing and allos the user to go back to previous levels   | 
 
 ### Button
-![alt text](../docs/img/actionable.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/actionable.png "Logo Title Text 1")
 
 ### Checkbox
-![alt text](../docs/img/checkbox.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/checkbox.png "Logo Title Text 1")
 
 ### Droplink
-![alt text](../docs/img/droplink.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/droplink.png "Logo Title Text 1")
 
 ### List
-![alt text](../docs/img/list.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/list.png "Logo Title Text 1")
 
 ### Loading
-![alt text](../docs/img/loading.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/loading.png "Logo Title Text 1")
 
 ### Modal
-![alt text](../docs/img/modal.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/modal.png "Logo Title Text 1")
 
 ### Notifier
-![alt text](../docs/img/notifier.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/notifier.png "Logo Title Text 1")
 
 ### PrivateRoute
 ### ProgressKPI
-![alt text](../docs/img/progress_kpi.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/progress_kpi.png "Logo Title Text 1")
 ### Sidebar
-![alt text](../docs/img/sidebar.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/sidebar.png "Logo Title Text 1")
 ### BreatheCrumb
-![alt text](../docs/img/breadcrump.png "Logo Title Text 1")
+![alt text](https://breatheco-de.github.io/react-components/img/breadcrump.png "Logo Title Text 1")
 
