@@ -50,9 +50,9 @@ class CheckBox extends React.Component{
     }
 }
 CheckBox.propTypes = {
-  // You can declare that a prop is a specific JS primitive. By default, these
-  // are all optional.
+  //you can pass your own component to render the to-do
   render: PropTypes.func,
+  //what happends on click
   onClick: PropTypes.func,
   checked: PropTypes.bool,
   label: PropTypes.string,
