@@ -13,13 +13,12 @@ class MenuItem extends React.Component{
         if(this.props.to) this.props.history.push(this.props.to);
         if(this.props.onClick) this.props.onClick();
     }
+    
     render(){
         return(
-            <li onClick={this.onClick.bind(this)} className={'nav-item '+(this.props.mobile) ? 'mobile':''}>
-                <a className="nav-link" href="#">
-                    <i id={this.props.slug} className={this.props.icon+" menuicon"}></i>
-                    <span className="ml-2">{this.props.label}</span>
-                </a>
+            <li onClick={this.onClick.bind(this)} className={(this.props.mobile) ? 'mobile':''}>
+                <i id={this.props.slug} className={this.props.icon+" menuicon"}></i>
+                <span>{this.props.label}</span>
             </li>
         )
     }
@@ -31,7 +30,7 @@ MenuItem.propTypes = {
   label: PropTypes.string.isRequired,
   icon: PropTypes.string,
   to: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func.isRequired
 }
 MenuItem.defaultProps = {
     icon: '',

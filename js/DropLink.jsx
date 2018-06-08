@@ -7,8 +7,9 @@ class DropLink extends React.Component{
         super();
         this.state = {
             opened: false
-        }
+        };
         this.beingHovered = false;
+        this.dropdown = null;
     }
     
     buttonType(){
@@ -32,7 +33,9 @@ class DropLink extends React.Component{
     }
     
     render(){
-        
+        const styles = {
+            marginLeft: (this.dropdown) ? "-"+this.dropdown.with : '0'
+        };
         const menuOptions = this.props.dropdown.map((opt,i) => (<a key={i} className="dropdown-item" onClick={()=>this.props.onSelect(opt)}>{opt.label}</a>));
         return(
             <div className={"bcdroplink dropdown "+this.props.className+((this.state.opened) ? ' show':'')}>
@@ -42,7 +45,9 @@ class DropLink extends React.Component{
                     {this.props.children}
                 </a>
                 {(this.props.dropdown.length>0 && this.state.opened) ?
-                (<div className={"dropdown-menu "+this.props.direction+((this.state.opened) ? ' show':'')}
+                (<div ref={(c) => this.dropdown = c} 
+                    style={styles}
+                    className={"dropdown-menu "+this.props.direction+((this.state.opened) ? ' show':'')}
                     onMouseOut={this.onMouseOut.bind(this)} 
                     onMouseOver={()=>this.beingHovered = true}>
                     {menuOptions}
