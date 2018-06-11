@@ -10,13 +10,13 @@ a neat experience but with a very minimalis approach.
 
 ## Instalation
 
-1. Clone the repository
+1. Install using npm
 ```
-$ git clone https://github.com/breatheco-de/react-components.git
+$ npm i @breathecode/breathecode-react-components --save
 ```
 2. Import any component that you want to use
 ```
-import { Panel, DropLink } from '../path/to/library/index.js';
+import { Panel, DropLink } from '@breathecode/breathecode-react-components';
 ```
 
 ## Component Table of Contents:

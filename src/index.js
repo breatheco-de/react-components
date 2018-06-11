@@ -19,12 +19,12 @@ export var Modal = require('./js/Modal').default;
 export var Notify = require('./js/actions/NotifyActions');
 export var Notifications = require('./js/stores/NotificationStore').default;
 
-export var ForgotView = require('./js/views/ForgotView').default;
-export var LoginView = require('./js/views/LoginView').default;
-export var Session = require('./js/stores/SessionStore').default;
+// export var ForgotView = require('./js/views/ForgotView').default;
+// export var LoginView = require('./js/views/LoginView').default;
+// export var Session = require('./js/stores/SessionStore').default;
 
-export var login = require('./js/actions/SessionActions').loginUser;
-export var logout = require('./js/actions/SessionActions').logoutUser;
-export var remind = require('./js/actions/SessionActions').remindUser;
+// export var login = require('./js/actions/SessionActions').loginUser;
+// export var logout = require('./js/actions/SessionActions').logoutUser;
+// export var remind = require('./js/actions/SessionActions').remindUser;
 
 export class UserError extends Error{}
