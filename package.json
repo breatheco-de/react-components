@@ -45,7 +45,8 @@
     "webpack-cli": "^3.0.3"
   },
   "dependencies": {
-    "@4geeksacademy/react-flux-dash": "^3.0.0",
+    "@4geeksacademy/react-flux-dash": "^3.0.2",
+    "@breathecode/api-js-wrapper": "*",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "bootstrap": "^4.1.1",

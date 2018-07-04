@@ -2,7 +2,7 @@ import React from "react";
 import Flux from "@4geeksacademy/react-flux-dash";
 import {Link} from "react-router-dom";
 import Validator from 'validator';
-import bcLogo from '../../img/bc-icon.png';
+import bcLogo from '../../../img/bc-icon.png';
 import * as SessionActions from '../actions/SessionActions';
 
 export default class Forgot extends Flux.View {

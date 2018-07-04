@@ -1,5 +1,5 @@
 import Flux from '@4geeksacademy/react-flux-dash';
-import BC from '../../../api/index';
+import BC from '@breathecode/api-js-wrapper';
 
 export const loginUser = (username, password) =>{
     return BC.credentials().autenticate(username, password)
