@@ -8,7 +8,8 @@ import { Theme, ActionableItem, DropLink, Button, CheckBox } from '../src/index'
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
-storiesOf('Welcome', module).add('to Storybook', () => (<Welcome showApp={linkTo('Button')} />));
+const Welcome = () => (<h1>Welcome to the BreatheCode UI!</h1>);
+storiesOf('Welcome', module).add('to BreatheCode UI', () => (<Welcome />));
 
 
 const actionableItemOptions = [
