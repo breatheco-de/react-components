@@ -8,9 +8,11 @@ import { Theme, ActionableItem, DropLink, Button, CheckBox } from '../src/index'
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
-const Welcome = () => (<h1>Welcome to the BreatheCode UI!</h1>);
-storiesOf('Welcome', module).add('to BreatheCode UI', () => (<Welcome />));
 
+
+/**
+ *  Actionable Item
+ */
 
 const actionableItemOptions = [
     { label: 'Mark as read', url: 'hello' },
@@ -24,7 +26,9 @@ storiesOf('ActionableItem', module).add('with text', () => (<Theme.Theme>
 </Theme.Theme>));
   
   
-  
+/**
+ *  DropLink
+ */
   
 const droplinkOptions = [
     { label: 'Mark as read', url: 'hello' },
@@ -39,7 +43,9 @@ storiesOf('DropLink', module).add('with text', () => (<Theme.Theme>
 
 
 
-
+/**
+ *  CheckBox
+ */
 
 storiesOf('CheckBox', module).add('with text', () => (<Theme.Theme>
     <CheckBox 
@@ -50,14 +56,22 @@ storiesOf('CheckBox', module).add('with text', () => (<Theme.Theme>
   notes: { markdown: 'welele' }
 });
  
+ 
+ 
+ 
+/**
+ *  Button
+ */
+ 
 storiesOf('Button', module).add('with text', () => (<Theme.Theme>
     <Button 
       label={text('Label', 'Click Me!')} 
-      icon={text('Label', 'Click Me!')}
+      icon={text('Label', 'fab fa-trash')}
       type={select('Type', ['light'], 'light')}
       dropdown={[
         { label: 'First action', url: 'hello' }
       ]}
+      onClick={action('checkbox-click')}
     > 
     I am a dropdown
     </Button>
