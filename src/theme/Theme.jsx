@@ -1,21 +1,22 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import './theme.scss';
+import PropTypes from "prop-types";
+import "./theme.scss";
 
-const Theme = ({children}) => {
-    return (<div className="theme">
-        {children}
-    </div>);
+const Theme = ({ children }) => {
+	return <div className="theme">{children}</div>;
 };
 Theme.propTypes = {
-  children: PropTypes.array.isRequired
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired
 };
 
 const _Context = React.createContext({
-  bar: {}
+	bar: {}
 });
 export default {
-    Theme: Theme,
-    Provider: _Context.Provider,
-    Consumer: _Context.Consumer
+	Theme: Theme,
+	Provider: _Context.Provider,
+	Consumer: _Context.Consumer
 };

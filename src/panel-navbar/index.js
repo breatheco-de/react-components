@@ -1,1 +1,1 @@
-export { default } from './PanelNavbar.jsx';
+export { default } from "./PanelNavbar.jsx";

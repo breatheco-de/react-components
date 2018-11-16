@@ -1,41 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
 
-class MenuItem extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            mobile: false
-        }
-    }
-    onClick(){
-        if(this.props.to) this.props.history.push(this.props.to);
-        if(this.props.onClick) this.props.onClick();
-    }
-    
-    render(){
-        return(
-            <li onClick={this.onClick.bind(this)} className={(this.props.collapsed) ? 'collapsed':''}>
-                <i id={this.props.slug} className={this.props.icon+" menuicon"}></i>
-                <span>{this.props.label}</span>
-            </li>
-        )
-    }
-}
+const MenuItem = () => (
+	<li
+		onClick={() => {
+			if (this.props.onClick) this.props.onClick();
+		}}
+		className={this.props.collapsed ? "collapsed" : ""}>
+		<i id={this.props.slug} className={this.props.icon + " menuicon"} />
+		<span>{this.props.label}</span>
+	</li>
+);
 MenuItem.propTypes = {
-  // You can declare that a prop is a specific JS primitive. By default, these
-  // are all optional.
-  mobile: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-  icon: PropTypes.string,
-  to: PropTypes.string,
-  onClick: PropTypes.func.isRequired
-}
-MenuItem.defaultProps = {
-    icon: '',
-    onClick: null,
-    to: null,
-    mobile: false
+	// You can declare that a prop is a specific JS primitive. By default, these
+	// are all optional.
+	mobile: PropTypes.bool,
+	label: PropTypes.string.isRequired,
+	icon: PropTypes.string,
+	history: PropTypes.object.isRequired,
+	to: PropTypes.string,
+	onClick: PropTypes.func.isRequired
 };
-export default withRouter(MenuItem);
+MenuItem.defaultProps = {
+	icon: "",
+	onClick: null,
+	history: null,
+	to: null,
+	mobile: false
+};
+export default MenuItem;

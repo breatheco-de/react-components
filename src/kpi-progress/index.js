@@ -1,1 +1,1 @@
-export { default } from './KPIProgress.jsx';
+export { default } from "./KPIProgress.jsx";
