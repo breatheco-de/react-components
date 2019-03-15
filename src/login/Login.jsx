@@ -45,7 +45,7 @@ class Login extends React.Component {
 		return (
 			<div className="container">
 				<div className="form-signin text-center">
-					<img src={this.props.logoURL} />
+					<img src={this.props.logoURL} style={{ maxHeight: this.props.logoHeight }} />
 					<small className="text-center d-block">
 						[{this.props.appName}]
 					</small>
@@ -64,7 +64,7 @@ class Login extends React.Component {
 						<input
 							type="email"
 							id="inputEmail"
-							className="form-control"
+							className="form-control mb-2"
 							placeholder="Email address"
 							required
 							autoFocus
@@ -76,7 +76,7 @@ class Login extends React.Component {
 						<input
 							type="password"
 							id="inputPassword"
-							className="form-control"
+							className="form-control mb-2"
 							placeholder="Password"
 							required
 							onChange={e => (this.password = e.target.value)}
@@ -95,10 +95,10 @@ class Login extends React.Component {
 								Loading...
 							</button>
 						)}
-						<div className="checkbox">
-							<a href="#" onClick={() => this.props.onForgot()}>
+						<div>
+							<button type="button" className="btn btn-default mt-2 w-100" href="#" onClick={() => this.props.onForgot()}>
 								Forgot Password
-							</a>
+							</button>
 						</div>
 					</form>
 					{

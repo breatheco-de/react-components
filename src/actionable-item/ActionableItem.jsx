@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DropLink from "../droplink";
+import './actionable-item.scss';
 
 const options = ["lesson", "replit", "quiz", "assignment"];
 

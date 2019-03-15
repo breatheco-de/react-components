@@ -50,7 +50,7 @@ class Forgot extends React.Component {
 		return (
 			<div className="container">
 				<div className="form-signin text-center">
-					<img src={this.props.logoURL} />
+					<img src={this.props.logoURL} style={{ maxHeight: this.props.logoHeight }} />
 					<h2 className="form-signin-heading">
 						What's your account email?
 					</h2>
@@ -95,9 +95,9 @@ class Forgot extends React.Component {
 								Loading...
 							</button>
 						)}
-						<a href="#" onClick={() => this.props.onBackToLogin()}>
-							Forgot Password
-						</a>
+						<button className="btn btn-default text-blue mt-3 w-100" onClick={() => this.props.onBackToLogin()}>
+							Back To Login
+						</button>
 					</form>
 					{
 						//<button className="btn btn-lg btn-light btn-block" type="submit">or use Github <i className="fab fa-github"></i></button>

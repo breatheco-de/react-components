@@ -8,10 +8,12 @@ class BreadCrumb extends React.Component {
 				<ul className="breadcrumb">
 					<li
 						onClick={() => this.props.onClick(this.props.levels[0])}>
-						<img
-							className="logo"
-							src={process.env.STATIC_PATH + this.props.logoURL}
-						/>
+						{ typeof this.props.logoURL !== 'undefined' ?
+							<img
+								className="logo"
+								src={process.env.STATIC_PATH + this.props.logoURL}
+							/>:''
+						}
 					</li>
 				</ul>
 			);
