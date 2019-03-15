@@ -97,3 +97,26 @@ export const days = _days.map((d,i) => {
     d.dayNumber = i;
     return d;
 });
+
+
+export const menuItems = [
+    {
+        slug:"course", label:"Course", items: [
+            { 
+                slug: "syllabus", 
+                label: "Syllabus", 
+                icon: "graduationCap", 
+                size: 370 
+            },
+            { 
+                slug: "assignments",
+                label: "Assignments", 
+                icon: "faCheck", 
+                size: 370 
+            }
+        ]},
+    {
+        slug:"search", 
+        label:"Search" 
+    }
+];

@@ -4,11 +4,11 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import { days } from './data.js';
+import { days, menuItems } from './data.js';
 
 import { Theme, ActionableItem, DropLink, Button, CheckBox, BreadCrumb,
  List, TimeLine, Sidebar, Panel, ProgressKPI, Login, Forgot, Loading,
- LoadBar } from '../src/index';
+ LoadBar, MenuItem } from '../src/index';
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
@@ -106,36 +106,16 @@ storiesOf('Button', module).add('default configuration', () => (<Theme.Theme>
  */
  
 storiesOf('List', module).add('default configuration', () => (<Theme.Theme>
-    <Button 
-      label={text('Label', 'Click Me!')} 
-      className={text('Classname')}
-      type={select('Type', ['light'], 'light')}
-      dropdown={[
-        { label: 'First action', url: 'hello' }
-      ]}
-      onClick={action('checkbox-click')}
-    > 
-    I am a dropdown
-    </Button>
-</Theme.Theme>));
-
-
-/**
- *  List
- */
- 
-storiesOf('List', module).add('default configuration', () => (<Theme.Theme>
-    <Button 
-      label={text('Label', 'Click Me!')} 
-      className={text('Classname')}
-      type={select('Type', ['light'], 'light')}
-      dropdown={[
-        { label: 'First action', url: 'hello' }
-      ]}
-      onClick={action('checkbox-click')}
-    > 
-    I am a dropdown
-    </Button>
+    <List> 
+      <ActionableItem label={text('Label', 'Make dinner')}
+        onDropdownSelect={action('actionable-select')}
+        dropdown={object('Options', actionableItemOptions)}
+      />
+      <ActionableItem label={text('Label', 'Make dinner')}
+        onDropdownSelect={action('actionable-select')}
+        dropdown={object('Options', actionableItemOptions)}
+      />
+    </List>
 </Theme.Theme>));
 
 /**
@@ -165,9 +145,7 @@ storiesOf('TimeLine', module).add('default configuration', () => (<Theme.Theme>
     <TimeLine 
       days={object('Days', days)} 
       onClick={action('timline-day-click')}
-    > 
-    I am a dropdown
-    </TimeLine>
+    /> 
 </Theme.Theme>));
 
 /**
@@ -176,11 +154,23 @@ storiesOf('TimeLine', module).add('default configuration', () => (<Theme.Theme>
 
 storiesOf('Sidebar', module).add('default configuration', () => (<Theme.Theme>
     <Sidebar 
-      days={object('Days', days)} 
-      onClick={action('timline-day-click')}
-    > 
-    I am a Sidebar
-    </Sidebar>
+      menuItems={object('menuItems', menuItems)} 
+      selectedOption={object('menuItems', menuItems[0])}
+      onSelect={action('timline-day-selected')}
+    /> 
+</Theme.Theme>));
+
+/**
+ *  MenuItem
+ */
+
+storiesOf('MenuItem', module).add('default configuration', () => (<Theme.Theme>
+    <MenuItem 
+      label={text('label', 'First option of the menu')} 
+      icon={text('icon', 'cog')} 
+      collapsed={boolean('collapsed', true)} 
+      onClick={action('menu-item-click')}
+    /> 
 </Theme.Theme>));
 
 /**

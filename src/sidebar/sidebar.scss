@@ -1,4 +1,16 @@
 @import '../theme/colors';
+.bc-sidebar{
+    ul{ padding: 0; }
+    &.collapsed{
+        overflow: inherit;
+        .dropdown-toggle:after{
+            display: none;
+        }
+    }
+    .nav-link{
+        padding: 0;
+    }
+}
 .settings-item{
     position: absolute;
     padding: 10px;
@@ -20,16 +32,5 @@
         .up{
             transform: translateY(calc(-100% - 40px));
         }
-    }
-}
-.bc-sidebar{
-    &.collapsed{
-        overflow: inherit;
-        .dropdown-toggle:after{
-            display: none;
-        }
-    }
-    .nav-link{
-        padding: 0;
     }
 }

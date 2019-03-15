@@ -12,7 +12,10 @@ export var Sidebar = require("./sidebar").default;
 export var ProgressKPI = require("./kpi-progress").default;
 export var MenuItem = require("./menu-item").default;
 export var Modal = require("./modal").default;
+
 export var LoadBar = require("./load-bar").default;
+export var setLoading = require("./load-bar").setLoading;
+
 export var PanelNavbar = require("./panel-navbar").default;
 export var TimeLine = require("./timeline").default;
 //export var Wizard = require('./wizard').default;

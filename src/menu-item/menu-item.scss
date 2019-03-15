@@ -1,0 +1,11 @@
+@import '../theme/colors.scss';
+.bc-menu-item{
+    padding: 5px;
+    .menuicon{
+        margin-right: 10px;
+    }
+    &:hover{
+        background: $light-grey;
+        cursor: pointer;
+    }
+}

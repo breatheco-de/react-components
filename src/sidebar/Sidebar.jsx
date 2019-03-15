@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import BreadCrumb from "../breadcrumb";
 import MenuItem from "../menu-item";
 import "./sidebar.scss";
 
@@ -37,20 +36,12 @@ Menu.defaultProps = {
 
 const Sidebar = props => {
 	if (!props.selectedOption) return <small>No option recognized</small>;
-
 	const collapsedClass = props.collapsed ? "collapsed" : "";
 	const MenuComponent = props.selectedOption.component
 		? props.selectedOption.component
 		: Menu;
 	return (
 		<div className={"navbar bc-sidebar " + collapsedClass}>
-			<h2>
-				<BreadCrumb
-					levels={props.breadcrumb}
-					onClick={option => props.onSelect(option)}
-					collapsed={props.collapsed}
-				/>
-			</h2>
 			{MenuComponent ? (
 				<MenuComponent
 					collapsed={props.collapsed}
@@ -77,8 +68,7 @@ Sidebar.propTypes = {
 	onSelect: PropTypes.func.isRequired,
 	onToggle: PropTypes.func,
 	collapsed: PropTypes.bool,
-	breadcrumb: PropTypes.array,
-	selectedOption: PropTypes.object,
+	selectedOption: PropTypes.object.isRequired,
 	menuItems: PropTypes.array.isRequired
 };
 Sidebar.defaultProps = {
@@ -86,7 +76,6 @@ Sidebar.defaultProps = {
 	onSelect: null,
 	collapsed: true,
 	menuItems: [],
-	breadcrumb: [],
 	selectedOption: null
 };
 export default Sidebar;

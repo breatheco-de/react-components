@@ -1,1 +1,1 @@
-export { default } from './LoadBar.jsx';
+export { default, setLoading } from './LoadBar.jsx';
