@@ -27,6 +27,11 @@ import faAngleDoubleUp from '@fortawesome/fontawesome-free-solid/faAngleDoubleUp
 import faQuestion from '@fortawesome/fontawesome-free-solid/faQuestion';
 import faExclamationCircle from '@fortawesome/fontawesome-free-solid/faExclamationCircle';
 import faYoutube from '@fortawesome/fontawesome-free-brands/faYoutube';
+import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
+import faPowerOff from '@fortawesome/fontawesome-free-solid/faPowerOff';
+import faBell from '@fortawesome/fontawesome-free-solid/faBell';
+import faBars from '@fortawesome/fontawesome-free-solid/faBars';
+import faTrash from '@fortawesome/fontawesome-free-solid/faTrash';
 /**
  * 3) Tell font-awesome that you want to replace your icons with SVGs (recomended for performance)
 */
@@ -41,7 +46,7 @@ fontawesome.library.add(
     faCheck, faGraduationCap, faPlay, faSpinner, faSearch, faGithub, faEnvelope,
     faCog, faSync, faEllipsisV, faExternalLinkAlt, faArrowRight, faArrowLeft,
     faAngleDoubleDown, faAngleDoubleUp, faQuestion, faExclamationCircle,
-    faYoutube
+    faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash
 );
 
 
@@ -49,8 +54,13 @@ fontawesome.library.add(
  * 5) Now, you can place the icon tag anywhere you want to icon to show, for example:
  *    <i className="fas fa-check"></i>
 */
-export const icons = {
-    cog: 'fas fa-cog',
-    graduationCap: 'fas fa-graduation-cap',
-    faCheck: 'fas fa-check',
+export const icon = (name) => {
+    const _icons = {
+        cog: 'fas fa-cog',
+        graduationCap: 'fas fa-graduation-cap',
+        check: 'fas fa-check',
+        trash: 'fas fa-trash'
+    };
+    if(typeof _icons[name] === 'undefined') throw new Error('Invalid icon name: '+name);
+    else return _icons[name];
 };

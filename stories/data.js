@@ -120,3 +120,8 @@ export const menuItems = [
         label:"Search" 
     }
 ];
+
+export const actionableMenu = [
+    { label: 'Mark as read', url: 'hello', icon: 'graduationCap' },
+    { label: 'Other sample action', url: 'hello'}
+];

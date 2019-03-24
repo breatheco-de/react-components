@@ -1,5 +1,6 @@
 import React from "react";
 import Validator from "validator";
+import './login.scss';
 
 class Forgot extends React.Component {
 	constructor() {

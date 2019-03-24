@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./droplink.scss";
+import { icon } from '../theme/icons';
+
 class DropLink extends React.Component {
 	constructor() {
 		super();
@@ -31,6 +33,7 @@ class DropLink extends React.Component {
 				key={i}
 				className="dropdown-item"
 				onClick={() => this.props.onSelect(opt)}>
+				{opt.icon && <i className={icon(opt.icon)+" mr-1"} />} 
 				{opt.label}
 			</a>
 		));
@@ -83,11 +86,13 @@ DropLink.propTypes = {
 	dropdown: PropTypes.array,
 	className: PropTypes.string,
 	onSelect: PropTypes.func.isRequired,
-	direction: PropTypes.string
+	direction: PropTypes.string,
+	icon: PropTypes.string
 };
 DropLink.defaultProps = {
 	dropdown: [],
 	className: "",
-	direction: "down"
+	direction: "down",
+	icon: null
 };
 export default DropLink;

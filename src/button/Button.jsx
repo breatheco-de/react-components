@@ -1,31 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./button.scss";
-class Button extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			checked: "checked"
-		};
-	}
+import { icon } from '../theme/icons';
 
-	buttonType() {
-		switch (this.props.type) {
-			case "light":
-				return "btn btn-light";
-				break;
-			default:
-				return "btn btn-light";
-				break;
-		}
-	}
+const types = (name) => {
+	const _typeNames = {
+		light: "btn btn-light"
+	};
+	if(typeof _typeNames[name] == 'undefined') throw new Error('Invalid button type: '+name);
+	return _typeNames[name];
+};
+class Button extends React.Component {
 
 	render() {
 		return (
 			<button
-				className={"bcbutton " + this.buttonType()}
+				className={"bcbutton " + types(this.props.type)}
 				onClick={() => this.props.onClick()}>
-				<i className={this.props.icon + " btnicon"} />{" "}
+				{this.props.icon && <i className={icon(this.props.icon) + " btnicon"} />}
+				{" "}
 				{this.props.label}
 			</button>
 		);
@@ -40,7 +33,7 @@ Button.propTypes = {
 	label: PropTypes.string
 };
 Button.defaultProps = {
-	icon: '',
+	icon: null,
 	type: 'light',
 	label: ''
 };

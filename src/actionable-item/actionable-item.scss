@@ -1,3 +1,7 @@
+@import '../theme/colors';
 .actionable-item{
     list-style: none;
+    .fa-check{
+        color: $darkGreen;
+    } 
 }

@@ -4,6 +4,12 @@ import DropLink from "../droplink";
 import './actionable-item.scss';
 
 const options = ["lesson", "replit", "quiz", "assignment"];
+const messages = {
+	lesson: "React:",	
+	quiz: "Answer:",	
+	replit: "Practice:",	
+	assignment: "Code:"	
+};
 
 class ActionableItem extends React.Component {
 	
@@ -13,40 +19,11 @@ class ActionableItem extends React.Component {
 		}
 	}
 
-	componentDidCatch(error, info) {
-		// You can also log the error to an error reporting service
-		console.log(error, info);
-	}
-
-	prependMessage() {
-		switch (this.props.type) {
-			case "lesson":
-				return "Read:";
-				break;
-			case "quiz":
-				return "Answer:";
-				break;
-			case "replit":
-				return "Practice:";
-				break;
-			case "assignment":
-				return "Code:";
-				break;
-			default:
-				return "";
-				break;
-		}
-	}
-
 	render() {
 		return (
 			<li className="actionable-item" onClick={this.onClick.bind(this)}>
-				{this.props.icon ? (
-					<i className={this.props.icon + " menuicon"} />
-				) : (
-					""
-				)}
-				{this.prependMessage()}
+				{this.props.icon && <i className={this.props.icon + " menuicon"} />}
+				{messages[this.props.type]}
 				<DropLink
 					dropdown={this.props.dropdown}
 					onSelect={option => this.props.onDropdownSelect(option)}>
@@ -68,7 +45,7 @@ ActionableItem.propTypes = {
 	type: PropTypes.oneOf(options)
 };
 ActionableItem.defaultProps = {
-	icon: false,
+	icon: null,
 	onClick: null,
 	dropdown: [],
 	done: false

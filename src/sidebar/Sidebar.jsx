@@ -1,81 +1,60 @@
-import React from "react";
-import PropTypes from "prop-types";
-import MenuItem from "../menu-item";
-import "./sidebar.scss";
-
-export const Menu = props => {
-	const htmlItems = props.items.map((item, i) => (
-		<MenuItem
-			key={i}
-			icon={item.icon}
-			label={item.label}
-			slug={item.slug}
-			collapsed={props.collapsed}
-			onClick={() => props.onClick(item)}
-		/>
-	));
-
-	return (
-		<div className="main-menu">
-			<ul>{htmlItems}</ul>
-		</div>
-	);
-};
-Menu.propTypes = {
-	// You can declare that a prop is a specific JS primitive. By default, these
-	// are all optional.
-	items: PropTypes.array.isRequired,
-	collapsed: PropTypes.bool,
-	onClick: PropTypes.func
-};
-Menu.defaultProps = {
-	collapsed: true,
-	onClick: null,
-	items: []
-};
-
-const Sidebar = props => {
-	if (!props.selectedOption) return <small>No option recognized</small>;
-	const collapsedClass = props.collapsed ? "collapsed" : "";
-	const MenuComponent = props.selectedOption.component
-		? props.selectedOption.component
-		: Menu;
-	return (
-		<div className={"navbar bc-sidebar " + collapsedClass}>
-			{MenuComponent ? (
-				<MenuComponent
-					collapsed={props.collapsed}
-					onClick={option => {
-						window.location.hash = "menu=" + option.slug;
-						props.onSelect(option);
-					}}
-					items={
-						props.selectedOption ? props.selectedOption.items : null
-					}
-					data={
-						props.selectedOption ? props.selectedOption.data : null
-					}
-				/>
-			) : (
-				""
-			)}
-		</div>
-	);
-};
+import React from 'react';
+import './sidebar.scss';
+import PropTypes from 'prop-types';
+class Sidebar extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            toggled: true
+        };
+    }
+    render(){
+        const Footer = this.props.footer;
+        const Menu = this.props.menu;
+        return (<div className={"page-wrapper chiller-theme"+((this.state.toggled) ? ' toggled':'')}>
+              <button type="button" onClick={() => this.setState({toggled: true })} className="btn btn-sm btn-dark show-sidebar">
+                <i className="fas fa-bars"></i>
+              </button>
+              <nav className="sidebar-wrapper">
+                <div className="sidebar-brand">
+                  <a onClick={(e) => { 
+                      e.preventDefault();
+                      this.props.onBrandClick(e);
+                  }} className="title" href="#">BreatheCode</a>
+                  <div className="close-sidebar">
+                    <i onClick={() => this.setState({toggled: false})} className="fas fa-times"></i>
+                  </div>
+                </div>
+                <div className={"sidebar-content"+(Footer ? ' with-footer':'')}>
+                  <div className="sidebar-menu">
+                    {Menu && <Menu />}
+                  </div>
+                </div>
+                {Footer && <Footer />}
+              </nav>
+              <main className="page-content">
+                {this.props.children}
+              </main>
+            </div>);
+    }
+}
 Sidebar.propTypes = {
 	// You can declare that a prop is a specific JS primitive. By default, these
 	// are all optional.
-	onSelect: PropTypes.func.isRequired,
-	onToggle: PropTypes.func,
-	collapsed: PropTypes.bool,
-	selectedOption: PropTypes.object.isRequired,
-	menuItems: PropTypes.array.isRequired
+	deph: PropTypes.number,
+	style: PropTypes.object,
+	children: PropTypes.node.isRequired,
+	className: PropTypes.string,
+	menu: PropTypes.node.isRequired,
+	footer: PropTypes.node
 };
 Sidebar.defaultProps = {
-	onToggle: null,
-	onSelect: null,
-	collapsed: true,
-	menuItems: [],
-	selectedOption: null
+	deph: 1,
+	style: null,
+	children: null,
+	padding: null,
+	footer: null,
+	menu: null,
+	className: ""
 };
 export default Sidebar;

@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import { days, menuItems } from './data.js';
+import { days, menuItems, actionableMenu } from './data.js';
 
 import { Theme, ActionableItem, DropLink, Button, CheckBox, BreadCrumb,
  List, TimeLine, Sidebar, Panel, ProgressKPI, Login, Forgot, Loading,
@@ -18,14 +18,11 @@ import { text, boolean, number, array, object, select } from '@storybook/addon-k
  *  Actionable Item
  */
 
-const actionableItemOptions = [
-    { label: 'Mark as read', url: 'hello' },
-    { label: 'Other sample action', url: 'hello'}
-];
 storiesOf('ActionableItem', module).add('default configuration', () => (<Theme.Theme>
     <ActionableItem label={text('Label', 'Make dinner')}
       onDropdownSelect={action('actionable-select')}
-      dropdown={object('Options', actionableItemOptions)}
+      dropdown={object('Options', actionableMenu)}
+      done={boolean('Done', true)}
     />
 </Theme.Theme>));
   
@@ -88,15 +85,13 @@ storiesOf('CheckBox', module).add('default configuration', () => (<Theme.Theme>
 storiesOf('Button', module).add('default configuration', () => (<Theme.Theme>
     <Button 
       label={text('Label', 'Click Me!')} 
-      icon={text('Label', 'fab fa-trash')}
+      icon={text('Label', 'trash')}
       type={select('Type', ['light'], 'light')}
       dropdown={[
         { label: 'First action', url: 'hello' }
       ]}
       onClick={action('checkbox-click')}
-    > 
-    I am a dropdown
-    </Button>
+    /> 
 </Theme.Theme>));
 
 
@@ -109,11 +104,11 @@ storiesOf('List', module).add('default configuration', () => (<Theme.Theme>
     <List> 
       <ActionableItem label={text('Label', 'Make dinner')}
         onDropdownSelect={action('actionable-select')}
-        dropdown={object('Options', actionableItemOptions)}
+        dropdown={object('Options', actionableMenu)}
       />
       <ActionableItem label={text('Label', 'Make dinner')}
         onDropdownSelect={action('actionable-select')}
-        dropdown={object('Options', actionableItemOptions)}
+        dropdown={object('Options', actionableMenu)}
       />
     </List>
 </Theme.Theme>));
@@ -153,11 +148,45 @@ storiesOf('TimeLine', module).add('default configuration', () => (<Theme.Theme>
  */
 
 storiesOf('Sidebar', module).add('default configuration', () => (<Theme.Theme>
-    <Sidebar 
-      menuItems={object('menuItems', menuItems)} 
-      selectedOption={object('menuItems', menuItems[0])}
-      onSelect={action('timline-day-selected')}
-    /> 
+    <Sidebar
+      menu={() => <TimeLine 
+        days={days} 
+        height="100%"
+      />}
+    > 
+      <h1>This is the content of the page</h1>
+    </Sidebar> 
+</Theme.Theme>));
+
+/**
+ *  Sidebar
+ */
+
+storiesOf('Sidebar', module).add('with footer', () => (<Theme.Theme>
+    <Sidebar
+      menu={() => <TimeLine 
+        days={days} 
+        height="100%"
+      />}
+      footer={() => <div className="sidebar-footer">
+        <a href="#">
+          <i className="fa fa-bell"></i>
+          <span className="badge badge-pill badge-warning notification">3</span>
+        </a>
+        <a href="#">
+          <i className="fa fa-envelope"></i>
+          <span className="badge badge-pill badge-success notification">7</span>
+        </a>
+        <a href="#">
+          <i className="fa fa-cog"></i>
+          <span className="badge-sonar"></span>
+        </a>
+        <a href="#">
+          <i className="fa fa-power-off"></i>
+        </a>
+      </div>}> 
+      <h1>This is the content of the page</h1>
+    </Sidebar> 
 </Theme.Theme>));
 
 /**

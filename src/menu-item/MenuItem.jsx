@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { icons } from '../theme/icons';
+import { icon } from '../theme/icons';
 import './menu-item.scss';
 
-const MenuItem = ({ onClick, collapsed, slug, label, icon }) => (
+const MenuItem = ({ onClick, collapsed, slug, label, iconName }) => (
 	<li
 		onClick={() => (onClick) && onClick()}
 		className={"bc-menu-item "+(collapsed ? "collapsed" : "")}>
-			<i id={slug} className={icons[icon] + " menuicon"} />
+			<i id={slug} className={icon(iconName) + " menuicon"} />
 			<span>{label}</span>
 	</li>
 );

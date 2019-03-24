@@ -1,5 +1,6 @@
 import React from "react";
 import Validator from "validator";
+import './login.scss';
 
 class Login extends React.Component {
 	constructor() {
