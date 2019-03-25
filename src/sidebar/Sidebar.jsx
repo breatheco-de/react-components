@@ -11,19 +11,25 @@ class Sidebar extends React.Component{
     render(){
         const Footer = this.props.footer;
         const Menu = this.props.menu;
+        const Brand = this.props.brand;
         return (<div className={"page-wrapper chiller-theme"+((this.state.toggled) ? ' toggled':'')}>
               <button type="button" onClick={() => this.setState({toggled: true })} className="btn btn-sm btn-dark show-sidebar">
                 <i className="fas fa-bars"></i>
               </button>
               <nav className="sidebar-wrapper">
                 <div className="sidebar-brand">
-                  <a onClick={(e) => { 
-                      e.preventDefault();
-                      this.props.onBrandClick(e);
-                  }} className="title" href="#">BreatheCode</a>
-                  <div className="close-sidebar">
-                    <i onClick={() => this.setState({toggled: false})} className="fas fa-times"></i>
-                  </div>
+                  {Brand ? <Brand/>
+                    :
+                    <div className="default-brand">
+                      <div className="close-sidebar" onClick={() => this.setState({toggled: false})}>
+                        <i className="fas fa-times"></i>
+                      </div>
+                      <a onClick={(e) => { 
+                          e.preventDefault();
+                          if(this.props.onBrandClick) this.props.onBrandClick(e);
+                      }} className="title" href="#">Menu</a>
+                    </div>
+                  }
                 </div>
                 <div className={"sidebar-content"+(Footer ? ' with-footer':'')}>
                   <div className="sidebar-menu">
@@ -45,7 +51,11 @@ Sidebar.propTypes = {
 	style: PropTypes.object,
 	children: PropTypes.node.isRequired,
 	className: PropTypes.string,
-	menu: PropTypes.node.isRequired,
+	menu: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.function,
+  ]),
+	onBrandClick: PropTypes.func,
 	footer: PropTypes.node
 };
 Sidebar.defaultProps = {
@@ -53,6 +63,7 @@ Sidebar.defaultProps = {
 	style: null,
 	children: null,
 	padding: null,
+	onBrandClick: null,
 	footer: null,
 	menu: null,
 	className: ""

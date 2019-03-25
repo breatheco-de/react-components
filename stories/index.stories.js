@@ -149,10 +149,27 @@ storiesOf('TimeLine', module).add('default configuration', () => (<Theme.Theme>
 
 storiesOf('Sidebar', module).add('default configuration', () => (<Theme.Theme>
     <Sidebar
+      menu={() => <ul className="px-3">
+				<MenuItem label="Syllabus" slug="syllabus" iconName="graduationCap" collapsed={false} onClick={action('menu-item-click')} />
+				<MenuItem label="Attendancy" slug="attendancy" iconName="trash" collapsed={false} onClick={action('menu-item-click')} />
+			</ul>}
+			onBrandClick={action('brand-click')}
+    > 
+      <h1>This is the content of the page</h1>
+    </Sidebar> 
+</Theme.Theme>));
+
+/**
+ *  Sidebar
+ */
+
+storiesOf('Sidebar', module).add('with timeline', () => (<Theme.Theme>
+    <Sidebar
       menu={() => <TimeLine 
         days={days} 
         height="100%"
       />}
+			onBrandClick={action('brand-click')}
     > 
       <h1>This is the content of the page</h1>
     </Sidebar> 
@@ -168,6 +185,7 @@ storiesOf('Sidebar', module).add('with footer', () => (<Theme.Theme>
         days={days} 
         height="100%"
       />}
+			onBrandClick={action('brand-click')}
       footer={() => <div className="sidebar-footer">
         <a href="#">
           <i className="fa fa-bell"></i>

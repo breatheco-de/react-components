@@ -32,6 +32,7 @@ import faPowerOff from '@fortawesome/fontawesome-free-solid/faPowerOff';
 import faBell from '@fortawesome/fontawesome-free-solid/faBell';
 import faBars from '@fortawesome/fontawesome-free-solid/faBars';
 import faTrash from '@fortawesome/fontawesome-free-solid/faTrash';
+import faList from '@fortawesome/fontawesome-free-solid/faList';
 /**
  * 3) Tell font-awesome that you want to replace your icons with SVGs (recomended for performance)
 */
@@ -46,7 +47,7 @@ fontawesome.library.add(
     faCheck, faGraduationCap, faPlay, faSpinner, faSearch, faGithub, faEnvelope,
     faCog, faSync, faEllipsisV, faExternalLinkAlt, faArrowRight, faArrowLeft,
     faAngleDoubleDown, faAngleDoubleUp, faQuestion, faExclamationCircle,
-    faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash
+    faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash, faList
 );
 
 
@@ -59,6 +60,18 @@ export const icon = (name) => {
         cog: 'fas fa-cog',
         graduationCap: 'fas fa-graduation-cap',
         check: 'fas fa-check',
+        list: 'fas fa-list',
+        search: 'fas fa-search',
+        envelope: 'fas fa-envelope',
+        sync: 'fas fa-sync',
+        bell: 'fas fa-bell',
+        play: 'fas fa-play',
+        powerOff: 'fas fa-power-off',
+        bars: 'fas fa-bars',
+        question: 'fas fa-question',
+        times: 'fas fa-times',
+        arrowRight: 'fas fa-arrow-right',
+        arrowLeft: 'fas fa-arrow-left',
         trash: 'fas fa-trash'
     };
     if(typeof _icons[name] === 'undefined') throw new Error('Invalid icon name: '+name);

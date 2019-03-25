@@ -157,6 +157,7 @@
 .sidebar-content {
   max-height: calc(100% - 30px);
   &.with-footer{ max-height: calc(100% - 80px); }
+  width: 100%;
   height: calc(100% - 30px);
   overflow-y: auto;
   position: relative;
@@ -170,16 +171,21 @@
 .sidebar-wrapper {
   .sidebar-brand {
     padding: 5px 15px;
-    display: flex;
-    align-items: center;
-    > a {
+    .default-brand{
+      width: 100%;
+    }
+    a {
       text-transform: uppercase;
       font-weight: bold;
+      color: #818896;
       flex-grow: 1;
     }
     .close-sidebar {
       cursor: pointer;
       font-size: 20px;
+      display: inline-block;
+      float: right;
+      width: 20px;
     }
   }
   .sidebar-header {
