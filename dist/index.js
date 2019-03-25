@@ -184,6 +184,28 @@ module.exports = { prefix: 'fas', iconName: 'arrow-right', icon: [448, 512, [], 
 
 /***/ }),
 
+/***/ "./node_modules/@fortawesome/fontawesome-free-solid/faBars.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@fortawesome/fontawesome-free-solid/faBars.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = { prefix: 'fas', iconName: 'bars', icon: [448, 512, [], "f0c9", "M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"] };
+
+/***/ }),
+
+/***/ "./node_modules/@fortawesome/fontawesome-free-solid/faBell.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@fortawesome/fontawesome-free-solid/faBell.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = { prefix: 'fas', iconName: 'bell', icon: [448, 512, [], "f0f3", "M433.884 366.059C411.634 343.809 384 316.118 384 208c0-79.394-57.831-145.269-133.663-157.83A31.845 31.845 0 0 0 256 32c0-17.673-14.327-32-32-32s-32 14.327-32 32c0 6.75 2.095 13.008 5.663 18.17C121.831 62.731 64 128.606 64 208c0 108.118-27.643 135.809-49.893 158.059C-16.042 396.208 5.325 448 48.048 448H160c0 35.346 28.654 64 64 64s64-28.654 64-64h111.943c42.638 0 64.151-51.731 33.941-81.941zM224 472a8 8 0 0 1 0 16c-22.056 0-40-17.944-40-40h16c0 13.234 10.766 24 24 24z"] };
+
+/***/ }),
+
 /***/ "./node_modules/@fortawesome/fontawesome-free-solid/faCheck.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/@fortawesome/fontawesome-free-solid/faCheck.js ***!
@@ -272,6 +294,17 @@ module.exports = { prefix: 'fas', iconName: 'play', icon: [448, 512, [], "f04b",
 
 /***/ }),
 
+/***/ "./node_modules/@fortawesome/fontawesome-free-solid/faPowerOff.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@fortawesome/fontawesome-free-solid/faPowerOff.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = { prefix: 'fas', iconName: 'power-off', icon: [512, 512, [], "f011", "M400 54.1c63 45 104 118.6 104 201.9 0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4 7.9 173.1 48.9 99.3 111.8 54.2c11.7-8.3 28-4.8 35 7.7L162.6 90c5.9 10.5 3.1 23.8-6.6 31-41.5 30.8-68 79.6-68 134.9-.1 92.3 74.5 168.1 168 168.1 91.6 0 168.6-74.2 168-169.1-.3-51.8-24.7-101.8-68.1-134-9.7-7.2-12.4-20.5-6.5-30.9l15.8-28.1c7-12.4 23.2-16.1 34.8-7.8zM296 264V24c0-13.3-10.7-24-24-24h-32c-13.3 0-24 10.7-24 24v240c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24z"] };
+
+/***/ }),
+
 /***/ "./node_modules/@fortawesome/fontawesome-free-solid/faQuestion.js":
 /*!************************************************************************!*\
   !*** ./node_modules/@fortawesome/fontawesome-free-solid/faQuestion.js ***!
@@ -313,6 +346,28 @@ module.exports = { prefix: 'fas', iconName: 'spinner', icon: [512, 512, [], "f11
 /***/ (function(module, exports) {
 
 module.exports = { prefix: 'fas', iconName: 'sync', icon: [512, 512, [], "f021", "M440.935 12.574l3.966 82.766C399.416 41.904 331.674 8 256 8 134.813 8 33.933 94.924 12.296 209.824 10.908 217.193 16.604 224 24.103 224h49.084c5.57 0 10.377-3.842 11.676-9.259C103.407 137.408 172.931 80 256 80c60.893 0 114.512 30.856 146.104 77.801l-101.53-4.865c-6.845-.328-12.574 5.133-12.574 11.986v47.411c0 6.627 5.373 12 12 12h200.333c6.627 0 12-5.373 12-12V12c0-6.627-5.373-12-12-12h-47.411c-6.853 0-12.315 5.729-11.987 12.574zM256 432c-60.895 0-114.517-30.858-146.109-77.805l101.868 4.871c6.845.327 12.573-5.134 12.573-11.986v-47.412c0-6.627-5.373-12-12-12H12c-6.627 0-12 5.373-12 12V500c0 6.627 5.373 12 12 12h47.385c6.863 0 12.328-5.745 11.985-12.599l-4.129-82.575C112.725 470.166 180.405 504 256 504c121.187 0 222.067-86.924 243.704-201.824 1.388-7.369-4.308-14.176-11.807-14.176h-49.084c-5.57 0-10.377 3.842-11.676 9.259C408.593 374.592 339.069 432 256 432z"] };
+
+/***/ }),
+
+/***/ "./node_modules/@fortawesome/fontawesome-free-solid/faTimes.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@fortawesome/fontawesome-free-solid/faTimes.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = { prefix: 'fas', iconName: 'times', icon: [352, 512, [], "f00d", "M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"] };
+
+/***/ }),
+
+/***/ "./node_modules/@fortawesome/fontawesome-free-solid/faTrash.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@fortawesome/fontawesome-free-solid/faTrash.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = { prefix: 'fas', iconName: 'trash', icon: [448, 512, [], "f1f8", "M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm415.2 56.7L394.8 467c-1.6 25.3-22.6 45-47.9 45H101.1c-25.3 0-46.3-19.7-47.9-45L32.8 140.7c-.4-6.9 5.1-12.7 12-12.7h358.5c6.8 0 12.3 5.8 11.9 12.7z"] };
 
 /***/ }),
 
@@ -2155,7 +2210,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".actionable-item {\n  list-style: none; }\n", ""]);
+exports.push([module.i, ".actionable-item {\n  list-style: none; }\n  .actionable-item .fa-check {\n    color: #28a745; }\n", ""]);
 
 // exports
 
@@ -2314,6 +2369,25 @@ exports.push([module.i, ".loading {\n  position: absolute;\n  top: 0;\n  left: 0
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/login/login.scss":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/login/login.scss ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".form-signin {\n  max-width: 400px;\n  margin: auto; }\n\n.form-signin ul {\n  margin: 0; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/menu-item/menu-item.scss":
 /*!*********************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/menu-item/menu-item.scss ***!
@@ -2383,7 +2457,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".bc-sidebar ul {\n  padding: 0; }\n\n.bc-sidebar.collapsed {\n  overflow: inherit; }\n  .bc-sidebar.collapsed .dropdown-toggle:after {\n    display: none; }\n\n.bc-sidebar .nav-link {\n  padding: 0; }\n\n.settings-item {\n  position: absolute;\n  padding: 10px;\n  bottom: 0;\n  right: 0;\n  z-index: 20;\n  width: 100%;\n  background: white;\n  border-top: 1px solid #D8D8D8; }\n  .settings-item.collapsed {\n    right: -1px; }\n    .settings-item.collapsed .dropdown-toggle:after {\n      display: none; }\n  .settings-item .dropdown {\n    float: right;\n    margin-top: -3px; }\n    .settings-item .dropdown .up {\n      transform: translateY(calc(-100% - 40px)); }\n", ""]);
+exports.push([module.i, "@keyframes swing {\n  0% {\n    transform: rotate(0deg); }\n  10% {\n    transform: rotate(10deg); }\n  30% {\n    transform: rotate(0deg); }\n  40% {\n    transform: rotate(-10deg); }\n  50% {\n    transform: rotate(0deg); }\n  60% {\n    transform: rotate(5deg); }\n  70% {\n    transform: rotate(0deg); }\n  80% {\n    transform: rotate(-5deg); }\n  100% {\n    transform: rotate(0deg); } }\n\n@keyframes sonar {\n  0% {\n    transform: scale(0.9);\n    opacity: 1; }\n  100% {\n    transform: scale(2);\n    opacity: 0; } }\n\n.page-wrapper .sidebar-wrapper {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.sidebar-wrapper .sidebar-brand > a, .sidebar-wrapper ul li a i {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.page-wrapper .page-content {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.sidebar-wrapper .sidebar-search input.search-menu, .sidebar-wrapper .sidebar-search .input-group-text {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.sidebar-wrapper .sidebar-menu ul li a {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.show-sidebar, .close-sidebar {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n/*----------------page-wrapper----------------*/\n.page-wrapper.toggled .sidebar-wrapper {\n  left: 0px; }\n\n/*----------------toggeled sidebar----------------*/\n@media screen and (min-width: 768px) {\n  .page-wrapper.toggled .page-content {\n    padding-left: 300px; } }\n\n/*----------------show sidebar button----------------*/\n.show-sidebar {\n  position: fixed;\n  left: -3px;\n  top: 10px;\n  border-radius: 0 4px 4px 0px;\n  width: 35px;\n  transition-delay: 0.3s; }\n\n.page-wrapper.toggled .show-sidebar {\n  left: -40px; }\n\n/*----------------sidebar-wrapper----------------*/\n.sidebar-wrapper {\n  width: 260px;\n  height: 100%;\n  max-height: 100%;\n  position: fixed;\n  top: 0;\n  left: -300px;\n  z-index: 999; }\n  .sidebar-wrapper ul {\n    list-style-type: none;\n    padding: 0;\n    margin: 0; }\n  .sidebar-wrapper a {\n    text-decoration: none; }\n\n/*----------------sidebar-content----------------*/\n.sidebar-content {\n  max-height: calc(100% - 30px);\n  height: calc(100% - 30px);\n  overflow-y: auto;\n  position: relative; }\n  .sidebar-content.with-footer {\n    max-height: calc(100% - 80px); }\n  .sidebar-content.desktop {\n    overflow-y: hidden; }\n\n/*--------------------sidebar-brand----------------------*/\n.sidebar-wrapper .sidebar-brand {\n  padding: 5px 15px;\n  display: flex;\n  align-items: center; }\n  .sidebar-wrapper .sidebar-brand > a {\n    text-transform: uppercase;\n    font-weight: bold;\n    flex-grow: 1; }\n  .sidebar-wrapper .sidebar-brand .close-sidebar {\n    cursor: pointer;\n    font-size: 20px; }\n\n.sidebar-wrapper .sidebar-header {\n  padding: 20px;\n  overflow: hidden; }\n  .sidebar-wrapper .sidebar-header .user-pic {\n    float: left;\n    width: 60px;\n    padding: 2px;\n    border-radius: 12px;\n    margin-right: 15px;\n    overflow: hidden; }\n    .sidebar-wrapper .sidebar-header .user-pic img {\n      object-fit: cover;\n      height: 100%;\n      width: 100%; }\n  .sidebar-wrapper .sidebar-header .user-info {\n    float: left; }\n    .sidebar-wrapper .sidebar-header .user-info > span {\n      display: block; }\n    .sidebar-wrapper .sidebar-header .user-info .user-role {\n      font-size: 12px; }\n    .sidebar-wrapper .sidebar-header .user-info .user-status {\n      font-size: 11px;\n      margin-top: 4px; }\n      .sidebar-wrapper .sidebar-header .user-info .user-status i {\n        font-size: 8px;\n        margin-right: 4px;\n        color: #5cb85c; }\n\n.sidebar-wrapper .sidebar-search > div {\n  padding: 10px 20px; }\n\n.sidebar-wrapper .sidebar-menu {\n  padding-bottom: 10px; }\n  .sidebar-wrapper .sidebar-menu .header-menu span {\n    font-weight: bold;\n    font-size: 14px;\n    padding: 15px 20px 5px 20px;\n    display: inline-block; }\n  .sidebar-wrapper .sidebar-menu ul li a {\n    display: inline-block;\n    width: 100%;\n    text-decoration: none;\n    position: relative;\n    padding: 8px 30px 8px 20px; }\n    .sidebar-wrapper .sidebar-menu ul li a i {\n      margin-right: 10px;\n      font-size: 12px;\n      width: 30px;\n      height: 30px;\n      line-height: 30px;\n      text-align: center;\n      border-radius: 4px; }\n    .sidebar-wrapper .sidebar-menu ul li a:hover > i::before {\n      display: inline-block;\n      animation: swing ease-in-out 0.5s 1 alternate; }\n  .sidebar-wrapper .sidebar-menu ul li a span.label, .sidebar-wrapper .sidebar-menu ul li a span.badge {\n    float: right;\n    margin-top: 8px;\n    margin-left: 5px; }\n  .sidebar-wrapper .sidebar-menu .sidebar-submenu {\n    display: none; }\n\n/*--------------------sidebar-header----------------------*/\n/*-----------------------sidebar-search------------------------*/\n/*----------------------sidebar-menu-------------------------*/\n/*--------------------------side-footer------------------------------*/\n.sidebar-footer {\n  position: absolute;\n  width: 100%;\n  bottom: 0;\n  display: flex; }\n  .sidebar-footer a {\n    flex-grow: 1;\n    text-align: center;\n    height: 30px;\n    line-height: 30px;\n    position: relative; }\n    .sidebar-footer a .notification {\n      position: absolute;\n      top: 0; }\n\n.badge-sonar {\n  display: inline-block;\n  background: #980303;\n  border-radius: 50%;\n  height: 8px;\n  width: 8px;\n  position: absolute;\n  top: 0; }\n  .badge-sonar:after {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    left: 0;\n    border: 2px solid #980303;\n    opacity: 0;\n    border-radius: 50%;\n    width: 100%;\n    height: 100%;\n    animation: sonar 1.5s infinite; }\n\n/*--------------------------page-content-----------------------------*/\n.page-wrapper .page-content {\n  display: inline-block;\n  width: 100%;\n  padding-left: 0px;\n  padding-top: 20px;\n  overflow-x: hidden; }\n  .page-wrapper .page-content > div {\n    padding: 20px 40px; }\n\n/*------scroll bar---------------------*/\n::-webkit-scrollbar {\n  width: 5px;\n  height: 7px; }\n\n::-webkit-scrollbar-button {\n  width: 0px;\n  height: 0px; }\n\n::-webkit-scrollbar-thumb {\n  background: #525965;\n  border: 0px none #ffffff;\n  border-radius: 0px; }\n  ::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active {\n    background: #525965; }\n\n::-webkit-scrollbar-track {\n  background: transparent;\n  border: 0px none #ffffff;\n  border-radius: 50px; }\n  ::-webkit-scrollbar-track:hover, ::-webkit-scrollbar-track:active {\n    background: transparent; }\n\n::-webkit-scrollbar-corner {\n  background: transparent; }\n\n/*-----------------------------chiller-theme-------------------------------------------------*/\n.chiller-theme .sidebar-wrapper {\n  background: #eee; }\n  .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu, .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {\n    border-color: transparent;\n    box-shadow: none; }\n  .chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-role, .chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-status {\n    color: #818896; }\n  .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu, .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {\n    color: #818896; }\n  .chiller-theme .sidebar-wrapper .sidebar-brand > a, .chiller-theme .sidebar-wrapper .sidebar-menu ul li a {\n    color: #818896; }\n\n.chiller-theme .sidebar-footer a {\n  color: #818896; }\n\n.chiller-theme .sidebar-wrapper .sidebar-header .user-info, .chiller-theme .sidebar-wrapper .sidebar-brand > a:hover {\n  color: #b8bfce; }\n\n.chiller-theme .sidebar-footer a:hover i {\n  color: #b8bfce; }\n\n.page-wrapper.chiller-theme.toggled .close-sidebar {\n  color: #bdbdbd; }\n  .page-wrapper.chiller-theme.toggled .close-sidebar:hover {\n    color: #ffffff; }\n\n.chiller-theme .sidebar-wrapper ul li:hover a i {\n  color: #16c7ff;\n  text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5); }\n\n.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu, .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {\n  background: #3a3f48; }\n\n.chiller-theme .sidebar-wrapper .sidebar-menu .header-menu span {\n  color: #6c7b88; }\n\n.chiller-theme .sidebar-footer {\n  background: #3a3f48;\n  padding: 5px 0; }\n  .chiller-theme .sidebar-footer a:first-child {\n    border-left: none; }\n  .chiller-theme .sidebar-footer a:last-child {\n    border-right: none; }\n", ""]);
 
 // exports
 
@@ -2421,7 +2495,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".timeline {\n  overflow: hidden;\n  padding: 0;\n  position: relative;\n  padding-right: 10px;\n  /* ================ Timeline Media Queries ================ */ }\n  .timeline .line {\n    position: absolute;\n    top: 0;\n    content: ' ';\n    display: block;\n    width: 1px;\n    height: 100%;\n    background: #5b5b5b;\n    background: -moz-linear-gradient(top, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1e5799), color-stop(100%, #7db9e8));\n    background: -webkit-linear-gradient(top, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    background: -o-linear-gradient(top, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    background: -ms-linear-gradient(top, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    background: linear-gradient(to bottom, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    z-index: 5; }\n    .timeline .line.left {\n      left: 14px; }\n    .timeline .line.right {\n      right: 5px; }\n  .timeline ul {\n    position: relative;\n    width: calc(100% + 10px);\n    height: calc(100vh - 70px);\n    margin-left: 15px;\n    padding-left: 0;\n    overflow-y: scroll;\n    overflow-x: hidden;\n    list-style-type: none; }\n    .timeline ul:-webkit-scrollbar {\n      display: none; }\n    .timeline ul li {\n      padding: 1em 0;\n      padding-right: 20px;\n      background: white; }\n      .timeline ul li:after {\n        content: \"\";\n        display: block;\n        height: 0;\n        clear: both;\n        visibility: hidden; }\n      .timeline ul li:active {\n        background: #ffbf00; }\n      .timeline ul li.selected {\n        background-color: #ffbf00 !important; }\n      .timeline ul li:hover {\n        cursor: pointer;\n        background-color: #eee; }\n  .timeline .direction-l {\n    position: relative;\n    width: 100%;\n    float: left;\n    text-align: right; }\n  .timeline .direction-r {\n    position: relative;\n    width: 100%;\n    float: right; }\n  .timeline .flag-wrapper {\n    position: relative;\n    display: inline-block;\n    text-align: center; }\n  .timeline .flag {\n    position: relative;\n    display: inline;\n    background: #f8f8f8;\n    padding: 6px 10px;\n    border-radius: 5px;\n    font-weight: 600;\n    text-align: left;\n    -webkit-box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15);\n    -moz-box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15);\n    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15); }\n  .timeline .direction-l .flag {\n    margin-right: 20px; }\n  .timeline .direction-r .flag {\n    margin-left: 20px; }\n  .timeline .direction-l .flag-point, .timeline .direction-r .flag-point {\n    position: absolute;\n    top: 20px;\n    content: ' ';\n    display: block;\n    width: 12px;\n    height: 12px;\n    margin-top: -10px;\n    background: #fff;\n    border-radius: 10px;\n    border: 4px solid #ff5050;\n    z-index: 10; }\n  .timeline .direction-l .flag-point {\n    right: -3px; }\n  .timeline .direction-r .flag-point {\n    left: -3px; }\n  .timeline .direction-l .flag:after {\n    content: \"\";\n    position: absolute;\n    left: 100%;\n    top: 50%;\n    height: 0;\n    width: 0;\n    margin-top: -8px;\n    border: solid transparent;\n    border-left-color: #5b5b5b;\n    border-width: 8px;\n    pointer-events: none; }\n  .timeline .direction-r .flag:after {\n    content: \"\";\n    position: absolute;\n    right: 100%;\n    top: 50%;\n    height: 0;\n    width: 0;\n    margin-top: -8px;\n    border: solid transparent;\n    border-right-color: #5b5b5b;\n    border-width: 8px;\n    pointer-events: none; }\n  .timeline .time-wrapper {\n    display: inline;\n    line-height: 1em;\n    font-size: 0.66666em;\n    color: #fa5050;\n    vertical-align: middle;\n    max-width: 150px; }\n  .timeline .direction-l .time-wrapper {\n    float: left; }\n  .timeline .direction-r .time-wrapper {\n    float: right; }\n  .timeline .time {\n    display: inline-block;\n    padding: 4px 6px;\n    background: #f8f8f8;\n    max-width: 220px; }\n  .timeline .desc {\n    margin: 1em 0.75em 0 0;\n    font-size: 0.77777em;\n    font-style: italic;\n    line-height: 1.5em; }\n  .timeline .direction-r .desc {\n    margin: 1em 0 0 0.75em; }\n  .timeline.collapsed {\n    padding: 0;\n    overflow: inherit;\n    font-size: 0.8em; }\n    .timeline.collapsed .line {\n      left: 6px; }\n    .timeline.collapsed ul {\n      width: 100%;\n      margin-left: 7px;\n      padding: 0;\n      overflow: hidden; }\n      .timeline.collapsed ul li {\n        padding: 10px 0px;\n        margin-left: 6px; }\n    .timeline.collapsed .direction-l, .timeline.collapsed .direction-r {\n      float: none;\n      width: 100%;\n      text-align: left; }\n      .timeline.collapsed .direction-l .time-wrapper, .timeline.collapsed .direction-r .time-wrapper {\n        display: none;\n        min-width: 140px;\n        position: fixed;\n        text-align: left;\n        z-index: 99999999; }\n      .timeline.collapsed .direction-l:hover .time-wrapper, .timeline.collapsed .direction-r:hover .time-wrapper {\n        display: inline-block; }\n    .timeline.collapsed .flag-wrapper {\n      text-align: center; }\n    .timeline.collapsed .flag {\n      background: white;\n      z-index: 15;\n      margin: 0; }\n      .timeline.collapsed .flag:hover {\n        background: #fbf5eb; }\n    .timeline.collapsed .direction-l .flag-point, .timeline.collapsed .direction-r .flag-point {\n      left: -9px; }\n    .timeline.collapsed .direction-l .flag:after, .timeline.collapsed .direction-r .flag:after {\n      content: \"\";\n      position: absolute;\n      left: 50%;\n      top: -8px;\n      height: 0;\n      width: 0;\n      margin-left: -8px;\n      border: solid transparent;\n      border-bottom-color: white;\n      border-width: 8px;\n      pointer-events: none; }\n    .timeline.collapsed .direction-l .time-wrapper, .timeline.collapsed .direction-r .time-wrapper {\n      float: none; }\n    .timeline.collapsed .desc {\n      display: none; }\n", ""]);
+exports.push([module.i, ".timeline {\n  overflow: hidden;\n  padding: 0;\n  position: relative;\n  padding-right: 10px;\n  /* ================ Timeline Media Queries ================ */ }\n  .timeline .line {\n    position: absolute;\n    top: 0;\n    content: ' ';\n    display: block;\n    width: 1px;\n    height: 100%;\n    background: #5b5b5b;\n    background: -moz-linear-gradient(top, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1e5799), color-stop(100%, #7db9e8));\n    background: -webkit-linear-gradient(top, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    background: -o-linear-gradient(top, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    background: -ms-linear-gradient(top, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    background: linear-gradient(to bottom, rgba(80, 80, 80, 0) 0%, #5b5b5b 8%, #5b5b5b 92%, rgba(80, 80, 80, 0) 100%);\n    z-index: 5; }\n    .timeline .line.left {\n      left: 14px; }\n    .timeline .line.right {\n      right: 5px; }\n  .timeline ul {\n    position: relative;\n    width: calc(100% + 10px);\n    height: calc(100vh - 70px);\n    margin-left: 15px;\n    padding-left: 0;\n    overflow-y: scroll;\n    overflow-x: hidden;\n    list-style-type: none; }\n    .timeline ul:-webkit-scrollbar {\n      display: none; }\n    .timeline ul li {\n      padding: 1em 0;\n      padding-right: 20px; }\n      .timeline ul li:after {\n        content: \"\";\n        display: block;\n        height: 0;\n        clear: both;\n        visibility: hidden; }\n      .timeline ul li:active {\n        background: #ffbf00; }\n      .timeline ul li.selected {\n        background-color: #ffbf00 !important; }\n      .timeline ul li:hover {\n        cursor: pointer;\n        background-color: #eee; }\n  .timeline .direction-l {\n    position: relative;\n    width: 100%;\n    float: left;\n    text-align: right; }\n  .timeline .direction-r {\n    position: relative;\n    width: 100%;\n    float: right; }\n  .timeline .flag-wrapper {\n    position: relative;\n    display: inline-block;\n    text-align: center; }\n  .timeline .flag {\n    position: relative;\n    display: inline;\n    background: #f8f8f8;\n    padding: 6px 10px;\n    border-radius: 5px;\n    font-weight: 600;\n    text-align: left;\n    -webkit-box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15);\n    -moz-box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15);\n    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15); }\n  .timeline .direction-l .flag {\n    margin-right: 20px; }\n  .timeline .direction-r .flag {\n    margin-left: 20px; }\n  .timeline .direction-l .flag-point, .timeline .direction-r .flag-point {\n    position: absolute;\n    top: 20px;\n    content: ' ';\n    display: block;\n    width: 12px;\n    height: 12px;\n    margin-top: -10px;\n    background: #fff;\n    border-radius: 10px;\n    border: 4px solid #ff5050;\n    z-index: 10; }\n  .timeline .direction-l .flag-point {\n    right: -3px; }\n  .timeline .direction-r .flag-point {\n    left: -3px; }\n  .timeline .direction-l .flag:after {\n    content: \"\";\n    position: absolute;\n    left: 100%;\n    top: 50%;\n    height: 0;\n    width: 0;\n    margin-top: -8px;\n    border: solid transparent;\n    border-left-color: #5b5b5b;\n    border-width: 8px;\n    pointer-events: none; }\n  .timeline .direction-r .flag:after {\n    content: \"\";\n    position: absolute;\n    right: 100%;\n    top: 50%;\n    height: 0;\n    width: 0;\n    margin-top: -8px;\n    border: solid transparent;\n    border-right-color: #5b5b5b;\n    border-width: 8px;\n    pointer-events: none; }\n  .timeline .time-wrapper {\n    display: inline;\n    line-height: 1em;\n    font-size: 0.66666em;\n    color: #fa5050;\n    vertical-align: middle;\n    max-width: 150px; }\n  .timeline .direction-l .time-wrapper {\n    float: left; }\n  .timeline .direction-r .time-wrapper {\n    float: right; }\n  .timeline .time {\n    display: inline-block;\n    padding: 4px 6px;\n    background: #f8f8f8;\n    max-width: 220px; }\n  .timeline .desc {\n    margin: 1em 0.75em 0 0;\n    font-size: 0.77777em;\n    font-style: italic;\n    line-height: 1.5em; }\n  .timeline .direction-r .desc {\n    margin: 1em 0 0 0.75em; }\n  .timeline.collapsed {\n    padding: 0;\n    overflow: inherit;\n    font-size: 0.8em; }\n    .timeline.collapsed .line {\n      left: 6px; }\n    .timeline.collapsed ul {\n      width: 100%;\n      margin-left: 7px;\n      padding: 0;\n      overflow: hidden; }\n      .timeline.collapsed ul li {\n        padding: 10px 0px;\n        margin-left: 6px; }\n    .timeline.collapsed .direction-l, .timeline.collapsed .direction-r {\n      float: none;\n      width: 100%;\n      text-align: left; }\n      .timeline.collapsed .direction-l .time-wrapper, .timeline.collapsed .direction-r .time-wrapper {\n        display: none;\n        min-width: 140px;\n        position: fixed;\n        text-align: left;\n        z-index: 99999999; }\n      .timeline.collapsed .direction-l:hover .time-wrapper, .timeline.collapsed .direction-r:hover .time-wrapper {\n        display: inline-block; }\n    .timeline.collapsed .flag-wrapper {\n      text-align: center; }\n    .timeline.collapsed .flag {\n      background: white;\n      z-index: 15;\n      margin: 0; }\n      .timeline.collapsed .flag:hover {\n        background: #fbf5eb; }\n    .timeline.collapsed .direction-l .flag-point, .timeline.collapsed .direction-r .flag-point {\n      left: -9px; }\n    .timeline.collapsed .direction-l .flag:after, .timeline.collapsed .direction-r .flag:after {\n      content: \"\";\n      position: absolute;\n      left: 50%;\n      top: -8px;\n      height: 0;\n      width: 0;\n      margin-left: -8px;\n      border: solid transparent;\n      border-bottom-color: white;\n      border-width: 8px;\n      pointer-events: none; }\n    .timeline.collapsed .direction-l .time-wrapper, .timeline.collapsed .direction-r .time-wrapper {\n      float: none; }\n    .timeline.collapsed .desc {\n      display: none; }\n", ""]);
 
 // exports
 
@@ -10209,6 +10283,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 var options = ["lesson", "replit", "quiz", "assignment"];
+var messages = {
+  lesson: "React:",
+  quiz: "Answer:",
+  replit: "Practice:",
+  assignment: "Code:"
+};
 
 var ActionableItem =
 /*#__PURE__*/
@@ -10231,37 +10311,6 @@ function (_React$Component) {
       }
     }
   }, {
-    key: "componentDidCatch",
-    value: function componentDidCatch(error, info) {
-      // You can also log the error to an error reporting service
-      console.log(error, info);
-    }
-  }, {
-    key: "prependMessage",
-    value: function prependMessage() {
-      switch (this.props.type) {
-        case "lesson":
-          return "Read:";
-          break;
-
-        case "quiz":
-          return "Answer:";
-          break;
-
-        case "replit":
-          return "Practice:";
-          break;
-
-        case "assignment":
-          return "Code:";
-          break;
-
-        default:
-          return "";
-          break;
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this = this;
@@ -10269,9 +10318,9 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "actionable-item",
         onClick: this.onClick.bind(this)
-      }, this.props.icon ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      }, this.props.icon && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: this.props.icon + " menuicon"
-      }) : "", this.prependMessage(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_droplink__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }), messages[this.props.type], react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_droplink__WEBPACK_IMPORTED_MODULE_2__["default"], {
         dropdown: this.props.dropdown,
         onSelect: function onSelect(option) {
           return _this.props.onDropdownSelect(option);
@@ -10296,7 +10345,7 @@ ActionableItem.propTypes = {
   type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(options)
 };
 ActionableItem.defaultProps = {
-  icon: false,
+  icon: null,
   onClick: null,
   dropdown: [],
   done: false
@@ -10510,6 +10559,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _button_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./button.scss */ "./src/button/button.scss");
 /* harmony import */ var _button_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_button_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _theme_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../theme/icons */ "./src/theme/icons.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10532,48 +10582,38 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+var types = function types(name) {
+  var _typeNames = {
+    light: "btn btn-light"
+  };
+  if (typeof _typeNames[name] == 'undefined') throw new Error('Invalid button type: ' + name);
+  return _typeNames[name];
+};
+
 var Button =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(Button, _React$Component);
 
   function Button() {
-    var _this;
-
     _classCallCheck(this, Button);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Button).call(this));
-    _this.state = {
-      checked: "checked"
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Button).apply(this, arguments));
   }
 
   _createClass(Button, [{
-    key: "buttonType",
-    value: function buttonType() {
-      switch (this.props.type) {
-        case "light":
-          return "btn btn-light";
-          break;
-
-        default:
-          return "btn btn-light";
-          break;
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "bcbutton " + this.buttonType(),
+        className: "bcbutton " + types(this.props.type),
         onClick: function onClick() {
-          return _this2.props.onClick();
+          return _this.props.onClick();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: this.props.icon + " btnicon"
+      }, this.props.icon && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: Object(_theme_icons__WEBPACK_IMPORTED_MODULE_3__["icon"])(this.props.icon) + " btnicon"
       }), " ", this.props.label);
     }
   }]);
@@ -10590,7 +10630,7 @@ Button.propTypes = {
   label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
 };
 Button.defaultProps = {
-  icon: '',
+  icon: null,
   type: 'light',
   label: ''
 };
@@ -10831,6 +10871,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _droplink_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./droplink.scss */ "./src/droplink/droplink.scss");
 /* harmony import */ var _droplink_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_droplink_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _theme_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../theme/icons */ "./src/theme/icons.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10848,6 +10889,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -10900,7 +10942,9 @@ function (_React$Component) {
           onClick: function onClick() {
             return _this2.props.onSelect(opt);
           }
-        }, opt.label);
+        }, opt.icon && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: Object(_theme_icons__WEBPACK_IMPORTED_MODULE_3__["icon"])(opt.icon) + " mr-1"
+        }), opt.label);
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bcdroplink dropdown " + this.props.className + (this.state.opened ? " show" : "")
@@ -10945,12 +10989,14 @@ DropLink.propTypes = {
   dropdown: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
   className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   onSelect: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  direction: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+  direction: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  icon: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
 };
 DropLink.defaultProps = {
   dropdown: [],
   className: "",
-  direction: "down"
+  direction: "down",
+  icon: null
 };
 /* harmony default export */ __webpack_exports__["default"] = (DropLink);
 
@@ -11709,6 +11755,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! validator */ "./node_modules/validator/index.js");
 /* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(validator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _login_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login.scss */ "./src/login/login.scss");
+/* harmony import */ var _login_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_login_scss__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11726,6 +11774,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -11868,6 +11917,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! validator */ "./node_modules/validator/index.js");
 /* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(validator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _login_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login.scss */ "./src/login/login.scss");
+/* harmony import */ var _login_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_login_scss__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11885,6 +11936,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -12039,6 +12091,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/login/login.scss":
+/*!******************************!*\
+  !*** ./src/login/login.scss ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./login.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/login/login.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./src/menu-item/MenuItem.jsx":
 /*!************************************!*\
   !*** ./src/menu-item/MenuItem.jsx ***!
@@ -12065,7 +12147,7 @@ var MenuItem = function MenuItem(_ref) {
       collapsed = _ref.collapsed,
       slug = _ref.slug,
       label = _ref.label,
-      icon = _ref.icon;
+      iconName = _ref.iconName;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     onClick: function onClick() {
       return _onClick && _onClick();
@@ -12073,7 +12155,7 @@ var MenuItem = function MenuItem(_ref) {
     className: "bc-menu-item " + (collapsed ? "collapsed" : "")
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     id: slug,
-    className: _theme_icons__WEBPACK_IMPORTED_MODULE_2__["icons"][icon] + " menuicon"
+    className: Object(_theme_icons__WEBPACK_IMPORTED_MODULE_2__["icon"])(iconName) + " menuicon"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, label));
 };
 
@@ -12514,85 +12596,127 @@ if(false) {}
 /*!*********************************!*\
   !*** ./src/sidebar/Sidebar.jsx ***!
   \*********************************/
-/*! exports provided: Menu, default */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Menu", function() { return Menu; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _menu_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../menu-item */ "./src/menu-item/index.js");
-/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sidebar.scss */ "./src/sidebar/sidebar.scss");
-/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_sidebar_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sidebar.scss */ "./src/sidebar/sidebar.scss");
+/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sidebar_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
-var Menu = function Menu(props) {
-  var htmlItems = props.items.map(function (item, i) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_menu_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      key: i,
-      icon: item.icon,
-      label: item.label,
-      slug: item.slug,
-      collapsed: props.collapsed,
-      onClick: function onClick() {
-        return props.onClick(item);
-      }
-    });
-  });
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "main-menu"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, htmlItems));
-};
-Menu.propTypes = {
-  // You can declare that a prop is a specific JS primitive. By default, these
-  // are all optional.
-  items: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,
-  collapsed: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  onClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
-};
-Menu.defaultProps = {
-  collapsed: true,
-  onClick: null,
-  items: []
-};
 
-var Sidebar = function Sidebar(props) {
-  if (!props.selectedOption) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "No option recognized");
-  var collapsedClass = props.collapsed ? "collapsed" : "";
-  var MenuComponent = props.selectedOption.component ? props.selectedOption.component : Menu;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "navbar bc-sidebar " + collapsedClass
-  }, MenuComponent ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MenuComponent, {
-    collapsed: props.collapsed,
-    onClick: function onClick(option) {
-      window.location.hash = "menu=" + option.slug;
-      props.onSelect(option);
-    },
-    items: props.selectedOption ? props.selectedOption.items : null,
-    data: props.selectedOption ? props.selectedOption.data : null
-  }) : "");
-};
+var Sidebar =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Sidebar, _React$Component);
+
+  function Sidebar() {
+    var _this;
+
+    _classCallCheck(this, Sidebar);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Sidebar).call(this));
+    _this.state = {
+      toggled: true
+    };
+    return _this;
+  }
+
+  _createClass(Sidebar, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var Footer = this.props.footer;
+      var Menu = this.props.menu;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "page-wrapper chiller-theme" + (this.state.toggled ? ' toggled' : '')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        onClick: function onClick() {
+          return _this2.setState({
+            toggled: true
+          });
+        },
+        className: "btn btn-sm btn-dark show-sidebar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-bars"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        className: "sidebar-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-brand"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this2.props.onBrandClick(e);
+        },
+        className: "title",
+        href: "#"
+      }, "BreatheCode"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "close-sidebar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        onClick: function onClick() {
+          return _this2.setState({
+            toggled: false
+          });
+        },
+        className: "fas fa-times"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-content" + (Footer ? ' with-footer' : '')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-menu"
+      }, Menu && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Menu, null))), Footer && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Footer, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        className: "page-content"
+      }, this.props.children));
+    }
+  }]);
+
+  return Sidebar;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 Sidebar.propTypes = {
   // You can declare that a prop is a specific JS primitive. By default, these
   // are all optional.
-  onSelect: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
-  onToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  collapsed: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  selectedOption: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
-  menuItems: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired
+  deph: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number,
+  style: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node.isRequired,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  menu: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node.isRequired,
+  footer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
 };
 Sidebar.defaultProps = {
-  onToggle: null,
-  onSelect: null,
-  collapsed: true,
-  menuItems: [],
-  selectedOption: null
+  deph: 1,
+  style: null,
+  children: null,
+  padding: null,
+  footer: null,
+  menu: null,
+  className: ""
 };
 /* harmony default export */ __webpack_exports__["default"] = (Sidebar);
 
@@ -12690,12 +12814,12 @@ var _Context = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext({
 /*!****************************!*\
   !*** ./src/theme/icons.js ***!
   \****************************/
-/*! exports provided: icons */
+/*! exports provided: icon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "icons", function() { return icons; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "icon", function() { return icon; });
 /* harmony import */ var _fortawesome_fontawesome__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/fontawesome */ "./node_modules/@fortawesome/fontawesome/index.es.js");
 /* harmony import */ var _fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faCheck */ "./node_modules/@fortawesome/fontawesome-free-solid/faCheck.js");
 /* harmony import */ var _fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_1__);
@@ -12733,6 +12857,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_free_solid_faExclamationCircle__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faExclamationCircle__WEBPACK_IMPORTED_MODULE_17__);
 /* harmony import */ var _fortawesome_fontawesome_free_brands_faYoutube__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @fortawesome/fontawesome-free-brands/faYoutube */ "./node_modules/@fortawesome/fontawesome-free-brands/faYoutube.js");
 /* harmony import */ var _fortawesome_fontawesome_free_brands_faYoutube__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_brands_faYoutube__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faTimes__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faTimes */ "./node_modules/@fortawesome/fontawesome-free-solid/faTimes.js");
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faTimes__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faTimes__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faPowerOff__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faPowerOff */ "./node_modules/@fortawesome/fontawesome-free-solid/faPowerOff.js");
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faPowerOff__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faPowerOff__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faBell__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faBell */ "./node_modules/@fortawesome/fontawesome-free-solid/faBell.js");
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faBell__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faBell__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faBars__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faBars */ "./node_modules/@fortawesome/fontawesome-free-solid/faBars.js");
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faBars__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faBars__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faTrash__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @fortawesome/fontawesome-free-solid/faTrash */ "./node_modules/@fortawesome/fontawesome-free-solid/faTrash.js");
+/* harmony import */ var _fortawesome_fontawesome_free_solid_faTrash__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_solid_faTrash__WEBPACK_IMPORTED_MODULE_23__);
 /* global FontAwesomeConfig */
 
 /**
@@ -12742,6 +12876,11 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * 2) Then you have to import every icon that you will use
 */
+
+
+
+
+
 
 
 
@@ -12772,16 +12911,20 @@ _fortawesome_fontawesome__WEBPACK_IMPORTED_MODULE_0__["default"].config = {
  * 4) Add the icons into the font-awesome library
 */
 
-_fortawesome_fontawesome__WEBPACK_IMPORTED_MODULE_0__["default"].library.add(_fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_1___default.a, _fortawesome_fontawesome_free_solid_faGraduationCap__WEBPACK_IMPORTED_MODULE_4___default.a, _fortawesome_fontawesome_free_solid_faPlay__WEBPACK_IMPORTED_MODULE_5___default.a, _fortawesome_fontawesome_free_solid_faSpinner__WEBPACK_IMPORTED_MODULE_7___default.a, _fortawesome_fontawesome_free_solid_faSearch__WEBPACK_IMPORTED_MODULE_8___default.a, _fortawesome_fontawesome_free_brands_faGithub__WEBPACK_IMPORTED_MODULE_9___default.a, _fortawesome_fontawesome_free_solid_faEnvelope__WEBPACK_IMPORTED_MODULE_13___default.a, _fortawesome_fontawesome_free_solid_faCog__WEBPACK_IMPORTED_MODULE_6___default.a, _fortawesome_fontawesome_free_solid_faSync__WEBPACK_IMPORTED_MODULE_2___default.a, _fortawesome_fontawesome_free_solid_faEllipsisV__WEBPACK_IMPORTED_MODULE_3___default.a, _fortawesome_fontawesome_free_solid_faExternalLinkAlt__WEBPACK_IMPORTED_MODULE_10___default.a, _fortawesome_fontawesome_free_solid_faArrowRight__WEBPACK_IMPORTED_MODULE_11___default.a, _fortawesome_fontawesome_free_solid_faArrowLeft__WEBPACK_IMPORTED_MODULE_12___default.a, _fortawesome_fontawesome_free_solid_faAngleDoubleDown__WEBPACK_IMPORTED_MODULE_14___default.a, _fortawesome_fontawesome_free_solid_faAngleDoubleUp__WEBPACK_IMPORTED_MODULE_15___default.a, _fortawesome_fontawesome_free_solid_faQuestion__WEBPACK_IMPORTED_MODULE_16___default.a, _fortawesome_fontawesome_free_solid_faExclamationCircle__WEBPACK_IMPORTED_MODULE_17___default.a, _fortawesome_fontawesome_free_brands_faYoutube__WEBPACK_IMPORTED_MODULE_18___default.a);
+_fortawesome_fontawesome__WEBPACK_IMPORTED_MODULE_0__["default"].library.add(_fortawesome_fontawesome_free_solid_faCheck__WEBPACK_IMPORTED_MODULE_1___default.a, _fortawesome_fontawesome_free_solid_faGraduationCap__WEBPACK_IMPORTED_MODULE_4___default.a, _fortawesome_fontawesome_free_solid_faPlay__WEBPACK_IMPORTED_MODULE_5___default.a, _fortawesome_fontawesome_free_solid_faSpinner__WEBPACK_IMPORTED_MODULE_7___default.a, _fortawesome_fontawesome_free_solid_faSearch__WEBPACK_IMPORTED_MODULE_8___default.a, _fortawesome_fontawesome_free_brands_faGithub__WEBPACK_IMPORTED_MODULE_9___default.a, _fortawesome_fontawesome_free_solid_faEnvelope__WEBPACK_IMPORTED_MODULE_13___default.a, _fortawesome_fontawesome_free_solid_faCog__WEBPACK_IMPORTED_MODULE_6___default.a, _fortawesome_fontawesome_free_solid_faSync__WEBPACK_IMPORTED_MODULE_2___default.a, _fortawesome_fontawesome_free_solid_faEllipsisV__WEBPACK_IMPORTED_MODULE_3___default.a, _fortawesome_fontawesome_free_solid_faExternalLinkAlt__WEBPACK_IMPORTED_MODULE_10___default.a, _fortawesome_fontawesome_free_solid_faArrowRight__WEBPACK_IMPORTED_MODULE_11___default.a, _fortawesome_fontawesome_free_solid_faArrowLeft__WEBPACK_IMPORTED_MODULE_12___default.a, _fortawesome_fontawesome_free_solid_faAngleDoubleDown__WEBPACK_IMPORTED_MODULE_14___default.a, _fortawesome_fontawesome_free_solid_faAngleDoubleUp__WEBPACK_IMPORTED_MODULE_15___default.a, _fortawesome_fontawesome_free_solid_faQuestion__WEBPACK_IMPORTED_MODULE_16___default.a, _fortawesome_fontawesome_free_solid_faExclamationCircle__WEBPACK_IMPORTED_MODULE_17___default.a, _fortawesome_fontawesome_free_brands_faYoutube__WEBPACK_IMPORTED_MODULE_18___default.a, _fortawesome_fontawesome_free_solid_faTimes__WEBPACK_IMPORTED_MODULE_19___default.a, _fortawesome_fontawesome_free_solid_faPowerOff__WEBPACK_IMPORTED_MODULE_20___default.a, _fortawesome_fontawesome_free_solid_faBell__WEBPACK_IMPORTED_MODULE_21___default.a, _fortawesome_fontawesome_free_solid_faBars__WEBPACK_IMPORTED_MODULE_22___default.a, _fortawesome_fontawesome_free_solid_faTrash__WEBPACK_IMPORTED_MODULE_23___default.a);
 /**
  * 5) Now, you can place the icon tag anywhere you want to icon to show, for example:
  *    <i className="fas fa-check"></i>
 */
 
-var icons = {
-  cog: 'fas fa-cog',
-  graduationCap: 'fas fa-graduation-cap',
-  faCheck: 'fas fa-check'
+var icon = function icon(name) {
+  var _icons = {
+    cog: 'fas fa-cog',
+    graduationCap: 'fas fa-graduation-cap',
+    check: 'fas fa-check',
+    trash: 'fas fa-trash'
+  };
+  if (typeof _icons[name] === 'undefined') throw new Error('Invalid icon name: ' + name);else return _icons[name];
 };
 
 /***/ }),
