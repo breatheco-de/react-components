@@ -32,7 +32,7 @@ class DropLink extends React.Component {
 			<a
 				key={i}
 				className="dropdown-item"
-				onClick={() => this.props.onSelect(opt)}>
+				onClick={() => this.props.onSelect && this.props.onSelect(opt)}>
 				{opt.icon && <i className={icon(opt.icon)+" mr-1"} />} 
 				{opt.label}
 			</a>
@@ -93,6 +93,7 @@ DropLink.defaultProps = {
 	dropdown: [],
 	className: "",
 	direction: "down",
-	icon: null
+	icon: null,
+	onSelect: null
 };
 export default DropLink;

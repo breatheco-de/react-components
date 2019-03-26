@@ -32,7 +32,7 @@ class TimeLine extends React.Component{
                     label={day.label}
                     description={day.description} 
                     technologies={day.technologies}
-                    isSelected={(this.state.selected == day.dayNumber)}
+                    isSelected={this.state.selected && (this.state.selected == day.dayNumber)}
                     onClick={()=>{
                         day.course = this.state.course;
                         this.setState({ selected: day.dayNumber });
@@ -65,7 +65,7 @@ TimeLine.propTypes = {
   collapsed: PropTypes.bool
 };
 TimeLine.defaultProps = {
-  daySelected: 1,
+  daySelected: null,
   collapsed: false,
   height: "400px",
   days: []

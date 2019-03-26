@@ -17,6 +17,6 @@ Loading.propTypes = {
 	show: PropTypes.bool
 };
 Loading.defaultProps = {
-	show: false
+	show: true
 };
 export default Loading;

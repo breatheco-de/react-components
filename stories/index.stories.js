@@ -84,14 +84,16 @@ storiesOf('CheckBox', module).add('default configuration', () => (<Theme.Theme>
  
 storiesOf('Button', module).add('default configuration', () => (<Theme.Theme>
     <Button 
-      label={text('Label', 'Click Me!')} 
-      icon={text('Label', 'trash')}
+      className={text('className', 'w-50')} 
+      icon={text('icon', 'trash')}
       type={select('Type', ['light'], 'light')}
       dropdown={[
         { label: 'First action', url: 'hello' }
       ]}
       onClick={action('checkbox-click')}
-    /> 
+    >
+      Click Me
+    </Button>
 </Theme.Theme>));
 
 
