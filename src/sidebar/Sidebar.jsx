@@ -13,7 +13,7 @@ class Sidebar extends React.Component{
         const Menu = this.props.menu;
         const Brand = this.props.brand;
         return (<div className={"page-wrapper chiller-theme"+((this.state.toggled) ? ' toggled':'')}>
-              <button type="button" onClick={() => this.setState({toggled: true })} className="btn btn-sm btn-dark show-sidebar">
+              <button type="button" onClick={() => this.setState({toggled: true })} className="btn btn-dark show-sidebar">
                 <i className="fas fa-bars"></i>
               </button>
               <nav className="sidebar-wrapper">
@@ -36,7 +36,7 @@ class Sidebar extends React.Component{
                     {Menu && <Menu />}
                   </div>
                 </div>
-                {Footer && <Footer />}
+                {Footer && <Footer onToggle={(value) => this.setState({ toggled: value })} />}
               </nav>
               <main className="page-content">
                 {this.props.children}

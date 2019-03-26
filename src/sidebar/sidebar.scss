@@ -125,7 +125,6 @@
   left: -3px;
   top: 10px;
   border-radius: 0 4px 4px 0px;
-  width: 35px;
   transition-delay: 0.3s;
 }
 
@@ -142,7 +141,7 @@
   position: fixed;
   top: 0;
   left: -300px;
-  z-index: 999;
+  z-index: 10;
   ul {
     list-style-type: none;
     padding: 0;

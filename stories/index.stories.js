@@ -208,6 +208,25 @@ storiesOf('Sidebar', module).add('with footer', () => (<Theme.Theme>
       <h1>This is the content of the page</h1>
     </Sidebar> 
 </Theme.Theme>));
+/**
+ *  Sidebar
+ */
+
+storiesOf('Sidebar', module).add('with small footer', () => (<Theme.Theme>
+    <Sidebar
+      menu={() => <TimeLine 
+        days={days} 
+        height="100%"
+      />}
+			onBrandClick={action('brand-click')}
+      footer={() => <div className="sidebar-footer">
+        <a href="#">
+          <i className="fa fa-power-off"></i>
+        </a>
+      </div>}> 
+      <h1>This is the content of the page</h1>
+    </Sidebar> 
+</Theme.Theme>));
 
 /**
  *  MenuItem
