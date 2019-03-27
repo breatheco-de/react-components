@@ -2,12 +2,13 @@
 .breadcrumb{
     padding: 0;
     background: inherit;
+    margin: 0;
     li{
         list-style: none;
         width: inherit;
         cursor: pointer;
         display: inline;
-        padding:0;
+        padding: 0;
         .logo{
             max-width: 32px;
         }

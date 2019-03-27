@@ -235,7 +235,7 @@ storiesOf('Sidebar', module).add('with small footer', () => (<Theme.Theme>
 storiesOf('MenuItem', module).add('default configuration', () => (<Theme.Theme>
     <MenuItem 
       label={text('label', 'First option of the menu')} 
-      icon={text('icon', 'cog')} 
+      iconName={text('icon', 'cog')} 
       collapsed={boolean('collapsed', true)} 
       onClick={action('menu-item-click')}
     /> 
