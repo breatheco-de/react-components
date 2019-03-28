@@ -27,7 +27,7 @@ class Sidebar extends React.Component{
                       <a onClick={(e) => { 
                           e.preventDefault();
                           if(this.props.onBrandClick) this.props.onBrandClick(e);
-                      }} className="title" href="#">Menu</a>
+                      }} className="title" href="#">{this.props.label}</a>
                     </div>
                   }
                 </div>
@@ -51,6 +51,7 @@ Sidebar.propTypes = {
 	style: PropTypes.object,
 	children: PropTypes.node.isRequired,
 	className: PropTypes.string,
+	label: PropTypes.string,
 	menu: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.function,
@@ -66,6 +67,7 @@ Sidebar.defaultProps = {
 	onBrandClick: null,
 	footer: null,
 	menu: null,
-	className: ""
+	className: "",
+	label: "Menu"
 };
 export default Sidebar;

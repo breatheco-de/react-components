@@ -4,11 +4,11 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import { days, menuItems, actionableMenu } from './data.js';
+import { days, menuItems, actionableMenu, markdown } from './data.js';
 
 import { Theme, ActionableItem, DropLink, Button, CheckBox, BreadCrumb,
  List, TimeLine, Sidebar, Panel, ProgressKPI, Login, Forgot, Loading,
- LoadBar, MenuItem } from '../src/index';
+ LoadBar, MenuItem, MarkdownParser } from '../src/index';
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
@@ -133,6 +133,14 @@ storiesOf('Load bar', module).add('default configuration', () => (<Theme.Theme>
     <LoadBar />
 </Theme.Theme>));
 
+/**
+ *  LoadBar
+ */
+ 
+storiesOf('MarkdownParser', module).add('default configuration', () => (<Theme.Theme>
+    <MarkdownParser source={text('source',markdown)} />
+</Theme.Theme>));
+
 
 /**
  *  Timeline
@@ -214,6 +222,7 @@ storiesOf('Sidebar', module).add('with footer', () => (<Theme.Theme>
 
 storiesOf('Sidebar', module).add('with small footer', () => (<Theme.Theme>
     <Sidebar
+      label={text('label', "BreatheCode Menu")}
       menu={() => <TimeLine 
         days={days} 
         height="100%"

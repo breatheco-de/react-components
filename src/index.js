@@ -13,6 +13,8 @@ export var ProgressKPI = require("./kpi-progress").default;
 export var MenuItem = require("./menu-item").default;
 export var Modal = require("./modal").default;
 
+export var MarkdownParser = require("./markdown-parser").default;
+
 export var LoadBar = require("./load-bar").default;
 export var setLoading = require("./load-bar").setLoading;
 

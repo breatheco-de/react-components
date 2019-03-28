@@ -2209,6 +2209,242 @@ var config = api$1.config;
 
 /***/ }),
 
+/***/ "./node_modules/@mapbox/hast-util-table-cell-style/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@mapbox/hast-util-table-cell-style/index.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var visit = __webpack_require__(/*! unist-util-visit */ "./node_modules/unist-util-visit/index.js");
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var hastCssPropertyMap = {
+  align: 'text-align',
+  valign: 'vertical-align',
+  height: 'height',
+  width: 'width'
+};
+
+module.exports = function tableCellStyle(node) {
+  visit(node, 'element', visitor);
+  return node;
+};
+
+function visitor(node) {
+  if (node.tagName !== 'tr' && node.tagName !== 'td' && node.tagName !== 'th') {
+    return;
+  }
+
+  var hastName;
+  var cssName;
+  for (hastName in hastCssPropertyMap) {
+    if (
+      !hasOwnProperty.call(hastCssPropertyMap, hastName) ||
+      node.properties[hastName] === undefined
+    ) {
+      continue;
+    }
+    cssName = hastCssPropertyMap[hastName];
+    appendStyle(node, cssName, node.properties[hastName]);
+    delete node.properties[hastName];
+  }
+}
+
+function appendStyle(node, property, value) {
+  var prevStyle = (node.properties.style || '').trim();
+  if (prevStyle && !/;\s*/.test(prevStyle)) {
+    prevStyle += ';';
+  }
+  if (prevStyle) {
+    prevStyle += ' ';
+  }
+  var nextStyle = prevStyle + property + ': ' + value + ';';
+  node.properties.style = nextStyle;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/bail/index.js":
+/*!************************************!*\
+  !*** ./node_modules/bail/index.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = bail
+
+function bail(err) {
+  if (err) {
+    throw err
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/ccount/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/ccount/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = ccount
+
+function ccount(value, character) {
+  var count = 0
+  var index
+
+  value = String(value)
+
+  if (typeof character !== 'string' || character.length !== 1) {
+    throw new Error('Expected character')
+  }
+
+  index = value.indexOf(character)
+
+  while (index !== -1) {
+    count++
+    index = value.indexOf(character, index + 1)
+  }
+
+  return count
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/character-entities-html4/index.json":
+/*!**********************************************************!*\
+  !*** ./node_modules/character-entities-html4/index.json ***!
+  \**********************************************************/
+/*! exports provided: nbsp, iexcl, cent, pound, curren, yen, brvbar, sect, uml, copy, ordf, laquo, not, shy, reg, macr, deg, plusmn, sup2, sup3, acute, micro, para, middot, cedil, sup1, ordm, raquo, frac14, frac12, frac34, iquest, Agrave, Aacute, Acirc, Atilde, Auml, Aring, AElig, Ccedil, Egrave, Eacute, Ecirc, Euml, Igrave, Iacute, Icirc, Iuml, ETH, Ntilde, Ograve, Oacute, Ocirc, Otilde, Ouml, times, Oslash, Ugrave, Uacute, Ucirc, Uuml, Yacute, THORN, szlig, agrave, aacute, acirc, atilde, auml, aring, aelig, ccedil, egrave, eacute, ecirc, euml, igrave, iacute, icirc, iuml, eth, ntilde, ograve, oacute, ocirc, otilde, ouml, divide, oslash, ugrave, uacute, ucirc, uuml, yacute, thorn, yuml, fnof, Alpha, Beta, Gamma, Delta, Epsilon, Zeta, Eta, Theta, Iota, Kappa, Lambda, Mu, Nu, Xi, Omicron, Pi, Rho, Sigma, Tau, Upsilon, Phi, Chi, Psi, Omega, alpha, beta, gamma, delta, epsilon, zeta, eta, theta, iota, kappa, lambda, mu, nu, xi, omicron, pi, rho, sigmaf, sigma, tau, upsilon, phi, chi, psi, omega, thetasym, upsih, piv, bull, hellip, prime, Prime, oline, frasl, weierp, image, real, trade, alefsym, larr, uarr, rarr, darr, harr, crarr, lArr, uArr, rArr, dArr, hArr, forall, part, exist, empty, nabla, isin, notin, ni, prod, sum, minus, lowast, radic, prop, infin, ang, and, or, cap, cup, int, there4, sim, cong, asymp, ne, equiv, le, ge, sub, sup, nsub, sube, supe, oplus, otimes, perp, sdot, lceil, rceil, lfloor, rfloor, lang, rang, loz, spades, clubs, hearts, diams, quot, amp, lt, gt, OElig, oelig, Scaron, scaron, Yuml, circ, tilde, ensp, emsp, thinsp, zwnj, zwj, lrm, rlm, ndash, mdash, lsquo, rsquo, sbquo, ldquo, rdquo, bdquo, dagger, Dagger, permil, lsaquo, rsaquo, euro, default */
+/***/ (function(module) {
+
+module.exports = {"nbsp":" ","iexcl":"¡","cent":"¢","pound":"£","curren":"¤","yen":"¥","brvbar":"¦","sect":"§","uml":"¨","copy":"©","ordf":"ª","laquo":"«","not":"¬","shy":"­","reg":"®","macr":"¯","deg":"°","plusmn":"±","sup2":"²","sup3":"³","acute":"´","micro":"µ","para":"¶","middot":"·","cedil":"¸","sup1":"¹","ordm":"º","raquo":"»","frac14":"¼","frac12":"½","frac34":"¾","iquest":"¿","Agrave":"À","Aacute":"Á","Acirc":"Â","Atilde":"Ã","Auml":"Ä","Aring":"Å","AElig":"Æ","Ccedil":"Ç","Egrave":"È","Eacute":"É","Ecirc":"Ê","Euml":"Ë","Igrave":"Ì","Iacute":"Í","Icirc":"Î","Iuml":"Ï","ETH":"Ð","Ntilde":"Ñ","Ograve":"Ò","Oacute":"Ó","Ocirc":"Ô","Otilde":"Õ","Ouml":"Ö","times":"×","Oslash":"Ø","Ugrave":"Ù","Uacute":"Ú","Ucirc":"Û","Uuml":"Ü","Yacute":"Ý","THORN":"Þ","szlig":"ß","agrave":"à","aacute":"á","acirc":"â","atilde":"ã","auml":"ä","aring":"å","aelig":"æ","ccedil":"ç","egrave":"è","eacute":"é","ecirc":"ê","euml":"ë","igrave":"ì","iacute":"í","icirc":"î","iuml":"ï","eth":"ð","ntilde":"ñ","ograve":"ò","oacute":"ó","ocirc":"ô","otilde":"õ","ouml":"ö","divide":"÷","oslash":"ø","ugrave":"ù","uacute":"ú","ucirc":"û","uuml":"ü","yacute":"ý","thorn":"þ","yuml":"ÿ","fnof":"ƒ","Alpha":"Α","Beta":"Β","Gamma":"Γ","Delta":"Δ","Epsilon":"Ε","Zeta":"Ζ","Eta":"Η","Theta":"Θ","Iota":"Ι","Kappa":"Κ","Lambda":"Λ","Mu":"Μ","Nu":"Ν","Xi":"Ξ","Omicron":"Ο","Pi":"Π","Rho":"Ρ","Sigma":"Σ","Tau":"Τ","Upsilon":"Υ","Phi":"Φ","Chi":"Χ","Psi":"Ψ","Omega":"Ω","alpha":"α","beta":"β","gamma":"γ","delta":"δ","epsilon":"ε","zeta":"ζ","eta":"η","theta":"θ","iota":"ι","kappa":"κ","lambda":"λ","mu":"μ","nu":"ν","xi":"ξ","omicron":"ο","pi":"π","rho":"ρ","sigmaf":"ς","sigma":"σ","tau":"τ","upsilon":"υ","phi":"φ","chi":"χ","psi":"ψ","omega":"ω","thetasym":"ϑ","upsih":"ϒ","piv":"ϖ","bull":"•","hellip":"…","prime":"′","Prime":"″","oline":"‾","frasl":"⁄","weierp":"℘","image":"ℑ","real":"ℜ","trade":"™","alefsym":"ℵ","larr":"←","uarr":"↑","rarr":"→","darr":"↓","harr":"↔","crarr":"↵","lArr":"⇐","uArr":"⇑","rArr":"⇒","dArr":"⇓","hArr":"⇔","forall":"∀","part":"∂","exist":"∃","empty":"∅","nabla":"∇","isin":"∈","notin":"∉","ni":"∋","prod":"∏","sum":"∑","minus":"−","lowast":"∗","radic":"√","prop":"∝","infin":"∞","ang":"∠","and":"∧","or":"∨","cap":"∩","cup":"∪","int":"∫","there4":"∴","sim":"∼","cong":"≅","asymp":"≈","ne":"≠","equiv":"≡","le":"≤","ge":"≥","sub":"⊂","sup":"⊃","nsub":"⊄","sube":"⊆","supe":"⊇","oplus":"⊕","otimes":"⊗","perp":"⊥","sdot":"⋅","lceil":"⌈","rceil":"⌉","lfloor":"⌊","rfloor":"⌋","lang":"〈","rang":"〉","loz":"◊","spades":"♠","clubs":"♣","hearts":"♥","diams":"♦","quot":"\"","amp":"&","lt":"<","gt":">","OElig":"Œ","oelig":"œ","Scaron":"Š","scaron":"š","Yuml":"Ÿ","circ":"ˆ","tilde":"˜","ensp":" ","emsp":" ","thinsp":" ","zwnj":"‌","zwj":"‍","lrm":"‎","rlm":"‏","ndash":"–","mdash":"—","lsquo":"‘","rsquo":"’","sbquo":"‚","ldquo":"“","rdquo":"”","bdquo":"„","dagger":"†","Dagger":"‡","permil":"‰","lsaquo":"‹","rsaquo":"›","euro":"€"};
+
+/***/ }),
+
+/***/ "./node_modules/character-entities-legacy/index.json":
+/*!***********************************************************!*\
+  !*** ./node_modules/character-entities-legacy/index.json ***!
+  \***********************************************************/
+/*! exports provided: AElig, AMP, Aacute, Acirc, Agrave, Aring, Atilde, Auml, COPY, Ccedil, ETH, Eacute, Ecirc, Egrave, Euml, GT, Iacute, Icirc, Igrave, Iuml, LT, Ntilde, Oacute, Ocirc, Ograve, Oslash, Otilde, Ouml, QUOT, REG, THORN, Uacute, Ucirc, Ugrave, Uuml, Yacute, aacute, acirc, acute, aelig, agrave, amp, aring, atilde, auml, brvbar, ccedil, cedil, cent, copy, curren, deg, divide, eacute, ecirc, egrave, eth, euml, frac12, frac14, frac34, gt, iacute, icirc, iexcl, igrave, iquest, iuml, laquo, lt, macr, micro, middot, nbsp, not, ntilde, oacute, ocirc, ograve, ordf, ordm, oslash, otilde, ouml, para, plusmn, pound, quot, raquo, reg, sect, shy, sup1, sup2, sup3, szlig, thorn, times, uacute, ucirc, ugrave, uml, uuml, yacute, yen, yuml, default */
+/***/ (function(module) {
+
+module.exports = {"AElig":"Æ","AMP":"&","Aacute":"Á","Acirc":"Â","Agrave":"À","Aring":"Å","Atilde":"Ã","Auml":"Ä","COPY":"©","Ccedil":"Ç","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Euml":"Ë","GT":">","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iuml":"Ï","LT":"<","Ntilde":"Ñ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","QUOT":"\"","REG":"®","THORN":"Þ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Uuml":"Ü","Yacute":"Ý","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","amp":"&","aring":"å","atilde":"ã","auml":"ä","brvbar":"¦","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","curren":"¤","deg":"°","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","eth":"ð","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","iquest":"¿","iuml":"ï","laquo":"«","lt":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","ntilde":"ñ","oacute":"ó","ocirc":"ô","ograve":"ò","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\"","raquo":"»","reg":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","thorn":"þ","times":"×","uacute":"ú","ucirc":"û","ugrave":"ù","uml":"¨","uuml":"ü","yacute":"ý","yen":"¥","yuml":"ÿ"};
+
+/***/ }),
+
+/***/ "./node_modules/character-reference-invalid/index.json":
+/*!*************************************************************!*\
+  !*** ./node_modules/character-reference-invalid/index.json ***!
+  \*************************************************************/
+/*! exports provided: 0, 128, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 142, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 158, 159, default */
+/***/ (function(module) {
+
+module.exports = {"0":"�","128":"€","130":"‚","131":"ƒ","132":"„","133":"…","134":"†","135":"‡","136":"ˆ","137":"‰","138":"Š","139":"‹","140":"Œ","142":"Ž","145":"‘","146":"’","147":"“","148":"”","149":"•","150":"–","151":"—","152":"˜","153":"™","154":"š","155":"›","156":"œ","158":"ž","159":"Ÿ"};
+
+/***/ }),
+
+/***/ "./node_modules/collapse-white-space/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/collapse-white-space/index.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = collapse
+
+/* collapse(' \t\nbar \nbaz\t'); // ' bar baz ' */
+function collapse(value) {
+  return String(value).replace(/\s+/g, ' ')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/comma-separated-tokens/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/comma-separated-tokens/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.parse = parse
+exports.stringify = stringify
+
+var trim = __webpack_require__(/*! trim */ "./node_modules/trim/index.js")
+
+var comma = ','
+var space = ' '
+var empty = ''
+
+/* Parse comma-separated tokens to an array. */
+function parse(value) {
+  var values = []
+  var input = String(value || empty)
+  var index = input.indexOf(comma)
+  var lastIndex = 0
+  var end = false
+  var val
+
+  while (!end) {
+    if (index === -1) {
+      index = input.length
+      end = true
+    }
+
+    val = trim(input.slice(lastIndex, index))
+
+    if (val || !end) {
+      values.push(val)
+    }
+
+    lastIndex = index + 1
+    index = input.indexOf(comma, lastIndex)
+  }
+
+  return values
+}
+
+/* Compile an array to comma-separated tokens.
+ * `options.padLeft` (default: `true`) pads a space left of each
+ * token, and `options.padRight` (default: `false`) pads a space
+ * to the right of each token. */
+function stringify(values, options) {
+  var settings = options || {}
+  var left = settings.padLeft === false ? empty : space
+  var right = settings.padRight ? space : empty
+
+  /* Ensure the last empty entry is seen. */
+  if (values[values.length - 1] === empty) {
+    values = values.concat(empty)
+  }
+
+  return trim(values.join(right + comma + left))
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/actionable-item/actionable-item.scss":
 /*!*********************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/actionable-item/actionable-item.scss ***!
@@ -2240,7 +2476,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".breadcrumb {\n  padding: 0;\n  background: inherit; }\n  .breadcrumb li {\n    list-style: none;\n    width: inherit;\n    cursor: pointer;\n    display: inline;\n    padding: 0; }\n    .breadcrumb li .logo {\n      max-width: 32px; }\n    .breadcrumb li:hover {\n      color: #ffbf00; }\n    .breadcrumb li:not(:first-child):before {\n      content: \":\";\n      color: #ffbf00; }\n", ""]);
+exports.push([module.i, ".breadcrumb {\n  padding: 0;\n  background: inherit;\n  margin: 0; }\n  .breadcrumb li {\n    list-style: none;\n    width: inherit;\n    cursor: pointer;\n    display: inline;\n    padding: 0; }\n    .breadcrumb li .logo {\n      max-width: 32px; }\n    .breadcrumb li:hover {\n      color: #ffbf00; }\n    .breadcrumb li:not(:first-child):before {\n      content: \":\";\n      color: #ffbf00; }\n", ""]);
 
 // exports
 
@@ -2297,7 +2533,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".bcdroplink.dropdown {\n  display: inline; }\n  .bcdroplink.dropdown .dropdown-menu a {\n    cursor: pointer; }\n", ""]);
+exports.push([module.i, ".bcdroplink.dropdown {\n  display: inline; }\n  .bcdroplink.dropdown .dropdown-menu a {\n    cursor: pointer; }\n\n.bcdroplink a {\n  background-image: none; }\n", ""]);
 
 // exports
 
@@ -2392,7 +2628,45 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".form-signin {\n  max-width: 400px;\n  margin: auto; }\n\n.form-signin ul {\n  margin: 0; }\n", ""]);
+exports.push([module.i, ".form-signin {\n  max-width: 400px;\n  margin: auto; }\n\n.form-signin ul {\n  margin: 0;\n  padding: 0; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/markdown-parser/markdown-parser.scss":
+/*!*********************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/markdown-parser/markdown-parser.scss ***!
+  \*********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".bc-readme {\n  padding: 5px; }\n  .bc-readme pre {\n    padding: 5px;\n    background: #23241f;\n    border-radius: 5px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/markdown-parser/prism-okaidia.scss":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/markdown-parser/prism-okaidia.scss ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/**\n * okaidia theme for JavaScript, CSS and HTML\n * Loosely based on Monokai textmate theme by http://www.monokai.nl/\n * @author ocodia\n */\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n  color: #f8f8f2;\n  background: none;\n  text-shadow: 0 1px rgba(0, 0, 0, 0.3);\n  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;\n  font-size: 1em;\n  text-align: left;\n  white-space: pre;\n  word-spacing: normal;\n  word-break: normal;\n  word-wrap: normal;\n  line-height: 1.5;\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n  tab-size: 4;\n  -webkit-hyphens: none;\n  -moz-hyphens: none;\n  -ms-hyphens: none;\n  hyphens: none; }\n\n/* Code blocks */\npre[class*=\"language-\"] {\n  padding: 1em;\n  margin: .5em 0;\n  overflow: auto;\n  border-radius: 0.3em; }\n\n:not(pre) > code[class*=\"language-\"],\npre[class*=\"language-\"] {\n  background: #272822; }\n\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n  padding: .1em;\n  border-radius: .3em;\n  white-space: normal; }\n\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n  color: slategray; }\n\n.token.punctuation {\n  color: #f8f8f2; }\n\n.namespace {\n  opacity: .7; }\n\n.token.property,\n.token.tag,\n.token.constant,\n.token.symbol,\n.token.deleted {\n  color: #f92672; }\n\n.token.boolean,\n.token.number {\n  color: #ae81ff; }\n\n.token.selector,\n.token.attr-name,\n.token.string,\n.token.char,\n.token.builtin,\n.token.inserted {\n  color: #a6e22e; }\n\n.token.operator,\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string,\n.token.variable {\n  color: #f8f8f2; }\n\n.token.atrule,\n.token.attr-value,\n.token.function,\n.token.class-name {\n  color: #e6db74; }\n\n.token.keyword {\n  color: #66d9ef; }\n\n.token.regex,\n.token.important {\n  color: #fd971f; }\n\n.token.important,\n.token.bold {\n  font-weight: bold; }\n\n.token.italic {\n  font-style: italic; }\n\n.token.entity {\n  cursor: help; }\n", ""]);
 
 // exports
 
@@ -2468,7 +2742,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "@keyframes swing {\n  0% {\n    transform: rotate(0deg); }\n  10% {\n    transform: rotate(10deg); }\n  30% {\n    transform: rotate(0deg); }\n  40% {\n    transform: rotate(-10deg); }\n  50% {\n    transform: rotate(0deg); }\n  60% {\n    transform: rotate(5deg); }\n  70% {\n    transform: rotate(0deg); }\n  80% {\n    transform: rotate(-5deg); }\n  100% {\n    transform: rotate(0deg); } }\n\n@keyframes sonar {\n  0% {\n    transform: scale(0.9);\n    opacity: 1; }\n  100% {\n    transform: scale(2);\n    opacity: 0; } }\n\n.page-wrapper .sidebar-wrapper {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.sidebar-wrapper .sidebar-brand > a, .sidebar-wrapper ul li a i {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.page-wrapper .page-content {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.sidebar-wrapper .sidebar-search input.search-menu, .sidebar-wrapper .sidebar-search .input-group-text {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.sidebar-wrapper .sidebar-menu ul li a {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.show-sidebar, .close-sidebar {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n/*----------------page-wrapper----------------*/\n.page-wrapper.toggled .sidebar-wrapper {\n  left: 0px; }\n\n/*----------------toggeled sidebar----------------*/\n@media screen and (min-width: 768px) {\n  .page-wrapper.toggled .page-content {\n    padding-left: 290px;\n    padding-right: 20px; } }\n\n/*----------------show sidebar button----------------*/\n.show-sidebar {\n  position: fixed;\n  left: -3px;\n  top: 10px;\n  border-radius: 0 4px 4px 0px;\n  transition-delay: 0.3s; }\n\n.page-wrapper.toggled .show-sidebar {\n  left: -40px; }\n\n/*----------------sidebar-wrapper----------------*/\n.sidebar-wrapper {\n  width: 260px;\n  height: 100%;\n  max-height: 100%;\n  position: fixed;\n  top: 0;\n  left: -300px;\n  z-index: 10; }\n  .sidebar-wrapper ul {\n    list-style-type: none;\n    padding: 0;\n    margin: 0; }\n  .sidebar-wrapper a {\n    text-decoration: none; }\n\n/*----------------sidebar-content----------------*/\n.sidebar-content {\n  max-height: calc(100% - 30px);\n  width: 100%;\n  height: calc(100% - 30px);\n  overflow-y: auto;\n  position: relative; }\n  .sidebar-content.with-footer {\n    max-height: calc(100% - 80px); }\n  .sidebar-content.desktop {\n    overflow-y: hidden; }\n\n/*--------------------sidebar-brand----------------------*/\n.sidebar-wrapper .sidebar-brand {\n  padding: 5px 15px; }\n  .sidebar-wrapper .sidebar-brand .default-brand {\n    width: 100%; }\n  .sidebar-wrapper .sidebar-brand a {\n    text-transform: uppercase;\n    font-weight: bold;\n    color: #818896;\n    flex-grow: 1; }\n  .sidebar-wrapper .sidebar-brand .close-sidebar {\n    cursor: pointer;\n    font-size: 20px;\n    display: inline-block;\n    float: right;\n    width: 20px; }\n\n.sidebar-wrapper .sidebar-header {\n  padding: 20px;\n  overflow: hidden; }\n  .sidebar-wrapper .sidebar-header .user-pic {\n    float: left;\n    width: 60px;\n    padding: 2px;\n    border-radius: 12px;\n    margin-right: 15px;\n    overflow: hidden; }\n    .sidebar-wrapper .sidebar-header .user-pic img {\n      object-fit: cover;\n      height: 100%;\n      width: 100%; }\n  .sidebar-wrapper .sidebar-header .user-info {\n    float: left; }\n    .sidebar-wrapper .sidebar-header .user-info > span {\n      display: block; }\n    .sidebar-wrapper .sidebar-header .user-info .user-role {\n      font-size: 12px; }\n    .sidebar-wrapper .sidebar-header .user-info .user-status {\n      font-size: 11px;\n      margin-top: 4px; }\n      .sidebar-wrapper .sidebar-header .user-info .user-status i {\n        font-size: 8px;\n        margin-right: 4px;\n        color: #5cb85c; }\n\n.sidebar-wrapper .sidebar-search > div {\n  padding: 10px 20px; }\n\n.sidebar-wrapper .sidebar-menu {\n  padding-bottom: 10px; }\n  .sidebar-wrapper .sidebar-menu .header-menu span {\n    font-weight: bold;\n    font-size: 14px;\n    padding: 15px 20px 5px 20px;\n    display: inline-block; }\n  .sidebar-wrapper .sidebar-menu ul li a {\n    display: inline-block;\n    width: 100%;\n    text-decoration: none;\n    position: relative;\n    padding: 8px 30px 8px 20px; }\n    .sidebar-wrapper .sidebar-menu ul li a i {\n      margin-right: 10px;\n      font-size: 12px;\n      width: 30px;\n      height: 30px;\n      line-height: 30px;\n      text-align: center;\n      border-radius: 4px; }\n    .sidebar-wrapper .sidebar-menu ul li a:hover > i::before {\n      display: inline-block;\n      animation: swing ease-in-out 0.5s 1 alternate; }\n  .sidebar-wrapper .sidebar-menu ul li a span.label, .sidebar-wrapper .sidebar-menu ul li a span.badge {\n    float: right;\n    margin-top: 8px;\n    margin-left: 5px; }\n  .sidebar-wrapper .sidebar-menu .sidebar-submenu {\n    display: none; }\n\n/*--------------------sidebar-header----------------------*/\n/*-----------------------sidebar-search------------------------*/\n/*----------------------sidebar-menu-------------------------*/\n/*--------------------------side-footer------------------------------*/\n.sidebar-footer {\n  position: absolute;\n  width: 100%;\n  bottom: 0;\n  display: flex; }\n  .sidebar-footer a {\n    flex-grow: 1;\n    text-align: center;\n    height: 30px;\n    line-height: 30px;\n    position: relative; }\n    .sidebar-footer a .notification {\n      position: absolute;\n      top: 0; }\n\n.badge-sonar {\n  display: inline-block;\n  background: #980303;\n  border-radius: 50%;\n  height: 8px;\n  width: 8px;\n  position: absolute;\n  top: 0; }\n  .badge-sonar:after {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    left: 0;\n    border: 2px solid #980303;\n    opacity: 0;\n    border-radius: 50%;\n    width: 100%;\n    height: 100%;\n    animation: sonar 1.5s infinite; }\n\n/*--------------------------page-content-----------------------------*/\n.page-wrapper .page-content {\n  display: inline-block;\n  width: 100%;\n  padding-left: 0px;\n  padding-top: 20px;\n  overflow-x: hidden; }\n  .page-wrapper .page-content > div {\n    padding: 20px 40px; }\n\n/*------scroll bar---------------------*/\n::-webkit-scrollbar {\n  width: 5px;\n  height: 7px; }\n\n::-webkit-scrollbar-button {\n  width: 0px;\n  height: 0px; }\n\n::-webkit-scrollbar-thumb {\n  background: #525965;\n  border: 0px none #ffffff;\n  border-radius: 0px; }\n  ::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active {\n    background: #525965; }\n\n::-webkit-scrollbar-track {\n  background: transparent;\n  border: 0px none #ffffff;\n  border-radius: 50px; }\n  ::-webkit-scrollbar-track:hover, ::-webkit-scrollbar-track:active {\n    background: transparent; }\n\n::-webkit-scrollbar-corner {\n  background: transparent; }\n\n/*-----------------------------chiller-theme-------------------------------------------------*/\n.chiller-theme .sidebar-wrapper {\n  background: #eee; }\n  .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu, .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {\n    border-color: transparent;\n    box-shadow: none; }\n  .chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-role, .chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-status {\n    color: #818896; }\n  .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu, .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {\n    color: #818896; }\n  .chiller-theme .sidebar-wrapper .sidebar-brand > a, .chiller-theme .sidebar-wrapper .sidebar-menu ul li a {\n    color: #818896; }\n\n.chiller-theme .sidebar-footer a {\n  color: #818896; }\n\n.chiller-theme .sidebar-wrapper .sidebar-header .user-info, .chiller-theme .sidebar-wrapper .sidebar-brand > a:hover {\n  color: #b8bfce; }\n\n.chiller-theme .sidebar-footer a:hover i {\n  color: #b8bfce; }\n\n.page-wrapper.chiller-theme.toggled .close-sidebar {\n  color: #bdbdbd; }\n  .page-wrapper.chiller-theme.toggled .close-sidebar:hover {\n    color: #ffffff; }\n\n.chiller-theme .sidebar-wrapper ul li:hover a i {\n  color: #16c7ff;\n  text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5); }\n\n.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu, .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {\n  background: #3a3f48; }\n\n.chiller-theme .sidebar-wrapper .sidebar-menu .header-menu span {\n  color: #6c7b88; }\n\n.chiller-theme .sidebar-footer {\n  background: #3a3f48;\n  padding: 5px 0; }\n  .chiller-theme .sidebar-footer a:first-child {\n    border-left: none; }\n  .chiller-theme .sidebar-footer a:last-child {\n    border-right: none; }\n", ""]);
+exports.push([module.i, "@keyframes swing {\n  0% {\n    transform: rotate(0deg); }\n  10% {\n    transform: rotate(10deg); }\n  30% {\n    transform: rotate(0deg); }\n  40% {\n    transform: rotate(-10deg); }\n  50% {\n    transform: rotate(0deg); }\n  60% {\n    transform: rotate(5deg); }\n  70% {\n    transform: rotate(0deg); }\n  80% {\n    transform: rotate(-5deg); }\n  100% {\n    transform: rotate(0deg); } }\n\n@keyframes sonar {\n  0% {\n    transform: scale(0.9);\n    opacity: 1; }\n  100% {\n    transform: scale(2);\n    opacity: 0; } }\n\n.page-wrapper .sidebar-wrapper {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.sidebar-wrapper .sidebar-brand > a, .sidebar-wrapper ul li a i {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.page-wrapper .page-content {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.sidebar-wrapper .sidebar-search input.search-menu, .sidebar-wrapper .sidebar-search .input-group-text {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.sidebar-wrapper .sidebar-menu ul li a {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n.show-sidebar, .close-sidebar {\n  -webkit-transition: all 0.3s ease;\n  -moz-transition: all 0.3s ease;\n  -ms-transition: all 0.3s ease;\n  -o-transition: all 0.3s ease;\n  transition: all 0.3s ease; }\n\n/*----------------page-wrapper----------------*/\n.page-wrapper.toggled .sidebar-wrapper {\n  left: 0px; }\n\n/*----------------toggeled sidebar----------------*/\n@media screen and (min-width: 768px) {\n  .page-wrapper.toggled .page-content {\n    padding-left: 290px;\n    padding-right: 20px; } }\n\n/*----------------show sidebar button----------------*/\n.show-sidebar {\n  position: fixed;\n  left: -3px;\n  top: 10px;\n  border-radius: 0 4px 4px 0px;\n  transition-delay: 0.3s; }\n\n.page-wrapper.toggled .show-sidebar {\n  left: -40px; }\n\n/*----------------sidebar-wrapper----------------*/\n.sidebar-wrapper {\n  width: 260px;\n  height: 100%;\n  max-height: 100%;\n  position: fixed;\n  top: 0;\n  left: -300px;\n  z-index: 10; }\n  .sidebar-wrapper ul {\n    list-style-type: none;\n    padding: 0;\n    margin: 0; }\n  .sidebar-wrapper a {\n    text-decoration: none; }\n\n/*----------------sidebar-content----------------*/\n.sidebar-content {\n  max-height: calc(100% - 30px);\n  width: 100%;\n  height: calc(100% - 30px);\n  overflow-y: auto;\n  position: relative; }\n  .sidebar-content.with-footer {\n    max-height: calc(100% - 80px); }\n  .sidebar-content.desktop {\n    overflow-y: hidden; }\n\n/*--------------------sidebar-brand----------------------*/\n.sidebar-wrapper .sidebar-brand {\n  padding: 5px 15px; }\n  .sidebar-wrapper .sidebar-brand .default-brand {\n    width: 100%; }\n  .sidebar-wrapper .sidebar-brand a {\n    text-transform: uppercase;\n    font-weight: bold;\n    color: #818896;\n    flex-grow: 1; }\n  .sidebar-wrapper .sidebar-brand .close-sidebar {\n    cursor: pointer;\n    font-size: 20px;\n    display: inline-block;\n    float: right;\n    width: 20px; }\n\n.sidebar-wrapper .sidebar-header {\n  padding: 20px;\n  overflow: hidden; }\n  .sidebar-wrapper .sidebar-header .user-pic {\n    float: left;\n    width: 60px;\n    padding: 2px;\n    border-radius: 12px;\n    margin-right: 15px;\n    overflow: hidden; }\n    .sidebar-wrapper .sidebar-header .user-pic img {\n      object-fit: cover;\n      height: 100%;\n      width: 100%; }\n  .sidebar-wrapper .sidebar-header .user-info {\n    float: left; }\n    .sidebar-wrapper .sidebar-header .user-info > span {\n      display: block; }\n    .sidebar-wrapper .sidebar-header .user-info .user-role {\n      font-size: 12px; }\n    .sidebar-wrapper .sidebar-header .user-info .user-status {\n      font-size: 11px;\n      margin-top: 4px; }\n      .sidebar-wrapper .sidebar-header .user-info .user-status i {\n        font-size: 8px;\n        margin-right: 4px;\n        color: #5cb85c; }\n\n.sidebar-wrapper .sidebar-search > div {\n  padding: 10px 20px; }\n\n.sidebar-wrapper .sidebar-menu {\n  padding-bottom: 10px; }\n  .sidebar-wrapper .sidebar-menu .header-menu span {\n    font-weight: bold;\n    font-size: 14px;\n    padding: 15px 20px 5px 20px;\n    display: inline-block; }\n  .sidebar-wrapper .sidebar-menu ul li a {\n    display: inline-block;\n    width: 100%;\n    text-decoration: none;\n    position: relative;\n    padding: 8px 30px 8px 20px; }\n    .sidebar-wrapper .sidebar-menu ul li a i {\n      margin-right: 10px;\n      font-size: 12px;\n      width: 30px;\n      height: 30px;\n      line-height: 30px;\n      text-align: center;\n      border-radius: 4px; }\n    .sidebar-wrapper .sidebar-menu ul li a:hover > i::before {\n      display: inline-block;\n      animation: swing ease-in-out 0.5s 1 alternate; }\n  .sidebar-wrapper .sidebar-menu ul li a span.label, .sidebar-wrapper .sidebar-menu ul li a span.badge {\n    float: right;\n    margin-top: 8px;\n    margin-left: 5px; }\n  .sidebar-wrapper .sidebar-menu .sidebar-submenu {\n    display: none; }\n\n/*--------------------sidebar-header----------------------*/\n/*-----------------------sidebar-search------------------------*/\n/*----------------------sidebar-menu-------------------------*/\n/*--------------------------side-footer------------------------------*/\n.sidebar-footer {\n  position: absolute;\n  width: 100%;\n  bottom: 0;\n  display: flex; }\n  .sidebar-footer a {\n    flex-grow: 1;\n    text-align: center;\n    height: 30px;\n    line-height: 30px;\n    position: relative;\n    background-image: none; }\n    .sidebar-footer a .notification {\n      position: absolute;\n      top: 0; }\n\n.badge-sonar {\n  display: inline-block;\n  background: #980303;\n  border-radius: 50%;\n  height: 8px;\n  width: 8px;\n  position: absolute;\n  top: 0; }\n  .badge-sonar:after {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    left: 0;\n    border: 2px solid #980303;\n    opacity: 0;\n    border-radius: 50%;\n    width: 100%;\n    height: 100%;\n    animation: sonar 1.5s infinite; }\n\n/*--------------------------page-content-----------------------------*/\n.page-wrapper .page-content {\n  display: inline-block;\n  width: 100%;\n  padding-left: 0px;\n  padding-top: 20px;\n  overflow-x: hidden; }\n  .page-wrapper .page-content > div {\n    padding: 20px 40px; }\n\n/*------scroll bar---------------------*/\n::-webkit-scrollbar {\n  width: 5px;\n  height: 7px; }\n\n::-webkit-scrollbar-button {\n  width: 0px;\n  height: 0px; }\n\n::-webkit-scrollbar-thumb {\n  background: #525965;\n  border: 0px none #ffffff;\n  border-radius: 0px; }\n  ::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active {\n    background: #525965; }\n\n::-webkit-scrollbar-track {\n  background: transparent;\n  border: 0px none #ffffff;\n  border-radius: 50px; }\n  ::-webkit-scrollbar-track:hover, ::-webkit-scrollbar-track:active {\n    background: transparent; }\n\n::-webkit-scrollbar-corner {\n  background: transparent; }\n\n/*-----------------------------chiller-theme-------------------------------------------------*/\n.chiller-theme .sidebar-wrapper {\n  background: #eee; }\n  .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu, .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {\n    border-color: transparent;\n    box-shadow: none; }\n  .chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-role, .chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-status {\n    color: #818896; }\n  .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu, .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {\n    color: #818896; }\n  .chiller-theme .sidebar-wrapper .sidebar-brand > a, .chiller-theme .sidebar-wrapper .sidebar-menu ul li a {\n    color: #818896; }\n\n.chiller-theme .sidebar-footer a {\n  color: #818896; }\n\n.chiller-theme .sidebar-wrapper .sidebar-header .user-info, .chiller-theme .sidebar-wrapper .sidebar-brand > a:hover {\n  color: #b8bfce; }\n\n.chiller-theme .sidebar-footer a:hover i {\n  color: #b8bfce; }\n\n.page-wrapper.chiller-theme.toggled .close-sidebar {\n  color: #bdbdbd; }\n  .page-wrapper.chiller-theme.toggled .close-sidebar:hover {\n    color: #ffffff; }\n\n.chiller-theme .sidebar-wrapper ul li:hover a i {\n  color: #16c7ff;\n  text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5); }\n\n.chiller-theme .sidebar-wrapper .sidebar-search input.search-menu, .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {\n  background: #3a3f48; }\n\n.chiller-theme .sidebar-wrapper .sidebar-menu .header-menu span {\n  color: #6c7b88; }\n\n.chiller-theme .sidebar-footer {\n  background: #3a3f48;\n  padding: 5px 0; }\n  .chiller-theme .sidebar-footer a:first-child {\n    border-left: none; }\n  .chiller-theme .sidebar-footer a:last-child {\n    border-right: none; }\n", ""]);
 
 // exports
 
@@ -2487,7 +2761,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "/*!\n * Bootstrap v4.1.1 (https://getbootstrap.com/)\n * Copyright 2011-2018 The Bootstrap Authors\n * Copyright 2011-2018 Twitter, Inc.\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n */\n:root {\n  --blue: #007bff;\n  --indigo: #6610f2;\n  --purple: #6f42c1;\n  --pink: #e83e8c;\n  --red: #dc3545;\n  --orange: #fd7e14;\n  --yellow: #ffc107;\n  --green: #28a745;\n  --teal: #20c997;\n  --cyan: #17a2b8;\n  --white: #fff;\n  --gray: #6c757d;\n  --gray-dark: #343a40;\n  --primary: #007bff;\n  --secondary: #6c757d;\n  --success: #28a745;\n  --info: #17a2b8;\n  --warning: #ffc107;\n  --danger: #dc3545;\n  --light: #f8f9fa;\n  --dark: #343a40;\n  --breakpoint-xs: 0;\n  --breakpoint-sm: 576px;\n  --breakpoint-md: 768px;\n  --breakpoint-lg: 992px;\n  --breakpoint-xl: 1200px;\n  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; }\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box; }\n\nhtml {\n  font-family: sans-serif;\n  line-height: 1.15;\n  -webkit-text-size-adjust: 100%;\n  -ms-text-size-adjust: 100%;\n  -ms-overflow-style: scrollbar;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }\n\n@-ms-viewport {\n  width: device-width; }\n\narticle, aside, figcaption, figure, footer, header, hgroup, main, nav, section {\n  display: block; }\n\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.5;\n  color: #212529;\n  text-align: left;\n  background-color: #fff; }\n\n[tabindex=\"-1\"]:focus {\n  outline: 0 !important; }\n\nhr {\n  box-sizing: content-box;\n  height: 0;\n  overflow: visible; }\n\nh1, h2, h3, h4, h5, h6 {\n  margin-top: 0;\n  margin-bottom: 0.5rem; }\n\np {\n  margin-top: 0;\n  margin-bottom: 1rem; }\n\nabbr[title],\nabbr[data-original-title] {\n  text-decoration: underline;\n  text-decoration: underline dotted;\n  cursor: help;\n  border-bottom: 0; }\n\naddress {\n  margin-bottom: 1rem;\n  font-style: normal;\n  line-height: inherit; }\n\nol,\nul,\ndl {\n  margin-top: 0;\n  margin-bottom: 1rem; }\n\nol ol,\nul ul,\nol ul,\nul ol {\n  margin-bottom: 0; }\n\ndt {\n  font-weight: 700; }\n\ndd {\n  margin-bottom: .5rem;\n  margin-left: 0; }\n\nblockquote {\n  margin: 0 0 1rem; }\n\ndfn {\n  font-style: italic; }\n\nb,\nstrong {\n  font-weight: bolder; }\n\nsmall {\n  font-size: 80%; }\n\nsub,\nsup {\n  position: relative;\n  font-size: 75%;\n  line-height: 0;\n  vertical-align: baseline; }\n\nsub {\n  bottom: -.25em; }\n\nsup {\n  top: -.5em; }\n\na {\n  color: #007bff;\n  text-decoration: none;\n  background-color: transparent;\n  -webkit-text-decoration-skip: objects; }\n  a:hover {\n    color: #0056b3;\n    text-decoration: underline; }\n\na:not([href]):not([tabindex]) {\n  color: inherit;\n  text-decoration: none; }\n  a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {\n    color: inherit;\n    text-decoration: none; }\n  a:not([href]):not([tabindex]):focus {\n    outline: 0; }\n\npre,\ncode,\nkbd,\nsamp {\n  font-family: SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n  font-size: 1em; }\n\npre {\n  margin-top: 0;\n  margin-bottom: 1rem;\n  overflow: auto;\n  -ms-overflow-style: scrollbar; }\n\nfigure {\n  margin: 0 0 1rem; }\n\nimg {\n  vertical-align: middle;\n  border-style: none; }\n\nsvg:not(:root) {\n  overflow: hidden; }\n\ntable {\n  border-collapse: collapse; }\n\ncaption {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n  color: #6c757d;\n  text-align: left;\n  caption-side: bottom; }\n\nth {\n  text-align: inherit; }\n\nlabel {\n  display: inline-block;\n  margin-bottom: 0.5rem; }\n\nbutton {\n  border-radius: 0; }\n\nbutton:focus {\n  outline: 1px dotted;\n  outline: 5px auto -webkit-focus-ring-color; }\n\ninput,\nbutton,\nselect,\noptgroup,\ntextarea {\n  margin: 0;\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit; }\n\nbutton,\ninput {\n  overflow: visible; }\n\nbutton,\nselect {\n  text-transform: none; }\n\nbutton,\nhtml [type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button; }\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  padding: 0;\n  border-style: none; }\n\ninput[type=\"radio\"],\ninput[type=\"checkbox\"] {\n  box-sizing: border-box;\n  padding: 0; }\n\ninput[type=\"date\"],\ninput[type=\"time\"],\ninput[type=\"datetime-local\"],\ninput[type=\"month\"] {\n  -webkit-appearance: listbox; }\n\ntextarea {\n  overflow: auto;\n  resize: vertical; }\n\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0; }\n\nlegend {\n  display: block;\n  width: 100%;\n  max-width: 100%;\n  padding: 0;\n  margin-bottom: .5rem;\n  font-size: 1.5rem;\n  line-height: inherit;\n  color: inherit;\n  white-space: normal; }\n\nprogress {\n  vertical-align: baseline; }\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto; }\n\n[type=\"search\"] {\n  outline-offset: -2px;\n  -webkit-appearance: none; }\n\n[type=\"search\"]::-webkit-search-cancel-button,\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none; }\n\n::-webkit-file-upload-button {\n  font: inherit;\n  -webkit-appearance: button; }\n\noutput {\n  display: inline-block; }\n\nsummary {\n  display: list-item;\n  cursor: pointer; }\n\ntemplate {\n  display: none; }\n\n[hidden] {\n  display: none !important; }\n\nh1, h2, h3, h4, h5, h6,\n.h1, .h2, .h3, .h4, .h5, .h6 {\n  margin-bottom: 0.5rem;\n  font-family: inherit;\n  font-weight: 500;\n  line-height: 1.2;\n  color: inherit; }\n\nh1, .h1 {\n  font-size: 2.5rem; }\n\nh2, .h2 {\n  font-size: 2rem; }\n\nh3, .h3 {\n  font-size: 1.75rem; }\n\nh4, .h4 {\n  font-size: 1.5rem; }\n\nh5, .h5 {\n  font-size: 1.25rem; }\n\nh6, .h6 {\n  font-size: 1rem; }\n\n.lead {\n  font-size: 1.25rem;\n  font-weight: 300; }\n\n.display-1 {\n  font-size: 6rem;\n  font-weight: 300;\n  line-height: 1.2; }\n\n.display-2 {\n  font-size: 5.5rem;\n  font-weight: 300;\n  line-height: 1.2; }\n\n.display-3 {\n  font-size: 4.5rem;\n  font-weight: 300;\n  line-height: 1.2; }\n\n.display-4 {\n  font-size: 3.5rem;\n  font-weight: 300;\n  line-height: 1.2; }\n\nhr {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  border: 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1); }\n\nsmall,\n.small {\n  font-size: 80%;\n  font-weight: 400; }\n\nmark,\n.mark {\n  padding: 0.2em;\n  background-color: #fcf8e3; }\n\n.list-unstyled {\n  padding-left: 0;\n  list-style: none; }\n\n.list-inline {\n  padding-left: 0;\n  list-style: none; }\n\n.list-inline-item {\n  display: inline-block; }\n  .list-inline-item:not(:last-child) {\n    margin-right: 0.5rem; }\n\n.initialism {\n  font-size: 90%;\n  text-transform: uppercase; }\n\n.blockquote {\n  margin-bottom: 1rem;\n  font-size: 1.25rem; }\n\n.blockquote-footer {\n  display: block;\n  font-size: 80%;\n  color: #6c757d; }\n  .blockquote-footer::before {\n    content: \"\\2014   \\A0\"; }\n\n.img-fluid {\n  max-width: 100%;\n  height: auto; }\n\n.img-thumbnail {\n  padding: 0.25rem;\n  background-color: #fff;\n  border: 1px solid #dee2e6;\n  border-radius: 0.25rem;\n  max-width: 100%;\n  height: auto; }\n\n.figure {\n  display: inline-block; }\n\n.figure-img {\n  margin-bottom: 0.5rem;\n  line-height: 1; }\n\n.figure-caption {\n  font-size: 90%;\n  color: #6c757d; }\n\ncode {\n  font-size: 87.5%;\n  color: #e83e8c;\n  word-break: break-word; }\n  a > code {\n    color: inherit; }\n\nkbd {\n  padding: 0.2rem 0.4rem;\n  font-size: 87.5%;\n  color: #fff;\n  background-color: #212529;\n  border-radius: 0.2rem; }\n  kbd kbd {\n    padding: 0;\n    font-size: 100%;\n    font-weight: 700; }\n\npre {\n  display: block;\n  font-size: 87.5%;\n  color: #212529; }\n  pre code {\n    font-size: inherit;\n    color: inherit;\n    word-break: normal; }\n\n.pre-scrollable {\n  max-height: 340px;\n  overflow-y: scroll; }\n\n.container {\n  width: 100%;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto; }\n  @media (min-width: 576px) {\n    .container {\n      max-width: 540px; } }\n  @media (min-width: 768px) {\n    .container {\n      max-width: 720px; } }\n  @media (min-width: 992px) {\n    .container {\n      max-width: 960px; } }\n  @media (min-width: 1200px) {\n    .container {\n      max-width: 1140px; } }\n\n.container-fluid {\n  width: 100%;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto; }\n\n.row {\n  display: flex;\n  flex-wrap: wrap;\n  margin-right: -15px;\n  margin-left: -15px; }\n\n.no-gutters {\n  margin-right: 0;\n  margin-left: 0; }\n  .no-gutters > .col,\n  .no-gutters > [class*=\"col-\"] {\n    padding-right: 0;\n    padding-left: 0; }\n\n.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,\n.col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,\n.col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,\n.col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,\n.col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl,\n.col-xl-auto {\n  position: relative;\n  width: 100%;\n  min-height: 1px;\n  padding-right: 15px;\n  padding-left: 15px; }\n\n.col {\n  flex-basis: 0;\n  flex-grow: 1;\n  max-width: 100%; }\n\n.col-auto {\n  flex: 0 0 auto;\n  width: auto;\n  max-width: none; }\n\n.col-1 {\n  flex: 0 0 8.33333%;\n  max-width: 8.33333%; }\n\n.col-2 {\n  flex: 0 0 16.66667%;\n  max-width: 16.66667%; }\n\n.col-3 {\n  flex: 0 0 25%;\n  max-width: 25%; }\n\n.col-4 {\n  flex: 0 0 33.33333%;\n  max-width: 33.33333%; }\n\n.col-5 {\n  flex: 0 0 41.66667%;\n  max-width: 41.66667%; }\n\n.col-6 {\n  flex: 0 0 50%;\n  max-width: 50%; }\n\n.col-7 {\n  flex: 0 0 58.33333%;\n  max-width: 58.33333%; }\n\n.col-8 {\n  flex: 0 0 66.66667%;\n  max-width: 66.66667%; }\n\n.col-9 {\n  flex: 0 0 75%;\n  max-width: 75%; }\n\n.col-10 {\n  flex: 0 0 83.33333%;\n  max-width: 83.33333%; }\n\n.col-11 {\n  flex: 0 0 91.66667%;\n  max-width: 91.66667%; }\n\n.col-12 {\n  flex: 0 0 100%;\n  max-width: 100%; }\n\n.order-first {\n  order: -1; }\n\n.order-last {\n  order: 13; }\n\n.order-0 {\n  order: 0; }\n\n.order-1 {\n  order: 1; }\n\n.order-2 {\n  order: 2; }\n\n.order-3 {\n  order: 3; }\n\n.order-4 {\n  order: 4; }\n\n.order-5 {\n  order: 5; }\n\n.order-6 {\n  order: 6; }\n\n.order-7 {\n  order: 7; }\n\n.order-8 {\n  order: 8; }\n\n.order-9 {\n  order: 9; }\n\n.order-10 {\n  order: 10; }\n\n.order-11 {\n  order: 11; }\n\n.order-12 {\n  order: 12; }\n\n.offset-1 {\n  margin-left: 8.33333%; }\n\n.offset-2 {\n  margin-left: 16.66667%; }\n\n.offset-3 {\n  margin-left: 25%; }\n\n.offset-4 {\n  margin-left: 33.33333%; }\n\n.offset-5 {\n  margin-left: 41.66667%; }\n\n.offset-6 {\n  margin-left: 50%; }\n\n.offset-7 {\n  margin-left: 58.33333%; }\n\n.offset-8 {\n  margin-left: 66.66667%; }\n\n.offset-9 {\n  margin-left: 75%; }\n\n.offset-10 {\n  margin-left: 83.33333%; }\n\n.offset-11 {\n  margin-left: 91.66667%; }\n\n@media (min-width: 576px) {\n  .col-sm {\n    flex-basis: 0;\n    flex-grow: 1;\n    max-width: 100%; }\n  .col-sm-auto {\n    flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-sm-1 {\n    flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-sm-2 {\n    flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-sm-3 {\n    flex: 0 0 25%;\n    max-width: 25%; }\n  .col-sm-4 {\n    flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-sm-5 {\n    flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-sm-6 {\n    flex: 0 0 50%;\n    max-width: 50%; }\n  .col-sm-7 {\n    flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-sm-8 {\n    flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-sm-9 {\n    flex: 0 0 75%;\n    max-width: 75%; }\n  .col-sm-10 {\n    flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-sm-11 {\n    flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-sm-12 {\n    flex: 0 0 100%;\n    max-width: 100%; }\n  .order-sm-first {\n    order: -1; }\n  .order-sm-last {\n    order: 13; }\n  .order-sm-0 {\n    order: 0; }\n  .order-sm-1 {\n    order: 1; }\n  .order-sm-2 {\n    order: 2; }\n  .order-sm-3 {\n    order: 3; }\n  .order-sm-4 {\n    order: 4; }\n  .order-sm-5 {\n    order: 5; }\n  .order-sm-6 {\n    order: 6; }\n  .order-sm-7 {\n    order: 7; }\n  .order-sm-8 {\n    order: 8; }\n  .order-sm-9 {\n    order: 9; }\n  .order-sm-10 {\n    order: 10; }\n  .order-sm-11 {\n    order: 11; }\n  .order-sm-12 {\n    order: 12; }\n  .offset-sm-0 {\n    margin-left: 0; }\n  .offset-sm-1 {\n    margin-left: 8.33333%; }\n  .offset-sm-2 {\n    margin-left: 16.66667%; }\n  .offset-sm-3 {\n    margin-left: 25%; }\n  .offset-sm-4 {\n    margin-left: 33.33333%; }\n  .offset-sm-5 {\n    margin-left: 41.66667%; }\n  .offset-sm-6 {\n    margin-left: 50%; }\n  .offset-sm-7 {\n    margin-left: 58.33333%; }\n  .offset-sm-8 {\n    margin-left: 66.66667%; }\n  .offset-sm-9 {\n    margin-left: 75%; }\n  .offset-sm-10 {\n    margin-left: 83.33333%; }\n  .offset-sm-11 {\n    margin-left: 91.66667%; } }\n\n@media (min-width: 768px) {\n  .col-md {\n    flex-basis: 0;\n    flex-grow: 1;\n    max-width: 100%; }\n  .col-md-auto {\n    flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-md-1 {\n    flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-md-2 {\n    flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-md-3 {\n    flex: 0 0 25%;\n    max-width: 25%; }\n  .col-md-4 {\n    flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-md-5 {\n    flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-md-6 {\n    flex: 0 0 50%;\n    max-width: 50%; }\n  .col-md-7 {\n    flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-md-8 {\n    flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-md-9 {\n    flex: 0 0 75%;\n    max-width: 75%; }\n  .col-md-10 {\n    flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-md-11 {\n    flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-md-12 {\n    flex: 0 0 100%;\n    max-width: 100%; }\n  .order-md-first {\n    order: -1; }\n  .order-md-last {\n    order: 13; }\n  .order-md-0 {\n    order: 0; }\n  .order-md-1 {\n    order: 1; }\n  .order-md-2 {\n    order: 2; }\n  .order-md-3 {\n    order: 3; }\n  .order-md-4 {\n    order: 4; }\n  .order-md-5 {\n    order: 5; }\n  .order-md-6 {\n    order: 6; }\n  .order-md-7 {\n    order: 7; }\n  .order-md-8 {\n    order: 8; }\n  .order-md-9 {\n    order: 9; }\n  .order-md-10 {\n    order: 10; }\n  .order-md-11 {\n    order: 11; }\n  .order-md-12 {\n    order: 12; }\n  .offset-md-0 {\n    margin-left: 0; }\n  .offset-md-1 {\n    margin-left: 8.33333%; }\n  .offset-md-2 {\n    margin-left: 16.66667%; }\n  .offset-md-3 {\n    margin-left: 25%; }\n  .offset-md-4 {\n    margin-left: 33.33333%; }\n  .offset-md-5 {\n    margin-left: 41.66667%; }\n  .offset-md-6 {\n    margin-left: 50%; }\n  .offset-md-7 {\n    margin-left: 58.33333%; }\n  .offset-md-8 {\n    margin-left: 66.66667%; }\n  .offset-md-9 {\n    margin-left: 75%; }\n  .offset-md-10 {\n    margin-left: 83.33333%; }\n  .offset-md-11 {\n    margin-left: 91.66667%; } }\n\n@media (min-width: 992px) {\n  .col-lg {\n    flex-basis: 0;\n    flex-grow: 1;\n    max-width: 100%; }\n  .col-lg-auto {\n    flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-lg-1 {\n    flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-lg-2 {\n    flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-lg-3 {\n    flex: 0 0 25%;\n    max-width: 25%; }\n  .col-lg-4 {\n    flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-lg-5 {\n    flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-lg-6 {\n    flex: 0 0 50%;\n    max-width: 50%; }\n  .col-lg-7 {\n    flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-lg-8 {\n    flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-lg-9 {\n    flex: 0 0 75%;\n    max-width: 75%; }\n  .col-lg-10 {\n    flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-lg-11 {\n    flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-lg-12 {\n    flex: 0 0 100%;\n    max-width: 100%; }\n  .order-lg-first {\n    order: -1; }\n  .order-lg-last {\n    order: 13; }\n  .order-lg-0 {\n    order: 0; }\n  .order-lg-1 {\n    order: 1; }\n  .order-lg-2 {\n    order: 2; }\n  .order-lg-3 {\n    order: 3; }\n  .order-lg-4 {\n    order: 4; }\n  .order-lg-5 {\n    order: 5; }\n  .order-lg-6 {\n    order: 6; }\n  .order-lg-7 {\n    order: 7; }\n  .order-lg-8 {\n    order: 8; }\n  .order-lg-9 {\n    order: 9; }\n  .order-lg-10 {\n    order: 10; }\n  .order-lg-11 {\n    order: 11; }\n  .order-lg-12 {\n    order: 12; }\n  .offset-lg-0 {\n    margin-left: 0; }\n  .offset-lg-1 {\n    margin-left: 8.33333%; }\n  .offset-lg-2 {\n    margin-left: 16.66667%; }\n  .offset-lg-3 {\n    margin-left: 25%; }\n  .offset-lg-4 {\n    margin-left: 33.33333%; }\n  .offset-lg-5 {\n    margin-left: 41.66667%; }\n  .offset-lg-6 {\n    margin-left: 50%; }\n  .offset-lg-7 {\n    margin-left: 58.33333%; }\n  .offset-lg-8 {\n    margin-left: 66.66667%; }\n  .offset-lg-9 {\n    margin-left: 75%; }\n  .offset-lg-10 {\n    margin-left: 83.33333%; }\n  .offset-lg-11 {\n    margin-left: 91.66667%; } }\n\n@media (min-width: 1200px) {\n  .col-xl {\n    flex-basis: 0;\n    flex-grow: 1;\n    max-width: 100%; }\n  .col-xl-auto {\n    flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-xl-1 {\n    flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-xl-2 {\n    flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-xl-3 {\n    flex: 0 0 25%;\n    max-width: 25%; }\n  .col-xl-4 {\n    flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-xl-5 {\n    flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-xl-6 {\n    flex: 0 0 50%;\n    max-width: 50%; }\n  .col-xl-7 {\n    flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-xl-8 {\n    flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-xl-9 {\n    flex: 0 0 75%;\n    max-width: 75%; }\n  .col-xl-10 {\n    flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-xl-11 {\n    flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-xl-12 {\n    flex: 0 0 100%;\n    max-width: 100%; }\n  .order-xl-first {\n    order: -1; }\n  .order-xl-last {\n    order: 13; }\n  .order-xl-0 {\n    order: 0; }\n  .order-xl-1 {\n    order: 1; }\n  .order-xl-2 {\n    order: 2; }\n  .order-xl-3 {\n    order: 3; }\n  .order-xl-4 {\n    order: 4; }\n  .order-xl-5 {\n    order: 5; }\n  .order-xl-6 {\n    order: 6; }\n  .order-xl-7 {\n    order: 7; }\n  .order-xl-8 {\n    order: 8; }\n  .order-xl-9 {\n    order: 9; }\n  .order-xl-10 {\n    order: 10; }\n  .order-xl-11 {\n    order: 11; }\n  .order-xl-12 {\n    order: 12; }\n  .offset-xl-0 {\n    margin-left: 0; }\n  .offset-xl-1 {\n    margin-left: 8.33333%; }\n  .offset-xl-2 {\n    margin-left: 16.66667%; }\n  .offset-xl-3 {\n    margin-left: 25%; }\n  .offset-xl-4 {\n    margin-left: 33.33333%; }\n  .offset-xl-5 {\n    margin-left: 41.66667%; }\n  .offset-xl-6 {\n    margin-left: 50%; }\n  .offset-xl-7 {\n    margin-left: 58.33333%; }\n  .offset-xl-8 {\n    margin-left: 66.66667%; }\n  .offset-xl-9 {\n    margin-left: 75%; }\n  .offset-xl-10 {\n    margin-left: 83.33333%; }\n  .offset-xl-11 {\n    margin-left: 91.66667%; } }\n\n.table {\n  width: 100%;\n  max-width: 100%;\n  margin-bottom: 1rem;\n  background-color: transparent; }\n  .table th,\n  .table td {\n    padding: 0.75rem;\n    vertical-align: top;\n    border-top: 1px solid #dee2e6; }\n  .table thead th {\n    vertical-align: bottom;\n    border-bottom: 2px solid #dee2e6; }\n  .table tbody + tbody {\n    border-top: 2px solid #dee2e6; }\n  .table .table {\n    background-color: #fff; }\n\n.table-sm th,\n.table-sm td {\n  padding: 0.3rem; }\n\n.table-bordered {\n  border: 1px solid #dee2e6; }\n  .table-bordered th,\n  .table-bordered td {\n    border: 1px solid #dee2e6; }\n  .table-bordered thead th,\n  .table-bordered thead td {\n    border-bottom-width: 2px; }\n\n.table-borderless th,\n.table-borderless td,\n.table-borderless thead th,\n.table-borderless tbody + tbody {\n  border: 0; }\n\n.table-striped tbody tr:nth-of-type(odd) {\n  background-color: rgba(0, 0, 0, 0.05); }\n\n.table-hover tbody tr:hover {\n  background-color: rgba(0, 0, 0, 0.075); }\n\n.table-primary,\n.table-primary > th,\n.table-primary > td {\n  background-color: #b8daff; }\n\n.table-hover .table-primary:hover {\n  background-color: #9fcdff; }\n  .table-hover .table-primary:hover > td,\n  .table-hover .table-primary:hover > th {\n    background-color: #9fcdff; }\n\n.table-secondary,\n.table-secondary > th,\n.table-secondary > td {\n  background-color: #d6d8db; }\n\n.table-hover .table-secondary:hover {\n  background-color: #c8cbcf; }\n  .table-hover .table-secondary:hover > td,\n  .table-hover .table-secondary:hover > th {\n    background-color: #c8cbcf; }\n\n.table-success,\n.table-success > th,\n.table-success > td {\n  background-color: #c3e6cb; }\n\n.table-hover .table-success:hover {\n  background-color: #b1dfbb; }\n  .table-hover .table-success:hover > td,\n  .table-hover .table-success:hover > th {\n    background-color: #b1dfbb; }\n\n.table-info,\n.table-info > th,\n.table-info > td {\n  background-color: #bee5eb; }\n\n.table-hover .table-info:hover {\n  background-color: #abdde5; }\n  .table-hover .table-info:hover > td,\n  .table-hover .table-info:hover > th {\n    background-color: #abdde5; }\n\n.table-warning,\n.table-warning > th,\n.table-warning > td {\n  background-color: #ffeeba; }\n\n.table-hover .table-warning:hover {\n  background-color: #ffe8a1; }\n  .table-hover .table-warning:hover > td,\n  .table-hover .table-warning:hover > th {\n    background-color: #ffe8a1; }\n\n.table-danger,\n.table-danger > th,\n.table-danger > td {\n  background-color: #f5c6cb; }\n\n.table-hover .table-danger:hover {\n  background-color: #f1b0b7; }\n  .table-hover .table-danger:hover > td,\n  .table-hover .table-danger:hover > th {\n    background-color: #f1b0b7; }\n\n.table-light,\n.table-light > th,\n.table-light > td {\n  background-color: #fdfdfe; }\n\n.table-hover .table-light:hover {\n  background-color: #ececf6; }\n  .table-hover .table-light:hover > td,\n  .table-hover .table-light:hover > th {\n    background-color: #ececf6; }\n\n.table-dark,\n.table-dark > th,\n.table-dark > td {\n  background-color: #c6c8ca; }\n\n.table-hover .table-dark:hover {\n  background-color: #b9bbbe; }\n  .table-hover .table-dark:hover > td,\n  .table-hover .table-dark:hover > th {\n    background-color: #b9bbbe; }\n\n.table-active,\n.table-active > th,\n.table-active > td {\n  background-color: rgba(0, 0, 0, 0.075); }\n\n.table-hover .table-active:hover {\n  background-color: rgba(0, 0, 0, 0.075); }\n  .table-hover .table-active:hover > td,\n  .table-hover .table-active:hover > th {\n    background-color: rgba(0, 0, 0, 0.075); }\n\n.table .thead-dark th {\n  color: #fff;\n  background-color: #212529;\n  border-color: #32383e; }\n\n.table .thead-light th {\n  color: #495057;\n  background-color: #e9ecef;\n  border-color: #dee2e6; }\n\n.table-dark {\n  color: #fff;\n  background-color: #212529; }\n  .table-dark th,\n  .table-dark td,\n  .table-dark thead th {\n    border-color: #32383e; }\n  .table-dark.table-bordered {\n    border: 0; }\n  .table-dark.table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(255, 255, 255, 0.05); }\n  .table-dark.table-hover tbody tr:hover {\n    background-color: rgba(255, 255, 255, 0.075); }\n\n@media (max-width: 575.98px) {\n  .table-responsive-sm {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-sm > .table-bordered {\n      border: 0; } }\n\n@media (max-width: 767.98px) {\n  .table-responsive-md {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-md > .table-bordered {\n      border: 0; } }\n\n@media (max-width: 991.98px) {\n  .table-responsive-lg {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-lg > .table-bordered {\n      border: 0; } }\n\n@media (max-width: 1199.98px) {\n  .table-responsive-xl {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-xl > .table-bordered {\n      border: 0; } }\n\n.table-responsive {\n  display: block;\n  width: 100%;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  -ms-overflow-style: -ms-autohiding-scrollbar; }\n  .table-responsive > .table-bordered {\n    border: 0; }\n\n.form-control {\n  display: block;\n  width: 100%;\n  padding: 0.375rem 0.75rem;\n  font-size: 1rem;\n  line-height: 1.5;\n  color: #495057;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid #ced4da;\n  border-radius: 0.25rem;\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .form-control {\n      transition: none; } }\n  .form-control::-ms-expand {\n    background-color: transparent;\n    border: 0; }\n  .form-control:focus {\n    color: #495057;\n    background-color: #fff;\n    border-color: #80bdff;\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n  .form-control::placeholder {\n    color: #6c757d;\n    opacity: 1; }\n  .form-control:disabled, .form-control[readonly] {\n    background-color: #e9ecef;\n    opacity: 1; }\n\nselect.form-control:not([size]):not([multiple]) {\n  height: calc(2.25rem + 2px); }\n\nselect.form-control:focus::-ms-value {\n  color: #495057;\n  background-color: #fff; }\n\n.form-control-file,\n.form-control-range {\n  display: block;\n  width: 100%; }\n\n.col-form-label {\n  padding-top: calc(0.375rem + 1px);\n  padding-bottom: calc(0.375rem + 1px);\n  margin-bottom: 0;\n  font-size: inherit;\n  line-height: 1.5; }\n\n.col-form-label-lg {\n  padding-top: calc(0.5rem + 1px);\n  padding-bottom: calc(0.5rem + 1px);\n  font-size: 1.25rem;\n  line-height: 1.5; }\n\n.col-form-label-sm {\n  padding-top: calc(0.25rem + 1px);\n  padding-bottom: calc(0.25rem + 1px);\n  font-size: 0.875rem;\n  line-height: 1.5; }\n\n.form-control-plaintext {\n  display: block;\n  width: 100%;\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n  margin-bottom: 0;\n  line-height: 1.5;\n  color: #212529;\n  background-color: transparent;\n  border: solid transparent;\n  border-width: 1px 0; }\n  .form-control-plaintext.form-control-sm, .input-group-sm > .form-control-plaintext.form-control,\n  .input-group-sm > .input-group-prepend > .form-control-plaintext.input-group-text,\n  .input-group-sm > .input-group-append > .form-control-plaintext.input-group-text,\n  .input-group-sm > .input-group-prepend > .form-control-plaintext.btn,\n  .input-group-sm > .input-group-append > .form-control-plaintext.btn, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control,\n  .input-group-lg > .input-group-prepend > .form-control-plaintext.input-group-text,\n  .input-group-lg > .input-group-append > .form-control-plaintext.input-group-text,\n  .input-group-lg > .input-group-prepend > .form-control-plaintext.btn,\n  .input-group-lg > .input-group-append > .form-control-plaintext.btn {\n    padding-right: 0;\n    padding-left: 0; }\n\n.form-control-sm, .input-group-sm > .form-control,\n.input-group-sm > .input-group-prepend > .input-group-text,\n.input-group-sm > .input-group-append > .input-group-text,\n.input-group-sm > .input-group-prepend > .btn,\n.input-group-sm > .input-group-append > .btn {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5;\n  border-radius: 0.2rem; }\n\nselect.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.form-control:not([size]):not([multiple]),\n.input-group-sm > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),\n.input-group-sm > .input-group-append > select.input-group-text:not([size]):not([multiple]),\n.input-group-sm > .input-group-prepend > select.btn:not([size]):not([multiple]),\n.input-group-sm > .input-group-append > select.btn:not([size]):not([multiple]) {\n  height: calc(1.8125rem + 2px); }\n\n.form-control-lg, .input-group-lg > .form-control,\n.input-group-lg > .input-group-prepend > .input-group-text,\n.input-group-lg > .input-group-append > .input-group-text,\n.input-group-lg > .input-group-prepend > .btn,\n.input-group-lg > .input-group-append > .btn {\n  padding: 0.5rem 1rem;\n  font-size: 1.25rem;\n  line-height: 1.5;\n  border-radius: 0.3rem; }\n\nselect.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.form-control:not([size]):not([multiple]),\n.input-group-lg > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),\n.input-group-lg > .input-group-append > select.input-group-text:not([size]):not([multiple]),\n.input-group-lg > .input-group-prepend > select.btn:not([size]):not([multiple]),\n.input-group-lg > .input-group-append > select.btn:not([size]):not([multiple]) {\n  height: calc(2.875rem + 2px); }\n\n.form-group {\n  margin-bottom: 1rem; }\n\n.form-text {\n  display: block;\n  margin-top: 0.25rem; }\n\n.form-row {\n  display: flex;\n  flex-wrap: wrap;\n  margin-right: -5px;\n  margin-left: -5px; }\n  .form-row > .col,\n  .form-row > [class*=\"col-\"] {\n    padding-right: 5px;\n    padding-left: 5px; }\n\n.form-check {\n  position: relative;\n  display: block;\n  padding-left: 1.25rem; }\n\n.form-check-input {\n  position: absolute;\n  margin-top: 0.3rem;\n  margin-left: -1.25rem; }\n  .form-check-input:disabled ~ .form-check-label {\n    color: #6c757d; }\n\n.form-check-label {\n  margin-bottom: 0; }\n\n.form-check-inline {\n  display: inline-flex;\n  align-items: center;\n  padding-left: 0;\n  margin-right: 0.75rem; }\n  .form-check-inline .form-check-input {\n    position: static;\n    margin-top: 0;\n    margin-right: 0.3125rem;\n    margin-left: 0; }\n\n.valid-feedback {\n  display: none;\n  width: 100%;\n  margin-top: 0.25rem;\n  font-size: 80%;\n  color: #28a745; }\n\n.valid-tooltip {\n  position: absolute;\n  top: 100%;\n  z-index: 5;\n  display: none;\n  max-width: 100%;\n  padding: .5rem;\n  margin-top: .1rem;\n  font-size: .875rem;\n  line-height: 1;\n  color: #fff;\n  background-color: rgba(40, 167, 69, 0.8);\n  border-radius: .2rem; }\n\n.was-validated .form-control:valid, .form-control.is-valid, .was-validated\n.custom-select:valid,\n.custom-select.is-valid {\n  border-color: #28a745; }\n  .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated\n  .custom-select:valid:focus,\n  .custom-select.is-valid:focus {\n    border-color: #28a745;\n    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); }\n  .was-validated .form-control:valid ~ .valid-feedback,\n  .was-validated .form-control:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback,\n  .form-control.is-valid ~ .valid-tooltip, .was-validated\n  .custom-select:valid ~ .valid-feedback,\n  .was-validated\n  .custom-select:valid ~ .valid-tooltip,\n  .custom-select.is-valid ~ .valid-feedback,\n  .custom-select.is-valid ~ .valid-tooltip {\n    display: block; }\n\n.was-validated .form-control-file:valid ~ .valid-feedback,\n.was-validated .form-control-file:valid ~ .valid-tooltip, .form-control-file.is-valid ~ .valid-feedback,\n.form-control-file.is-valid ~ .valid-tooltip {\n  display: block; }\n\n.was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {\n  color: #28a745; }\n\n.was-validated .form-check-input:valid ~ .valid-feedback,\n.was-validated .form-check-input:valid ~ .valid-tooltip, .form-check-input.is-valid ~ .valid-feedback,\n.form-check-input.is-valid ~ .valid-tooltip {\n  display: block; }\n\n.was-validated .custom-control-input:valid ~ .custom-control-label, .custom-control-input.is-valid ~ .custom-control-label {\n  color: #28a745; }\n  .was-validated .custom-control-input:valid ~ .custom-control-label::before, .custom-control-input.is-valid ~ .custom-control-label::before {\n    background-color: #71dd8a; }\n\n.was-validated .custom-control-input:valid ~ .valid-feedback,\n.was-validated .custom-control-input:valid ~ .valid-tooltip, .custom-control-input.is-valid ~ .valid-feedback,\n.custom-control-input.is-valid ~ .valid-tooltip {\n  display: block; }\n\n.was-validated .custom-control-input:valid:checked ~ .custom-control-label::before, .custom-control-input.is-valid:checked ~ .custom-control-label::before {\n  background-color: #34ce57; }\n\n.was-validated .custom-control-input:valid:focus ~ .custom-control-label::before, .custom-control-input.is-valid:focus ~ .custom-control-label::before {\n  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(40, 167, 69, 0.25); }\n\n.was-validated .custom-file-input:valid ~ .custom-file-label, .custom-file-input.is-valid ~ .custom-file-label {\n  border-color: #28a745; }\n  .was-validated .custom-file-input:valid ~ .custom-file-label::before, .custom-file-input.is-valid ~ .custom-file-label::before {\n    border-color: inherit; }\n\n.was-validated .custom-file-input:valid ~ .valid-feedback,\n.was-validated .custom-file-input:valid ~ .valid-tooltip, .custom-file-input.is-valid ~ .valid-feedback,\n.custom-file-input.is-valid ~ .valid-tooltip {\n  display: block; }\n\n.was-validated .custom-file-input:valid:focus ~ .custom-file-label, .custom-file-input.is-valid:focus ~ .custom-file-label {\n  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); }\n\n.invalid-feedback {\n  display: none;\n  width: 100%;\n  margin-top: 0.25rem;\n  font-size: 80%;\n  color: #dc3545; }\n\n.invalid-tooltip {\n  position: absolute;\n  top: 100%;\n  z-index: 5;\n  display: none;\n  max-width: 100%;\n  padding: .5rem;\n  margin-top: .1rem;\n  font-size: .875rem;\n  line-height: 1;\n  color: #fff;\n  background-color: rgba(220, 53, 69, 0.8);\n  border-radius: .2rem; }\n\n.was-validated .form-control:invalid, .form-control.is-invalid, .was-validated\n.custom-select:invalid,\n.custom-select.is-invalid {\n  border-color: #dc3545; }\n  .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus, .was-validated\n  .custom-select:invalid:focus,\n  .custom-select.is-invalid:focus {\n    border-color: #dc3545;\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n  .was-validated .form-control:invalid ~ .invalid-feedback,\n  .was-validated .form-control:invalid ~ .invalid-tooltip, .form-control.is-invalid ~ .invalid-feedback,\n  .form-control.is-invalid ~ .invalid-tooltip, .was-validated\n  .custom-select:invalid ~ .invalid-feedback,\n  .was-validated\n  .custom-select:invalid ~ .invalid-tooltip,\n  .custom-select.is-invalid ~ .invalid-feedback,\n  .custom-select.is-invalid ~ .invalid-tooltip {\n    display: block; }\n\n.was-validated .form-control-file:invalid ~ .invalid-feedback,\n.was-validated .form-control-file:invalid ~ .invalid-tooltip, .form-control-file.is-invalid ~ .invalid-feedback,\n.form-control-file.is-invalid ~ .invalid-tooltip {\n  display: block; }\n\n.was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {\n  color: #dc3545; }\n\n.was-validated .form-check-input:invalid ~ .invalid-feedback,\n.was-validated .form-check-input:invalid ~ .invalid-tooltip, .form-check-input.is-invalid ~ .invalid-feedback,\n.form-check-input.is-invalid ~ .invalid-tooltip {\n  display: block; }\n\n.was-validated .custom-control-input:invalid ~ .custom-control-label, .custom-control-input.is-invalid ~ .custom-control-label {\n  color: #dc3545; }\n  .was-validated .custom-control-input:invalid ~ .custom-control-label::before, .custom-control-input.is-invalid ~ .custom-control-label::before {\n    background-color: #efa2a9; }\n\n.was-validated .custom-control-input:invalid ~ .invalid-feedback,\n.was-validated .custom-control-input:invalid ~ .invalid-tooltip, .custom-control-input.is-invalid ~ .invalid-feedback,\n.custom-control-input.is-invalid ~ .invalid-tooltip {\n  display: block; }\n\n.was-validated .custom-control-input:invalid:checked ~ .custom-control-label::before, .custom-control-input.is-invalid:checked ~ .custom-control-label::before {\n  background-color: #e4606d; }\n\n.was-validated .custom-control-input:invalid:focus ~ .custom-control-label::before, .custom-control-input.is-invalid:focus ~ .custom-control-label::before {\n  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n\n.was-validated .custom-file-input:invalid ~ .custom-file-label, .custom-file-input.is-invalid ~ .custom-file-label {\n  border-color: #dc3545; }\n  .was-validated .custom-file-input:invalid ~ .custom-file-label::before, .custom-file-input.is-invalid ~ .custom-file-label::before {\n    border-color: inherit; }\n\n.was-validated .custom-file-input:invalid ~ .invalid-feedback,\n.was-validated .custom-file-input:invalid ~ .invalid-tooltip, .custom-file-input.is-invalid ~ .invalid-feedback,\n.custom-file-input.is-invalid ~ .invalid-tooltip {\n  display: block; }\n\n.was-validated .custom-file-input:invalid:focus ~ .custom-file-label, .custom-file-input.is-invalid:focus ~ .custom-file-label {\n  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n\n.form-inline {\n  display: flex;\n  flex-flow: row wrap;\n  align-items: center; }\n  .form-inline .form-check {\n    width: 100%; }\n  @media (min-width: 576px) {\n    .form-inline label {\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      margin-bottom: 0; }\n    .form-inline .form-group {\n      display: flex;\n      flex: 0 0 auto;\n      flex-flow: row wrap;\n      align-items: center;\n      margin-bottom: 0; }\n    .form-inline .form-control {\n      display: inline-block;\n      width: auto;\n      vertical-align: middle; }\n    .form-inline .form-control-plaintext {\n      display: inline-block; }\n    .form-inline .input-group,\n    .form-inline .custom-select {\n      width: auto; }\n    .form-inline .form-check {\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      width: auto;\n      padding-left: 0; }\n    .form-inline .form-check-input {\n      position: relative;\n      margin-top: 0;\n      margin-right: 0.25rem;\n      margin-left: 0; }\n    .form-inline .custom-control {\n      align-items: center;\n      justify-content: center; }\n    .form-inline .custom-control-label {\n      margin-bottom: 0; } }\n\n.btn {\n  display: inline-block;\n  font-weight: 400;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: middle;\n  user-select: none;\n  border: 1px solid transparent;\n  padding: 0.375rem 0.75rem;\n  font-size: 1rem;\n  line-height: 1.5;\n  border-radius: 0.25rem;\n  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .btn {\n      transition: none; } }\n  .btn:hover, .btn:focus {\n    text-decoration: none; }\n  .btn:focus, .btn.focus {\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n  .btn.disabled, .btn:disabled {\n    opacity: 0.65; }\n  .btn:not(:disabled):not(.disabled) {\n    cursor: pointer; }\n  .btn:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active {\n    background-image: none; }\n\na.btn.disabled,\nfieldset:disabled a.btn {\n  pointer-events: none; }\n\n.btn-primary {\n  color: #fff;\n  background-color: #007bff;\n  border-color: #007bff; }\n  .btn-primary:hover {\n    color: #fff;\n    background-color: #0069d9;\n    border-color: #0062cc; }\n  .btn-primary:focus, .btn-primary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); }\n  .btn-primary.disabled, .btn-primary:disabled {\n    color: #fff;\n    background-color: #007bff;\n    border-color: #007bff; }\n  .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,\n  .show > .btn-primary.dropdown-toggle {\n    color: #fff;\n    background-color: #0062cc;\n    border-color: #005cbf; }\n    .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-primary.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); }\n\n.btn-secondary {\n  color: #fff;\n  background-color: #6c757d;\n  border-color: #6c757d; }\n  .btn-secondary:hover {\n    color: #fff;\n    background-color: #5a6268;\n    border-color: #545b62; }\n  .btn-secondary:focus, .btn-secondary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }\n  .btn-secondary.disabled, .btn-secondary:disabled {\n    color: #fff;\n    background-color: #6c757d;\n    border-color: #6c757d; }\n  .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,\n  .show > .btn-secondary.dropdown-toggle {\n    color: #fff;\n    background-color: #545b62;\n    border-color: #4e555b; }\n    .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-secondary.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }\n\n.btn-success {\n  color: #fff;\n  background-color: #28a745;\n  border-color: #28a745; }\n  .btn-success:hover {\n    color: #fff;\n    background-color: #218838;\n    border-color: #1e7e34; }\n  .btn-success:focus, .btn-success.focus {\n    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }\n  .btn-success.disabled, .btn-success:disabled {\n    color: #fff;\n    background-color: #28a745;\n    border-color: #28a745; }\n  .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active,\n  .show > .btn-success.dropdown-toggle {\n    color: #fff;\n    background-color: #1e7e34;\n    border-color: #1c7430; }\n    .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-success.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }\n\n.btn-info {\n  color: #fff;\n  background-color: #17a2b8;\n  border-color: #17a2b8; }\n  .btn-info:hover {\n    color: #fff;\n    background-color: #138496;\n    border-color: #117a8b; }\n  .btn-info:focus, .btn-info.focus {\n    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n  .btn-info.disabled, .btn-info:disabled {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n  .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active,\n  .show > .btn-info.dropdown-toggle {\n    color: #fff;\n    background-color: #117a8b;\n    border-color: #10707f; }\n    .btn-info:not(:disabled):not(.disabled):active:focus, .btn-info:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-info.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n\n.btn-warning {\n  color: #212529;\n  background-color: #ffc107;\n  border-color: #ffc107; }\n  .btn-warning:hover {\n    color: #212529;\n    background-color: #e0a800;\n    border-color: #d39e00; }\n  .btn-warning:focus, .btn-warning.focus {\n    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n  .btn-warning.disabled, .btn-warning:disabled {\n    color: #212529;\n    background-color: #ffc107;\n    border-color: #ffc107; }\n  .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active,\n  .show > .btn-warning.dropdown-toggle {\n    color: #212529;\n    background-color: #d39e00;\n    border-color: #c69500; }\n    .btn-warning:not(:disabled):not(.disabled):active:focus, .btn-warning:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-warning.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n\n.btn-danger {\n  color: #fff;\n  background-color: #dc3545;\n  border-color: #dc3545; }\n  .btn-danger:hover {\n    color: #fff;\n    background-color: #c82333;\n    border-color: #bd2130; }\n  .btn-danger:focus, .btn-danger.focus {\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n  .btn-danger.disabled, .btn-danger:disabled {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545; }\n  .btn-danger:not(:disabled):not(.disabled):active, .btn-danger:not(:disabled):not(.disabled).active,\n  .show > .btn-danger.dropdown-toggle {\n    color: #fff;\n    background-color: #bd2130;\n    border-color: #b21f2d; }\n    .btn-danger:not(:disabled):not(.disabled):active:focus, .btn-danger:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-danger.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n\n.btn-light {\n  color: #212529;\n  background-color: #f8f9fa;\n  border-color: #f8f9fa; }\n  .btn-light:hover {\n    color: #212529;\n    background-color: #e2e6ea;\n    border-color: #dae0e5; }\n  .btn-light:focus, .btn-light.focus {\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n  .btn-light.disabled, .btn-light:disabled {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n  .btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active,\n  .show > .btn-light.dropdown-toggle {\n    color: #212529;\n    background-color: #dae0e5;\n    border-color: #d3d9df; }\n    .btn-light:not(:disabled):not(.disabled):active:focus, .btn-light:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-light.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n\n.btn-dark {\n  color: #fff;\n  background-color: #343a40;\n  border-color: #343a40; }\n  .btn-dark:hover {\n    color: #fff;\n    background-color: #23272b;\n    border-color: #1d2124; }\n  .btn-dark:focus, .btn-dark.focus {\n    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n  .btn-dark.disabled, .btn-dark:disabled {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40; }\n  .btn-dark:not(:disabled):not(.disabled):active, .btn-dark:not(:disabled):not(.disabled).active,\n  .show > .btn-dark.dropdown-toggle {\n    color: #fff;\n    background-color: #1d2124;\n    border-color: #171a1d; }\n    .btn-dark:not(:disabled):not(.disabled):active:focus, .btn-dark:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-dark.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n\n.btn-outline-primary {\n  color: #007bff;\n  background-color: transparent;\n  background-image: none;\n  border-color: #007bff; }\n  .btn-outline-primary:hover {\n    color: #fff;\n    background-color: #007bff;\n    border-color: #007bff; }\n  .btn-outline-primary:focus, .btn-outline-primary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); }\n  .btn-outline-primary.disabled, .btn-outline-primary:disabled {\n    color: #007bff;\n    background-color: transparent; }\n  .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-primary.dropdown-toggle {\n    color: #fff;\n    background-color: #007bff;\n    border-color: #007bff; }\n    .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-primary.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); }\n\n.btn-outline-secondary {\n  color: #6c757d;\n  background-color: transparent;\n  background-image: none;\n  border-color: #6c757d; }\n  .btn-outline-secondary:hover {\n    color: #fff;\n    background-color: #6c757d;\n    border-color: #6c757d; }\n  .btn-outline-secondary:focus, .btn-outline-secondary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }\n  .btn-outline-secondary.disabled, .btn-outline-secondary:disabled {\n    color: #6c757d;\n    background-color: transparent; }\n  .btn-outline-secondary:not(:disabled):not(.disabled):active, .btn-outline-secondary:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-secondary.dropdown-toggle {\n    color: #fff;\n    background-color: #6c757d;\n    border-color: #6c757d; }\n    .btn-outline-secondary:not(:disabled):not(.disabled):active:focus, .btn-outline-secondary:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-secondary.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }\n\n.btn-outline-success {\n  color: #28a745;\n  background-color: transparent;\n  background-image: none;\n  border-color: #28a745; }\n  .btn-outline-success:hover {\n    color: #fff;\n    background-color: #28a745;\n    border-color: #28a745; }\n  .btn-outline-success:focus, .btn-outline-success.focus {\n    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }\n  .btn-outline-success.disabled, .btn-outline-success:disabled {\n    color: #28a745;\n    background-color: transparent; }\n  .btn-outline-success:not(:disabled):not(.disabled):active, .btn-outline-success:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-success.dropdown-toggle {\n    color: #fff;\n    background-color: #28a745;\n    border-color: #28a745; }\n    .btn-outline-success:not(:disabled):not(.disabled):active:focus, .btn-outline-success:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-success.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }\n\n.btn-outline-info {\n  color: #17a2b8;\n  background-color: transparent;\n  background-image: none;\n  border-color: #17a2b8; }\n  .btn-outline-info:hover {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n  .btn-outline-info:focus, .btn-outline-info.focus {\n    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n  .btn-outline-info.disabled, .btn-outline-info:disabled {\n    color: #17a2b8;\n    background-color: transparent; }\n  .btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-info.dropdown-toggle {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n    .btn-outline-info:not(:disabled):not(.disabled):active:focus, .btn-outline-info:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-info.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n\n.btn-outline-warning {\n  color: #ffc107;\n  background-color: transparent;\n  background-image: none;\n  border-color: #ffc107; }\n  .btn-outline-warning:hover {\n    color: #212529;\n    background-color: #ffc107;\n    border-color: #ffc107; }\n  .btn-outline-warning:focus, .btn-outline-warning.focus {\n    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n  .btn-outline-warning.disabled, .btn-outline-warning:disabled {\n    color: #ffc107;\n    background-color: transparent; }\n  .btn-outline-warning:not(:disabled):not(.disabled):active, .btn-outline-warning:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-warning.dropdown-toggle {\n    color: #212529;\n    background-color: #ffc107;\n    border-color: #ffc107; }\n    .btn-outline-warning:not(:disabled):not(.disabled):active:focus, .btn-outline-warning:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-warning.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n\n.btn-outline-danger {\n  color: #dc3545;\n  background-color: transparent;\n  background-image: none;\n  border-color: #dc3545; }\n  .btn-outline-danger:hover {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545; }\n  .btn-outline-danger:focus, .btn-outline-danger.focus {\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n  .btn-outline-danger.disabled, .btn-outline-danger:disabled {\n    color: #dc3545;\n    background-color: transparent; }\n  .btn-outline-danger:not(:disabled):not(.disabled):active, .btn-outline-danger:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-danger.dropdown-toggle {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545; }\n    .btn-outline-danger:not(:disabled):not(.disabled):active:focus, .btn-outline-danger:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-danger.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n\n.btn-outline-light {\n  color: #f8f9fa;\n  background-color: transparent;\n  background-image: none;\n  border-color: #f8f9fa; }\n  .btn-outline-light:hover {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n  .btn-outline-light:focus, .btn-outline-light.focus {\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n  .btn-outline-light.disabled, .btn-outline-light:disabled {\n    color: #f8f9fa;\n    background-color: transparent; }\n  .btn-outline-light:not(:disabled):not(.disabled):active, .btn-outline-light:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-light.dropdown-toggle {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n    .btn-outline-light:not(:disabled):not(.disabled):active:focus, .btn-outline-light:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-light.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n\n.btn-outline-dark {\n  color: #343a40;\n  background-color: transparent;\n  background-image: none;\n  border-color: #343a40; }\n  .btn-outline-dark:hover {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40; }\n  .btn-outline-dark:focus, .btn-outline-dark.focus {\n    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n  .btn-outline-dark.disabled, .btn-outline-dark:disabled {\n    color: #343a40;\n    background-color: transparent; }\n  .btn-outline-dark:not(:disabled):not(.disabled):active, .btn-outline-dark:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-dark.dropdown-toggle {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40; }\n    .btn-outline-dark:not(:disabled):not(.disabled):active:focus, .btn-outline-dark:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-dark.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n\n.btn-link {\n  font-weight: 400;\n  color: #007bff;\n  background-color: transparent; }\n  .btn-link:hover {\n    color: #0056b3;\n    text-decoration: underline;\n    background-color: transparent;\n    border-color: transparent; }\n  .btn-link:focus, .btn-link.focus {\n    text-decoration: underline;\n    border-color: transparent;\n    box-shadow: none; }\n  .btn-link:disabled, .btn-link.disabled {\n    color: #6c757d;\n    pointer-events: none; }\n\n.btn-lg, .btn-group-lg > .btn {\n  padding: 0.5rem 1rem;\n  font-size: 1.25rem;\n  line-height: 1.5;\n  border-radius: 0.3rem; }\n\n.btn-sm, .btn-group-sm > .btn {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5;\n  border-radius: 0.2rem; }\n\n.btn-block {\n  display: block;\n  width: 100%; }\n  .btn-block + .btn-block {\n    margin-top: 0.5rem; }\n\ninput[type=\"submit\"].btn-block,\ninput[type=\"reset\"].btn-block,\ninput[type=\"button\"].btn-block {\n  width: 100%; }\n\n.fade {\n  transition: opacity 0.15s linear; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .fade {\n      transition: none; } }\n  .fade:not(.show) {\n    opacity: 0; }\n\n.collapse:not(.show) {\n  display: none; }\n\n.collapsing {\n  position: relative;\n  height: 0;\n  overflow: hidden;\n  transition: height 0.35s ease; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .collapsing {\n      transition: none; } }\n\n.dropup,\n.dropright,\n.dropdown,\n.dropleft {\n  position: relative; }\n\n.dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0.3em solid;\n  border-right: 0.3em solid transparent;\n  border-bottom: 0;\n  border-left: 0.3em solid transparent; }\n\n.dropdown-toggle:empty::after {\n  margin-left: 0; }\n\n.dropdown-menu {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  z-index: 1000;\n  display: none;\n  float: left;\n  min-width: 10rem;\n  padding: 0.5rem 0;\n  margin: 0.125rem 0 0;\n  font-size: 1rem;\n  color: #212529;\n  text-align: left;\n  list-style: none;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  border-radius: 0.25rem; }\n\n.dropdown-menu-right {\n  right: 0;\n  left: auto; }\n\n.dropup .dropdown-menu {\n  top: auto;\n  bottom: 100%;\n  margin-top: 0;\n  margin-bottom: 0.125rem; }\n\n.dropup .dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0;\n  border-right: 0.3em solid transparent;\n  border-bottom: 0.3em solid;\n  border-left: 0.3em solid transparent; }\n\n.dropup .dropdown-toggle:empty::after {\n  margin-left: 0; }\n\n.dropright .dropdown-menu {\n  top: 0;\n  right: auto;\n  left: 100%;\n  margin-top: 0;\n  margin-left: 0.125rem; }\n\n.dropright .dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0.3em solid transparent;\n  border-right: 0;\n  border-bottom: 0.3em solid transparent;\n  border-left: 0.3em solid; }\n\n.dropright .dropdown-toggle:empty::after {\n  margin-left: 0; }\n\n.dropright .dropdown-toggle::after {\n  vertical-align: 0; }\n\n.dropleft .dropdown-menu {\n  top: 0;\n  right: 100%;\n  left: auto;\n  margin-top: 0;\n  margin-right: 0.125rem; }\n\n.dropleft .dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\"; }\n\n.dropleft .dropdown-toggle::after {\n  display: none; }\n\n.dropleft .dropdown-toggle::before {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-right: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0.3em solid transparent;\n  border-right: 0.3em solid;\n  border-bottom: 0.3em solid transparent; }\n\n.dropleft .dropdown-toggle:empty::after {\n  margin-left: 0; }\n\n.dropleft .dropdown-toggle::before {\n  vertical-align: 0; }\n\n.dropdown-menu[x-placement^=\"top\"], .dropdown-menu[x-placement^=\"right\"], .dropdown-menu[x-placement^=\"bottom\"], .dropdown-menu[x-placement^=\"left\"] {\n  right: auto;\n  bottom: auto; }\n\n.dropdown-divider {\n  height: 0;\n  margin: 0.5rem 0;\n  overflow: hidden;\n  border-top: 1px solid #e9ecef; }\n\n.dropdown-item {\n  display: block;\n  width: 100%;\n  padding: 0.25rem 1.5rem;\n  clear: both;\n  font-weight: 400;\n  color: #212529;\n  text-align: inherit;\n  white-space: nowrap;\n  background-color: transparent;\n  border: 0; }\n  .dropdown-item:hover, .dropdown-item:focus {\n    color: #16181b;\n    text-decoration: none;\n    background-color: #f8f9fa; }\n  .dropdown-item.active, .dropdown-item:active {\n    color: #fff;\n    text-decoration: none;\n    background-color: #007bff; }\n  .dropdown-item.disabled, .dropdown-item:disabled {\n    color: #6c757d;\n    background-color: transparent; }\n\n.dropdown-menu.show {\n  display: block; }\n\n.dropdown-header {\n  display: block;\n  padding: 0.5rem 1.5rem;\n  margin-bottom: 0;\n  font-size: 0.875rem;\n  color: #6c757d;\n  white-space: nowrap; }\n\n.dropdown-item-text {\n  display: block;\n  padding: 0.25rem 1.5rem;\n  color: #212529; }\n\n.btn-group,\n.btn-group-vertical {\n  position: relative;\n  display: inline-flex;\n  vertical-align: middle; }\n  .btn-group > .btn,\n  .btn-group-vertical > .btn {\n    position: relative;\n    flex: 0 1 auto; }\n    .btn-group > .btn:hover,\n    .btn-group-vertical > .btn:hover {\n      z-index: 1; }\n    .btn-group > .btn:focus, .btn-group > .btn:active, .btn-group > .btn.active,\n    .btn-group-vertical > .btn:focus,\n    .btn-group-vertical > .btn:active,\n    .btn-group-vertical > .btn.active {\n      z-index: 1; }\n  .btn-group .btn + .btn,\n  .btn-group .btn + .btn-group,\n  .btn-group .btn-group + .btn,\n  .btn-group .btn-group + .btn-group,\n  .btn-group-vertical .btn + .btn,\n  .btn-group-vertical .btn + .btn-group,\n  .btn-group-vertical .btn-group + .btn,\n  .btn-group-vertical .btn-group + .btn-group {\n    margin-left: -1px; }\n\n.btn-toolbar {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start; }\n  .btn-toolbar .input-group {\n    width: auto; }\n\n.btn-group > .btn:first-child {\n  margin-left: 0; }\n\n.btn-group > .btn:not(:last-child):not(.dropdown-toggle),\n.btn-group > .btn-group:not(:last-child) > .btn {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.btn-group > .btn:not(:first-child),\n.btn-group > .btn-group:not(:first-child) > .btn {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n\n.dropdown-toggle-split {\n  padding-right: 0.5625rem;\n  padding-left: 0.5625rem; }\n  .dropdown-toggle-split::after,\n  .dropup .dropdown-toggle-split::after,\n  .dropright .dropdown-toggle-split::after {\n    margin-left: 0; }\n  .dropleft .dropdown-toggle-split::before {\n    margin-right: 0; }\n\n.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split {\n  padding-right: 0.375rem;\n  padding-left: 0.375rem; }\n\n.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split {\n  padding-right: 0.75rem;\n  padding-left: 0.75rem; }\n\n.btn-group-vertical {\n  flex-direction: column;\n  align-items: flex-start;\n  justify-content: center; }\n  .btn-group-vertical .btn,\n  .btn-group-vertical .btn-group {\n    width: 100%; }\n  .btn-group-vertical > .btn + .btn,\n  .btn-group-vertical > .btn + .btn-group,\n  .btn-group-vertical > .btn-group + .btn,\n  .btn-group-vertical > .btn-group + .btn-group {\n    margin-top: -1px;\n    margin-left: 0; }\n  .btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle),\n  .btn-group-vertical > .btn-group:not(:last-child) > .btn {\n    border-bottom-right-radius: 0;\n    border-bottom-left-radius: 0; }\n  .btn-group-vertical > .btn:not(:first-child),\n  .btn-group-vertical > .btn-group:not(:first-child) > .btn {\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n\n.btn-group-toggle > .btn,\n.btn-group-toggle > .btn-group > .btn {\n  margin-bottom: 0; }\n  .btn-group-toggle > .btn input[type=\"radio\"],\n  .btn-group-toggle > .btn input[type=\"checkbox\"],\n  .btn-group-toggle > .btn-group > .btn input[type=\"radio\"],\n  .btn-group-toggle > .btn-group > .btn input[type=\"checkbox\"] {\n    position: absolute;\n    clip: rect(0, 0, 0, 0);\n    pointer-events: none; }\n\n.input-group {\n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: stretch;\n  width: 100%; }\n  .input-group > .form-control,\n  .input-group > .custom-select,\n  .input-group > .custom-file {\n    position: relative;\n    flex: 1 1 auto;\n    width: 1%;\n    margin-bottom: 0; }\n    .input-group > .form-control:focus,\n    .input-group > .custom-select:focus,\n    .input-group > .custom-file:focus {\n      z-index: 3; }\n    .input-group > .form-control + .form-control,\n    .input-group > .form-control + .custom-select,\n    .input-group > .form-control + .custom-file,\n    .input-group > .custom-select + .form-control,\n    .input-group > .custom-select + .custom-select,\n    .input-group > .custom-select + .custom-file,\n    .input-group > .custom-file + .form-control,\n    .input-group > .custom-file + .custom-select,\n    .input-group > .custom-file + .custom-file {\n      margin-left: -1px; }\n  .input-group > .form-control:not(:last-child),\n  .input-group > .custom-select:not(:last-child) {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0; }\n  .input-group > .form-control:not(:first-child),\n  .input-group > .custom-select:not(:first-child) {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0; }\n  .input-group > .custom-file {\n    display: flex;\n    align-items: center; }\n    .input-group > .custom-file:not(:last-child) .custom-file-label,\n    .input-group > .custom-file:not(:last-child) .custom-file-label::after {\n      border-top-right-radius: 0;\n      border-bottom-right-radius: 0; }\n    .input-group > .custom-file:not(:first-child) .custom-file-label {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0; }\n\n.input-group-prepend,\n.input-group-append {\n  display: flex; }\n  .input-group-prepend .btn,\n  .input-group-append .btn {\n    position: relative;\n    z-index: 2; }\n  .input-group-prepend .btn + .btn,\n  .input-group-prepend .btn + .input-group-text,\n  .input-group-prepend .input-group-text + .input-group-text,\n  .input-group-prepend .input-group-text + .btn,\n  .input-group-append .btn + .btn,\n  .input-group-append .btn + .input-group-text,\n  .input-group-append .input-group-text + .input-group-text,\n  .input-group-append .input-group-text + .btn {\n    margin-left: -1px; }\n\n.input-group-prepend {\n  margin-right: -1px; }\n\n.input-group-append {\n  margin-left: -1px; }\n\n.input-group-text {\n  display: flex;\n  align-items: center;\n  padding: 0.375rem 0.75rem;\n  margin-bottom: 0;\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.5;\n  color: #495057;\n  text-align: center;\n  white-space: nowrap;\n  background-color: #e9ecef;\n  border: 1px solid #ced4da;\n  border-radius: 0.25rem; }\n  .input-group-text input[type=\"radio\"],\n  .input-group-text input[type=\"checkbox\"] {\n    margin-top: 0; }\n\n.input-group > .input-group-prepend > .btn,\n.input-group > .input-group-prepend > .input-group-text,\n.input-group > .input-group-append:not(:last-child) > .btn,\n.input-group > .input-group-append:not(:last-child) > .input-group-text,\n.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),\n.input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.input-group > .input-group-append > .btn,\n.input-group > .input-group-append > .input-group-text,\n.input-group > .input-group-prepend:not(:first-child) > .btn,\n.input-group > .input-group-prepend:not(:first-child) > .input-group-text,\n.input-group > .input-group-prepend:first-child > .btn:not(:first-child),\n.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n\n.custom-control {\n  position: relative;\n  display: block;\n  min-height: 1.5rem;\n  padding-left: 1.5rem; }\n\n.custom-control-inline {\n  display: inline-flex;\n  margin-right: 1rem; }\n\n.custom-control-input {\n  position: absolute;\n  z-index: -1;\n  opacity: 0; }\n  .custom-control-input:checked ~ .custom-control-label::before {\n    color: #fff;\n    background-color: #007bff; }\n  .custom-control-input:focus ~ .custom-control-label::before {\n    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n  .custom-control-input:active ~ .custom-control-label::before {\n    color: #fff;\n    background-color: #b3d7ff; }\n  .custom-control-input:disabled ~ .custom-control-label {\n    color: #6c757d; }\n    .custom-control-input:disabled ~ .custom-control-label::before {\n      background-color: #e9ecef; }\n\n.custom-control-label {\n  position: relative;\n  margin-bottom: 0; }\n  .custom-control-label::before {\n    position: absolute;\n    top: 0.25rem;\n    left: -1.5rem;\n    display: block;\n    width: 1rem;\n    height: 1rem;\n    pointer-events: none;\n    content: \"\";\n    user-select: none;\n    background-color: #dee2e6; }\n  .custom-control-label::after {\n    position: absolute;\n    top: 0.25rem;\n    left: -1.5rem;\n    display: block;\n    width: 1rem;\n    height: 1rem;\n    content: \"\";\n    background-repeat: no-repeat;\n    background-position: center center;\n    background-size: 50% 50%; }\n\n.custom-checkbox .custom-control-label::before {\n  border-radius: 0.25rem; }\n\n.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {\n  background-color: #007bff; }\n\n.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E\"); }\n\n.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {\n  background-color: #007bff; }\n\n.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='%23fff' d='M0 2h4'/%3E%3C/svg%3E\"); }\n\n.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {\n  background-color: rgba(0, 123, 255, 0.5); }\n\n.custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {\n  background-color: rgba(0, 123, 255, 0.5); }\n\n.custom-radio .custom-control-label::before {\n  border-radius: 50%; }\n\n.custom-radio .custom-control-input:checked ~ .custom-control-label::before {\n  background-color: #007bff; }\n\n.custom-radio .custom-control-input:checked ~ .custom-control-label::after {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E\"); }\n\n.custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {\n  background-color: rgba(0, 123, 255, 0.5); }\n\n.custom-select {\n  display: inline-block;\n  width: 100%;\n  height: calc(2.25rem + 2px);\n  padding: 0.375rem 1.75rem 0.375rem 0.75rem;\n  line-height: 1.5;\n  color: #495057;\n  vertical-align: middle;\n  background: #fff url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E\") no-repeat right 0.75rem center;\n  background-size: 8px 10px;\n  border: 1px solid #ced4da;\n  border-radius: 0.25rem;\n  appearance: none; }\n  .custom-select:focus {\n    border-color: #80bdff;\n    outline: 0;\n    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 5px rgba(128, 189, 255, 0.5); }\n    .custom-select:focus::-ms-value {\n      color: #495057;\n      background-color: #fff; }\n  .custom-select[multiple], .custom-select[size]:not([size=\"1\"]) {\n    height: auto;\n    padding-right: 0.75rem;\n    background-image: none; }\n  .custom-select:disabled {\n    color: #6c757d;\n    background-color: #e9ecef; }\n  .custom-select::-ms-expand {\n    opacity: 0; }\n\n.custom-select-sm {\n  height: calc(1.8125rem + 2px);\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n  font-size: 75%; }\n\n.custom-select-lg {\n  height: calc(2.875rem + 2px);\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n  font-size: 125%; }\n\n.custom-file {\n  position: relative;\n  display: inline-block;\n  width: 100%;\n  height: calc(2.25rem + 2px);\n  margin-bottom: 0; }\n\n.custom-file-input {\n  position: relative;\n  z-index: 2;\n  width: 100%;\n  height: calc(2.25rem + 2px);\n  margin: 0;\n  opacity: 0; }\n  .custom-file-input:focus ~ .custom-file-label {\n    border-color: #80bdff;\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n    .custom-file-input:focus ~ .custom-file-label::after {\n      border-color: #80bdff; }\n  .custom-file-input:lang(en) ~ .custom-file-label::after {\n    content: \"Browse\"; }\n\n.custom-file-label {\n  position: absolute;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 1;\n  height: calc(2.25rem + 2px);\n  padding: 0.375rem 0.75rem;\n  line-height: 1.5;\n  color: #495057;\n  background-color: #fff;\n  border: 1px solid #ced4da;\n  border-radius: 0.25rem; }\n  .custom-file-label::after {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 3;\n    display: block;\n    height: 2.25rem;\n    padding: 0.375rem 0.75rem;\n    line-height: 1.5;\n    color: #495057;\n    content: \"Browse\";\n    background-color: #e9ecef;\n    border-left: 1px solid #ced4da;\n    border-radius: 0 0.25rem 0.25rem 0; }\n\n.custom-range {\n  width: 100%;\n  padding-left: 0;\n  background-color: transparent;\n  appearance: none; }\n  .custom-range:focus {\n    outline: none; }\n  .custom-range::-moz-focus-outer {\n    border: 0; }\n  .custom-range::-webkit-slider-thumb {\n    width: 1rem;\n    height: 1rem;\n    margin-top: -0.25rem;\n    background-color: #007bff;\n    border: 0;\n    border-radius: 1rem;\n    appearance: none; }\n    .custom-range::-webkit-slider-thumb:focus {\n      outline: none;\n      box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n    .custom-range::-webkit-slider-thumb:active {\n      background-color: #b3d7ff; }\n  .custom-range::-webkit-slider-runnable-track {\n    width: 100%;\n    height: 0.5rem;\n    color: transparent;\n    cursor: pointer;\n    background-color: #dee2e6;\n    border-color: transparent;\n    border-radius: 1rem; }\n  .custom-range::-moz-range-thumb {\n    width: 1rem;\n    height: 1rem;\n    background-color: #007bff;\n    border: 0;\n    border-radius: 1rem;\n    appearance: none; }\n    .custom-range::-moz-range-thumb:focus {\n      outline: none;\n      box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n    .custom-range::-moz-range-thumb:active {\n      background-color: #b3d7ff; }\n  .custom-range::-moz-range-track {\n    width: 100%;\n    height: 0.5rem;\n    color: transparent;\n    cursor: pointer;\n    background-color: #dee2e6;\n    border-color: transparent;\n    border-radius: 1rem; }\n  .custom-range::-ms-thumb {\n    width: 1rem;\n    height: 1rem;\n    background-color: #007bff;\n    border: 0;\n    border-radius: 1rem;\n    appearance: none; }\n    .custom-range::-ms-thumb:focus {\n      outline: none;\n      box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n    .custom-range::-ms-thumb:active {\n      background-color: #b3d7ff; }\n  .custom-range::-ms-track {\n    width: 100%;\n    height: 0.5rem;\n    color: transparent;\n    cursor: pointer;\n    background-color: transparent;\n    border-color: transparent;\n    border-width: 0.5rem; }\n  .custom-range::-ms-fill-lower {\n    background-color: #dee2e6;\n    border-radius: 1rem; }\n  .custom-range::-ms-fill-upper {\n    margin-right: 15px;\n    background-color: #dee2e6;\n    border-radius: 1rem; }\n\n.nav {\n  display: flex;\n  flex-wrap: wrap;\n  padding-left: 0;\n  margin-bottom: 0;\n  list-style: none; }\n\n.nav-link {\n  display: block;\n  padding: 0.5rem 1rem; }\n  .nav-link:hover, .nav-link:focus {\n    text-decoration: none; }\n  .nav-link.disabled {\n    color: #6c757d; }\n\n.nav-tabs {\n  border-bottom: 1px solid #dee2e6; }\n  .nav-tabs .nav-item {\n    margin-bottom: -1px; }\n  .nav-tabs .nav-link {\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {\n      border-color: #e9ecef #e9ecef #dee2e6; }\n    .nav-tabs .nav-link.disabled {\n      color: #6c757d;\n      background-color: transparent;\n      border-color: transparent; }\n  .nav-tabs .nav-link.active,\n  .nav-tabs .nav-item.show .nav-link {\n    color: #495057;\n    background-color: #fff;\n    border-color: #dee2e6 #dee2e6 #fff; }\n  .nav-tabs .dropdown-menu {\n    margin-top: -1px;\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n\n.nav-pills .nav-link {\n  border-radius: 0.25rem; }\n\n.nav-pills .nav-link.active,\n.nav-pills .show > .nav-link {\n  color: #fff;\n  background-color: #007bff; }\n\n.nav-fill .nav-item {\n  flex: 1 1 auto;\n  text-align: center; }\n\n.nav-justified .nav-item {\n  flex-basis: 0;\n  flex-grow: 1;\n  text-align: center; }\n\n.tab-content > .tab-pane {\n  display: none; }\n\n.tab-content > .active {\n  display: block; }\n\n.navbar {\n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0.5rem 1rem; }\n  .navbar > .container,\n  .navbar > .container-fluid {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    justify-content: space-between; }\n\n.navbar-brand {\n  display: inline-block;\n  padding-top: 0.3125rem;\n  padding-bottom: 0.3125rem;\n  margin-right: 1rem;\n  font-size: 1.25rem;\n  line-height: inherit;\n  white-space: nowrap; }\n  .navbar-brand:hover, .navbar-brand:focus {\n    text-decoration: none; }\n\n.navbar-nav {\n  display: flex;\n  flex-direction: column;\n  padding-left: 0;\n  margin-bottom: 0;\n  list-style: none; }\n  .navbar-nav .nav-link {\n    padding-right: 0;\n    padding-left: 0; }\n  .navbar-nav .dropdown-menu {\n    position: static;\n    float: none; }\n\n.navbar-text {\n  display: inline-block;\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem; }\n\n.navbar-collapse {\n  flex-basis: 100%;\n  flex-grow: 1;\n  align-items: center; }\n\n.navbar-toggler {\n  padding: 0.25rem 0.75rem;\n  font-size: 1.25rem;\n  line-height: 1;\n  background-color: transparent;\n  border: 1px solid transparent;\n  border-radius: 0.25rem; }\n  .navbar-toggler:hover, .navbar-toggler:focus {\n    text-decoration: none; }\n  .navbar-toggler:not(:disabled):not(.disabled) {\n    cursor: pointer; }\n\n.navbar-toggler-icon {\n  display: inline-block;\n  width: 1.5em;\n  height: 1.5em;\n  vertical-align: middle;\n  content: \"\";\n  background: no-repeat center center;\n  background-size: 100% 100%; }\n\n@media (max-width: 575.98px) {\n  .navbar-expand-sm > .container,\n  .navbar-expand-sm > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n\n@media (min-width: 576px) {\n  .navbar-expand-sm {\n    flex-flow: row nowrap;\n    justify-content: flex-start; }\n    .navbar-expand-sm .navbar-nav {\n      flex-direction: row; }\n      .navbar-expand-sm .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-sm .navbar-nav .nav-link {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem; }\n    .navbar-expand-sm > .container,\n    .navbar-expand-sm > .container-fluid {\n      flex-wrap: nowrap; }\n    .navbar-expand-sm .navbar-collapse {\n      display: flex !important;\n      flex-basis: auto; }\n    .navbar-expand-sm .navbar-toggler {\n      display: none; } }\n\n@media (max-width: 767.98px) {\n  .navbar-expand-md > .container,\n  .navbar-expand-md > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n\n@media (min-width: 768px) {\n  .navbar-expand-md {\n    flex-flow: row nowrap;\n    justify-content: flex-start; }\n    .navbar-expand-md .navbar-nav {\n      flex-direction: row; }\n      .navbar-expand-md .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-md .navbar-nav .nav-link {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem; }\n    .navbar-expand-md > .container,\n    .navbar-expand-md > .container-fluid {\n      flex-wrap: nowrap; }\n    .navbar-expand-md .navbar-collapse {\n      display: flex !important;\n      flex-basis: auto; }\n    .navbar-expand-md .navbar-toggler {\n      display: none; } }\n\n@media (max-width: 991.98px) {\n  .navbar-expand-lg > .container,\n  .navbar-expand-lg > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n\n@media (min-width: 992px) {\n  .navbar-expand-lg {\n    flex-flow: row nowrap;\n    justify-content: flex-start; }\n    .navbar-expand-lg .navbar-nav {\n      flex-direction: row; }\n      .navbar-expand-lg .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-lg .navbar-nav .nav-link {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem; }\n    .navbar-expand-lg > .container,\n    .navbar-expand-lg > .container-fluid {\n      flex-wrap: nowrap; }\n    .navbar-expand-lg .navbar-collapse {\n      display: flex !important;\n      flex-basis: auto; }\n    .navbar-expand-lg .navbar-toggler {\n      display: none; } }\n\n@media (max-width: 1199.98px) {\n  .navbar-expand-xl > .container,\n  .navbar-expand-xl > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n\n@media (min-width: 1200px) {\n  .navbar-expand-xl {\n    flex-flow: row nowrap;\n    justify-content: flex-start; }\n    .navbar-expand-xl .navbar-nav {\n      flex-direction: row; }\n      .navbar-expand-xl .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-xl .navbar-nav .nav-link {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem; }\n    .navbar-expand-xl > .container,\n    .navbar-expand-xl > .container-fluid {\n      flex-wrap: nowrap; }\n    .navbar-expand-xl .navbar-collapse {\n      display: flex !important;\n      flex-basis: auto; }\n    .navbar-expand-xl .navbar-toggler {\n      display: none; } }\n\n.navbar-expand {\n  flex-flow: row nowrap;\n  justify-content: flex-start; }\n  .navbar-expand > .container,\n  .navbar-expand > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; }\n  .navbar-expand .navbar-nav {\n    flex-direction: row; }\n    .navbar-expand .navbar-nav .dropdown-menu {\n      position: absolute; }\n    .navbar-expand .navbar-nav .nav-link {\n      padding-right: 0.5rem;\n      padding-left: 0.5rem; }\n  .navbar-expand > .container,\n  .navbar-expand > .container-fluid {\n    flex-wrap: nowrap; }\n  .navbar-expand .navbar-collapse {\n    display: flex !important;\n    flex-basis: auto; }\n  .navbar-expand .navbar-toggler {\n    display: none; }\n\n.navbar-light .navbar-brand {\n  color: rgba(0, 0, 0, 0.9); }\n  .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {\n    color: rgba(0, 0, 0, 0.9); }\n\n.navbar-light .navbar-nav .nav-link {\n  color: rgba(0, 0, 0, 0.5); }\n  .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {\n    color: rgba(0, 0, 0, 0.7); }\n  .navbar-light .navbar-nav .nav-link.disabled {\n    color: rgba(0, 0, 0, 0.3); }\n\n.navbar-light .navbar-nav .show > .nav-link,\n.navbar-light .navbar-nav .active > .nav-link,\n.navbar-light .navbar-nav .nav-link.show,\n.navbar-light .navbar-nav .nav-link.active {\n  color: rgba(0, 0, 0, 0.9); }\n\n.navbar-light .navbar-toggler {\n  color: rgba(0, 0, 0, 0.5);\n  border-color: rgba(0, 0, 0, 0.1); }\n\n.navbar-light .navbar-toggler-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E\"); }\n\n.navbar-light .navbar-text {\n  color: rgba(0, 0, 0, 0.5); }\n  .navbar-light .navbar-text a {\n    color: rgba(0, 0, 0, 0.9); }\n    .navbar-light .navbar-text a:hover, .navbar-light .navbar-text a:focus {\n      color: rgba(0, 0, 0, 0.9); }\n\n.navbar-dark .navbar-brand {\n  color: #fff; }\n  .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {\n    color: #fff; }\n\n.navbar-dark .navbar-nav .nav-link {\n  color: rgba(255, 255, 255, 0.5); }\n  .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {\n    color: rgba(255, 255, 255, 0.75); }\n  .navbar-dark .navbar-nav .nav-link.disabled {\n    color: rgba(255, 255, 255, 0.25); }\n\n.navbar-dark .navbar-nav .show > .nav-link,\n.navbar-dark .navbar-nav .active > .nav-link,\n.navbar-dark .navbar-nav .nav-link.show,\n.navbar-dark .navbar-nav .nav-link.active {\n  color: #fff; }\n\n.navbar-dark .navbar-toggler {\n  color: rgba(255, 255, 255, 0.5);\n  border-color: rgba(255, 255, 255, 0.1); }\n\n.navbar-dark .navbar-toggler-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E\"); }\n\n.navbar-dark .navbar-text {\n  color: rgba(255, 255, 255, 0.5); }\n  .navbar-dark .navbar-text a {\n    color: #fff; }\n    .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {\n      color: #fff; }\n\n.card {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: border-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem; }\n  .card > hr {\n    margin-right: 0;\n    margin-left: 0; }\n  .card > .list-group:first-child .list-group-item:first-child {\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n  .card > .list-group:last-child .list-group-item:last-child {\n    border-bottom-right-radius: 0.25rem;\n    border-bottom-left-radius: 0.25rem; }\n\n.card-body {\n  flex: 1 1 auto;\n  padding: 1.25rem; }\n\n.card-title {\n  margin-bottom: 0.75rem; }\n\n.card-subtitle {\n  margin-top: -0.375rem;\n  margin-bottom: 0; }\n\n.card-text:last-child {\n  margin-bottom: 0; }\n\n.card-link:hover {\n  text-decoration: none; }\n\n.card-link + .card-link {\n  margin-left: 1.25rem; }\n\n.card-header {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: rgba(0, 0, 0, 0.03);\n  border-bottom: 1px solid rgba(0, 0, 0, 0.125); }\n  .card-header:first-child {\n    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0; }\n  .card-header + .list-group .list-group-item:first-child {\n    border-top: 0; }\n\n.card-footer {\n  padding: 0.75rem 1.25rem;\n  background-color: rgba(0, 0, 0, 0.03);\n  border-top: 1px solid rgba(0, 0, 0, 0.125); }\n  .card-footer:last-child {\n    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px); }\n\n.card-header-tabs {\n  margin-right: -0.625rem;\n  margin-bottom: -0.75rem;\n  margin-left: -0.625rem;\n  border-bottom: 0; }\n\n.card-header-pills {\n  margin-right: -0.625rem;\n  margin-left: -0.625rem; }\n\n.card-img-overlay {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding: 1.25rem; }\n\n.card-img {\n  width: 100%;\n  border-radius: calc(0.25rem - 1px); }\n\n.card-img-top {\n  width: 100%;\n  border-top-left-radius: calc(0.25rem - 1px);\n  border-top-right-radius: calc(0.25rem - 1px); }\n\n.card-img-bottom {\n  width: 100%;\n  border-bottom-right-radius: calc(0.25rem - 1px);\n  border-bottom-left-radius: calc(0.25rem - 1px); }\n\n.card-deck {\n  display: flex;\n  flex-direction: column; }\n  .card-deck .card {\n    margin-bottom: 15px; }\n  @media (min-width: 576px) {\n    .card-deck {\n      flex-flow: row wrap;\n      margin-right: -15px;\n      margin-left: -15px; }\n      .card-deck .card {\n        display: flex;\n        flex: 1 0 0%;\n        flex-direction: column;\n        margin-right: 15px;\n        margin-bottom: 0;\n        margin-left: 15px; } }\n\n.card-group {\n  display: flex;\n  flex-direction: column; }\n  .card-group > .card {\n    margin-bottom: 15px; }\n  @media (min-width: 576px) {\n    .card-group {\n      flex-flow: row wrap; }\n      .card-group > .card {\n        flex: 1 0 0%;\n        margin-bottom: 0; }\n        .card-group > .card + .card {\n          margin-left: 0;\n          border-left: 0; }\n        .card-group > .card:first-child {\n          border-top-right-radius: 0;\n          border-bottom-right-radius: 0; }\n          .card-group > .card:first-child .card-img-top,\n          .card-group > .card:first-child .card-header {\n            border-top-right-radius: 0; }\n          .card-group > .card:first-child .card-img-bottom,\n          .card-group > .card:first-child .card-footer {\n            border-bottom-right-radius: 0; }\n        .card-group > .card:last-child {\n          border-top-left-radius: 0;\n          border-bottom-left-radius: 0; }\n          .card-group > .card:last-child .card-img-top,\n          .card-group > .card:last-child .card-header {\n            border-top-left-radius: 0; }\n          .card-group > .card:last-child .card-img-bottom,\n          .card-group > .card:last-child .card-footer {\n            border-bottom-left-radius: 0; }\n        .card-group > .card:only-child {\n          border-radius: 0.25rem; }\n          .card-group > .card:only-child .card-img-top,\n          .card-group > .card:only-child .card-header {\n            border-top-left-radius: 0.25rem;\n            border-top-right-radius: 0.25rem; }\n          .card-group > .card:only-child .card-img-bottom,\n          .card-group > .card:only-child .card-footer {\n            border-bottom-right-radius: 0.25rem;\n            border-bottom-left-radius: 0.25rem; }\n        .card-group > .card:not(:first-child):not(:last-child):not(:only-child) {\n          border-radius: 0; }\n          .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-img-top,\n          .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-img-bottom,\n          .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-header,\n          .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-footer {\n            border-radius: 0; } }\n\n.card-columns .card {\n  margin-bottom: 0.75rem; }\n\n@media (min-width: 576px) {\n  .card-columns {\n    column-count: 3;\n    column-gap: 1.25rem;\n    orphans: 1;\n    widows: 1; }\n    .card-columns .card {\n      display: inline-block;\n      width: 100%; } }\n\n.accordion .card:not(:first-of-type):not(:last-of-type) {\n  border-bottom: 0;\n  border-radius: 0; }\n\n.accordion .card:not(:first-of-type) .card-header:first-child {\n  border-radius: 0; }\n\n.accordion .card:first-of-type {\n  border-bottom: 0;\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0; }\n\n.accordion .card:last-of-type {\n  border-top-left-radius: 0;\n  border-top-right-radius: 0; }\n\n.breadcrumb {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.75rem 1rem;\n  margin-bottom: 1rem;\n  list-style: none;\n  background-color: #e9ecef;\n  border-radius: 0.25rem; }\n\n.breadcrumb-item + .breadcrumb-item {\n  padding-left: 0.5rem; }\n  .breadcrumb-item + .breadcrumb-item::before {\n    display: inline-block;\n    padding-right: 0.5rem;\n    color: #6c757d;\n    content: \"/\"; }\n\n.breadcrumb-item + .breadcrumb-item:hover::before {\n  text-decoration: underline; }\n\n.breadcrumb-item + .breadcrumb-item:hover::before {\n  text-decoration: none; }\n\n.breadcrumb-item.active {\n  color: #6c757d; }\n\n.pagination {\n  display: flex;\n  padding-left: 0;\n  list-style: none;\n  border-radius: 0.25rem; }\n\n.page-link {\n  position: relative;\n  display: block;\n  padding: 0.5rem 0.75rem;\n  margin-left: -1px;\n  line-height: 1.25;\n  color: #007bff;\n  background-color: #fff;\n  border: 1px solid #dee2e6; }\n  .page-link:hover {\n    z-index: 2;\n    color: #0056b3;\n    text-decoration: none;\n    background-color: #e9ecef;\n    border-color: #dee2e6; }\n  .page-link:focus {\n    z-index: 2;\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n  .page-link:not(:disabled):not(.disabled) {\n    cursor: pointer; }\n\n.page-item:first-child .page-link {\n  margin-left: 0;\n  border-top-left-radius: 0.25rem;\n  border-bottom-left-radius: 0.25rem; }\n\n.page-item:last-child .page-link {\n  border-top-right-radius: 0.25rem;\n  border-bottom-right-radius: 0.25rem; }\n\n.page-item.active .page-link {\n  z-index: 1;\n  color: #fff;\n  background-color: #007bff;\n  border-color: #007bff; }\n\n.page-item.disabled .page-link {\n  color: #6c757d;\n  pointer-events: none;\n  cursor: auto;\n  background-color: #fff;\n  border-color: #dee2e6; }\n\n.pagination-lg .page-link {\n  padding: 0.75rem 1.5rem;\n  font-size: 1.25rem;\n  line-height: 1.5; }\n\n.pagination-lg .page-item:first-child .page-link {\n  border-top-left-radius: 0.3rem;\n  border-bottom-left-radius: 0.3rem; }\n\n.pagination-lg .page-item:last-child .page-link {\n  border-top-right-radius: 0.3rem;\n  border-bottom-right-radius: 0.3rem; }\n\n.pagination-sm .page-link {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5; }\n\n.pagination-sm .page-item:first-child .page-link {\n  border-top-left-radius: 0.2rem;\n  border-bottom-left-radius: 0.2rem; }\n\n.pagination-sm .page-item:last-child .page-link {\n  border-top-right-radius: 0.2rem;\n  border-bottom-right-radius: 0.2rem; }\n\n.badge {\n  display: inline-block;\n  padding: 0.25em 0.4em;\n  font-size: 75%;\n  font-weight: 700;\n  line-height: 1;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: baseline;\n  border-radius: 0.25rem; }\n  .badge:empty {\n    display: none; }\n\n.btn .badge {\n  position: relative;\n  top: -1px; }\n\n.badge-pill {\n  padding-right: 0.6em;\n  padding-left: 0.6em;\n  border-radius: 10rem; }\n\n.badge-primary {\n  color: #fff;\n  background-color: #007bff; }\n  .badge-primary[href]:hover, .badge-primary[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #0062cc; }\n\n.badge-secondary {\n  color: #fff;\n  background-color: #6c757d; }\n  .badge-secondary[href]:hover, .badge-secondary[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #545b62; }\n\n.badge-success {\n  color: #fff;\n  background-color: #28a745; }\n  .badge-success[href]:hover, .badge-success[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #1e7e34; }\n\n.badge-info {\n  color: #fff;\n  background-color: #17a2b8; }\n  .badge-info[href]:hover, .badge-info[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #117a8b; }\n\n.badge-warning {\n  color: #212529;\n  background-color: #ffc107; }\n  .badge-warning[href]:hover, .badge-warning[href]:focus {\n    color: #212529;\n    text-decoration: none;\n    background-color: #d39e00; }\n\n.badge-danger {\n  color: #fff;\n  background-color: #dc3545; }\n  .badge-danger[href]:hover, .badge-danger[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #bd2130; }\n\n.badge-light {\n  color: #212529;\n  background-color: #f8f9fa; }\n  .badge-light[href]:hover, .badge-light[href]:focus {\n    color: #212529;\n    text-decoration: none;\n    background-color: #dae0e5; }\n\n.badge-dark {\n  color: #fff;\n  background-color: #343a40; }\n  .badge-dark[href]:hover, .badge-dark[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #1d2124; }\n\n.jumbotron {\n  padding: 2rem 1rem;\n  margin-bottom: 2rem;\n  background-color: #e9ecef;\n  border-radius: 0.3rem; }\n  @media (min-width: 576px) {\n    .jumbotron {\n      padding: 4rem 2rem; } }\n\n.jumbotron-fluid {\n  padding-right: 0;\n  padding-left: 0;\n  border-radius: 0; }\n\n.alert {\n  position: relative;\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 1rem;\n  border: 1px solid transparent;\n  border-radius: 0.25rem; }\n\n.alert-heading {\n  color: inherit; }\n\n.alert-link {\n  font-weight: 700; }\n\n.alert-dismissible {\n  padding-right: 4rem; }\n  .alert-dismissible .close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.75rem 1.25rem;\n    color: inherit; }\n\n.alert-primary {\n  color: #004085;\n  background-color: #cce5ff;\n  border-color: #b8daff; }\n  .alert-primary hr {\n    border-top-color: #9fcdff; }\n  .alert-primary .alert-link {\n    color: #002752; }\n\n.alert-secondary {\n  color: #383d41;\n  background-color: #e2e3e5;\n  border-color: #d6d8db; }\n  .alert-secondary hr {\n    border-top-color: #c8cbcf; }\n  .alert-secondary .alert-link {\n    color: #202326; }\n\n.alert-success {\n  color: #155724;\n  background-color: #d4edda;\n  border-color: #c3e6cb; }\n  .alert-success hr {\n    border-top-color: #b1dfbb; }\n  .alert-success .alert-link {\n    color: #0b2e13; }\n\n.alert-info {\n  color: #0c5460;\n  background-color: #d1ecf1;\n  border-color: #bee5eb; }\n  .alert-info hr {\n    border-top-color: #abdde5; }\n  .alert-info .alert-link {\n    color: #062c33; }\n\n.alert-warning {\n  color: #856404;\n  background-color: #fff3cd;\n  border-color: #ffeeba; }\n  .alert-warning hr {\n    border-top-color: #ffe8a1; }\n  .alert-warning .alert-link {\n    color: #533f03; }\n\n.alert-danger {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-color: #f5c6cb; }\n  .alert-danger hr {\n    border-top-color: #f1b0b7; }\n  .alert-danger .alert-link {\n    color: #491217; }\n\n.alert-light {\n  color: #818182;\n  background-color: #fefefe;\n  border-color: #fdfdfe; }\n  .alert-light hr {\n    border-top-color: #ececf6; }\n  .alert-light .alert-link {\n    color: #686868; }\n\n.alert-dark {\n  color: #1b1e21;\n  background-color: #d6d8d9;\n  border-color: #c6c8ca; }\n  .alert-dark hr {\n    border-top-color: #b9bbbe; }\n  .alert-dark .alert-link {\n    color: #040505; }\n\n@keyframes progress-bar-stripes {\n  from {\n    background-position: 1rem 0; }\n  to {\n    background-position: 0 0; } }\n\n.progress {\n  display: flex;\n  height: 1rem;\n  overflow: hidden;\n  font-size: 0.75rem;\n  background-color: #e9ecef;\n  border-radius: 0.25rem; }\n\n.progress-bar {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  color: #fff;\n  text-align: center;\n  white-space: nowrap;\n  background-color: #007bff;\n  transition: width 0.6s ease; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .progress-bar {\n      transition: none; } }\n\n.progress-bar-striped {\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-size: 1rem 1rem; }\n\n.progress-bar-animated {\n  animation: progress-bar-stripes 1s linear infinite; }\n\n.media {\n  display: flex;\n  align-items: flex-start; }\n\n.media-body {\n  flex: 1; }\n\n.list-group {\n  display: flex;\n  flex-direction: column;\n  padding-left: 0;\n  margin-bottom: 0; }\n\n.list-group-item-action {\n  width: 100%;\n  color: #495057;\n  text-align: inherit; }\n  .list-group-item-action:hover, .list-group-item-action:focus {\n    color: #495057;\n    text-decoration: none;\n    background-color: #f8f9fa; }\n  .list-group-item-action:active {\n    color: #212529;\n    background-color: #e9ecef; }\n\n.list-group-item {\n  position: relative;\n  display: block;\n  padding: 0.75rem 1.25rem;\n  margin-bottom: -1px;\n  background-color: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.125); }\n  .list-group-item:first-child {\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n  .list-group-item:last-child {\n    margin-bottom: 0;\n    border-bottom-right-radius: 0.25rem;\n    border-bottom-left-radius: 0.25rem; }\n  .list-group-item:hover, .list-group-item:focus {\n    z-index: 1;\n    text-decoration: none; }\n  .list-group-item.disabled, .list-group-item:disabled {\n    color: #6c757d;\n    background-color: #fff; }\n  .list-group-item.active {\n    z-index: 2;\n    color: #fff;\n    background-color: #007bff;\n    border-color: #007bff; }\n\n.list-group-flush .list-group-item {\n  border-right: 0;\n  border-left: 0;\n  border-radius: 0; }\n\n.list-group-flush:first-child .list-group-item:first-child {\n  border-top: 0; }\n\n.list-group-flush:last-child .list-group-item:last-child {\n  border-bottom: 0; }\n\n.list-group-item-primary {\n  color: #004085;\n  background-color: #b8daff; }\n  .list-group-item-primary.list-group-item-action:hover, .list-group-item-primary.list-group-item-action:focus {\n    color: #004085;\n    background-color: #9fcdff; }\n  .list-group-item-primary.list-group-item-action.active {\n    color: #fff;\n    background-color: #004085;\n    border-color: #004085; }\n\n.list-group-item-secondary {\n  color: #383d41;\n  background-color: #d6d8db; }\n  .list-group-item-secondary.list-group-item-action:hover, .list-group-item-secondary.list-group-item-action:focus {\n    color: #383d41;\n    background-color: #c8cbcf; }\n  .list-group-item-secondary.list-group-item-action.active {\n    color: #fff;\n    background-color: #383d41;\n    border-color: #383d41; }\n\n.list-group-item-success {\n  color: #155724;\n  background-color: #c3e6cb; }\n  .list-group-item-success.list-group-item-action:hover, .list-group-item-success.list-group-item-action:focus {\n    color: #155724;\n    background-color: #b1dfbb; }\n  .list-group-item-success.list-group-item-action.active {\n    color: #fff;\n    background-color: #155724;\n    border-color: #155724; }\n\n.list-group-item-info {\n  color: #0c5460;\n  background-color: #bee5eb; }\n  .list-group-item-info.list-group-item-action:hover, .list-group-item-info.list-group-item-action:focus {\n    color: #0c5460;\n    background-color: #abdde5; }\n  .list-group-item-info.list-group-item-action.active {\n    color: #fff;\n    background-color: #0c5460;\n    border-color: #0c5460; }\n\n.list-group-item-warning {\n  color: #856404;\n  background-color: #ffeeba; }\n  .list-group-item-warning.list-group-item-action:hover, .list-group-item-warning.list-group-item-action:focus {\n    color: #856404;\n    background-color: #ffe8a1; }\n  .list-group-item-warning.list-group-item-action.active {\n    color: #fff;\n    background-color: #856404;\n    border-color: #856404; }\n\n.list-group-item-danger {\n  color: #721c24;\n  background-color: #f5c6cb; }\n  .list-group-item-danger.list-group-item-action:hover, .list-group-item-danger.list-group-item-action:focus {\n    color: #721c24;\n    background-color: #f1b0b7; }\n  .list-group-item-danger.list-group-item-action.active {\n    color: #fff;\n    background-color: #721c24;\n    border-color: #721c24; }\n\n.list-group-item-light {\n  color: #818182;\n  background-color: #fdfdfe; }\n  .list-group-item-light.list-group-item-action:hover, .list-group-item-light.list-group-item-action:focus {\n    color: #818182;\n    background-color: #ececf6; }\n  .list-group-item-light.list-group-item-action.active {\n    color: #fff;\n    background-color: #818182;\n    border-color: #818182; }\n\n.list-group-item-dark {\n  color: #1b1e21;\n  background-color: #c6c8ca; }\n  .list-group-item-dark.list-group-item-action:hover, .list-group-item-dark.list-group-item-action:focus {\n    color: #1b1e21;\n    background-color: #b9bbbe; }\n  .list-group-item-dark.list-group-item-action.active {\n    color: #fff;\n    background-color: #1b1e21;\n    border-color: #1b1e21; }\n\n.close {\n  float: right;\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 1;\n  color: #000;\n  text-shadow: 0 1px 0 #fff;\n  opacity: .5; }\n  .close:hover, .close:focus {\n    color: #000;\n    text-decoration: none;\n    opacity: .75; }\n  .close:not(:disabled):not(.disabled) {\n    cursor: pointer; }\n\nbutton.close {\n  padding: 0;\n  background-color: transparent;\n  border: 0;\n  -webkit-appearance: none; }\n\n.modal-open {\n  overflow: hidden; }\n\n.modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1050;\n  display: none;\n  overflow: hidden;\n  outline: 0; }\n  .modal-open .modal {\n    overflow-x: hidden;\n    overflow-y: auto; }\n\n.modal-dialog {\n  position: relative;\n  width: auto;\n  margin: 0.5rem;\n  pointer-events: none; }\n  .modal.fade .modal-dialog {\n    transition: transform 0.3s ease-out;\n    transform: translate(0, -25%); }\n    @media screen and (prefers-reduced-motion: reduce) {\n      .modal.fade .modal-dialog {\n        transition: none; } }\n  .modal.show .modal-dialog {\n    transform: translate(0, 0); }\n\n.modal-dialog-centered {\n  display: flex;\n  align-items: center;\n  min-height: calc(100% - (0.5rem * 2)); }\n\n.modal-content {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  pointer-events: auto;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 0.3rem;\n  outline: 0; }\n\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1040;\n  background-color: #000; }\n  .modal-backdrop.fade {\n    opacity: 0; }\n  .modal-backdrop.show {\n    opacity: 0.5; }\n\n.modal-header {\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n  padding: 1rem;\n  border-bottom: 1px solid #e9ecef;\n  border-top-left-radius: 0.3rem;\n  border-top-right-radius: 0.3rem; }\n  .modal-header .close {\n    padding: 1rem;\n    margin: -1rem -1rem -1rem auto; }\n\n.modal-title {\n  margin-bottom: 0;\n  line-height: 1.5; }\n\n.modal-body {\n  position: relative;\n  flex: 1 1 auto;\n  padding: 1rem; }\n\n.modal-footer {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  padding: 1rem;\n  border-top: 1px solid #e9ecef; }\n  .modal-footer > :not(:first-child) {\n    margin-left: .25rem; }\n  .modal-footer > :not(:last-child) {\n    margin-right: .25rem; }\n\n.modal-scrollbar-measure {\n  position: absolute;\n  top: -9999px;\n  width: 50px;\n  height: 50px;\n  overflow: scroll; }\n\n@media (min-width: 576px) {\n  .modal-dialog {\n    max-width: 500px;\n    margin: 1.75rem auto; }\n  .modal-dialog-centered {\n    min-height: calc(100% - (1.75rem * 2)); }\n  .modal-sm {\n    max-width: 300px; } }\n\n@media (min-width: 992px) {\n  .modal-lg {\n    max-width: 800px; } }\n\n.tooltip {\n  position: absolute;\n  z-index: 1070;\n  display: block;\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-style: normal;\n  font-weight: 400;\n  line-height: 1.5;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  letter-spacing: normal;\n  word-break: normal;\n  word-spacing: normal;\n  white-space: normal;\n  line-break: auto;\n  font-size: 0.875rem;\n  word-wrap: break-word;\n  opacity: 0; }\n  .tooltip.show {\n    opacity: 0.9; }\n  .tooltip .arrow {\n    position: absolute;\n    display: block;\n    width: 0.8rem;\n    height: 0.4rem; }\n    .tooltip .arrow::before {\n      position: absolute;\n      content: \"\";\n      border-color: transparent;\n      border-style: solid; }\n\n.bs-tooltip-top, .bs-tooltip-auto[x-placement^=\"top\"] {\n  padding: 0.4rem 0; }\n  .bs-tooltip-top .arrow, .bs-tooltip-auto[x-placement^=\"top\"] .arrow {\n    bottom: 0; }\n    .bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^=\"top\"] .arrow::before {\n      top: 0;\n      border-width: 0.4rem 0.4rem 0;\n      border-top-color: #000; }\n\n.bs-tooltip-right, .bs-tooltip-auto[x-placement^=\"right\"] {\n  padding: 0 0.4rem; }\n  .bs-tooltip-right .arrow, .bs-tooltip-auto[x-placement^=\"right\"] .arrow {\n    left: 0;\n    width: 0.4rem;\n    height: 0.8rem; }\n    .bs-tooltip-right .arrow::before, .bs-tooltip-auto[x-placement^=\"right\"] .arrow::before {\n      right: 0;\n      border-width: 0.4rem 0.4rem 0.4rem 0;\n      border-right-color: #000; }\n\n.bs-tooltip-bottom, .bs-tooltip-auto[x-placement^=\"bottom\"] {\n  padding: 0.4rem 0; }\n  .bs-tooltip-bottom .arrow, .bs-tooltip-auto[x-placement^=\"bottom\"] .arrow {\n    top: 0; }\n    .bs-tooltip-bottom .arrow::before, .bs-tooltip-auto[x-placement^=\"bottom\"] .arrow::before {\n      bottom: 0;\n      border-width: 0 0.4rem 0.4rem;\n      border-bottom-color: #000; }\n\n.bs-tooltip-left, .bs-tooltip-auto[x-placement^=\"left\"] {\n  padding: 0 0.4rem; }\n  .bs-tooltip-left .arrow, .bs-tooltip-auto[x-placement^=\"left\"] .arrow {\n    right: 0;\n    width: 0.4rem;\n    height: 0.8rem; }\n    .bs-tooltip-left .arrow::before, .bs-tooltip-auto[x-placement^=\"left\"] .arrow::before {\n      left: 0;\n      border-width: 0.4rem 0 0.4rem 0.4rem;\n      border-left-color: #000; }\n\n.tooltip-inner {\n  max-width: 200px;\n  padding: 0.25rem 0.5rem;\n  color: #fff;\n  text-align: center;\n  background-color: #000;\n  border-radius: 0.25rem; }\n\n.popover {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 1060;\n  display: block;\n  max-width: 276px;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-style: normal;\n  font-weight: 400;\n  line-height: 1.5;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  letter-spacing: normal;\n  word-break: normal;\n  word-spacing: normal;\n  white-space: normal;\n  line-break: auto;\n  font-size: 0.875rem;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 0.3rem; }\n  .popover .arrow {\n    position: absolute;\n    display: block;\n    width: 1rem;\n    height: 0.5rem;\n    margin: 0 0.3rem; }\n    .popover .arrow::before, .popover .arrow::after {\n      position: absolute;\n      display: block;\n      content: \"\";\n      border-color: transparent;\n      border-style: solid; }\n\n.bs-popover-top, .bs-popover-auto[x-placement^=\"top\"] {\n  margin-bottom: 0.5rem; }\n  .bs-popover-top .arrow, .bs-popover-auto[x-placement^=\"top\"] .arrow {\n    bottom: calc((0.5rem + 1px) * -1); }\n  .bs-popover-top .arrow::before, .bs-popover-auto[x-placement^=\"top\"] .arrow::before,\n  .bs-popover-top .arrow::after,\n  .bs-popover-auto[x-placement^=\"top\"] .arrow::after {\n    border-width: 0.5rem 0.5rem 0; }\n  .bs-popover-top .arrow::before, .bs-popover-auto[x-placement^=\"top\"] .arrow::before {\n    bottom: 0;\n    border-top-color: rgba(0, 0, 0, 0.25); }\n  \n  .bs-popover-top .arrow::after,\n  .bs-popover-auto[x-placement^=\"top\"] .arrow::after {\n    bottom: 1px;\n    border-top-color: #fff; }\n\n.bs-popover-right, .bs-popover-auto[x-placement^=\"right\"] {\n  margin-left: 0.5rem; }\n  .bs-popover-right .arrow, .bs-popover-auto[x-placement^=\"right\"] .arrow {\n    left: calc((0.5rem + 1px) * -1);\n    width: 0.5rem;\n    height: 1rem;\n    margin: 0.3rem 0; }\n  .bs-popover-right .arrow::before, .bs-popover-auto[x-placement^=\"right\"] .arrow::before,\n  .bs-popover-right .arrow::after,\n  .bs-popover-auto[x-placement^=\"right\"] .arrow::after {\n    border-width: 0.5rem 0.5rem 0.5rem 0; }\n  .bs-popover-right .arrow::before, .bs-popover-auto[x-placement^=\"right\"] .arrow::before {\n    left: 0;\n    border-right-color: rgba(0, 0, 0, 0.25); }\n  \n  .bs-popover-right .arrow::after,\n  .bs-popover-auto[x-placement^=\"right\"] .arrow::after {\n    left: 1px;\n    border-right-color: #fff; }\n\n.bs-popover-bottom, .bs-popover-auto[x-placement^=\"bottom\"] {\n  margin-top: 0.5rem; }\n  .bs-popover-bottom .arrow, .bs-popover-auto[x-placement^=\"bottom\"] .arrow {\n    top: calc((0.5rem + 1px) * -1); }\n  .bs-popover-bottom .arrow::before, .bs-popover-auto[x-placement^=\"bottom\"] .arrow::before,\n  .bs-popover-bottom .arrow::after,\n  .bs-popover-auto[x-placement^=\"bottom\"] .arrow::after {\n    border-width: 0 0.5rem 0.5rem 0.5rem; }\n  .bs-popover-bottom .arrow::before, .bs-popover-auto[x-placement^=\"bottom\"] .arrow::before {\n    top: 0;\n    border-bottom-color: rgba(0, 0, 0, 0.25); }\n  \n  .bs-popover-bottom .arrow::after,\n  .bs-popover-auto[x-placement^=\"bottom\"] .arrow::after {\n    top: 1px;\n    border-bottom-color: #fff; }\n  .bs-popover-bottom .popover-header::before, .bs-popover-auto[x-placement^=\"bottom\"] .popover-header::before {\n    position: absolute;\n    top: 0;\n    left: 50%;\n    display: block;\n    width: 1rem;\n    margin-left: -0.5rem;\n    content: \"\";\n    border-bottom: 1px solid #f7f7f7; }\n\n.bs-popover-left, .bs-popover-auto[x-placement^=\"left\"] {\n  margin-right: 0.5rem; }\n  .bs-popover-left .arrow, .bs-popover-auto[x-placement^=\"left\"] .arrow {\n    right: calc((0.5rem + 1px) * -1);\n    width: 0.5rem;\n    height: 1rem;\n    margin: 0.3rem 0; }\n  .bs-popover-left .arrow::before, .bs-popover-auto[x-placement^=\"left\"] .arrow::before,\n  .bs-popover-left .arrow::after,\n  .bs-popover-auto[x-placement^=\"left\"] .arrow::after {\n    border-width: 0.5rem 0 0.5rem 0.5rem; }\n  .bs-popover-left .arrow::before, .bs-popover-auto[x-placement^=\"left\"] .arrow::before {\n    right: 0;\n    border-left-color: rgba(0, 0, 0, 0.25); }\n  \n  .bs-popover-left .arrow::after,\n  .bs-popover-auto[x-placement^=\"left\"] .arrow::after {\n    right: 1px;\n    border-left-color: #fff; }\n\n.popover-header {\n  padding: 0.5rem 0.75rem;\n  margin-bottom: 0;\n  font-size: 1rem;\n  color: inherit;\n  background-color: #f7f7f7;\n  border-bottom: 1px solid #ebebeb;\n  border-top-left-radius: calc(0.3rem - 1px);\n  border-top-right-radius: calc(0.3rem - 1px); }\n  .popover-header:empty {\n    display: none; }\n\n.popover-body {\n  padding: 0.5rem 0.75rem;\n  color: #212529; }\n\n.carousel {\n  position: relative; }\n\n.carousel-inner {\n  position: relative;\n  width: 100%;\n  overflow: hidden; }\n\n.carousel-item {\n  position: relative;\n  display: none;\n  align-items: center;\n  width: 100%;\n  transition: transform 0.6s ease;\n  backface-visibility: hidden;\n  perspective: 1000px; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .carousel-item {\n      transition: none; } }\n\n.carousel-item.active,\n.carousel-item-next,\n.carousel-item-prev {\n  display: block; }\n\n.carousel-item-next,\n.carousel-item-prev {\n  position: absolute;\n  top: 0; }\n\n.carousel-item-next.carousel-item-left,\n.carousel-item-prev.carousel-item-right {\n  transform: translateX(0); }\n  @supports (transform-style: preserve-3d) {\n    .carousel-item-next.carousel-item-left,\n    .carousel-item-prev.carousel-item-right {\n      transform: translate3d(0, 0, 0); } }\n\n.carousel-item-next,\n.active.carousel-item-right {\n  transform: translateX(100%); }\n  @supports (transform-style: preserve-3d) {\n    .carousel-item-next,\n    .active.carousel-item-right {\n      transform: translate3d(100%, 0, 0); } }\n\n.carousel-item-prev,\n.active.carousel-item-left {\n  transform: translateX(-100%); }\n  @supports (transform-style: preserve-3d) {\n    .carousel-item-prev,\n    .active.carousel-item-left {\n      transform: translate3d(-100%, 0, 0); } }\n\n.carousel-fade .carousel-item {\n  opacity: 0;\n  transition-duration: .6s;\n  transition-property: opacity; }\n\n.carousel-fade .carousel-item.active,\n.carousel-fade .carousel-item-next.carousel-item-left,\n.carousel-fade .carousel-item-prev.carousel-item-right {\n  opacity: 1; }\n\n.carousel-fade .active.carousel-item-left,\n.carousel-fade .active.carousel-item-right {\n  opacity: 0; }\n\n.carousel-fade .carousel-item-next,\n.carousel-fade .carousel-item-prev,\n.carousel-fade .carousel-item.active,\n.carousel-fade .active.carousel-item-left,\n.carousel-fade .active.carousel-item-prev {\n  transform: translateX(0); }\n  @supports (transform-style: preserve-3d) {\n    .carousel-fade .carousel-item-next,\n    .carousel-fade .carousel-item-prev,\n    .carousel-fade .carousel-item.active,\n    .carousel-fade .active.carousel-item-left,\n    .carousel-fade .active.carousel-item-prev {\n      transform: translate3d(0, 0, 0); } }\n\n.carousel-control-prev,\n.carousel-control-next {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 15%;\n  color: #fff;\n  text-align: center;\n  opacity: 0.5; }\n  .carousel-control-prev:hover, .carousel-control-prev:focus,\n  .carousel-control-next:hover,\n  .carousel-control-next:focus {\n    color: #fff;\n    text-decoration: none;\n    outline: 0;\n    opacity: .9; }\n\n.carousel-control-prev {\n  left: 0; }\n\n.carousel-control-next {\n  right: 0; }\n\n.carousel-control-prev-icon,\n.carousel-control-next-icon {\n  display: inline-block;\n  width: 20px;\n  height: 20px;\n  background: transparent no-repeat center center;\n  background-size: 100% 100%; }\n\n.carousel-control-prev-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E\"); }\n\n.carousel-control-next-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E\"); }\n\n.carousel-indicators {\n  position: absolute;\n  right: 0;\n  bottom: 10px;\n  left: 0;\n  z-index: 15;\n  display: flex;\n  justify-content: center;\n  padding-left: 0;\n  margin-right: 15%;\n  margin-left: 15%;\n  list-style: none; }\n  .carousel-indicators li {\n    position: relative;\n    flex: 0 1 auto;\n    width: 30px;\n    height: 3px;\n    margin-right: 3px;\n    margin-left: 3px;\n    text-indent: -999px;\n    cursor: pointer;\n    background-color: rgba(255, 255, 255, 0.5); }\n    .carousel-indicators li::before {\n      position: absolute;\n      top: -10px;\n      left: 0;\n      display: inline-block;\n      width: 100%;\n      height: 10px;\n      content: \"\"; }\n    .carousel-indicators li::after {\n      position: absolute;\n      bottom: -10px;\n      left: 0;\n      display: inline-block;\n      width: 100%;\n      height: 10px;\n      content: \"\"; }\n  .carousel-indicators .active {\n    background-color: #fff; }\n\n.carousel-caption {\n  position: absolute;\n  right: 15%;\n  bottom: 20px;\n  left: 15%;\n  z-index: 10;\n  padding-top: 20px;\n  padding-bottom: 20px;\n  color: #fff;\n  text-align: center; }\n\n.align-baseline {\n  vertical-align: baseline !important; }\n\n.align-top {\n  vertical-align: top !important; }\n\n.align-middle {\n  vertical-align: middle !important; }\n\n.align-bottom {\n  vertical-align: bottom !important; }\n\n.align-text-bottom {\n  vertical-align: text-bottom !important; }\n\n.align-text-top {\n  vertical-align: text-top !important; }\n\n.bg-primary {\n  background-color: #007bff !important; }\n\na.bg-primary:hover, a.bg-primary:focus,\nbutton.bg-primary:hover,\nbutton.bg-primary:focus {\n  background-color: #0062cc !important; }\n\n.bg-secondary {\n  background-color: #6c757d !important; }\n\na.bg-secondary:hover, a.bg-secondary:focus,\nbutton.bg-secondary:hover,\nbutton.bg-secondary:focus {\n  background-color: #545b62 !important; }\n\n.bg-success {\n  background-color: #28a745 !important; }\n\na.bg-success:hover, a.bg-success:focus,\nbutton.bg-success:hover,\nbutton.bg-success:focus {\n  background-color: #1e7e34 !important; }\n\n.bg-info {\n  background-color: #17a2b8 !important; }\n\na.bg-info:hover, a.bg-info:focus,\nbutton.bg-info:hover,\nbutton.bg-info:focus {\n  background-color: #117a8b !important; }\n\n.bg-warning {\n  background-color: #ffc107 !important; }\n\na.bg-warning:hover, a.bg-warning:focus,\nbutton.bg-warning:hover,\nbutton.bg-warning:focus {\n  background-color: #d39e00 !important; }\n\n.bg-danger {\n  background-color: #dc3545 !important; }\n\na.bg-danger:hover, a.bg-danger:focus,\nbutton.bg-danger:hover,\nbutton.bg-danger:focus {\n  background-color: #bd2130 !important; }\n\n.bg-light {\n  background-color: #f8f9fa !important; }\n\na.bg-light:hover, a.bg-light:focus,\nbutton.bg-light:hover,\nbutton.bg-light:focus {\n  background-color: #dae0e5 !important; }\n\n.bg-dark {\n  background-color: #343a40 !important; }\n\na.bg-dark:hover, a.bg-dark:focus,\nbutton.bg-dark:hover,\nbutton.bg-dark:focus {\n  background-color: #1d2124 !important; }\n\n.bg-white {\n  background-color: #fff !important; }\n\n.bg-transparent {\n  background-color: transparent !important; }\n\n.border {\n  border: 1px solid #dee2e6 !important; }\n\n.border-top {\n  border-top: 1px solid #dee2e6 !important; }\n\n.border-right {\n  border-right: 1px solid #dee2e6 !important; }\n\n.border-bottom {\n  border-bottom: 1px solid #dee2e6 !important; }\n\n.border-left {\n  border-left: 1px solid #dee2e6 !important; }\n\n.border-0 {\n  border: 0 !important; }\n\n.border-top-0 {\n  border-top: 0 !important; }\n\n.border-right-0 {\n  border-right: 0 !important; }\n\n.border-bottom-0 {\n  border-bottom: 0 !important; }\n\n.border-left-0 {\n  border-left: 0 !important; }\n\n.border-primary {\n  border-color: #007bff !important; }\n\n.border-secondary {\n  border-color: #6c757d !important; }\n\n.border-success {\n  border-color: #28a745 !important; }\n\n.border-info {\n  border-color: #17a2b8 !important; }\n\n.border-warning {\n  border-color: #ffc107 !important; }\n\n.border-danger {\n  border-color: #dc3545 !important; }\n\n.border-light {\n  border-color: #f8f9fa !important; }\n\n.border-dark {\n  border-color: #343a40 !important; }\n\n.border-white {\n  border-color: #fff !important; }\n\n.rounded {\n  border-radius: 0.25rem !important; }\n\n.rounded-top {\n  border-top-left-radius: 0.25rem !important;\n  border-top-right-radius: 0.25rem !important; }\n\n.rounded-right {\n  border-top-right-radius: 0.25rem !important;\n  border-bottom-right-radius: 0.25rem !important; }\n\n.rounded-bottom {\n  border-bottom-right-radius: 0.25rem !important;\n  border-bottom-left-radius: 0.25rem !important; }\n\n.rounded-left {\n  border-top-left-radius: 0.25rem !important;\n  border-bottom-left-radius: 0.25rem !important; }\n\n.rounded-circle {\n  border-radius: 50% !important; }\n\n.rounded-0 {\n  border-radius: 0 !important; }\n\n.clearfix::after {\n  display: block;\n  clear: both;\n  content: \"\"; }\n\n.d-none {\n  display: none !important; }\n\n.d-inline {\n  display: inline !important; }\n\n.d-inline-block {\n  display: inline-block !important; }\n\n.d-block {\n  display: block !important; }\n\n.d-table {\n  display: table !important; }\n\n.d-table-row {\n  display: table-row !important; }\n\n.d-table-cell {\n  display: table-cell !important; }\n\n.d-flex {\n  display: flex !important; }\n\n.d-inline-flex {\n  display: inline-flex !important; }\n\n@media (min-width: 576px) {\n  .d-sm-none {\n    display: none !important; }\n  .d-sm-inline {\n    display: inline !important; }\n  .d-sm-inline-block {\n    display: inline-block !important; }\n  .d-sm-block {\n    display: block !important; }\n  .d-sm-table {\n    display: table !important; }\n  .d-sm-table-row {\n    display: table-row !important; }\n  .d-sm-table-cell {\n    display: table-cell !important; }\n  .d-sm-flex {\n    display: flex !important; }\n  .d-sm-inline-flex {\n    display: inline-flex !important; } }\n\n@media (min-width: 768px) {\n  .d-md-none {\n    display: none !important; }\n  .d-md-inline {\n    display: inline !important; }\n  .d-md-inline-block {\n    display: inline-block !important; }\n  .d-md-block {\n    display: block !important; }\n  .d-md-table {\n    display: table !important; }\n  .d-md-table-row {\n    display: table-row !important; }\n  .d-md-table-cell {\n    display: table-cell !important; }\n  .d-md-flex {\n    display: flex !important; }\n  .d-md-inline-flex {\n    display: inline-flex !important; } }\n\n@media (min-width: 992px) {\n  .d-lg-none {\n    display: none !important; }\n  .d-lg-inline {\n    display: inline !important; }\n  .d-lg-inline-block {\n    display: inline-block !important; }\n  .d-lg-block {\n    display: block !important; }\n  .d-lg-table {\n    display: table !important; }\n  .d-lg-table-row {\n    display: table-row !important; }\n  .d-lg-table-cell {\n    display: table-cell !important; }\n  .d-lg-flex {\n    display: flex !important; }\n  .d-lg-inline-flex {\n    display: inline-flex !important; } }\n\n@media (min-width: 1200px) {\n  .d-xl-none {\n    display: none !important; }\n  .d-xl-inline {\n    display: inline !important; }\n  .d-xl-inline-block {\n    display: inline-block !important; }\n  .d-xl-block {\n    display: block !important; }\n  .d-xl-table {\n    display: table !important; }\n  .d-xl-table-row {\n    display: table-row !important; }\n  .d-xl-table-cell {\n    display: table-cell !important; }\n  .d-xl-flex {\n    display: flex !important; }\n  .d-xl-inline-flex {\n    display: inline-flex !important; } }\n\n@media print {\n  .d-print-none {\n    display: none !important; }\n  .d-print-inline {\n    display: inline !important; }\n  .d-print-inline-block {\n    display: inline-block !important; }\n  .d-print-block {\n    display: block !important; }\n  .d-print-table {\n    display: table !important; }\n  .d-print-table-row {\n    display: table-row !important; }\n  .d-print-table-cell {\n    display: table-cell !important; }\n  .d-print-flex {\n    display: flex !important; }\n  .d-print-inline-flex {\n    display: inline-flex !important; } }\n\n.embed-responsive {\n  position: relative;\n  display: block;\n  width: 100%;\n  padding: 0;\n  overflow: hidden; }\n  .embed-responsive::before {\n    display: block;\n    content: \"\"; }\n  .embed-responsive .embed-responsive-item,\n  .embed-responsive iframe,\n  .embed-responsive embed,\n  .embed-responsive object,\n  .embed-responsive video {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border: 0; }\n\n.embed-responsive-21by9::before {\n  padding-top: 42.85714%; }\n\n.embed-responsive-16by9::before {\n  padding-top: 56.25%; }\n\n.embed-responsive-4by3::before {\n  padding-top: 75%; }\n\n.embed-responsive-1by1::before {\n  padding-top: 100%; }\n\n.flex-row {\n  flex-direction: row !important; }\n\n.flex-column {\n  flex-direction: column !important; }\n\n.flex-row-reverse {\n  flex-direction: row-reverse !important; }\n\n.flex-column-reverse {\n  flex-direction: column-reverse !important; }\n\n.flex-wrap {\n  flex-wrap: wrap !important; }\n\n.flex-nowrap {\n  flex-wrap: nowrap !important; }\n\n.flex-wrap-reverse {\n  flex-wrap: wrap-reverse !important; }\n\n.flex-fill {\n  flex: 1 1 auto !important; }\n\n.flex-grow-0 {\n  flex-grow: 0 !important; }\n\n.flex-grow-1 {\n  flex-grow: 1 !important; }\n\n.flex-shrink-0 {\n  flex-shrink: 0 !important; }\n\n.flex-shrink-1 {\n  flex-shrink: 1 !important; }\n\n.justify-content-start {\n  justify-content: flex-start !important; }\n\n.justify-content-end {\n  justify-content: flex-end !important; }\n\n.justify-content-center {\n  justify-content: center !important; }\n\n.justify-content-between {\n  justify-content: space-between !important; }\n\n.justify-content-around {\n  justify-content: space-around !important; }\n\n.align-items-start {\n  align-items: flex-start !important; }\n\n.align-items-end {\n  align-items: flex-end !important; }\n\n.align-items-center {\n  align-items: center !important; }\n\n.align-items-baseline {\n  align-items: baseline !important; }\n\n.align-items-stretch {\n  align-items: stretch !important; }\n\n.align-content-start {\n  align-content: flex-start !important; }\n\n.align-content-end {\n  align-content: flex-end !important; }\n\n.align-content-center {\n  align-content: center !important; }\n\n.align-content-between {\n  align-content: space-between !important; }\n\n.align-content-around {\n  align-content: space-around !important; }\n\n.align-content-stretch {\n  align-content: stretch !important; }\n\n.align-self-auto {\n  align-self: auto !important; }\n\n.align-self-start {\n  align-self: flex-start !important; }\n\n.align-self-end {\n  align-self: flex-end !important; }\n\n.align-self-center {\n  align-self: center !important; }\n\n.align-self-baseline {\n  align-self: baseline !important; }\n\n.align-self-stretch {\n  align-self: stretch !important; }\n\n@media (min-width: 576px) {\n  .flex-sm-row {\n    flex-direction: row !important; }\n  .flex-sm-column {\n    flex-direction: column !important; }\n  .flex-sm-row-reverse {\n    flex-direction: row-reverse !important; }\n  .flex-sm-column-reverse {\n    flex-direction: column-reverse !important; }\n  .flex-sm-wrap {\n    flex-wrap: wrap !important; }\n  .flex-sm-nowrap {\n    flex-wrap: nowrap !important; }\n  .flex-sm-wrap-reverse {\n    flex-wrap: wrap-reverse !important; }\n  .flex-sm-fill {\n    flex: 1 1 auto !important; }\n  .flex-sm-grow-0 {\n    flex-grow: 0 !important; }\n  .flex-sm-grow-1 {\n    flex-grow: 1 !important; }\n  .flex-sm-shrink-0 {\n    flex-shrink: 0 !important; }\n  .flex-sm-shrink-1 {\n    flex-shrink: 1 !important; }\n  .justify-content-sm-start {\n    justify-content: flex-start !important; }\n  .justify-content-sm-end {\n    justify-content: flex-end !important; }\n  .justify-content-sm-center {\n    justify-content: center !important; }\n  .justify-content-sm-between {\n    justify-content: space-between !important; }\n  .justify-content-sm-around {\n    justify-content: space-around !important; }\n  .align-items-sm-start {\n    align-items: flex-start !important; }\n  .align-items-sm-end {\n    align-items: flex-end !important; }\n  .align-items-sm-center {\n    align-items: center !important; }\n  .align-items-sm-baseline {\n    align-items: baseline !important; }\n  .align-items-sm-stretch {\n    align-items: stretch !important; }\n  .align-content-sm-start {\n    align-content: flex-start !important; }\n  .align-content-sm-end {\n    align-content: flex-end !important; }\n  .align-content-sm-center {\n    align-content: center !important; }\n  .align-content-sm-between {\n    align-content: space-between !important; }\n  .align-content-sm-around {\n    align-content: space-around !important; }\n  .align-content-sm-stretch {\n    align-content: stretch !important; }\n  .align-self-sm-auto {\n    align-self: auto !important; }\n  .align-self-sm-start {\n    align-self: flex-start !important; }\n  .align-self-sm-end {\n    align-self: flex-end !important; }\n  .align-self-sm-center {\n    align-self: center !important; }\n  .align-self-sm-baseline {\n    align-self: baseline !important; }\n  .align-self-sm-stretch {\n    align-self: stretch !important; } }\n\n@media (min-width: 768px) {\n  .flex-md-row {\n    flex-direction: row !important; }\n  .flex-md-column {\n    flex-direction: column !important; }\n  .flex-md-row-reverse {\n    flex-direction: row-reverse !important; }\n  .flex-md-column-reverse {\n    flex-direction: column-reverse !important; }\n  .flex-md-wrap {\n    flex-wrap: wrap !important; }\n  .flex-md-nowrap {\n    flex-wrap: nowrap !important; }\n  .flex-md-wrap-reverse {\n    flex-wrap: wrap-reverse !important; }\n  .flex-md-fill {\n    flex: 1 1 auto !important; }\n  .flex-md-grow-0 {\n    flex-grow: 0 !important; }\n  .flex-md-grow-1 {\n    flex-grow: 1 !important; }\n  .flex-md-shrink-0 {\n    flex-shrink: 0 !important; }\n  .flex-md-shrink-1 {\n    flex-shrink: 1 !important; }\n  .justify-content-md-start {\n    justify-content: flex-start !important; }\n  .justify-content-md-end {\n    justify-content: flex-end !important; }\n  .justify-content-md-center {\n    justify-content: center !important; }\n  .justify-content-md-between {\n    justify-content: space-between !important; }\n  .justify-content-md-around {\n    justify-content: space-around !important; }\n  .align-items-md-start {\n    align-items: flex-start !important; }\n  .align-items-md-end {\n    align-items: flex-end !important; }\n  .align-items-md-center {\n    align-items: center !important; }\n  .align-items-md-baseline {\n    align-items: baseline !important; }\n  .align-items-md-stretch {\n    align-items: stretch !important; }\n  .align-content-md-start {\n    align-content: flex-start !important; }\n  .align-content-md-end {\n    align-content: flex-end !important; }\n  .align-content-md-center {\n    align-content: center !important; }\n  .align-content-md-between {\n    align-content: space-between !important; }\n  .align-content-md-around {\n    align-content: space-around !important; }\n  .align-content-md-stretch {\n    align-content: stretch !important; }\n  .align-self-md-auto {\n    align-self: auto !important; }\n  .align-self-md-start {\n    align-self: flex-start !important; }\n  .align-self-md-end {\n    align-self: flex-end !important; }\n  .align-self-md-center {\n    align-self: center !important; }\n  .align-self-md-baseline {\n    align-self: baseline !important; }\n  .align-self-md-stretch {\n    align-self: stretch !important; } }\n\n@media (min-width: 992px) {\n  .flex-lg-row {\n    flex-direction: row !important; }\n  .flex-lg-column {\n    flex-direction: column !important; }\n  .flex-lg-row-reverse {\n    flex-direction: row-reverse !important; }\n  .flex-lg-column-reverse {\n    flex-direction: column-reverse !important; }\n  .flex-lg-wrap {\n    flex-wrap: wrap !important; }\n  .flex-lg-nowrap {\n    flex-wrap: nowrap !important; }\n  .flex-lg-wrap-reverse {\n    flex-wrap: wrap-reverse !important; }\n  .flex-lg-fill {\n    flex: 1 1 auto !important; }\n  .flex-lg-grow-0 {\n    flex-grow: 0 !important; }\n  .flex-lg-grow-1 {\n    flex-grow: 1 !important; }\n  .flex-lg-shrink-0 {\n    flex-shrink: 0 !important; }\n  .flex-lg-shrink-1 {\n    flex-shrink: 1 !important; }\n  .justify-content-lg-start {\n    justify-content: flex-start !important; }\n  .justify-content-lg-end {\n    justify-content: flex-end !important; }\n  .justify-content-lg-center {\n    justify-content: center !important; }\n  .justify-content-lg-between {\n    justify-content: space-between !important; }\n  .justify-content-lg-around {\n    justify-content: space-around !important; }\n  .align-items-lg-start {\n    align-items: flex-start !important; }\n  .align-items-lg-end {\n    align-items: flex-end !important; }\n  .align-items-lg-center {\n    align-items: center !important; }\n  .align-items-lg-baseline {\n    align-items: baseline !important; }\n  .align-items-lg-stretch {\n    align-items: stretch !important; }\n  .align-content-lg-start {\n    align-content: flex-start !important; }\n  .align-content-lg-end {\n    align-content: flex-end !important; }\n  .align-content-lg-center {\n    align-content: center !important; }\n  .align-content-lg-between {\n    align-content: space-between !important; }\n  .align-content-lg-around {\n    align-content: space-around !important; }\n  .align-content-lg-stretch {\n    align-content: stretch !important; }\n  .align-self-lg-auto {\n    align-self: auto !important; }\n  .align-self-lg-start {\n    align-self: flex-start !important; }\n  .align-self-lg-end {\n    align-self: flex-end !important; }\n  .align-self-lg-center {\n    align-self: center !important; }\n  .align-self-lg-baseline {\n    align-self: baseline !important; }\n  .align-self-lg-stretch {\n    align-self: stretch !important; } }\n\n@media (min-width: 1200px) {\n  .flex-xl-row {\n    flex-direction: row !important; }\n  .flex-xl-column {\n    flex-direction: column !important; }\n  .flex-xl-row-reverse {\n    flex-direction: row-reverse !important; }\n  .flex-xl-column-reverse {\n    flex-direction: column-reverse !important; }\n  .flex-xl-wrap {\n    flex-wrap: wrap !important; }\n  .flex-xl-nowrap {\n    flex-wrap: nowrap !important; }\n  .flex-xl-wrap-reverse {\n    flex-wrap: wrap-reverse !important; }\n  .flex-xl-fill {\n    flex: 1 1 auto !important; }\n  .flex-xl-grow-0 {\n    flex-grow: 0 !important; }\n  .flex-xl-grow-1 {\n    flex-grow: 1 !important; }\n  .flex-xl-shrink-0 {\n    flex-shrink: 0 !important; }\n  .flex-xl-shrink-1 {\n    flex-shrink: 1 !important; }\n  .justify-content-xl-start {\n    justify-content: flex-start !important; }\n  .justify-content-xl-end {\n    justify-content: flex-end !important; }\n  .justify-content-xl-center {\n    justify-content: center !important; }\n  .justify-content-xl-between {\n    justify-content: space-between !important; }\n  .justify-content-xl-around {\n    justify-content: space-around !important; }\n  .align-items-xl-start {\n    align-items: flex-start !important; }\n  .align-items-xl-end {\n    align-items: flex-end !important; }\n  .align-items-xl-center {\n    align-items: center !important; }\n  .align-items-xl-baseline {\n    align-items: baseline !important; }\n  .align-items-xl-stretch {\n    align-items: stretch !important; }\n  .align-content-xl-start {\n    align-content: flex-start !important; }\n  .align-content-xl-end {\n    align-content: flex-end !important; }\n  .align-content-xl-center {\n    align-content: center !important; }\n  .align-content-xl-between {\n    align-content: space-between !important; }\n  .align-content-xl-around {\n    align-content: space-around !important; }\n  .align-content-xl-stretch {\n    align-content: stretch !important; }\n  .align-self-xl-auto {\n    align-self: auto !important; }\n  .align-self-xl-start {\n    align-self: flex-start !important; }\n  .align-self-xl-end {\n    align-self: flex-end !important; }\n  .align-self-xl-center {\n    align-self: center !important; }\n  .align-self-xl-baseline {\n    align-self: baseline !important; }\n  .align-self-xl-stretch {\n    align-self: stretch !important; } }\n\n.float-left {\n  float: left !important; }\n\n.float-right {\n  float: right !important; }\n\n.float-none {\n  float: none !important; }\n\n@media (min-width: 576px) {\n  .float-sm-left {\n    float: left !important; }\n  .float-sm-right {\n    float: right !important; }\n  .float-sm-none {\n    float: none !important; } }\n\n@media (min-width: 768px) {\n  .float-md-left {\n    float: left !important; }\n  .float-md-right {\n    float: right !important; }\n  .float-md-none {\n    float: none !important; } }\n\n@media (min-width: 992px) {\n  .float-lg-left {\n    float: left !important; }\n  .float-lg-right {\n    float: right !important; }\n  .float-lg-none {\n    float: none !important; } }\n\n@media (min-width: 1200px) {\n  .float-xl-left {\n    float: left !important; }\n  .float-xl-right {\n    float: right !important; }\n  .float-xl-none {\n    float: none !important; } }\n\n.position-static {\n  position: static !important; }\n\n.position-relative {\n  position: relative !important; }\n\n.position-absolute {\n  position: absolute !important; }\n\n.position-fixed {\n  position: fixed !important; }\n\n.position-sticky {\n  position: sticky !important; }\n\n.fixed-top {\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 1030; }\n\n.fixed-bottom {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1030; }\n\n@supports (position: sticky) {\n  .sticky-top {\n    position: sticky;\n    top: 0;\n    z-index: 1020; } }\n\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border: 0; }\n\n.sr-only-focusable:active, .sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  overflow: visible;\n  clip: auto;\n  white-space: normal; }\n\n.shadow-sm {\n  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; }\n\n.shadow {\n  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; }\n\n.shadow-lg {\n  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }\n\n.shadow-none {\n  box-shadow: none !important; }\n\n.w-25 {\n  width: 25% !important; }\n\n.w-50 {\n  width: 50% !important; }\n\n.w-75 {\n  width: 75% !important; }\n\n.w-100 {\n  width: 100% !important; }\n\n.w-auto {\n  width: auto !important; }\n\n.h-25 {\n  height: 25% !important; }\n\n.h-50 {\n  height: 50% !important; }\n\n.h-75 {\n  height: 75% !important; }\n\n.h-100 {\n  height: 100% !important; }\n\n.h-auto {\n  height: auto !important; }\n\n.mw-100 {\n  max-width: 100% !important; }\n\n.mh-100 {\n  max-height: 100% !important; }\n\n.m-0 {\n  margin: 0 !important; }\n\n.mt-0,\n.my-0 {\n  margin-top: 0 !important; }\n\n.mr-0,\n.mx-0 {\n  margin-right: 0 !important; }\n\n.mb-0,\n.my-0 {\n  margin-bottom: 0 !important; }\n\n.ml-0,\n.mx-0 {\n  margin-left: 0 !important; }\n\n.m-1 {\n  margin: 0.25rem !important; }\n\n.mt-1,\n.my-1 {\n  margin-top: 0.25rem !important; }\n\n.mr-1,\n.mx-1 {\n  margin-right: 0.25rem !important; }\n\n.mb-1,\n.my-1 {\n  margin-bottom: 0.25rem !important; }\n\n.ml-1,\n.mx-1 {\n  margin-left: 0.25rem !important; }\n\n.m-2 {\n  margin: 0.5rem !important; }\n\n.mt-2,\n.my-2 {\n  margin-top: 0.5rem !important; }\n\n.mr-2,\n.mx-2 {\n  margin-right: 0.5rem !important; }\n\n.mb-2,\n.my-2 {\n  margin-bottom: 0.5rem !important; }\n\n.ml-2,\n.mx-2 {\n  margin-left: 0.5rem !important; }\n\n.m-3 {\n  margin: 1rem !important; }\n\n.mt-3,\n.my-3 {\n  margin-top: 1rem !important; }\n\n.mr-3,\n.mx-3 {\n  margin-right: 1rem !important; }\n\n.mb-3,\n.my-3 {\n  margin-bottom: 1rem !important; }\n\n.ml-3,\n.mx-3 {\n  margin-left: 1rem !important; }\n\n.m-4 {\n  margin: 1.5rem !important; }\n\n.mt-4,\n.my-4 {\n  margin-top: 1.5rem !important; }\n\n.mr-4,\n.mx-4 {\n  margin-right: 1.5rem !important; }\n\n.mb-4,\n.my-4 {\n  margin-bottom: 1.5rem !important; }\n\n.ml-4,\n.mx-4 {\n  margin-left: 1.5rem !important; }\n\n.m-5 {\n  margin: 3rem !important; }\n\n.mt-5,\n.my-5 {\n  margin-top: 3rem !important; }\n\n.mr-5,\n.mx-5 {\n  margin-right: 3rem !important; }\n\n.mb-5,\n.my-5 {\n  margin-bottom: 3rem !important; }\n\n.ml-5,\n.mx-5 {\n  margin-left: 3rem !important; }\n\n.p-0 {\n  padding: 0 !important; }\n\n.pt-0,\n.py-0 {\n  padding-top: 0 !important; }\n\n.pr-0,\n.px-0 {\n  padding-right: 0 !important; }\n\n.pb-0,\n.py-0 {\n  padding-bottom: 0 !important; }\n\n.pl-0,\n.px-0 {\n  padding-left: 0 !important; }\n\n.p-1 {\n  padding: 0.25rem !important; }\n\n.pt-1,\n.py-1 {\n  padding-top: 0.25rem !important; }\n\n.pr-1,\n.px-1 {\n  padding-right: 0.25rem !important; }\n\n.pb-1,\n.py-1 {\n  padding-bottom: 0.25rem !important; }\n\n.pl-1,\n.px-1 {\n  padding-left: 0.25rem !important; }\n\n.p-2 {\n  padding: 0.5rem !important; }\n\n.pt-2,\n.py-2 {\n  padding-top: 0.5rem !important; }\n\n.pr-2,\n.px-2 {\n  padding-right: 0.5rem !important; }\n\n.pb-2,\n.py-2 {\n  padding-bottom: 0.5rem !important; }\n\n.pl-2,\n.px-2 {\n  padding-left: 0.5rem !important; }\n\n.p-3 {\n  padding: 1rem !important; }\n\n.pt-3,\n.py-3 {\n  padding-top: 1rem !important; }\n\n.pr-3,\n.px-3 {\n  padding-right: 1rem !important; }\n\n.pb-3,\n.py-3 {\n  padding-bottom: 1rem !important; }\n\n.pl-3,\n.px-3 {\n  padding-left: 1rem !important; }\n\n.p-4 {\n  padding: 1.5rem !important; }\n\n.pt-4,\n.py-4 {\n  padding-top: 1.5rem !important; }\n\n.pr-4,\n.px-4 {\n  padding-right: 1.5rem !important; }\n\n.pb-4,\n.py-4 {\n  padding-bottom: 1.5rem !important; }\n\n.pl-4,\n.px-4 {\n  padding-left: 1.5rem !important; }\n\n.p-5 {\n  padding: 3rem !important; }\n\n.pt-5,\n.py-5 {\n  padding-top: 3rem !important; }\n\n.pr-5,\n.px-5 {\n  padding-right: 3rem !important; }\n\n.pb-5,\n.py-5 {\n  padding-bottom: 3rem !important; }\n\n.pl-5,\n.px-5 {\n  padding-left: 3rem !important; }\n\n.m-auto {\n  margin: auto !important; }\n\n.mt-auto,\n.my-auto {\n  margin-top: auto !important; }\n\n.mr-auto,\n.mx-auto {\n  margin-right: auto !important; }\n\n.mb-auto,\n.my-auto {\n  margin-bottom: auto !important; }\n\n.ml-auto,\n.mx-auto {\n  margin-left: auto !important; }\n\n@media (min-width: 576px) {\n  .m-sm-0 {\n    margin: 0 !important; }\n  .mt-sm-0,\n  .my-sm-0 {\n    margin-top: 0 !important; }\n  .mr-sm-0,\n  .mx-sm-0 {\n    margin-right: 0 !important; }\n  .mb-sm-0,\n  .my-sm-0 {\n    margin-bottom: 0 !important; }\n  .ml-sm-0,\n  .mx-sm-0 {\n    margin-left: 0 !important; }\n  .m-sm-1 {\n    margin: 0.25rem !important; }\n  .mt-sm-1,\n  .my-sm-1 {\n    margin-top: 0.25rem !important; }\n  .mr-sm-1,\n  .mx-sm-1 {\n    margin-right: 0.25rem !important; }\n  .mb-sm-1,\n  .my-sm-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-sm-1,\n  .mx-sm-1 {\n    margin-left: 0.25rem !important; }\n  .m-sm-2 {\n    margin: 0.5rem !important; }\n  .mt-sm-2,\n  .my-sm-2 {\n    margin-top: 0.5rem !important; }\n  .mr-sm-2,\n  .mx-sm-2 {\n    margin-right: 0.5rem !important; }\n  .mb-sm-2,\n  .my-sm-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-sm-2,\n  .mx-sm-2 {\n    margin-left: 0.5rem !important; }\n  .m-sm-3 {\n    margin: 1rem !important; }\n  .mt-sm-3,\n  .my-sm-3 {\n    margin-top: 1rem !important; }\n  .mr-sm-3,\n  .mx-sm-3 {\n    margin-right: 1rem !important; }\n  .mb-sm-3,\n  .my-sm-3 {\n    margin-bottom: 1rem !important; }\n  .ml-sm-3,\n  .mx-sm-3 {\n    margin-left: 1rem !important; }\n  .m-sm-4 {\n    margin: 1.5rem !important; }\n  .mt-sm-4,\n  .my-sm-4 {\n    margin-top: 1.5rem !important; }\n  .mr-sm-4,\n  .mx-sm-4 {\n    margin-right: 1.5rem !important; }\n  .mb-sm-4,\n  .my-sm-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-sm-4,\n  .mx-sm-4 {\n    margin-left: 1.5rem !important; }\n  .m-sm-5 {\n    margin: 3rem !important; }\n  .mt-sm-5,\n  .my-sm-5 {\n    margin-top: 3rem !important; }\n  .mr-sm-5,\n  .mx-sm-5 {\n    margin-right: 3rem !important; }\n  .mb-sm-5,\n  .my-sm-5 {\n    margin-bottom: 3rem !important; }\n  .ml-sm-5,\n  .mx-sm-5 {\n    margin-left: 3rem !important; }\n  .p-sm-0 {\n    padding: 0 !important; }\n  .pt-sm-0,\n  .py-sm-0 {\n    padding-top: 0 !important; }\n  .pr-sm-0,\n  .px-sm-0 {\n    padding-right: 0 !important; }\n  .pb-sm-0,\n  .py-sm-0 {\n    padding-bottom: 0 !important; }\n  .pl-sm-0,\n  .px-sm-0 {\n    padding-left: 0 !important; }\n  .p-sm-1 {\n    padding: 0.25rem !important; }\n  .pt-sm-1,\n  .py-sm-1 {\n    padding-top: 0.25rem !important; }\n  .pr-sm-1,\n  .px-sm-1 {\n    padding-right: 0.25rem !important; }\n  .pb-sm-1,\n  .py-sm-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-sm-1,\n  .px-sm-1 {\n    padding-left: 0.25rem !important; }\n  .p-sm-2 {\n    padding: 0.5rem !important; }\n  .pt-sm-2,\n  .py-sm-2 {\n    padding-top: 0.5rem !important; }\n  .pr-sm-2,\n  .px-sm-2 {\n    padding-right: 0.5rem !important; }\n  .pb-sm-2,\n  .py-sm-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-sm-2,\n  .px-sm-2 {\n    padding-left: 0.5rem !important; }\n  .p-sm-3 {\n    padding: 1rem !important; }\n  .pt-sm-3,\n  .py-sm-3 {\n    padding-top: 1rem !important; }\n  .pr-sm-3,\n  .px-sm-3 {\n    padding-right: 1rem !important; }\n  .pb-sm-3,\n  .py-sm-3 {\n    padding-bottom: 1rem !important; }\n  .pl-sm-3,\n  .px-sm-3 {\n    padding-left: 1rem !important; }\n  .p-sm-4 {\n    padding: 1.5rem !important; }\n  .pt-sm-4,\n  .py-sm-4 {\n    padding-top: 1.5rem !important; }\n  .pr-sm-4,\n  .px-sm-4 {\n    padding-right: 1.5rem !important; }\n  .pb-sm-4,\n  .py-sm-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-sm-4,\n  .px-sm-4 {\n    padding-left: 1.5rem !important; }\n  .p-sm-5 {\n    padding: 3rem !important; }\n  .pt-sm-5,\n  .py-sm-5 {\n    padding-top: 3rem !important; }\n  .pr-sm-5,\n  .px-sm-5 {\n    padding-right: 3rem !important; }\n  .pb-sm-5,\n  .py-sm-5 {\n    padding-bottom: 3rem !important; }\n  .pl-sm-5,\n  .px-sm-5 {\n    padding-left: 3rem !important; }\n  .m-sm-auto {\n    margin: auto !important; }\n  .mt-sm-auto,\n  .my-sm-auto {\n    margin-top: auto !important; }\n  .mr-sm-auto,\n  .mx-sm-auto {\n    margin-right: auto !important; }\n  .mb-sm-auto,\n  .my-sm-auto {\n    margin-bottom: auto !important; }\n  .ml-sm-auto,\n  .mx-sm-auto {\n    margin-left: auto !important; } }\n\n@media (min-width: 768px) {\n  .m-md-0 {\n    margin: 0 !important; }\n  .mt-md-0,\n  .my-md-0 {\n    margin-top: 0 !important; }\n  .mr-md-0,\n  .mx-md-0 {\n    margin-right: 0 !important; }\n  .mb-md-0,\n  .my-md-0 {\n    margin-bottom: 0 !important; }\n  .ml-md-0,\n  .mx-md-0 {\n    margin-left: 0 !important; }\n  .m-md-1 {\n    margin: 0.25rem !important; }\n  .mt-md-1,\n  .my-md-1 {\n    margin-top: 0.25rem !important; }\n  .mr-md-1,\n  .mx-md-1 {\n    margin-right: 0.25rem !important; }\n  .mb-md-1,\n  .my-md-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-md-1,\n  .mx-md-1 {\n    margin-left: 0.25rem !important; }\n  .m-md-2 {\n    margin: 0.5rem !important; }\n  .mt-md-2,\n  .my-md-2 {\n    margin-top: 0.5rem !important; }\n  .mr-md-2,\n  .mx-md-2 {\n    margin-right: 0.5rem !important; }\n  .mb-md-2,\n  .my-md-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-md-2,\n  .mx-md-2 {\n    margin-left: 0.5rem !important; }\n  .m-md-3 {\n    margin: 1rem !important; }\n  .mt-md-3,\n  .my-md-3 {\n    margin-top: 1rem !important; }\n  .mr-md-3,\n  .mx-md-3 {\n    margin-right: 1rem !important; }\n  .mb-md-3,\n  .my-md-3 {\n    margin-bottom: 1rem !important; }\n  .ml-md-3,\n  .mx-md-3 {\n    margin-left: 1rem !important; }\n  .m-md-4 {\n    margin: 1.5rem !important; }\n  .mt-md-4,\n  .my-md-4 {\n    margin-top: 1.5rem !important; }\n  .mr-md-4,\n  .mx-md-4 {\n    margin-right: 1.5rem !important; }\n  .mb-md-4,\n  .my-md-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-md-4,\n  .mx-md-4 {\n    margin-left: 1.5rem !important; }\n  .m-md-5 {\n    margin: 3rem !important; }\n  .mt-md-5,\n  .my-md-5 {\n    margin-top: 3rem !important; }\n  .mr-md-5,\n  .mx-md-5 {\n    margin-right: 3rem !important; }\n  .mb-md-5,\n  .my-md-5 {\n    margin-bottom: 3rem !important; }\n  .ml-md-5,\n  .mx-md-5 {\n    margin-left: 3rem !important; }\n  .p-md-0 {\n    padding: 0 !important; }\n  .pt-md-0,\n  .py-md-0 {\n    padding-top: 0 !important; }\n  .pr-md-0,\n  .px-md-0 {\n    padding-right: 0 !important; }\n  .pb-md-0,\n  .py-md-0 {\n    padding-bottom: 0 !important; }\n  .pl-md-0,\n  .px-md-0 {\n    padding-left: 0 !important; }\n  .p-md-1 {\n    padding: 0.25rem !important; }\n  .pt-md-1,\n  .py-md-1 {\n    padding-top: 0.25rem !important; }\n  .pr-md-1,\n  .px-md-1 {\n    padding-right: 0.25rem !important; }\n  .pb-md-1,\n  .py-md-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-md-1,\n  .px-md-1 {\n    padding-left: 0.25rem !important; }\n  .p-md-2 {\n    padding: 0.5rem !important; }\n  .pt-md-2,\n  .py-md-2 {\n    padding-top: 0.5rem !important; }\n  .pr-md-2,\n  .px-md-2 {\n    padding-right: 0.5rem !important; }\n  .pb-md-2,\n  .py-md-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-md-2,\n  .px-md-2 {\n    padding-left: 0.5rem !important; }\n  .p-md-3 {\n    padding: 1rem !important; }\n  .pt-md-3,\n  .py-md-3 {\n    padding-top: 1rem !important; }\n  .pr-md-3,\n  .px-md-3 {\n    padding-right: 1rem !important; }\n  .pb-md-3,\n  .py-md-3 {\n    padding-bottom: 1rem !important; }\n  .pl-md-3,\n  .px-md-3 {\n    padding-left: 1rem !important; }\n  .p-md-4 {\n    padding: 1.5rem !important; }\n  .pt-md-4,\n  .py-md-4 {\n    padding-top: 1.5rem !important; }\n  .pr-md-4,\n  .px-md-4 {\n    padding-right: 1.5rem !important; }\n  .pb-md-4,\n  .py-md-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-md-4,\n  .px-md-4 {\n    padding-left: 1.5rem !important; }\n  .p-md-5 {\n    padding: 3rem !important; }\n  .pt-md-5,\n  .py-md-5 {\n    padding-top: 3rem !important; }\n  .pr-md-5,\n  .px-md-5 {\n    padding-right: 3rem !important; }\n  .pb-md-5,\n  .py-md-5 {\n    padding-bottom: 3rem !important; }\n  .pl-md-5,\n  .px-md-5 {\n    padding-left: 3rem !important; }\n  .m-md-auto {\n    margin: auto !important; }\n  .mt-md-auto,\n  .my-md-auto {\n    margin-top: auto !important; }\n  .mr-md-auto,\n  .mx-md-auto {\n    margin-right: auto !important; }\n  .mb-md-auto,\n  .my-md-auto {\n    margin-bottom: auto !important; }\n  .ml-md-auto,\n  .mx-md-auto {\n    margin-left: auto !important; } }\n\n@media (min-width: 992px) {\n  .m-lg-0 {\n    margin: 0 !important; }\n  .mt-lg-0,\n  .my-lg-0 {\n    margin-top: 0 !important; }\n  .mr-lg-0,\n  .mx-lg-0 {\n    margin-right: 0 !important; }\n  .mb-lg-0,\n  .my-lg-0 {\n    margin-bottom: 0 !important; }\n  .ml-lg-0,\n  .mx-lg-0 {\n    margin-left: 0 !important; }\n  .m-lg-1 {\n    margin: 0.25rem !important; }\n  .mt-lg-1,\n  .my-lg-1 {\n    margin-top: 0.25rem !important; }\n  .mr-lg-1,\n  .mx-lg-1 {\n    margin-right: 0.25rem !important; }\n  .mb-lg-1,\n  .my-lg-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-lg-1,\n  .mx-lg-1 {\n    margin-left: 0.25rem !important; }\n  .m-lg-2 {\n    margin: 0.5rem !important; }\n  .mt-lg-2,\n  .my-lg-2 {\n    margin-top: 0.5rem !important; }\n  .mr-lg-2,\n  .mx-lg-2 {\n    margin-right: 0.5rem !important; }\n  .mb-lg-2,\n  .my-lg-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-lg-2,\n  .mx-lg-2 {\n    margin-left: 0.5rem !important; }\n  .m-lg-3 {\n    margin: 1rem !important; }\n  .mt-lg-3,\n  .my-lg-3 {\n    margin-top: 1rem !important; }\n  .mr-lg-3,\n  .mx-lg-3 {\n    margin-right: 1rem !important; }\n  .mb-lg-3,\n  .my-lg-3 {\n    margin-bottom: 1rem !important; }\n  .ml-lg-3,\n  .mx-lg-3 {\n    margin-left: 1rem !important; }\n  .m-lg-4 {\n    margin: 1.5rem !important; }\n  .mt-lg-4,\n  .my-lg-4 {\n    margin-top: 1.5rem !important; }\n  .mr-lg-4,\n  .mx-lg-4 {\n    margin-right: 1.5rem !important; }\n  .mb-lg-4,\n  .my-lg-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-lg-4,\n  .mx-lg-4 {\n    margin-left: 1.5rem !important; }\n  .m-lg-5 {\n    margin: 3rem !important; }\n  .mt-lg-5,\n  .my-lg-5 {\n    margin-top: 3rem !important; }\n  .mr-lg-5,\n  .mx-lg-5 {\n    margin-right: 3rem !important; }\n  .mb-lg-5,\n  .my-lg-5 {\n    margin-bottom: 3rem !important; }\n  .ml-lg-5,\n  .mx-lg-5 {\n    margin-left: 3rem !important; }\n  .p-lg-0 {\n    padding: 0 !important; }\n  .pt-lg-0,\n  .py-lg-0 {\n    padding-top: 0 !important; }\n  .pr-lg-0,\n  .px-lg-0 {\n    padding-right: 0 !important; }\n  .pb-lg-0,\n  .py-lg-0 {\n    padding-bottom: 0 !important; }\n  .pl-lg-0,\n  .px-lg-0 {\n    padding-left: 0 !important; }\n  .p-lg-1 {\n    padding: 0.25rem !important; }\n  .pt-lg-1,\n  .py-lg-1 {\n    padding-top: 0.25rem !important; }\n  .pr-lg-1,\n  .px-lg-1 {\n    padding-right: 0.25rem !important; }\n  .pb-lg-1,\n  .py-lg-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-lg-1,\n  .px-lg-1 {\n    padding-left: 0.25rem !important; }\n  .p-lg-2 {\n    padding: 0.5rem !important; }\n  .pt-lg-2,\n  .py-lg-2 {\n    padding-top: 0.5rem !important; }\n  .pr-lg-2,\n  .px-lg-2 {\n    padding-right: 0.5rem !important; }\n  .pb-lg-2,\n  .py-lg-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-lg-2,\n  .px-lg-2 {\n    padding-left: 0.5rem !important; }\n  .p-lg-3 {\n    padding: 1rem !important; }\n  .pt-lg-3,\n  .py-lg-3 {\n    padding-top: 1rem !important; }\n  .pr-lg-3,\n  .px-lg-3 {\n    padding-right: 1rem !important; }\n  .pb-lg-3,\n  .py-lg-3 {\n    padding-bottom: 1rem !important; }\n  .pl-lg-3,\n  .px-lg-3 {\n    padding-left: 1rem !important; }\n  .p-lg-4 {\n    padding: 1.5rem !important; }\n  .pt-lg-4,\n  .py-lg-4 {\n    padding-top: 1.5rem !important; }\n  .pr-lg-4,\n  .px-lg-4 {\n    padding-right: 1.5rem !important; }\n  .pb-lg-4,\n  .py-lg-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-lg-4,\n  .px-lg-4 {\n    padding-left: 1.5rem !important; }\n  .p-lg-5 {\n    padding: 3rem !important; }\n  .pt-lg-5,\n  .py-lg-5 {\n    padding-top: 3rem !important; }\n  .pr-lg-5,\n  .px-lg-5 {\n    padding-right: 3rem !important; }\n  .pb-lg-5,\n  .py-lg-5 {\n    padding-bottom: 3rem !important; }\n  .pl-lg-5,\n  .px-lg-5 {\n    padding-left: 3rem !important; }\n  .m-lg-auto {\n    margin: auto !important; }\n  .mt-lg-auto,\n  .my-lg-auto {\n    margin-top: auto !important; }\n  .mr-lg-auto,\n  .mx-lg-auto {\n    margin-right: auto !important; }\n  .mb-lg-auto,\n  .my-lg-auto {\n    margin-bottom: auto !important; }\n  .ml-lg-auto,\n  .mx-lg-auto {\n    margin-left: auto !important; } }\n\n@media (min-width: 1200px) {\n  .m-xl-0 {\n    margin: 0 !important; }\n  .mt-xl-0,\n  .my-xl-0 {\n    margin-top: 0 !important; }\n  .mr-xl-0,\n  .mx-xl-0 {\n    margin-right: 0 !important; }\n  .mb-xl-0,\n  .my-xl-0 {\n    margin-bottom: 0 !important; }\n  .ml-xl-0,\n  .mx-xl-0 {\n    margin-left: 0 !important; }\n  .m-xl-1 {\n    margin: 0.25rem !important; }\n  .mt-xl-1,\n  .my-xl-1 {\n    margin-top: 0.25rem !important; }\n  .mr-xl-1,\n  .mx-xl-1 {\n    margin-right: 0.25rem !important; }\n  .mb-xl-1,\n  .my-xl-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-xl-1,\n  .mx-xl-1 {\n    margin-left: 0.25rem !important; }\n  .m-xl-2 {\n    margin: 0.5rem !important; }\n  .mt-xl-2,\n  .my-xl-2 {\n    margin-top: 0.5rem !important; }\n  .mr-xl-2,\n  .mx-xl-2 {\n    margin-right: 0.5rem !important; }\n  .mb-xl-2,\n  .my-xl-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-xl-2,\n  .mx-xl-2 {\n    margin-left: 0.5rem !important; }\n  .m-xl-3 {\n    margin: 1rem !important; }\n  .mt-xl-3,\n  .my-xl-3 {\n    margin-top: 1rem !important; }\n  .mr-xl-3,\n  .mx-xl-3 {\n    margin-right: 1rem !important; }\n  .mb-xl-3,\n  .my-xl-3 {\n    margin-bottom: 1rem !important; }\n  .ml-xl-3,\n  .mx-xl-3 {\n    margin-left: 1rem !important; }\n  .m-xl-4 {\n    margin: 1.5rem !important; }\n  .mt-xl-4,\n  .my-xl-4 {\n    margin-top: 1.5rem !important; }\n  .mr-xl-4,\n  .mx-xl-4 {\n    margin-right: 1.5rem !important; }\n  .mb-xl-4,\n  .my-xl-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-xl-4,\n  .mx-xl-4 {\n    margin-left: 1.5rem !important; }\n  .m-xl-5 {\n    margin: 3rem !important; }\n  .mt-xl-5,\n  .my-xl-5 {\n    margin-top: 3rem !important; }\n  .mr-xl-5,\n  .mx-xl-5 {\n    margin-right: 3rem !important; }\n  .mb-xl-5,\n  .my-xl-5 {\n    margin-bottom: 3rem !important; }\n  .ml-xl-5,\n  .mx-xl-5 {\n    margin-left: 3rem !important; }\n  .p-xl-0 {\n    padding: 0 !important; }\n  .pt-xl-0,\n  .py-xl-0 {\n    padding-top: 0 !important; }\n  .pr-xl-0,\n  .px-xl-0 {\n    padding-right: 0 !important; }\n  .pb-xl-0,\n  .py-xl-0 {\n    padding-bottom: 0 !important; }\n  .pl-xl-0,\n  .px-xl-0 {\n    padding-left: 0 !important; }\n  .p-xl-1 {\n    padding: 0.25rem !important; }\n  .pt-xl-1,\n  .py-xl-1 {\n    padding-top: 0.25rem !important; }\n  .pr-xl-1,\n  .px-xl-1 {\n    padding-right: 0.25rem !important; }\n  .pb-xl-1,\n  .py-xl-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-xl-1,\n  .px-xl-1 {\n    padding-left: 0.25rem !important; }\n  .p-xl-2 {\n    padding: 0.5rem !important; }\n  .pt-xl-2,\n  .py-xl-2 {\n    padding-top: 0.5rem !important; }\n  .pr-xl-2,\n  .px-xl-2 {\n    padding-right: 0.5rem !important; }\n  .pb-xl-2,\n  .py-xl-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-xl-2,\n  .px-xl-2 {\n    padding-left: 0.5rem !important; }\n  .p-xl-3 {\n    padding: 1rem !important; }\n  .pt-xl-3,\n  .py-xl-3 {\n    padding-top: 1rem !important; }\n  .pr-xl-3,\n  .px-xl-3 {\n    padding-right: 1rem !important; }\n  .pb-xl-3,\n  .py-xl-3 {\n    padding-bottom: 1rem !important; }\n  .pl-xl-3,\n  .px-xl-3 {\n    padding-left: 1rem !important; }\n  .p-xl-4 {\n    padding: 1.5rem !important; }\n  .pt-xl-4,\n  .py-xl-4 {\n    padding-top: 1.5rem !important; }\n  .pr-xl-4,\n  .px-xl-4 {\n    padding-right: 1.5rem !important; }\n  .pb-xl-4,\n  .py-xl-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-xl-4,\n  .px-xl-4 {\n    padding-left: 1.5rem !important; }\n  .p-xl-5 {\n    padding: 3rem !important; }\n  .pt-xl-5,\n  .py-xl-5 {\n    padding-top: 3rem !important; }\n  .pr-xl-5,\n  .px-xl-5 {\n    padding-right: 3rem !important; }\n  .pb-xl-5,\n  .py-xl-5 {\n    padding-bottom: 3rem !important; }\n  .pl-xl-5,\n  .px-xl-5 {\n    padding-left: 3rem !important; }\n  .m-xl-auto {\n    margin: auto !important; }\n  .mt-xl-auto,\n  .my-xl-auto {\n    margin-top: auto !important; }\n  .mr-xl-auto,\n  .mx-xl-auto {\n    margin-right: auto !important; }\n  .mb-xl-auto,\n  .my-xl-auto {\n    margin-bottom: auto !important; }\n  .ml-xl-auto,\n  .mx-xl-auto {\n    margin-left: auto !important; } }\n\n.text-monospace {\n  font-family: SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; }\n\n.text-justify {\n  text-align: justify !important; }\n\n.text-nowrap {\n  white-space: nowrap !important; }\n\n.text-truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap; }\n\n.text-left {\n  text-align: left !important; }\n\n.text-right {\n  text-align: right !important; }\n\n.text-center {\n  text-align: center !important; }\n\n@media (min-width: 576px) {\n  .text-sm-left {\n    text-align: left !important; }\n  .text-sm-right {\n    text-align: right !important; }\n  .text-sm-center {\n    text-align: center !important; } }\n\n@media (min-width: 768px) {\n  .text-md-left {\n    text-align: left !important; }\n  .text-md-right {\n    text-align: right !important; }\n  .text-md-center {\n    text-align: center !important; } }\n\n@media (min-width: 992px) {\n  .text-lg-left {\n    text-align: left !important; }\n  .text-lg-right {\n    text-align: right !important; }\n  .text-lg-center {\n    text-align: center !important; } }\n\n@media (min-width: 1200px) {\n  .text-xl-left {\n    text-align: left !important; }\n  .text-xl-right {\n    text-align: right !important; }\n  .text-xl-center {\n    text-align: center !important; } }\n\n.text-lowercase {\n  text-transform: lowercase !important; }\n\n.text-uppercase {\n  text-transform: uppercase !important; }\n\n.text-capitalize {\n  text-transform: capitalize !important; }\n\n.font-weight-light {\n  font-weight: 300 !important; }\n\n.font-weight-normal {\n  font-weight: 400 !important; }\n\n.font-weight-bold {\n  font-weight: 700 !important; }\n\n.font-italic {\n  font-style: italic !important; }\n\n.text-white {\n  color: #fff !important; }\n\n.text-primary {\n  color: #007bff !important; }\n\na.text-primary:hover, a.text-primary:focus {\n  color: #0062cc !important; }\n\n.text-secondary {\n  color: #6c757d !important; }\n\na.text-secondary:hover, a.text-secondary:focus {\n  color: #545b62 !important; }\n\n.text-success {\n  color: #28a745 !important; }\n\na.text-success:hover, a.text-success:focus {\n  color: #1e7e34 !important; }\n\n.text-info {\n  color: #17a2b8 !important; }\n\na.text-info:hover, a.text-info:focus {\n  color: #117a8b !important; }\n\n.text-warning {\n  color: #ffc107 !important; }\n\na.text-warning:hover, a.text-warning:focus {\n  color: #d39e00 !important; }\n\n.text-danger {\n  color: #dc3545 !important; }\n\na.text-danger:hover, a.text-danger:focus {\n  color: #bd2130 !important; }\n\n.text-light {\n  color: #f8f9fa !important; }\n\na.text-light:hover, a.text-light:focus {\n  color: #dae0e5 !important; }\n\n.text-dark {\n  color: #343a40 !important; }\n\na.text-dark:hover, a.text-dark:focus {\n  color: #1d2124 !important; }\n\n.text-body {\n  color: #212529 !important; }\n\n.text-muted {\n  color: #6c757d !important; }\n\n.text-black-50 {\n  color: rgba(0, 0, 0, 0.5) !important; }\n\n.text-white-50 {\n  color: rgba(255, 255, 255, 0.5) !important; }\n\n.text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0; }\n\n.visible {\n  visibility: visible !important; }\n\n.invisible {\n  visibility: hidden !important; }\n\n@media print {\n  *,\n  *::before,\n  *::after {\n    text-shadow: none !important;\n    box-shadow: none !important; }\n  a:not(.btn) {\n    text-decoration: underline; }\n  abbr[title]::after {\n    content: \" (\" attr(title) \")\"; }\n  pre {\n    white-space: pre-wrap !important; }\n  pre,\n  blockquote {\n    border: 1px solid #adb5bd;\n    page-break-inside: avoid; }\n  thead {\n    display: table-header-group; }\n  tr,\n  img {\n    page-break-inside: avoid; }\n  p,\n  h2,\n  h3 {\n    orphans: 3;\n    widows: 3; }\n  h2,\n  h3 {\n    page-break-after: avoid; }\n  @page {\n    size: a3; }\n  body {\n    min-width: 992px !important; }\n  .container {\n    min-width: 992px !important; }\n  .navbar {\n    display: none; }\n  .badge {\n    border: 1px solid #000; }\n  .table {\n    border-collapse: collapse !important; }\n    .table td,\n    .table th {\n      background-color: #fff !important; }\n  .table-bordered th,\n  .table-bordered td {\n    border: 1px solid #dee2e6 !important; }\n  .table-dark {\n    color: inherit; }\n    .table-dark th,\n    .table-dark td,\n    .table-dark thead th,\n    .table-dark tbody + tbody {\n      border-color: #dee2e6; }\n  .table .thead-dark th {\n    color: inherit;\n    border-color: #dee2e6; } }\n\nli {\n  list-style: none; }\n\nul.bcnotifier {\n  padding: 0;\n  margin: 0; }\n  ul.bcnotifier li {\n    list-style: none;\n    height: 0;\n    margin: 0;\n    text-align: center;\n    padding: 10px 0;\n    border-radius: 0px;\n    overflow: hidden; }\n    ul.bcnotifier li.bcnotification-appear {\n      opacity: 0.01;\n      padding: 10px;\n      height: 0;\n      overflow: hidden; }\n      ul.bcnotifier li.bcnotification-appear.bcnotification-appear-active {\n        opacity: 1;\n        height: inherit;\n        overflow: inherit;\n        transition: opacity 1s ease-in, height 1s ease-in; }\n", ""]);
+exports.push([module.i, "/*!\n * Bootstrap v4.1.1 (https://getbootstrap.com/)\n * Copyright 2011-2018 The Bootstrap Authors\n * Copyright 2011-2018 Twitter, Inc.\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n */\n:root {\n  --blue: #007bff;\n  --indigo: #6610f2;\n  --purple: #6f42c1;\n  --pink: #e83e8c;\n  --red: #dc3545;\n  --orange: #fd7e14;\n  --yellow: #ffc107;\n  --green: #28a745;\n  --teal: #20c997;\n  --cyan: #17a2b8;\n  --white: #fff;\n  --gray: #6c757d;\n  --gray-dark: #343a40;\n  --primary: #007bff;\n  --secondary: #6c757d;\n  --success: #28a745;\n  --info: #17a2b8;\n  --warning: #ffc107;\n  --danger: #dc3545;\n  --light: #f8f9fa;\n  --dark: #343a40;\n  --breakpoint-xs: 0;\n  --breakpoint-sm: 576px;\n  --breakpoint-md: 768px;\n  --breakpoint-lg: 992px;\n  --breakpoint-xl: 1200px;\n  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; }\n\n*,\n*::before,\n*::after {\n  box-sizing: border-box; }\n\nhtml {\n  font-family: sans-serif;\n  line-height: 1.15;\n  -webkit-text-size-adjust: 100%;\n  -ms-text-size-adjust: 100%;\n  -ms-overflow-style: scrollbar;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }\n\n@-ms-viewport {\n  width: device-width; }\n\narticle, aside, figcaption, figure, footer, header, hgroup, main, nav, section {\n  display: block; }\n\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.5;\n  color: #212529;\n  text-align: left;\n  background-color: #fff; }\n\n[tabindex=\"-1\"]:focus {\n  outline: 0 !important; }\n\nhr {\n  box-sizing: content-box;\n  height: 0;\n  overflow: visible; }\n\nh1, h2, h3, h4, h5, h6 {\n  margin-top: 0;\n  margin-bottom: 0.5rem; }\n\np {\n  margin-top: 0;\n  margin-bottom: 1rem; }\n\nabbr[title],\nabbr[data-original-title] {\n  text-decoration: underline;\n  text-decoration: underline dotted;\n  cursor: help;\n  border-bottom: 0; }\n\naddress {\n  margin-bottom: 1rem;\n  font-style: normal;\n  line-height: inherit; }\n\nol,\nul,\ndl {\n  margin-top: 0;\n  margin-bottom: 1rem; }\n\nol ol,\nul ul,\nol ul,\nul ol {\n  margin-bottom: 0; }\n\ndt {\n  font-weight: 700; }\n\ndd {\n  margin-bottom: .5rem;\n  margin-left: 0; }\n\nblockquote {\n  margin: 0 0 1rem; }\n\ndfn {\n  font-style: italic; }\n\nb,\nstrong {\n  font-weight: bolder; }\n\nsmall {\n  font-size: 80%; }\n\nsub,\nsup {\n  position: relative;\n  font-size: 75%;\n  line-height: 0;\n  vertical-align: baseline; }\n\nsub {\n  bottom: -.25em; }\n\nsup {\n  top: -.5em; }\n\na {\n  color: #007bff;\n  text-decoration: none;\n  background-color: transparent;\n  -webkit-text-decoration-skip: objects; }\n  a:hover {\n    color: #0056b3;\n    text-decoration: underline; }\n\na:not([href]):not([tabindex]) {\n  color: inherit;\n  text-decoration: none; }\n  a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {\n    color: inherit;\n    text-decoration: none; }\n  a:not([href]):not([tabindex]):focus {\n    outline: 0; }\n\npre,\ncode,\nkbd,\nsamp {\n  font-family: SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;\n  font-size: 1em; }\n\npre {\n  margin-top: 0;\n  margin-bottom: 1rem;\n  overflow: auto;\n  -ms-overflow-style: scrollbar; }\n\nfigure {\n  margin: 0 0 1rem; }\n\nimg {\n  vertical-align: middle;\n  border-style: none; }\n\nsvg:not(:root) {\n  overflow: hidden; }\n\ntable {\n  border-collapse: collapse; }\n\ncaption {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n  color: #6c757d;\n  text-align: left;\n  caption-side: bottom; }\n\nth {\n  text-align: inherit; }\n\nlabel {\n  display: inline-block;\n  margin-bottom: 0.5rem; }\n\nbutton {\n  border-radius: 0; }\n\nbutton:focus {\n  outline: 1px dotted;\n  outline: 5px auto -webkit-focus-ring-color; }\n\ninput,\nbutton,\nselect,\noptgroup,\ntextarea {\n  margin: 0;\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit; }\n\nbutton,\ninput {\n  overflow: visible; }\n\nbutton,\nselect {\n  text-transform: none; }\n\nbutton,\nhtml [type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button; }\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  padding: 0;\n  border-style: none; }\n\ninput[type=\"radio\"],\ninput[type=\"checkbox\"] {\n  box-sizing: border-box;\n  padding: 0; }\n\ninput[type=\"date\"],\ninput[type=\"time\"],\ninput[type=\"datetime-local\"],\ninput[type=\"month\"] {\n  -webkit-appearance: listbox; }\n\ntextarea {\n  overflow: auto;\n  resize: vertical; }\n\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0; }\n\nlegend {\n  display: block;\n  width: 100%;\n  max-width: 100%;\n  padding: 0;\n  margin-bottom: .5rem;\n  font-size: 1.5rem;\n  line-height: inherit;\n  color: inherit;\n  white-space: normal; }\n\nprogress {\n  vertical-align: baseline; }\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto; }\n\n[type=\"search\"] {\n  outline-offset: -2px;\n  -webkit-appearance: none; }\n\n[type=\"search\"]::-webkit-search-cancel-button,\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none; }\n\n::-webkit-file-upload-button {\n  font: inherit;\n  -webkit-appearance: button; }\n\noutput {\n  display: inline-block; }\n\nsummary {\n  display: list-item;\n  cursor: pointer; }\n\ntemplate {\n  display: none; }\n\n[hidden] {\n  display: none !important; }\n\nh1, h2, h3, h4, h5, h6,\n.h1, .h2, .h3, .h4, .h5, .h6 {\n  margin-bottom: 0.5rem;\n  font-family: inherit;\n  font-weight: 500;\n  line-height: 1.2;\n  color: inherit; }\n\nh1, .h1 {\n  font-size: 2.5rem; }\n\nh2, .h2 {\n  font-size: 2rem; }\n\nh3, .h3 {\n  font-size: 1.75rem; }\n\nh4, .h4 {\n  font-size: 1.5rem; }\n\nh5, .h5 {\n  font-size: 1.25rem; }\n\nh6, .h6 {\n  font-size: 1rem; }\n\n.lead {\n  font-size: 1.25rem;\n  font-weight: 300; }\n\n.display-1 {\n  font-size: 6rem;\n  font-weight: 300;\n  line-height: 1.2; }\n\n.display-2 {\n  font-size: 5.5rem;\n  font-weight: 300;\n  line-height: 1.2; }\n\n.display-3 {\n  font-size: 4.5rem;\n  font-weight: 300;\n  line-height: 1.2; }\n\n.display-4 {\n  font-size: 3.5rem;\n  font-weight: 300;\n  line-height: 1.2; }\n\nhr {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  border: 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1); }\n\nsmall,\n.small {\n  font-size: 80%;\n  font-weight: 400; }\n\nmark,\n.mark {\n  padding: 0.2em;\n  background-color: #fcf8e3; }\n\n.list-unstyled {\n  padding-left: 0;\n  list-style: none; }\n\n.list-inline {\n  padding-left: 0;\n  list-style: none; }\n\n.list-inline-item {\n  display: inline-block; }\n  .list-inline-item:not(:last-child) {\n    margin-right: 0.5rem; }\n\n.initialism {\n  font-size: 90%;\n  text-transform: uppercase; }\n\n.blockquote {\n  margin-bottom: 1rem;\n  font-size: 1.25rem; }\n\n.blockquote-footer {\n  display: block;\n  font-size: 80%;\n  color: #6c757d; }\n  .blockquote-footer::before {\n    content: \"\\2014   \\A0\"; }\n\n.img-fluid {\n  max-width: 100%;\n  height: auto; }\n\n.img-thumbnail {\n  padding: 0.25rem;\n  background-color: #fff;\n  border: 1px solid #dee2e6;\n  border-radius: 0.25rem;\n  max-width: 100%;\n  height: auto; }\n\n.figure {\n  display: inline-block; }\n\n.figure-img {\n  margin-bottom: 0.5rem;\n  line-height: 1; }\n\n.figure-caption {\n  font-size: 90%;\n  color: #6c757d; }\n\ncode {\n  font-size: 87.5%;\n  color: #e83e8c;\n  word-break: break-word; }\n  a > code {\n    color: inherit; }\n\nkbd {\n  padding: 0.2rem 0.4rem;\n  font-size: 87.5%;\n  color: #fff;\n  background-color: #212529;\n  border-radius: 0.2rem; }\n  kbd kbd {\n    padding: 0;\n    font-size: 100%;\n    font-weight: 700; }\n\npre {\n  display: block;\n  font-size: 87.5%;\n  color: #212529; }\n  pre code {\n    font-size: inherit;\n    color: inherit;\n    word-break: normal; }\n\n.pre-scrollable {\n  max-height: 340px;\n  overflow-y: scroll; }\n\n.container {\n  width: 100%;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto; }\n  @media (min-width: 576px) {\n    .container {\n      max-width: 540px; } }\n  @media (min-width: 768px) {\n    .container {\n      max-width: 720px; } }\n  @media (min-width: 992px) {\n    .container {\n      max-width: 960px; } }\n  @media (min-width: 1200px) {\n    .container {\n      max-width: 1140px; } }\n\n.container-fluid {\n  width: 100%;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto; }\n\n.row {\n  display: flex;\n  flex-wrap: wrap;\n  margin-right: -15px;\n  margin-left: -15px; }\n\n.no-gutters {\n  margin-right: 0;\n  margin-left: 0; }\n  .no-gutters > .col,\n  .no-gutters > [class*=\"col-\"] {\n    padding-right: 0;\n    padding-left: 0; }\n\n.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,\n.col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,\n.col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,\n.col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,\n.col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl,\n.col-xl-auto {\n  position: relative;\n  width: 100%;\n  min-height: 1px;\n  padding-right: 15px;\n  padding-left: 15px; }\n\n.col {\n  flex-basis: 0;\n  flex-grow: 1;\n  max-width: 100%; }\n\n.col-auto {\n  flex: 0 0 auto;\n  width: auto;\n  max-width: none; }\n\n.col-1 {\n  flex: 0 0 8.33333%;\n  max-width: 8.33333%; }\n\n.col-2 {\n  flex: 0 0 16.66667%;\n  max-width: 16.66667%; }\n\n.col-3 {\n  flex: 0 0 25%;\n  max-width: 25%; }\n\n.col-4 {\n  flex: 0 0 33.33333%;\n  max-width: 33.33333%; }\n\n.col-5 {\n  flex: 0 0 41.66667%;\n  max-width: 41.66667%; }\n\n.col-6 {\n  flex: 0 0 50%;\n  max-width: 50%; }\n\n.col-7 {\n  flex: 0 0 58.33333%;\n  max-width: 58.33333%; }\n\n.col-8 {\n  flex: 0 0 66.66667%;\n  max-width: 66.66667%; }\n\n.col-9 {\n  flex: 0 0 75%;\n  max-width: 75%; }\n\n.col-10 {\n  flex: 0 0 83.33333%;\n  max-width: 83.33333%; }\n\n.col-11 {\n  flex: 0 0 91.66667%;\n  max-width: 91.66667%; }\n\n.col-12 {\n  flex: 0 0 100%;\n  max-width: 100%; }\n\n.order-first {\n  order: -1; }\n\n.order-last {\n  order: 13; }\n\n.order-0 {\n  order: 0; }\n\n.order-1 {\n  order: 1; }\n\n.order-2 {\n  order: 2; }\n\n.order-3 {\n  order: 3; }\n\n.order-4 {\n  order: 4; }\n\n.order-5 {\n  order: 5; }\n\n.order-6 {\n  order: 6; }\n\n.order-7 {\n  order: 7; }\n\n.order-8 {\n  order: 8; }\n\n.order-9 {\n  order: 9; }\n\n.order-10 {\n  order: 10; }\n\n.order-11 {\n  order: 11; }\n\n.order-12 {\n  order: 12; }\n\n.offset-1 {\n  margin-left: 8.33333%; }\n\n.offset-2 {\n  margin-left: 16.66667%; }\n\n.offset-3 {\n  margin-left: 25%; }\n\n.offset-4 {\n  margin-left: 33.33333%; }\n\n.offset-5 {\n  margin-left: 41.66667%; }\n\n.offset-6 {\n  margin-left: 50%; }\n\n.offset-7 {\n  margin-left: 58.33333%; }\n\n.offset-8 {\n  margin-left: 66.66667%; }\n\n.offset-9 {\n  margin-left: 75%; }\n\n.offset-10 {\n  margin-left: 83.33333%; }\n\n.offset-11 {\n  margin-left: 91.66667%; }\n\n@media (min-width: 576px) {\n  .col-sm {\n    flex-basis: 0;\n    flex-grow: 1;\n    max-width: 100%; }\n  .col-sm-auto {\n    flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-sm-1 {\n    flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-sm-2 {\n    flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-sm-3 {\n    flex: 0 0 25%;\n    max-width: 25%; }\n  .col-sm-4 {\n    flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-sm-5 {\n    flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-sm-6 {\n    flex: 0 0 50%;\n    max-width: 50%; }\n  .col-sm-7 {\n    flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-sm-8 {\n    flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-sm-9 {\n    flex: 0 0 75%;\n    max-width: 75%; }\n  .col-sm-10 {\n    flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-sm-11 {\n    flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-sm-12 {\n    flex: 0 0 100%;\n    max-width: 100%; }\n  .order-sm-first {\n    order: -1; }\n  .order-sm-last {\n    order: 13; }\n  .order-sm-0 {\n    order: 0; }\n  .order-sm-1 {\n    order: 1; }\n  .order-sm-2 {\n    order: 2; }\n  .order-sm-3 {\n    order: 3; }\n  .order-sm-4 {\n    order: 4; }\n  .order-sm-5 {\n    order: 5; }\n  .order-sm-6 {\n    order: 6; }\n  .order-sm-7 {\n    order: 7; }\n  .order-sm-8 {\n    order: 8; }\n  .order-sm-9 {\n    order: 9; }\n  .order-sm-10 {\n    order: 10; }\n  .order-sm-11 {\n    order: 11; }\n  .order-sm-12 {\n    order: 12; }\n  .offset-sm-0 {\n    margin-left: 0; }\n  .offset-sm-1 {\n    margin-left: 8.33333%; }\n  .offset-sm-2 {\n    margin-left: 16.66667%; }\n  .offset-sm-3 {\n    margin-left: 25%; }\n  .offset-sm-4 {\n    margin-left: 33.33333%; }\n  .offset-sm-5 {\n    margin-left: 41.66667%; }\n  .offset-sm-6 {\n    margin-left: 50%; }\n  .offset-sm-7 {\n    margin-left: 58.33333%; }\n  .offset-sm-8 {\n    margin-left: 66.66667%; }\n  .offset-sm-9 {\n    margin-left: 75%; }\n  .offset-sm-10 {\n    margin-left: 83.33333%; }\n  .offset-sm-11 {\n    margin-left: 91.66667%; } }\n\n@media (min-width: 768px) {\n  .col-md {\n    flex-basis: 0;\n    flex-grow: 1;\n    max-width: 100%; }\n  .col-md-auto {\n    flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-md-1 {\n    flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-md-2 {\n    flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-md-3 {\n    flex: 0 0 25%;\n    max-width: 25%; }\n  .col-md-4 {\n    flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-md-5 {\n    flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-md-6 {\n    flex: 0 0 50%;\n    max-width: 50%; }\n  .col-md-7 {\n    flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-md-8 {\n    flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-md-9 {\n    flex: 0 0 75%;\n    max-width: 75%; }\n  .col-md-10 {\n    flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-md-11 {\n    flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-md-12 {\n    flex: 0 0 100%;\n    max-width: 100%; }\n  .order-md-first {\n    order: -1; }\n  .order-md-last {\n    order: 13; }\n  .order-md-0 {\n    order: 0; }\n  .order-md-1 {\n    order: 1; }\n  .order-md-2 {\n    order: 2; }\n  .order-md-3 {\n    order: 3; }\n  .order-md-4 {\n    order: 4; }\n  .order-md-5 {\n    order: 5; }\n  .order-md-6 {\n    order: 6; }\n  .order-md-7 {\n    order: 7; }\n  .order-md-8 {\n    order: 8; }\n  .order-md-9 {\n    order: 9; }\n  .order-md-10 {\n    order: 10; }\n  .order-md-11 {\n    order: 11; }\n  .order-md-12 {\n    order: 12; }\n  .offset-md-0 {\n    margin-left: 0; }\n  .offset-md-1 {\n    margin-left: 8.33333%; }\n  .offset-md-2 {\n    margin-left: 16.66667%; }\n  .offset-md-3 {\n    margin-left: 25%; }\n  .offset-md-4 {\n    margin-left: 33.33333%; }\n  .offset-md-5 {\n    margin-left: 41.66667%; }\n  .offset-md-6 {\n    margin-left: 50%; }\n  .offset-md-7 {\n    margin-left: 58.33333%; }\n  .offset-md-8 {\n    margin-left: 66.66667%; }\n  .offset-md-9 {\n    margin-left: 75%; }\n  .offset-md-10 {\n    margin-left: 83.33333%; }\n  .offset-md-11 {\n    margin-left: 91.66667%; } }\n\n@media (min-width: 992px) {\n  .col-lg {\n    flex-basis: 0;\n    flex-grow: 1;\n    max-width: 100%; }\n  .col-lg-auto {\n    flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-lg-1 {\n    flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-lg-2 {\n    flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-lg-3 {\n    flex: 0 0 25%;\n    max-width: 25%; }\n  .col-lg-4 {\n    flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-lg-5 {\n    flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-lg-6 {\n    flex: 0 0 50%;\n    max-width: 50%; }\n  .col-lg-7 {\n    flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-lg-8 {\n    flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-lg-9 {\n    flex: 0 0 75%;\n    max-width: 75%; }\n  .col-lg-10 {\n    flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-lg-11 {\n    flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-lg-12 {\n    flex: 0 0 100%;\n    max-width: 100%; }\n  .order-lg-first {\n    order: -1; }\n  .order-lg-last {\n    order: 13; }\n  .order-lg-0 {\n    order: 0; }\n  .order-lg-1 {\n    order: 1; }\n  .order-lg-2 {\n    order: 2; }\n  .order-lg-3 {\n    order: 3; }\n  .order-lg-4 {\n    order: 4; }\n  .order-lg-5 {\n    order: 5; }\n  .order-lg-6 {\n    order: 6; }\n  .order-lg-7 {\n    order: 7; }\n  .order-lg-8 {\n    order: 8; }\n  .order-lg-9 {\n    order: 9; }\n  .order-lg-10 {\n    order: 10; }\n  .order-lg-11 {\n    order: 11; }\n  .order-lg-12 {\n    order: 12; }\n  .offset-lg-0 {\n    margin-left: 0; }\n  .offset-lg-1 {\n    margin-left: 8.33333%; }\n  .offset-lg-2 {\n    margin-left: 16.66667%; }\n  .offset-lg-3 {\n    margin-left: 25%; }\n  .offset-lg-4 {\n    margin-left: 33.33333%; }\n  .offset-lg-5 {\n    margin-left: 41.66667%; }\n  .offset-lg-6 {\n    margin-left: 50%; }\n  .offset-lg-7 {\n    margin-left: 58.33333%; }\n  .offset-lg-8 {\n    margin-left: 66.66667%; }\n  .offset-lg-9 {\n    margin-left: 75%; }\n  .offset-lg-10 {\n    margin-left: 83.33333%; }\n  .offset-lg-11 {\n    margin-left: 91.66667%; } }\n\n@media (min-width: 1200px) {\n  .col-xl {\n    flex-basis: 0;\n    flex-grow: 1;\n    max-width: 100%; }\n  .col-xl-auto {\n    flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-xl-1 {\n    flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-xl-2 {\n    flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-xl-3 {\n    flex: 0 0 25%;\n    max-width: 25%; }\n  .col-xl-4 {\n    flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-xl-5 {\n    flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-xl-6 {\n    flex: 0 0 50%;\n    max-width: 50%; }\n  .col-xl-7 {\n    flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-xl-8 {\n    flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-xl-9 {\n    flex: 0 0 75%;\n    max-width: 75%; }\n  .col-xl-10 {\n    flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-xl-11 {\n    flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-xl-12 {\n    flex: 0 0 100%;\n    max-width: 100%; }\n  .order-xl-first {\n    order: -1; }\n  .order-xl-last {\n    order: 13; }\n  .order-xl-0 {\n    order: 0; }\n  .order-xl-1 {\n    order: 1; }\n  .order-xl-2 {\n    order: 2; }\n  .order-xl-3 {\n    order: 3; }\n  .order-xl-4 {\n    order: 4; }\n  .order-xl-5 {\n    order: 5; }\n  .order-xl-6 {\n    order: 6; }\n  .order-xl-7 {\n    order: 7; }\n  .order-xl-8 {\n    order: 8; }\n  .order-xl-9 {\n    order: 9; }\n  .order-xl-10 {\n    order: 10; }\n  .order-xl-11 {\n    order: 11; }\n  .order-xl-12 {\n    order: 12; }\n  .offset-xl-0 {\n    margin-left: 0; }\n  .offset-xl-1 {\n    margin-left: 8.33333%; }\n  .offset-xl-2 {\n    margin-left: 16.66667%; }\n  .offset-xl-3 {\n    margin-left: 25%; }\n  .offset-xl-4 {\n    margin-left: 33.33333%; }\n  .offset-xl-5 {\n    margin-left: 41.66667%; }\n  .offset-xl-6 {\n    margin-left: 50%; }\n  .offset-xl-7 {\n    margin-left: 58.33333%; }\n  .offset-xl-8 {\n    margin-left: 66.66667%; }\n  .offset-xl-9 {\n    margin-left: 75%; }\n  .offset-xl-10 {\n    margin-left: 83.33333%; }\n  .offset-xl-11 {\n    margin-left: 91.66667%; } }\n\n.table {\n  width: 100%;\n  max-width: 100%;\n  margin-bottom: 1rem;\n  background-color: transparent; }\n  .table th,\n  .table td {\n    padding: 0.75rem;\n    vertical-align: top;\n    border-top: 1px solid #dee2e6; }\n  .table thead th {\n    vertical-align: bottom;\n    border-bottom: 2px solid #dee2e6; }\n  .table tbody + tbody {\n    border-top: 2px solid #dee2e6; }\n  .table .table {\n    background-color: #fff; }\n\n.table-sm th,\n.table-sm td {\n  padding: 0.3rem; }\n\n.table-bordered {\n  border: 1px solid #dee2e6; }\n  .table-bordered th,\n  .table-bordered td {\n    border: 1px solid #dee2e6; }\n  .table-bordered thead th,\n  .table-bordered thead td {\n    border-bottom-width: 2px; }\n\n.table-borderless th,\n.table-borderless td,\n.table-borderless thead th,\n.table-borderless tbody + tbody {\n  border: 0; }\n\n.table-striped tbody tr:nth-of-type(odd) {\n  background-color: rgba(0, 0, 0, 0.05); }\n\n.table-hover tbody tr:hover {\n  background-color: rgba(0, 0, 0, 0.075); }\n\n.table-primary,\n.table-primary > th,\n.table-primary > td {\n  background-color: #b8daff; }\n\n.table-hover .table-primary:hover {\n  background-color: #9fcdff; }\n  .table-hover .table-primary:hover > td,\n  .table-hover .table-primary:hover > th {\n    background-color: #9fcdff; }\n\n.table-secondary,\n.table-secondary > th,\n.table-secondary > td {\n  background-color: #d6d8db; }\n\n.table-hover .table-secondary:hover {\n  background-color: #c8cbcf; }\n  .table-hover .table-secondary:hover > td,\n  .table-hover .table-secondary:hover > th {\n    background-color: #c8cbcf; }\n\n.table-success,\n.table-success > th,\n.table-success > td {\n  background-color: #c3e6cb; }\n\n.table-hover .table-success:hover {\n  background-color: #b1dfbb; }\n  .table-hover .table-success:hover > td,\n  .table-hover .table-success:hover > th {\n    background-color: #b1dfbb; }\n\n.table-info,\n.table-info > th,\n.table-info > td {\n  background-color: #bee5eb; }\n\n.table-hover .table-info:hover {\n  background-color: #abdde5; }\n  .table-hover .table-info:hover > td,\n  .table-hover .table-info:hover > th {\n    background-color: #abdde5; }\n\n.table-warning,\n.table-warning > th,\n.table-warning > td {\n  background-color: #ffeeba; }\n\n.table-hover .table-warning:hover {\n  background-color: #ffe8a1; }\n  .table-hover .table-warning:hover > td,\n  .table-hover .table-warning:hover > th {\n    background-color: #ffe8a1; }\n\n.table-danger,\n.table-danger > th,\n.table-danger > td {\n  background-color: #f5c6cb; }\n\n.table-hover .table-danger:hover {\n  background-color: #f1b0b7; }\n  .table-hover .table-danger:hover > td,\n  .table-hover .table-danger:hover > th {\n    background-color: #f1b0b7; }\n\n.table-light,\n.table-light > th,\n.table-light > td {\n  background-color: #fdfdfe; }\n\n.table-hover .table-light:hover {\n  background-color: #ececf6; }\n  .table-hover .table-light:hover > td,\n  .table-hover .table-light:hover > th {\n    background-color: #ececf6; }\n\n.table-dark,\n.table-dark > th,\n.table-dark > td {\n  background-color: #c6c8ca; }\n\n.table-hover .table-dark:hover {\n  background-color: #b9bbbe; }\n  .table-hover .table-dark:hover > td,\n  .table-hover .table-dark:hover > th {\n    background-color: #b9bbbe; }\n\n.table-active,\n.table-active > th,\n.table-active > td {\n  background-color: rgba(0, 0, 0, 0.075); }\n\n.table-hover .table-active:hover {\n  background-color: rgba(0, 0, 0, 0.075); }\n  .table-hover .table-active:hover > td,\n  .table-hover .table-active:hover > th {\n    background-color: rgba(0, 0, 0, 0.075); }\n\n.table .thead-dark th {\n  color: #fff;\n  background-color: #212529;\n  border-color: #32383e; }\n\n.table .thead-light th {\n  color: #495057;\n  background-color: #e9ecef;\n  border-color: #dee2e6; }\n\n.table-dark {\n  color: #fff;\n  background-color: #212529; }\n  .table-dark th,\n  .table-dark td,\n  .table-dark thead th {\n    border-color: #32383e; }\n  .table-dark.table-bordered {\n    border: 0; }\n  .table-dark.table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(255, 255, 255, 0.05); }\n  .table-dark.table-hover tbody tr:hover {\n    background-color: rgba(255, 255, 255, 0.075); }\n\n@media (max-width: 575.98px) {\n  .table-responsive-sm {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-sm > .table-bordered {\n      border: 0; } }\n\n@media (max-width: 767.98px) {\n  .table-responsive-md {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-md > .table-bordered {\n      border: 0; } }\n\n@media (max-width: 991.98px) {\n  .table-responsive-lg {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-lg > .table-bordered {\n      border: 0; } }\n\n@media (max-width: 1199.98px) {\n  .table-responsive-xl {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-xl > .table-bordered {\n      border: 0; } }\n\n.table-responsive {\n  display: block;\n  width: 100%;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  -ms-overflow-style: -ms-autohiding-scrollbar; }\n  .table-responsive > .table-bordered {\n    border: 0; }\n\n.form-control {\n  display: block;\n  width: 100%;\n  padding: 0.375rem 0.75rem;\n  font-size: 1rem;\n  line-height: 1.5;\n  color: #495057;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid #ced4da;\n  border-radius: 0.25rem;\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .form-control {\n      transition: none; } }\n  .form-control::-ms-expand {\n    background-color: transparent;\n    border: 0; }\n  .form-control:focus {\n    color: #495057;\n    background-color: #fff;\n    border-color: #80bdff;\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n  .form-control::placeholder {\n    color: #6c757d;\n    opacity: 1; }\n  .form-control:disabled, .form-control[readonly] {\n    background-color: #e9ecef;\n    opacity: 1; }\n\nselect.form-control:not([size]):not([multiple]) {\n  height: calc(2.25rem + 2px); }\n\nselect.form-control:focus::-ms-value {\n  color: #495057;\n  background-color: #fff; }\n\n.form-control-file,\n.form-control-range {\n  display: block;\n  width: 100%; }\n\n.col-form-label {\n  padding-top: calc(0.375rem + 1px);\n  padding-bottom: calc(0.375rem + 1px);\n  margin-bottom: 0;\n  font-size: inherit;\n  line-height: 1.5; }\n\n.col-form-label-lg {\n  padding-top: calc(0.5rem + 1px);\n  padding-bottom: calc(0.5rem + 1px);\n  font-size: 1.25rem;\n  line-height: 1.5; }\n\n.col-form-label-sm {\n  padding-top: calc(0.25rem + 1px);\n  padding-bottom: calc(0.25rem + 1px);\n  font-size: 0.875rem;\n  line-height: 1.5; }\n\n.form-control-plaintext {\n  display: block;\n  width: 100%;\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n  margin-bottom: 0;\n  line-height: 1.5;\n  color: #212529;\n  background-color: transparent;\n  border: solid transparent;\n  border-width: 1px 0; }\n  .form-control-plaintext.form-control-sm, .input-group-sm > .form-control-plaintext.form-control,\n  .input-group-sm > .input-group-prepend > .form-control-plaintext.input-group-text,\n  .input-group-sm > .input-group-append > .form-control-plaintext.input-group-text,\n  .input-group-sm > .input-group-prepend > .form-control-plaintext.btn,\n  .input-group-sm > .input-group-append > .form-control-plaintext.btn, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control,\n  .input-group-lg > .input-group-prepend > .form-control-plaintext.input-group-text,\n  .input-group-lg > .input-group-append > .form-control-plaintext.input-group-text,\n  .input-group-lg > .input-group-prepend > .form-control-plaintext.btn,\n  .input-group-lg > .input-group-append > .form-control-plaintext.btn {\n    padding-right: 0;\n    padding-left: 0; }\n\n.form-control-sm, .input-group-sm > .form-control,\n.input-group-sm > .input-group-prepend > .input-group-text,\n.input-group-sm > .input-group-append > .input-group-text,\n.input-group-sm > .input-group-prepend > .btn,\n.input-group-sm > .input-group-append > .btn {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5;\n  border-radius: 0.2rem; }\n\nselect.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.form-control:not([size]):not([multiple]),\n.input-group-sm > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),\n.input-group-sm > .input-group-append > select.input-group-text:not([size]):not([multiple]),\n.input-group-sm > .input-group-prepend > select.btn:not([size]):not([multiple]),\n.input-group-sm > .input-group-append > select.btn:not([size]):not([multiple]) {\n  height: calc(1.8125rem + 2px); }\n\n.form-control-lg, .input-group-lg > .form-control,\n.input-group-lg > .input-group-prepend > .input-group-text,\n.input-group-lg > .input-group-append > .input-group-text,\n.input-group-lg > .input-group-prepend > .btn,\n.input-group-lg > .input-group-append > .btn {\n  padding: 0.5rem 1rem;\n  font-size: 1.25rem;\n  line-height: 1.5;\n  border-radius: 0.3rem; }\n\nselect.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.form-control:not([size]):not([multiple]),\n.input-group-lg > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),\n.input-group-lg > .input-group-append > select.input-group-text:not([size]):not([multiple]),\n.input-group-lg > .input-group-prepend > select.btn:not([size]):not([multiple]),\n.input-group-lg > .input-group-append > select.btn:not([size]):not([multiple]) {\n  height: calc(2.875rem + 2px); }\n\n.form-group {\n  margin-bottom: 1rem; }\n\n.form-text {\n  display: block;\n  margin-top: 0.25rem; }\n\n.form-row {\n  display: flex;\n  flex-wrap: wrap;\n  margin-right: -5px;\n  margin-left: -5px; }\n  .form-row > .col,\n  .form-row > [class*=\"col-\"] {\n    padding-right: 5px;\n    padding-left: 5px; }\n\n.form-check {\n  position: relative;\n  display: block;\n  padding-left: 1.25rem; }\n\n.form-check-input {\n  position: absolute;\n  margin-top: 0.3rem;\n  margin-left: -1.25rem; }\n  .form-check-input:disabled ~ .form-check-label {\n    color: #6c757d; }\n\n.form-check-label {\n  margin-bottom: 0; }\n\n.form-check-inline {\n  display: inline-flex;\n  align-items: center;\n  padding-left: 0;\n  margin-right: 0.75rem; }\n  .form-check-inline .form-check-input {\n    position: static;\n    margin-top: 0;\n    margin-right: 0.3125rem;\n    margin-left: 0; }\n\n.valid-feedback {\n  display: none;\n  width: 100%;\n  margin-top: 0.25rem;\n  font-size: 80%;\n  color: #28a745; }\n\n.valid-tooltip {\n  position: absolute;\n  top: 100%;\n  z-index: 5;\n  display: none;\n  max-width: 100%;\n  padding: .5rem;\n  margin-top: .1rem;\n  font-size: .875rem;\n  line-height: 1;\n  color: #fff;\n  background-color: rgba(40, 167, 69, 0.8);\n  border-radius: .2rem; }\n\n.was-validated .form-control:valid, .form-control.is-valid, .was-validated\n.custom-select:valid,\n.custom-select.is-valid {\n  border-color: #28a745; }\n  .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated\n  .custom-select:valid:focus,\n  .custom-select.is-valid:focus {\n    border-color: #28a745;\n    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); }\n  .was-validated .form-control:valid ~ .valid-feedback,\n  .was-validated .form-control:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback,\n  .form-control.is-valid ~ .valid-tooltip, .was-validated\n  .custom-select:valid ~ .valid-feedback,\n  .was-validated\n  .custom-select:valid ~ .valid-tooltip,\n  .custom-select.is-valid ~ .valid-feedback,\n  .custom-select.is-valid ~ .valid-tooltip {\n    display: block; }\n\n.was-validated .form-control-file:valid ~ .valid-feedback,\n.was-validated .form-control-file:valid ~ .valid-tooltip, .form-control-file.is-valid ~ .valid-feedback,\n.form-control-file.is-valid ~ .valid-tooltip {\n  display: block; }\n\n.was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {\n  color: #28a745; }\n\n.was-validated .form-check-input:valid ~ .valid-feedback,\n.was-validated .form-check-input:valid ~ .valid-tooltip, .form-check-input.is-valid ~ .valid-feedback,\n.form-check-input.is-valid ~ .valid-tooltip {\n  display: block; }\n\n.was-validated .custom-control-input:valid ~ .custom-control-label, .custom-control-input.is-valid ~ .custom-control-label {\n  color: #28a745; }\n  .was-validated .custom-control-input:valid ~ .custom-control-label::before, .custom-control-input.is-valid ~ .custom-control-label::before {\n    background-color: #71dd8a; }\n\n.was-validated .custom-control-input:valid ~ .valid-feedback,\n.was-validated .custom-control-input:valid ~ .valid-tooltip, .custom-control-input.is-valid ~ .valid-feedback,\n.custom-control-input.is-valid ~ .valid-tooltip {\n  display: block; }\n\n.was-validated .custom-control-input:valid:checked ~ .custom-control-label::before, .custom-control-input.is-valid:checked ~ .custom-control-label::before {\n  background-color: #34ce57; }\n\n.was-validated .custom-control-input:valid:focus ~ .custom-control-label::before, .custom-control-input.is-valid:focus ~ .custom-control-label::before {\n  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(40, 167, 69, 0.25); }\n\n.was-validated .custom-file-input:valid ~ .custom-file-label, .custom-file-input.is-valid ~ .custom-file-label {\n  border-color: #28a745; }\n  .was-validated .custom-file-input:valid ~ .custom-file-label::before, .custom-file-input.is-valid ~ .custom-file-label::before {\n    border-color: inherit; }\n\n.was-validated .custom-file-input:valid ~ .valid-feedback,\n.was-validated .custom-file-input:valid ~ .valid-tooltip, .custom-file-input.is-valid ~ .valid-feedback,\n.custom-file-input.is-valid ~ .valid-tooltip {\n  display: block; }\n\n.was-validated .custom-file-input:valid:focus ~ .custom-file-label, .custom-file-input.is-valid:focus ~ .custom-file-label {\n  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); }\n\n.invalid-feedback {\n  display: none;\n  width: 100%;\n  margin-top: 0.25rem;\n  font-size: 80%;\n  color: #dc3545; }\n\n.invalid-tooltip {\n  position: absolute;\n  top: 100%;\n  z-index: 5;\n  display: none;\n  max-width: 100%;\n  padding: .5rem;\n  margin-top: .1rem;\n  font-size: .875rem;\n  line-height: 1;\n  color: #fff;\n  background-color: rgba(220, 53, 69, 0.8);\n  border-radius: .2rem; }\n\n.was-validated .form-control:invalid, .form-control.is-invalid, .was-validated\n.custom-select:invalid,\n.custom-select.is-invalid {\n  border-color: #dc3545; }\n  .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus, .was-validated\n  .custom-select:invalid:focus,\n  .custom-select.is-invalid:focus {\n    border-color: #dc3545;\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n  .was-validated .form-control:invalid ~ .invalid-feedback,\n  .was-validated .form-control:invalid ~ .invalid-tooltip, .form-control.is-invalid ~ .invalid-feedback,\n  .form-control.is-invalid ~ .invalid-tooltip, .was-validated\n  .custom-select:invalid ~ .invalid-feedback,\n  .was-validated\n  .custom-select:invalid ~ .invalid-tooltip,\n  .custom-select.is-invalid ~ .invalid-feedback,\n  .custom-select.is-invalid ~ .invalid-tooltip {\n    display: block; }\n\n.was-validated .form-control-file:invalid ~ .invalid-feedback,\n.was-validated .form-control-file:invalid ~ .invalid-tooltip, .form-control-file.is-invalid ~ .invalid-feedback,\n.form-control-file.is-invalid ~ .invalid-tooltip {\n  display: block; }\n\n.was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {\n  color: #dc3545; }\n\n.was-validated .form-check-input:invalid ~ .invalid-feedback,\n.was-validated .form-check-input:invalid ~ .invalid-tooltip, .form-check-input.is-invalid ~ .invalid-feedback,\n.form-check-input.is-invalid ~ .invalid-tooltip {\n  display: block; }\n\n.was-validated .custom-control-input:invalid ~ .custom-control-label, .custom-control-input.is-invalid ~ .custom-control-label {\n  color: #dc3545; }\n  .was-validated .custom-control-input:invalid ~ .custom-control-label::before, .custom-control-input.is-invalid ~ .custom-control-label::before {\n    background-color: #efa2a9; }\n\n.was-validated .custom-control-input:invalid ~ .invalid-feedback,\n.was-validated .custom-control-input:invalid ~ .invalid-tooltip, .custom-control-input.is-invalid ~ .invalid-feedback,\n.custom-control-input.is-invalid ~ .invalid-tooltip {\n  display: block; }\n\n.was-validated .custom-control-input:invalid:checked ~ .custom-control-label::before, .custom-control-input.is-invalid:checked ~ .custom-control-label::before {\n  background-color: #e4606d; }\n\n.was-validated .custom-control-input:invalid:focus ~ .custom-control-label::before, .custom-control-input.is-invalid:focus ~ .custom-control-label::before {\n  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n\n.was-validated .custom-file-input:invalid ~ .custom-file-label, .custom-file-input.is-invalid ~ .custom-file-label {\n  border-color: #dc3545; }\n  .was-validated .custom-file-input:invalid ~ .custom-file-label::before, .custom-file-input.is-invalid ~ .custom-file-label::before {\n    border-color: inherit; }\n\n.was-validated .custom-file-input:invalid ~ .invalid-feedback,\n.was-validated .custom-file-input:invalid ~ .invalid-tooltip, .custom-file-input.is-invalid ~ .invalid-feedback,\n.custom-file-input.is-invalid ~ .invalid-tooltip {\n  display: block; }\n\n.was-validated .custom-file-input:invalid:focus ~ .custom-file-label, .custom-file-input.is-invalid:focus ~ .custom-file-label {\n  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n\n.form-inline {\n  display: flex;\n  flex-flow: row wrap;\n  align-items: center; }\n  .form-inline .form-check {\n    width: 100%; }\n  @media (min-width: 576px) {\n    .form-inline label {\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      margin-bottom: 0; }\n    .form-inline .form-group {\n      display: flex;\n      flex: 0 0 auto;\n      flex-flow: row wrap;\n      align-items: center;\n      margin-bottom: 0; }\n    .form-inline .form-control {\n      display: inline-block;\n      width: auto;\n      vertical-align: middle; }\n    .form-inline .form-control-plaintext {\n      display: inline-block; }\n    .form-inline .input-group,\n    .form-inline .custom-select {\n      width: auto; }\n    .form-inline .form-check {\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      width: auto;\n      padding-left: 0; }\n    .form-inline .form-check-input {\n      position: relative;\n      margin-top: 0;\n      margin-right: 0.25rem;\n      margin-left: 0; }\n    .form-inline .custom-control {\n      align-items: center;\n      justify-content: center; }\n    .form-inline .custom-control-label {\n      margin-bottom: 0; } }\n\n.btn {\n  display: inline-block;\n  font-weight: 400;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: middle;\n  user-select: none;\n  border: 1px solid transparent;\n  padding: 0.375rem 0.75rem;\n  font-size: 1rem;\n  line-height: 1.5;\n  border-radius: 0.25rem;\n  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .btn {\n      transition: none; } }\n  .btn:hover, .btn:focus {\n    text-decoration: none; }\n  .btn:focus, .btn.focus {\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n  .btn.disabled, .btn:disabled {\n    opacity: 0.65; }\n  .btn:not(:disabled):not(.disabled) {\n    cursor: pointer; }\n  .btn:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active {\n    background-image: none; }\n\na.btn.disabled,\nfieldset:disabled a.btn {\n  pointer-events: none; }\n\n.btn-primary {\n  color: #fff;\n  background-color: #007bff;\n  border-color: #007bff; }\n  .btn-primary:hover {\n    color: #fff;\n    background-color: #0069d9;\n    border-color: #0062cc; }\n  .btn-primary:focus, .btn-primary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); }\n  .btn-primary.disabled, .btn-primary:disabled {\n    color: #fff;\n    background-color: #007bff;\n    border-color: #007bff; }\n  .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,\n  .show > .btn-primary.dropdown-toggle {\n    color: #fff;\n    background-color: #0062cc;\n    border-color: #005cbf; }\n    .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-primary.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); }\n\n.btn-secondary {\n  color: #fff;\n  background-color: #6c757d;\n  border-color: #6c757d; }\n  .btn-secondary:hover {\n    color: #fff;\n    background-color: #5a6268;\n    border-color: #545b62; }\n  .btn-secondary:focus, .btn-secondary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }\n  .btn-secondary.disabled, .btn-secondary:disabled {\n    color: #fff;\n    background-color: #6c757d;\n    border-color: #6c757d; }\n  .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,\n  .show > .btn-secondary.dropdown-toggle {\n    color: #fff;\n    background-color: #545b62;\n    border-color: #4e555b; }\n    .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-secondary.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }\n\n.btn-success {\n  color: #fff;\n  background-color: #28a745;\n  border-color: #28a745; }\n  .btn-success:hover {\n    color: #fff;\n    background-color: #218838;\n    border-color: #1e7e34; }\n  .btn-success:focus, .btn-success.focus {\n    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }\n  .btn-success.disabled, .btn-success:disabled {\n    color: #fff;\n    background-color: #28a745;\n    border-color: #28a745; }\n  .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active,\n  .show > .btn-success.dropdown-toggle {\n    color: #fff;\n    background-color: #1e7e34;\n    border-color: #1c7430; }\n    .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-success.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }\n\n.btn-info {\n  color: #fff;\n  background-color: #17a2b8;\n  border-color: #17a2b8; }\n  .btn-info:hover {\n    color: #fff;\n    background-color: #138496;\n    border-color: #117a8b; }\n  .btn-info:focus, .btn-info.focus {\n    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n  .btn-info.disabled, .btn-info:disabled {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n  .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active,\n  .show > .btn-info.dropdown-toggle {\n    color: #fff;\n    background-color: #117a8b;\n    border-color: #10707f; }\n    .btn-info:not(:disabled):not(.disabled):active:focus, .btn-info:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-info.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n\n.btn-warning {\n  color: #212529;\n  background-color: #ffc107;\n  border-color: #ffc107; }\n  .btn-warning:hover {\n    color: #212529;\n    background-color: #e0a800;\n    border-color: #d39e00; }\n  .btn-warning:focus, .btn-warning.focus {\n    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n  .btn-warning.disabled, .btn-warning:disabled {\n    color: #212529;\n    background-color: #ffc107;\n    border-color: #ffc107; }\n  .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active,\n  .show > .btn-warning.dropdown-toggle {\n    color: #212529;\n    background-color: #d39e00;\n    border-color: #c69500; }\n    .btn-warning:not(:disabled):not(.disabled):active:focus, .btn-warning:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-warning.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n\n.btn-danger {\n  color: #fff;\n  background-color: #dc3545;\n  border-color: #dc3545; }\n  .btn-danger:hover {\n    color: #fff;\n    background-color: #c82333;\n    border-color: #bd2130; }\n  .btn-danger:focus, .btn-danger.focus {\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n  .btn-danger.disabled, .btn-danger:disabled {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545; }\n  .btn-danger:not(:disabled):not(.disabled):active, .btn-danger:not(:disabled):not(.disabled).active,\n  .show > .btn-danger.dropdown-toggle {\n    color: #fff;\n    background-color: #bd2130;\n    border-color: #b21f2d; }\n    .btn-danger:not(:disabled):not(.disabled):active:focus, .btn-danger:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-danger.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n\n.btn-light {\n  color: #212529;\n  background-color: #f8f9fa;\n  border-color: #f8f9fa; }\n  .btn-light:hover {\n    color: #212529;\n    background-color: #e2e6ea;\n    border-color: #dae0e5; }\n  .btn-light:focus, .btn-light.focus {\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n  .btn-light.disabled, .btn-light:disabled {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n  .btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active,\n  .show > .btn-light.dropdown-toggle {\n    color: #212529;\n    background-color: #dae0e5;\n    border-color: #d3d9df; }\n    .btn-light:not(:disabled):not(.disabled):active:focus, .btn-light:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-light.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n\n.btn-dark {\n  color: #fff;\n  background-color: #343a40;\n  border-color: #343a40; }\n  .btn-dark:hover {\n    color: #fff;\n    background-color: #23272b;\n    border-color: #1d2124; }\n  .btn-dark:focus, .btn-dark.focus {\n    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n  .btn-dark.disabled, .btn-dark:disabled {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40; }\n  .btn-dark:not(:disabled):not(.disabled):active, .btn-dark:not(:disabled):not(.disabled).active,\n  .show > .btn-dark.dropdown-toggle {\n    color: #fff;\n    background-color: #1d2124;\n    border-color: #171a1d; }\n    .btn-dark:not(:disabled):not(.disabled):active:focus, .btn-dark:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-dark.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n\n.btn-outline-primary {\n  color: #007bff;\n  background-color: transparent;\n  background-image: none;\n  border-color: #007bff; }\n  .btn-outline-primary:hover {\n    color: #fff;\n    background-color: #007bff;\n    border-color: #007bff; }\n  .btn-outline-primary:focus, .btn-outline-primary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); }\n  .btn-outline-primary.disabled, .btn-outline-primary:disabled {\n    color: #007bff;\n    background-color: transparent; }\n  .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-primary.dropdown-toggle {\n    color: #fff;\n    background-color: #007bff;\n    border-color: #007bff; }\n    .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-primary.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); }\n\n.btn-outline-secondary {\n  color: #6c757d;\n  background-color: transparent;\n  background-image: none;\n  border-color: #6c757d; }\n  .btn-outline-secondary:hover {\n    color: #fff;\n    background-color: #6c757d;\n    border-color: #6c757d; }\n  .btn-outline-secondary:focus, .btn-outline-secondary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }\n  .btn-outline-secondary.disabled, .btn-outline-secondary:disabled {\n    color: #6c757d;\n    background-color: transparent; }\n  .btn-outline-secondary:not(:disabled):not(.disabled):active, .btn-outline-secondary:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-secondary.dropdown-toggle {\n    color: #fff;\n    background-color: #6c757d;\n    border-color: #6c757d; }\n    .btn-outline-secondary:not(:disabled):not(.disabled):active:focus, .btn-outline-secondary:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-secondary.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }\n\n.btn-outline-success {\n  color: #28a745;\n  background-color: transparent;\n  background-image: none;\n  border-color: #28a745; }\n  .btn-outline-success:hover {\n    color: #fff;\n    background-color: #28a745;\n    border-color: #28a745; }\n  .btn-outline-success:focus, .btn-outline-success.focus {\n    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }\n  .btn-outline-success.disabled, .btn-outline-success:disabled {\n    color: #28a745;\n    background-color: transparent; }\n  .btn-outline-success:not(:disabled):not(.disabled):active, .btn-outline-success:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-success.dropdown-toggle {\n    color: #fff;\n    background-color: #28a745;\n    border-color: #28a745; }\n    .btn-outline-success:not(:disabled):not(.disabled):active:focus, .btn-outline-success:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-success.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); }\n\n.btn-outline-info {\n  color: #17a2b8;\n  background-color: transparent;\n  background-image: none;\n  border-color: #17a2b8; }\n  .btn-outline-info:hover {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n  .btn-outline-info:focus, .btn-outline-info.focus {\n    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n  .btn-outline-info.disabled, .btn-outline-info:disabled {\n    color: #17a2b8;\n    background-color: transparent; }\n  .btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-info.dropdown-toggle {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n    .btn-outline-info:not(:disabled):not(.disabled):active:focus, .btn-outline-info:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-info.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n\n.btn-outline-warning {\n  color: #ffc107;\n  background-color: transparent;\n  background-image: none;\n  border-color: #ffc107; }\n  .btn-outline-warning:hover {\n    color: #212529;\n    background-color: #ffc107;\n    border-color: #ffc107; }\n  .btn-outline-warning:focus, .btn-outline-warning.focus {\n    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n  .btn-outline-warning.disabled, .btn-outline-warning:disabled {\n    color: #ffc107;\n    background-color: transparent; }\n  .btn-outline-warning:not(:disabled):not(.disabled):active, .btn-outline-warning:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-warning.dropdown-toggle {\n    color: #212529;\n    background-color: #ffc107;\n    border-color: #ffc107; }\n    .btn-outline-warning:not(:disabled):not(.disabled):active:focus, .btn-outline-warning:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-warning.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n\n.btn-outline-danger {\n  color: #dc3545;\n  background-color: transparent;\n  background-image: none;\n  border-color: #dc3545; }\n  .btn-outline-danger:hover {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545; }\n  .btn-outline-danger:focus, .btn-outline-danger.focus {\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n  .btn-outline-danger.disabled, .btn-outline-danger:disabled {\n    color: #dc3545;\n    background-color: transparent; }\n  .btn-outline-danger:not(:disabled):not(.disabled):active, .btn-outline-danger:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-danger.dropdown-toggle {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545; }\n    .btn-outline-danger:not(:disabled):not(.disabled):active:focus, .btn-outline-danger:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-danger.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n\n.btn-outline-light {\n  color: #f8f9fa;\n  background-color: transparent;\n  background-image: none;\n  border-color: #f8f9fa; }\n  .btn-outline-light:hover {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n  .btn-outline-light:focus, .btn-outline-light.focus {\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n  .btn-outline-light.disabled, .btn-outline-light:disabled {\n    color: #f8f9fa;\n    background-color: transparent; }\n  .btn-outline-light:not(:disabled):not(.disabled):active, .btn-outline-light:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-light.dropdown-toggle {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n    .btn-outline-light:not(:disabled):not(.disabled):active:focus, .btn-outline-light:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-light.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n\n.btn-outline-dark {\n  color: #343a40;\n  background-color: transparent;\n  background-image: none;\n  border-color: #343a40; }\n  .btn-outline-dark:hover {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40; }\n  .btn-outline-dark:focus, .btn-outline-dark.focus {\n    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n  .btn-outline-dark.disabled, .btn-outline-dark:disabled {\n    color: #343a40;\n    background-color: transparent; }\n  .btn-outline-dark:not(:disabled):not(.disabled):active, .btn-outline-dark:not(:disabled):not(.disabled).active,\n  .show > .btn-outline-dark.dropdown-toggle {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40; }\n    .btn-outline-dark:not(:disabled):not(.disabled):active:focus, .btn-outline-dark:not(:disabled):not(.disabled).active:focus,\n    .show > .btn-outline-dark.dropdown-toggle:focus {\n      box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n\n.btn-link {\n  font-weight: 400;\n  color: #007bff;\n  background-color: transparent; }\n  .btn-link:hover {\n    color: #0056b3;\n    text-decoration: underline;\n    background-color: transparent;\n    border-color: transparent; }\n  .btn-link:focus, .btn-link.focus {\n    text-decoration: underline;\n    border-color: transparent;\n    box-shadow: none; }\n  .btn-link:disabled, .btn-link.disabled {\n    color: #6c757d;\n    pointer-events: none; }\n\n.btn-lg, .btn-group-lg > .btn {\n  padding: 0.5rem 1rem;\n  font-size: 1.25rem;\n  line-height: 1.5;\n  border-radius: 0.3rem; }\n\n.btn-sm, .btn-group-sm > .btn {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5;\n  border-radius: 0.2rem; }\n\n.btn-block {\n  display: block;\n  width: 100%; }\n  .btn-block + .btn-block {\n    margin-top: 0.5rem; }\n\ninput[type=\"submit\"].btn-block,\ninput[type=\"reset\"].btn-block,\ninput[type=\"button\"].btn-block {\n  width: 100%; }\n\n.fade {\n  transition: opacity 0.15s linear; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .fade {\n      transition: none; } }\n  .fade:not(.show) {\n    opacity: 0; }\n\n.collapse:not(.show) {\n  display: none; }\n\n.collapsing {\n  position: relative;\n  height: 0;\n  overflow: hidden;\n  transition: height 0.35s ease; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .collapsing {\n      transition: none; } }\n\n.dropup,\n.dropright,\n.dropdown,\n.dropleft {\n  position: relative; }\n\n.dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0.3em solid;\n  border-right: 0.3em solid transparent;\n  border-bottom: 0;\n  border-left: 0.3em solid transparent; }\n\n.dropdown-toggle:empty::after {\n  margin-left: 0; }\n\n.dropdown-menu {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  z-index: 1000;\n  display: none;\n  float: left;\n  min-width: 10rem;\n  padding: 0.5rem 0;\n  margin: 0.125rem 0 0;\n  font-size: 1rem;\n  color: #212529;\n  text-align: left;\n  list-style: none;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  border-radius: 0.25rem; }\n\n.dropdown-menu-right {\n  right: 0;\n  left: auto; }\n\n.dropup .dropdown-menu {\n  top: auto;\n  bottom: 100%;\n  margin-top: 0;\n  margin-bottom: 0.125rem; }\n\n.dropup .dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0;\n  border-right: 0.3em solid transparent;\n  border-bottom: 0.3em solid;\n  border-left: 0.3em solid transparent; }\n\n.dropup .dropdown-toggle:empty::after {\n  margin-left: 0; }\n\n.dropright .dropdown-menu {\n  top: 0;\n  right: auto;\n  left: 100%;\n  margin-top: 0;\n  margin-left: 0.125rem; }\n\n.dropright .dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0.3em solid transparent;\n  border-right: 0;\n  border-bottom: 0.3em solid transparent;\n  border-left: 0.3em solid; }\n\n.dropright .dropdown-toggle:empty::after {\n  margin-left: 0; }\n\n.dropright .dropdown-toggle::after {\n  vertical-align: 0; }\n\n.dropleft .dropdown-menu {\n  top: 0;\n  right: 100%;\n  left: auto;\n  margin-top: 0;\n  margin-right: 0.125rem; }\n\n.dropleft .dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\"; }\n\n.dropleft .dropdown-toggle::after {\n  display: none; }\n\n.dropleft .dropdown-toggle::before {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-right: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0.3em solid transparent;\n  border-right: 0.3em solid;\n  border-bottom: 0.3em solid transparent; }\n\n.dropleft .dropdown-toggle:empty::after {\n  margin-left: 0; }\n\n.dropleft .dropdown-toggle::before {\n  vertical-align: 0; }\n\n.dropdown-menu[x-placement^=\"top\"], .dropdown-menu[x-placement^=\"right\"], .dropdown-menu[x-placement^=\"bottom\"], .dropdown-menu[x-placement^=\"left\"] {\n  right: auto;\n  bottom: auto; }\n\n.dropdown-divider {\n  height: 0;\n  margin: 0.5rem 0;\n  overflow: hidden;\n  border-top: 1px solid #e9ecef; }\n\n.dropdown-item {\n  display: block;\n  width: 100%;\n  padding: 0.25rem 1.5rem;\n  clear: both;\n  font-weight: 400;\n  color: #212529;\n  text-align: inherit;\n  white-space: nowrap;\n  background-color: transparent;\n  border: 0; }\n  .dropdown-item:hover, .dropdown-item:focus {\n    color: #16181b;\n    text-decoration: none;\n    background-color: #f8f9fa; }\n  .dropdown-item.active, .dropdown-item:active {\n    color: #fff;\n    text-decoration: none;\n    background-color: #007bff; }\n  .dropdown-item.disabled, .dropdown-item:disabled {\n    color: #6c757d;\n    background-color: transparent; }\n\n.dropdown-menu.show {\n  display: block; }\n\n.dropdown-header {\n  display: block;\n  padding: 0.5rem 1.5rem;\n  margin-bottom: 0;\n  font-size: 0.875rem;\n  color: #6c757d;\n  white-space: nowrap; }\n\n.dropdown-item-text {\n  display: block;\n  padding: 0.25rem 1.5rem;\n  color: #212529; }\n\n.btn-group,\n.btn-group-vertical {\n  position: relative;\n  display: inline-flex;\n  vertical-align: middle; }\n  .btn-group > .btn,\n  .btn-group-vertical > .btn {\n    position: relative;\n    flex: 0 1 auto; }\n    .btn-group > .btn:hover,\n    .btn-group-vertical > .btn:hover {\n      z-index: 1; }\n    .btn-group > .btn:focus, .btn-group > .btn:active, .btn-group > .btn.active,\n    .btn-group-vertical > .btn:focus,\n    .btn-group-vertical > .btn:active,\n    .btn-group-vertical > .btn.active {\n      z-index: 1; }\n  .btn-group .btn + .btn,\n  .btn-group .btn + .btn-group,\n  .btn-group .btn-group + .btn,\n  .btn-group .btn-group + .btn-group,\n  .btn-group-vertical .btn + .btn,\n  .btn-group-vertical .btn + .btn-group,\n  .btn-group-vertical .btn-group + .btn,\n  .btn-group-vertical .btn-group + .btn-group {\n    margin-left: -1px; }\n\n.btn-toolbar {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start; }\n  .btn-toolbar .input-group {\n    width: auto; }\n\n.btn-group > .btn:first-child {\n  margin-left: 0; }\n\n.btn-group > .btn:not(:last-child):not(.dropdown-toggle),\n.btn-group > .btn-group:not(:last-child) > .btn {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.btn-group > .btn:not(:first-child),\n.btn-group > .btn-group:not(:first-child) > .btn {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n\n.dropdown-toggle-split {\n  padding-right: 0.5625rem;\n  padding-left: 0.5625rem; }\n  .dropdown-toggle-split::after,\n  .dropup .dropdown-toggle-split::after,\n  .dropright .dropdown-toggle-split::after {\n    margin-left: 0; }\n  .dropleft .dropdown-toggle-split::before {\n    margin-right: 0; }\n\n.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split {\n  padding-right: 0.375rem;\n  padding-left: 0.375rem; }\n\n.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split {\n  padding-right: 0.75rem;\n  padding-left: 0.75rem; }\n\n.btn-group-vertical {\n  flex-direction: column;\n  align-items: flex-start;\n  justify-content: center; }\n  .btn-group-vertical .btn,\n  .btn-group-vertical .btn-group {\n    width: 100%; }\n  .btn-group-vertical > .btn + .btn,\n  .btn-group-vertical > .btn + .btn-group,\n  .btn-group-vertical > .btn-group + .btn,\n  .btn-group-vertical > .btn-group + .btn-group {\n    margin-top: -1px;\n    margin-left: 0; }\n  .btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle),\n  .btn-group-vertical > .btn-group:not(:last-child) > .btn {\n    border-bottom-right-radius: 0;\n    border-bottom-left-radius: 0; }\n  .btn-group-vertical > .btn:not(:first-child),\n  .btn-group-vertical > .btn-group:not(:first-child) > .btn {\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n\n.btn-group-toggle > .btn,\n.btn-group-toggle > .btn-group > .btn {\n  margin-bottom: 0; }\n  .btn-group-toggle > .btn input[type=\"radio\"],\n  .btn-group-toggle > .btn input[type=\"checkbox\"],\n  .btn-group-toggle > .btn-group > .btn input[type=\"radio\"],\n  .btn-group-toggle > .btn-group > .btn input[type=\"checkbox\"] {\n    position: absolute;\n    clip: rect(0, 0, 0, 0);\n    pointer-events: none; }\n\n.input-group {\n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: stretch;\n  width: 100%; }\n  .input-group > .form-control,\n  .input-group > .custom-select,\n  .input-group > .custom-file {\n    position: relative;\n    flex: 1 1 auto;\n    width: 1%;\n    margin-bottom: 0; }\n    .input-group > .form-control:focus,\n    .input-group > .custom-select:focus,\n    .input-group > .custom-file:focus {\n      z-index: 3; }\n    .input-group > .form-control + .form-control,\n    .input-group > .form-control + .custom-select,\n    .input-group > .form-control + .custom-file,\n    .input-group > .custom-select + .form-control,\n    .input-group > .custom-select + .custom-select,\n    .input-group > .custom-select + .custom-file,\n    .input-group > .custom-file + .form-control,\n    .input-group > .custom-file + .custom-select,\n    .input-group > .custom-file + .custom-file {\n      margin-left: -1px; }\n  .input-group > .form-control:not(:last-child),\n  .input-group > .custom-select:not(:last-child) {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0; }\n  .input-group > .form-control:not(:first-child),\n  .input-group > .custom-select:not(:first-child) {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0; }\n  .input-group > .custom-file {\n    display: flex;\n    align-items: center; }\n    .input-group > .custom-file:not(:last-child) .custom-file-label,\n    .input-group > .custom-file:not(:last-child) .custom-file-label::after {\n      border-top-right-radius: 0;\n      border-bottom-right-radius: 0; }\n    .input-group > .custom-file:not(:first-child) .custom-file-label {\n      border-top-left-radius: 0;\n      border-bottom-left-radius: 0; }\n\n.input-group-prepend,\n.input-group-append {\n  display: flex; }\n  .input-group-prepend .btn,\n  .input-group-append .btn {\n    position: relative;\n    z-index: 2; }\n  .input-group-prepend .btn + .btn,\n  .input-group-prepend .btn + .input-group-text,\n  .input-group-prepend .input-group-text + .input-group-text,\n  .input-group-prepend .input-group-text + .btn,\n  .input-group-append .btn + .btn,\n  .input-group-append .btn + .input-group-text,\n  .input-group-append .input-group-text + .input-group-text,\n  .input-group-append .input-group-text + .btn {\n    margin-left: -1px; }\n\n.input-group-prepend {\n  margin-right: -1px; }\n\n.input-group-append {\n  margin-left: -1px; }\n\n.input-group-text {\n  display: flex;\n  align-items: center;\n  padding: 0.375rem 0.75rem;\n  margin-bottom: 0;\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.5;\n  color: #495057;\n  text-align: center;\n  white-space: nowrap;\n  background-color: #e9ecef;\n  border: 1px solid #ced4da;\n  border-radius: 0.25rem; }\n  .input-group-text input[type=\"radio\"],\n  .input-group-text input[type=\"checkbox\"] {\n    margin-top: 0; }\n\n.input-group > .input-group-prepend > .btn,\n.input-group > .input-group-prepend > .input-group-text,\n.input-group > .input-group-append:not(:last-child) > .btn,\n.input-group > .input-group-append:not(:last-child) > .input-group-text,\n.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),\n.input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n\n.input-group > .input-group-append > .btn,\n.input-group > .input-group-append > .input-group-text,\n.input-group > .input-group-prepend:not(:first-child) > .btn,\n.input-group > .input-group-prepend:not(:first-child) > .input-group-text,\n.input-group > .input-group-prepend:first-child > .btn:not(:first-child),\n.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n\n.custom-control {\n  position: relative;\n  display: block;\n  min-height: 1.5rem;\n  padding-left: 1.5rem; }\n\n.custom-control-inline {\n  display: inline-flex;\n  margin-right: 1rem; }\n\n.custom-control-input {\n  position: absolute;\n  z-index: -1;\n  opacity: 0; }\n  .custom-control-input:checked ~ .custom-control-label::before {\n    color: #fff;\n    background-color: #007bff; }\n  .custom-control-input:focus ~ .custom-control-label::before {\n    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n  .custom-control-input:active ~ .custom-control-label::before {\n    color: #fff;\n    background-color: #b3d7ff; }\n  .custom-control-input:disabled ~ .custom-control-label {\n    color: #6c757d; }\n    .custom-control-input:disabled ~ .custom-control-label::before {\n      background-color: #e9ecef; }\n\n.custom-control-label {\n  position: relative;\n  margin-bottom: 0; }\n  .custom-control-label::before {\n    position: absolute;\n    top: 0.25rem;\n    left: -1.5rem;\n    display: block;\n    width: 1rem;\n    height: 1rem;\n    pointer-events: none;\n    content: \"\";\n    user-select: none;\n    background-color: #dee2e6; }\n  .custom-control-label::after {\n    position: absolute;\n    top: 0.25rem;\n    left: -1.5rem;\n    display: block;\n    width: 1rem;\n    height: 1rem;\n    content: \"\";\n    background-repeat: no-repeat;\n    background-position: center center;\n    background-size: 50% 50%; }\n\n.custom-checkbox .custom-control-label::before {\n  border-radius: 0.25rem; }\n\n.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {\n  background-color: #007bff; }\n\n.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E\"); }\n\n.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {\n  background-color: #007bff; }\n\n.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='%23fff' d='M0 2h4'/%3E%3C/svg%3E\"); }\n\n.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {\n  background-color: rgba(0, 123, 255, 0.5); }\n\n.custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {\n  background-color: rgba(0, 123, 255, 0.5); }\n\n.custom-radio .custom-control-label::before {\n  border-radius: 50%; }\n\n.custom-radio .custom-control-input:checked ~ .custom-control-label::before {\n  background-color: #007bff; }\n\n.custom-radio .custom-control-input:checked ~ .custom-control-label::after {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E\"); }\n\n.custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {\n  background-color: rgba(0, 123, 255, 0.5); }\n\n.custom-select {\n  display: inline-block;\n  width: 100%;\n  height: calc(2.25rem + 2px);\n  padding: 0.375rem 1.75rem 0.375rem 0.75rem;\n  line-height: 1.5;\n  color: #495057;\n  vertical-align: middle;\n  background: #fff url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E\") no-repeat right 0.75rem center;\n  background-size: 8px 10px;\n  border: 1px solid #ced4da;\n  border-radius: 0.25rem;\n  appearance: none; }\n  .custom-select:focus {\n    border-color: #80bdff;\n    outline: 0;\n    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 5px rgba(128, 189, 255, 0.5); }\n    .custom-select:focus::-ms-value {\n      color: #495057;\n      background-color: #fff; }\n  .custom-select[multiple], .custom-select[size]:not([size=\"1\"]) {\n    height: auto;\n    padding-right: 0.75rem;\n    background-image: none; }\n  .custom-select:disabled {\n    color: #6c757d;\n    background-color: #e9ecef; }\n  .custom-select::-ms-expand {\n    opacity: 0; }\n\n.custom-select-sm {\n  height: calc(1.8125rem + 2px);\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n  font-size: 75%; }\n\n.custom-select-lg {\n  height: calc(2.875rem + 2px);\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n  font-size: 125%; }\n\n.custom-file {\n  position: relative;\n  display: inline-block;\n  width: 100%;\n  height: calc(2.25rem + 2px);\n  margin-bottom: 0; }\n\n.custom-file-input {\n  position: relative;\n  z-index: 2;\n  width: 100%;\n  height: calc(2.25rem + 2px);\n  margin: 0;\n  opacity: 0; }\n  .custom-file-input:focus ~ .custom-file-label {\n    border-color: #80bdff;\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n    .custom-file-input:focus ~ .custom-file-label::after {\n      border-color: #80bdff; }\n  .custom-file-input:lang(en) ~ .custom-file-label::after {\n    content: \"Browse\"; }\n\n.custom-file-label {\n  position: absolute;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 1;\n  height: calc(2.25rem + 2px);\n  padding: 0.375rem 0.75rem;\n  line-height: 1.5;\n  color: #495057;\n  background-color: #fff;\n  border: 1px solid #ced4da;\n  border-radius: 0.25rem; }\n  .custom-file-label::after {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    z-index: 3;\n    display: block;\n    height: 2.25rem;\n    padding: 0.375rem 0.75rem;\n    line-height: 1.5;\n    color: #495057;\n    content: \"Browse\";\n    background-color: #e9ecef;\n    border-left: 1px solid #ced4da;\n    border-radius: 0 0.25rem 0.25rem 0; }\n\n.custom-range {\n  width: 100%;\n  padding-left: 0;\n  background-color: transparent;\n  appearance: none; }\n  .custom-range:focus {\n    outline: none; }\n  .custom-range::-moz-focus-outer {\n    border: 0; }\n  .custom-range::-webkit-slider-thumb {\n    width: 1rem;\n    height: 1rem;\n    margin-top: -0.25rem;\n    background-color: #007bff;\n    border: 0;\n    border-radius: 1rem;\n    appearance: none; }\n    .custom-range::-webkit-slider-thumb:focus {\n      outline: none;\n      box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n    .custom-range::-webkit-slider-thumb:active {\n      background-color: #b3d7ff; }\n  .custom-range::-webkit-slider-runnable-track {\n    width: 100%;\n    height: 0.5rem;\n    color: transparent;\n    cursor: pointer;\n    background-color: #dee2e6;\n    border-color: transparent;\n    border-radius: 1rem; }\n  .custom-range::-moz-range-thumb {\n    width: 1rem;\n    height: 1rem;\n    background-color: #007bff;\n    border: 0;\n    border-radius: 1rem;\n    appearance: none; }\n    .custom-range::-moz-range-thumb:focus {\n      outline: none;\n      box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n    .custom-range::-moz-range-thumb:active {\n      background-color: #b3d7ff; }\n  .custom-range::-moz-range-track {\n    width: 100%;\n    height: 0.5rem;\n    color: transparent;\n    cursor: pointer;\n    background-color: #dee2e6;\n    border-color: transparent;\n    border-radius: 1rem; }\n  .custom-range::-ms-thumb {\n    width: 1rem;\n    height: 1rem;\n    background-color: #007bff;\n    border: 0;\n    border-radius: 1rem;\n    appearance: none; }\n    .custom-range::-ms-thumb:focus {\n      outline: none;\n      box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n    .custom-range::-ms-thumb:active {\n      background-color: #b3d7ff; }\n  .custom-range::-ms-track {\n    width: 100%;\n    height: 0.5rem;\n    color: transparent;\n    cursor: pointer;\n    background-color: transparent;\n    border-color: transparent;\n    border-width: 0.5rem; }\n  .custom-range::-ms-fill-lower {\n    background-color: #dee2e6;\n    border-radius: 1rem; }\n  .custom-range::-ms-fill-upper {\n    margin-right: 15px;\n    background-color: #dee2e6;\n    border-radius: 1rem; }\n\n.nav {\n  display: flex;\n  flex-wrap: wrap;\n  padding-left: 0;\n  margin-bottom: 0;\n  list-style: none; }\n\n.nav-link {\n  display: block;\n  padding: 0.5rem 1rem; }\n  .nav-link:hover, .nav-link:focus {\n    text-decoration: none; }\n  .nav-link.disabled {\n    color: #6c757d; }\n\n.nav-tabs {\n  border-bottom: 1px solid #dee2e6; }\n  .nav-tabs .nav-item {\n    margin-bottom: -1px; }\n  .nav-tabs .nav-link {\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n    .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {\n      border-color: #e9ecef #e9ecef #dee2e6; }\n    .nav-tabs .nav-link.disabled {\n      color: #6c757d;\n      background-color: transparent;\n      border-color: transparent; }\n  .nav-tabs .nav-link.active,\n  .nav-tabs .nav-item.show .nav-link {\n    color: #495057;\n    background-color: #fff;\n    border-color: #dee2e6 #dee2e6 #fff; }\n  .nav-tabs .dropdown-menu {\n    margin-top: -1px;\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n\n.nav-pills .nav-link {\n  border-radius: 0.25rem; }\n\n.nav-pills .nav-link.active,\n.nav-pills .show > .nav-link {\n  color: #fff;\n  background-color: #007bff; }\n\n.nav-fill .nav-item {\n  flex: 1 1 auto;\n  text-align: center; }\n\n.nav-justified .nav-item {\n  flex-basis: 0;\n  flex-grow: 1;\n  text-align: center; }\n\n.tab-content > .tab-pane {\n  display: none; }\n\n.tab-content > .active {\n  display: block; }\n\n.navbar {\n  position: relative;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0.5rem 1rem; }\n  .navbar > .container,\n  .navbar > .container-fluid {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    justify-content: space-between; }\n\n.navbar-brand {\n  display: inline-block;\n  padding-top: 0.3125rem;\n  padding-bottom: 0.3125rem;\n  margin-right: 1rem;\n  font-size: 1.25rem;\n  line-height: inherit;\n  white-space: nowrap; }\n  .navbar-brand:hover, .navbar-brand:focus {\n    text-decoration: none; }\n\n.navbar-nav {\n  display: flex;\n  flex-direction: column;\n  padding-left: 0;\n  margin-bottom: 0;\n  list-style: none; }\n  .navbar-nav .nav-link {\n    padding-right: 0;\n    padding-left: 0; }\n  .navbar-nav .dropdown-menu {\n    position: static;\n    float: none; }\n\n.navbar-text {\n  display: inline-block;\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem; }\n\n.navbar-collapse {\n  flex-basis: 100%;\n  flex-grow: 1;\n  align-items: center; }\n\n.navbar-toggler {\n  padding: 0.25rem 0.75rem;\n  font-size: 1.25rem;\n  line-height: 1;\n  background-color: transparent;\n  border: 1px solid transparent;\n  border-radius: 0.25rem; }\n  .navbar-toggler:hover, .navbar-toggler:focus {\n    text-decoration: none; }\n  .navbar-toggler:not(:disabled):not(.disabled) {\n    cursor: pointer; }\n\n.navbar-toggler-icon {\n  display: inline-block;\n  width: 1.5em;\n  height: 1.5em;\n  vertical-align: middle;\n  content: \"\";\n  background: no-repeat center center;\n  background-size: 100% 100%; }\n\n@media (max-width: 575.98px) {\n  .navbar-expand-sm > .container,\n  .navbar-expand-sm > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n\n@media (min-width: 576px) {\n  .navbar-expand-sm {\n    flex-flow: row nowrap;\n    justify-content: flex-start; }\n    .navbar-expand-sm .navbar-nav {\n      flex-direction: row; }\n      .navbar-expand-sm .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-sm .navbar-nav .nav-link {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem; }\n    .navbar-expand-sm > .container,\n    .navbar-expand-sm > .container-fluid {\n      flex-wrap: nowrap; }\n    .navbar-expand-sm .navbar-collapse {\n      display: flex !important;\n      flex-basis: auto; }\n    .navbar-expand-sm .navbar-toggler {\n      display: none; } }\n\n@media (max-width: 767.98px) {\n  .navbar-expand-md > .container,\n  .navbar-expand-md > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n\n@media (min-width: 768px) {\n  .navbar-expand-md {\n    flex-flow: row nowrap;\n    justify-content: flex-start; }\n    .navbar-expand-md .navbar-nav {\n      flex-direction: row; }\n      .navbar-expand-md .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-md .navbar-nav .nav-link {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem; }\n    .navbar-expand-md > .container,\n    .navbar-expand-md > .container-fluid {\n      flex-wrap: nowrap; }\n    .navbar-expand-md .navbar-collapse {\n      display: flex !important;\n      flex-basis: auto; }\n    .navbar-expand-md .navbar-toggler {\n      display: none; } }\n\n@media (max-width: 991.98px) {\n  .navbar-expand-lg > .container,\n  .navbar-expand-lg > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n\n@media (min-width: 992px) {\n  .navbar-expand-lg {\n    flex-flow: row nowrap;\n    justify-content: flex-start; }\n    .navbar-expand-lg .navbar-nav {\n      flex-direction: row; }\n      .navbar-expand-lg .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-lg .navbar-nav .nav-link {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem; }\n    .navbar-expand-lg > .container,\n    .navbar-expand-lg > .container-fluid {\n      flex-wrap: nowrap; }\n    .navbar-expand-lg .navbar-collapse {\n      display: flex !important;\n      flex-basis: auto; }\n    .navbar-expand-lg .navbar-toggler {\n      display: none; } }\n\n@media (max-width: 1199.98px) {\n  .navbar-expand-xl > .container,\n  .navbar-expand-xl > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n\n@media (min-width: 1200px) {\n  .navbar-expand-xl {\n    flex-flow: row nowrap;\n    justify-content: flex-start; }\n    .navbar-expand-xl .navbar-nav {\n      flex-direction: row; }\n      .navbar-expand-xl .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-xl .navbar-nav .nav-link {\n        padding-right: 0.5rem;\n        padding-left: 0.5rem; }\n    .navbar-expand-xl > .container,\n    .navbar-expand-xl > .container-fluid {\n      flex-wrap: nowrap; }\n    .navbar-expand-xl .navbar-collapse {\n      display: flex !important;\n      flex-basis: auto; }\n    .navbar-expand-xl .navbar-toggler {\n      display: none; } }\n\n.navbar-expand {\n  flex-flow: row nowrap;\n  justify-content: flex-start; }\n  .navbar-expand > .container,\n  .navbar-expand > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; }\n  .navbar-expand .navbar-nav {\n    flex-direction: row; }\n    .navbar-expand .navbar-nav .dropdown-menu {\n      position: absolute; }\n    .navbar-expand .navbar-nav .nav-link {\n      padding-right: 0.5rem;\n      padding-left: 0.5rem; }\n  .navbar-expand > .container,\n  .navbar-expand > .container-fluid {\n    flex-wrap: nowrap; }\n  .navbar-expand .navbar-collapse {\n    display: flex !important;\n    flex-basis: auto; }\n  .navbar-expand .navbar-toggler {\n    display: none; }\n\n.navbar-light .navbar-brand {\n  color: rgba(0, 0, 0, 0.9); }\n  .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {\n    color: rgba(0, 0, 0, 0.9); }\n\n.navbar-light .navbar-nav .nav-link {\n  color: rgba(0, 0, 0, 0.5); }\n  .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {\n    color: rgba(0, 0, 0, 0.7); }\n  .navbar-light .navbar-nav .nav-link.disabled {\n    color: rgba(0, 0, 0, 0.3); }\n\n.navbar-light .navbar-nav .show > .nav-link,\n.navbar-light .navbar-nav .active > .nav-link,\n.navbar-light .navbar-nav .nav-link.show,\n.navbar-light .navbar-nav .nav-link.active {\n  color: rgba(0, 0, 0, 0.9); }\n\n.navbar-light .navbar-toggler {\n  color: rgba(0, 0, 0, 0.5);\n  border-color: rgba(0, 0, 0, 0.1); }\n\n.navbar-light .navbar-toggler-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E\"); }\n\n.navbar-light .navbar-text {\n  color: rgba(0, 0, 0, 0.5); }\n  .navbar-light .navbar-text a {\n    color: rgba(0, 0, 0, 0.9); }\n    .navbar-light .navbar-text a:hover, .navbar-light .navbar-text a:focus {\n      color: rgba(0, 0, 0, 0.9); }\n\n.navbar-dark .navbar-brand {\n  color: #fff; }\n  .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {\n    color: #fff; }\n\n.navbar-dark .navbar-nav .nav-link {\n  color: rgba(255, 255, 255, 0.5); }\n  .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {\n    color: rgba(255, 255, 255, 0.75); }\n  .navbar-dark .navbar-nav .nav-link.disabled {\n    color: rgba(255, 255, 255, 0.25); }\n\n.navbar-dark .navbar-nav .show > .nav-link,\n.navbar-dark .navbar-nav .active > .nav-link,\n.navbar-dark .navbar-nav .nav-link.show,\n.navbar-dark .navbar-nav .nav-link.active {\n  color: #fff; }\n\n.navbar-dark .navbar-toggler {\n  color: rgba(255, 255, 255, 0.5);\n  border-color: rgba(255, 255, 255, 0.1); }\n\n.navbar-dark .navbar-toggler-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E\"); }\n\n.navbar-dark .navbar-text {\n  color: rgba(255, 255, 255, 0.5); }\n  .navbar-dark .navbar-text a {\n    color: #fff; }\n    .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {\n      color: #fff; }\n\n.card {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: border-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem; }\n  .card > hr {\n    margin-right: 0;\n    margin-left: 0; }\n  .card > .list-group:first-child .list-group-item:first-child {\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n  .card > .list-group:last-child .list-group-item:last-child {\n    border-bottom-right-radius: 0.25rem;\n    border-bottom-left-radius: 0.25rem; }\n\n.card-body {\n  flex: 1 1 auto;\n  padding: 1.25rem; }\n\n.card-title {\n  margin-bottom: 0.75rem; }\n\n.card-subtitle {\n  margin-top: -0.375rem;\n  margin-bottom: 0; }\n\n.card-text:last-child {\n  margin-bottom: 0; }\n\n.card-link:hover {\n  text-decoration: none; }\n\n.card-link + .card-link {\n  margin-left: 1.25rem; }\n\n.card-header {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: rgba(0, 0, 0, 0.03);\n  border-bottom: 1px solid rgba(0, 0, 0, 0.125); }\n  .card-header:first-child {\n    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0; }\n  .card-header + .list-group .list-group-item:first-child {\n    border-top: 0; }\n\n.card-footer {\n  padding: 0.75rem 1.25rem;\n  background-color: rgba(0, 0, 0, 0.03);\n  border-top: 1px solid rgba(0, 0, 0, 0.125); }\n  .card-footer:last-child {\n    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px); }\n\n.card-header-tabs {\n  margin-right: -0.625rem;\n  margin-bottom: -0.75rem;\n  margin-left: -0.625rem;\n  border-bottom: 0; }\n\n.card-header-pills {\n  margin-right: -0.625rem;\n  margin-left: -0.625rem; }\n\n.card-img-overlay {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding: 1.25rem; }\n\n.card-img {\n  width: 100%;\n  border-radius: calc(0.25rem - 1px); }\n\n.card-img-top {\n  width: 100%;\n  border-top-left-radius: calc(0.25rem - 1px);\n  border-top-right-radius: calc(0.25rem - 1px); }\n\n.card-img-bottom {\n  width: 100%;\n  border-bottom-right-radius: calc(0.25rem - 1px);\n  border-bottom-left-radius: calc(0.25rem - 1px); }\n\n.card-deck {\n  display: flex;\n  flex-direction: column; }\n  .card-deck .card {\n    margin-bottom: 15px; }\n  @media (min-width: 576px) {\n    .card-deck {\n      flex-flow: row wrap;\n      margin-right: -15px;\n      margin-left: -15px; }\n      .card-deck .card {\n        display: flex;\n        flex: 1 0 0%;\n        flex-direction: column;\n        margin-right: 15px;\n        margin-bottom: 0;\n        margin-left: 15px; } }\n\n.card-group {\n  display: flex;\n  flex-direction: column; }\n  .card-group > .card {\n    margin-bottom: 15px; }\n  @media (min-width: 576px) {\n    .card-group {\n      flex-flow: row wrap; }\n      .card-group > .card {\n        flex: 1 0 0%;\n        margin-bottom: 0; }\n        .card-group > .card + .card {\n          margin-left: 0;\n          border-left: 0; }\n        .card-group > .card:first-child {\n          border-top-right-radius: 0;\n          border-bottom-right-radius: 0; }\n          .card-group > .card:first-child .card-img-top,\n          .card-group > .card:first-child .card-header {\n            border-top-right-radius: 0; }\n          .card-group > .card:first-child .card-img-bottom,\n          .card-group > .card:first-child .card-footer {\n            border-bottom-right-radius: 0; }\n        .card-group > .card:last-child {\n          border-top-left-radius: 0;\n          border-bottom-left-radius: 0; }\n          .card-group > .card:last-child .card-img-top,\n          .card-group > .card:last-child .card-header {\n            border-top-left-radius: 0; }\n          .card-group > .card:last-child .card-img-bottom,\n          .card-group > .card:last-child .card-footer {\n            border-bottom-left-radius: 0; }\n        .card-group > .card:only-child {\n          border-radius: 0.25rem; }\n          .card-group > .card:only-child .card-img-top,\n          .card-group > .card:only-child .card-header {\n            border-top-left-radius: 0.25rem;\n            border-top-right-radius: 0.25rem; }\n          .card-group > .card:only-child .card-img-bottom,\n          .card-group > .card:only-child .card-footer {\n            border-bottom-right-radius: 0.25rem;\n            border-bottom-left-radius: 0.25rem; }\n        .card-group > .card:not(:first-child):not(:last-child):not(:only-child) {\n          border-radius: 0; }\n          .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-img-top,\n          .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-img-bottom,\n          .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-header,\n          .card-group > .card:not(:first-child):not(:last-child):not(:only-child) .card-footer {\n            border-radius: 0; } }\n\n.card-columns .card {\n  margin-bottom: 0.75rem; }\n\n@media (min-width: 576px) {\n  .card-columns {\n    column-count: 3;\n    column-gap: 1.25rem;\n    orphans: 1;\n    widows: 1; }\n    .card-columns .card {\n      display: inline-block;\n      width: 100%; } }\n\n.accordion .card:not(:first-of-type):not(:last-of-type) {\n  border-bottom: 0;\n  border-radius: 0; }\n\n.accordion .card:not(:first-of-type) .card-header:first-child {\n  border-radius: 0; }\n\n.accordion .card:first-of-type {\n  border-bottom: 0;\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0; }\n\n.accordion .card:last-of-type {\n  border-top-left-radius: 0;\n  border-top-right-radius: 0; }\n\n.breadcrumb {\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0.75rem 1rem;\n  margin-bottom: 1rem;\n  list-style: none;\n  background-color: #e9ecef;\n  border-radius: 0.25rem; }\n\n.breadcrumb-item + .breadcrumb-item {\n  padding-left: 0.5rem; }\n  .breadcrumb-item + .breadcrumb-item::before {\n    display: inline-block;\n    padding-right: 0.5rem;\n    color: #6c757d;\n    content: \"/\"; }\n\n.breadcrumb-item + .breadcrumb-item:hover::before {\n  text-decoration: underline; }\n\n.breadcrumb-item + .breadcrumb-item:hover::before {\n  text-decoration: none; }\n\n.breadcrumb-item.active {\n  color: #6c757d; }\n\n.pagination {\n  display: flex;\n  padding-left: 0;\n  list-style: none;\n  border-radius: 0.25rem; }\n\n.page-link {\n  position: relative;\n  display: block;\n  padding: 0.5rem 0.75rem;\n  margin-left: -1px;\n  line-height: 1.25;\n  color: #007bff;\n  background-color: #fff;\n  border: 1px solid #dee2e6; }\n  .page-link:hover {\n    z-index: 2;\n    color: #0056b3;\n    text-decoration: none;\n    background-color: #e9ecef;\n    border-color: #dee2e6; }\n  .page-link:focus {\n    z-index: 2;\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }\n  .page-link:not(:disabled):not(.disabled) {\n    cursor: pointer; }\n\n.page-item:first-child .page-link {\n  margin-left: 0;\n  border-top-left-radius: 0.25rem;\n  border-bottom-left-radius: 0.25rem; }\n\n.page-item:last-child .page-link {\n  border-top-right-radius: 0.25rem;\n  border-bottom-right-radius: 0.25rem; }\n\n.page-item.active .page-link {\n  z-index: 1;\n  color: #fff;\n  background-color: #007bff;\n  border-color: #007bff; }\n\n.page-item.disabled .page-link {\n  color: #6c757d;\n  pointer-events: none;\n  cursor: auto;\n  background-color: #fff;\n  border-color: #dee2e6; }\n\n.pagination-lg .page-link {\n  padding: 0.75rem 1.5rem;\n  font-size: 1.25rem;\n  line-height: 1.5; }\n\n.pagination-lg .page-item:first-child .page-link {\n  border-top-left-radius: 0.3rem;\n  border-bottom-left-radius: 0.3rem; }\n\n.pagination-lg .page-item:last-child .page-link {\n  border-top-right-radius: 0.3rem;\n  border-bottom-right-radius: 0.3rem; }\n\n.pagination-sm .page-link {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5; }\n\n.pagination-sm .page-item:first-child .page-link {\n  border-top-left-radius: 0.2rem;\n  border-bottom-left-radius: 0.2rem; }\n\n.pagination-sm .page-item:last-child .page-link {\n  border-top-right-radius: 0.2rem;\n  border-bottom-right-radius: 0.2rem; }\n\n.badge {\n  display: inline-block;\n  padding: 0.25em 0.4em;\n  font-size: 75%;\n  font-weight: 700;\n  line-height: 1;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: baseline;\n  border-radius: 0.25rem; }\n  .badge:empty {\n    display: none; }\n\n.btn .badge {\n  position: relative;\n  top: -1px; }\n\n.badge-pill {\n  padding-right: 0.6em;\n  padding-left: 0.6em;\n  border-radius: 10rem; }\n\n.badge-primary {\n  color: #fff;\n  background-color: #007bff; }\n  .badge-primary[href]:hover, .badge-primary[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #0062cc; }\n\n.badge-secondary {\n  color: #fff;\n  background-color: #6c757d; }\n  .badge-secondary[href]:hover, .badge-secondary[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #545b62; }\n\n.badge-success {\n  color: #fff;\n  background-color: #28a745; }\n  .badge-success[href]:hover, .badge-success[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #1e7e34; }\n\n.badge-info {\n  color: #fff;\n  background-color: #17a2b8; }\n  .badge-info[href]:hover, .badge-info[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #117a8b; }\n\n.badge-warning {\n  color: #212529;\n  background-color: #ffc107; }\n  .badge-warning[href]:hover, .badge-warning[href]:focus {\n    color: #212529;\n    text-decoration: none;\n    background-color: #d39e00; }\n\n.badge-danger {\n  color: #fff;\n  background-color: #dc3545; }\n  .badge-danger[href]:hover, .badge-danger[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #bd2130; }\n\n.badge-light {\n  color: #212529;\n  background-color: #f8f9fa; }\n  .badge-light[href]:hover, .badge-light[href]:focus {\n    color: #212529;\n    text-decoration: none;\n    background-color: #dae0e5; }\n\n.badge-dark {\n  color: #fff;\n  background-color: #343a40; }\n  .badge-dark[href]:hover, .badge-dark[href]:focus {\n    color: #fff;\n    text-decoration: none;\n    background-color: #1d2124; }\n\n.jumbotron {\n  padding: 2rem 1rem;\n  margin-bottom: 2rem;\n  background-color: #e9ecef;\n  border-radius: 0.3rem; }\n  @media (min-width: 576px) {\n    .jumbotron {\n      padding: 4rem 2rem; } }\n\n.jumbotron-fluid {\n  padding-right: 0;\n  padding-left: 0;\n  border-radius: 0; }\n\n.alert {\n  position: relative;\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 1rem;\n  border: 1px solid transparent;\n  border-radius: 0.25rem; }\n\n.alert-heading {\n  color: inherit; }\n\n.alert-link {\n  font-weight: 700; }\n\n.alert-dismissible {\n  padding-right: 4rem; }\n  .alert-dismissible .close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.75rem 1.25rem;\n    color: inherit; }\n\n.alert-primary {\n  color: #004085;\n  background-color: #cce5ff;\n  border-color: #b8daff; }\n  .alert-primary hr {\n    border-top-color: #9fcdff; }\n  .alert-primary .alert-link {\n    color: #002752; }\n\n.alert-secondary {\n  color: #383d41;\n  background-color: #e2e3e5;\n  border-color: #d6d8db; }\n  .alert-secondary hr {\n    border-top-color: #c8cbcf; }\n  .alert-secondary .alert-link {\n    color: #202326; }\n\n.alert-success {\n  color: #155724;\n  background-color: #d4edda;\n  border-color: #c3e6cb; }\n  .alert-success hr {\n    border-top-color: #b1dfbb; }\n  .alert-success .alert-link {\n    color: #0b2e13; }\n\n.alert-info {\n  color: #0c5460;\n  background-color: #d1ecf1;\n  border-color: #bee5eb; }\n  .alert-info hr {\n    border-top-color: #abdde5; }\n  .alert-info .alert-link {\n    color: #062c33; }\n\n.alert-warning {\n  color: #856404;\n  background-color: #fff3cd;\n  border-color: #ffeeba; }\n  .alert-warning hr {\n    border-top-color: #ffe8a1; }\n  .alert-warning .alert-link {\n    color: #533f03; }\n\n.alert-danger {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-color: #f5c6cb; }\n  .alert-danger hr {\n    border-top-color: #f1b0b7; }\n  .alert-danger .alert-link {\n    color: #491217; }\n\n.alert-light {\n  color: #818182;\n  background-color: #fefefe;\n  border-color: #fdfdfe; }\n  .alert-light hr {\n    border-top-color: #ececf6; }\n  .alert-light .alert-link {\n    color: #686868; }\n\n.alert-dark {\n  color: #1b1e21;\n  background-color: #d6d8d9;\n  border-color: #c6c8ca; }\n  .alert-dark hr {\n    border-top-color: #b9bbbe; }\n  .alert-dark .alert-link {\n    color: #040505; }\n\n@keyframes progress-bar-stripes {\n  from {\n    background-position: 1rem 0; }\n  to {\n    background-position: 0 0; } }\n\n.progress {\n  display: flex;\n  height: 1rem;\n  overflow: hidden;\n  font-size: 0.75rem;\n  background-color: #e9ecef;\n  border-radius: 0.25rem; }\n\n.progress-bar {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  color: #fff;\n  text-align: center;\n  white-space: nowrap;\n  background-color: #007bff;\n  transition: width 0.6s ease; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .progress-bar {\n      transition: none; } }\n\n.progress-bar-striped {\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-size: 1rem 1rem; }\n\n.progress-bar-animated {\n  animation: progress-bar-stripes 1s linear infinite; }\n\n.media {\n  display: flex;\n  align-items: flex-start; }\n\n.media-body {\n  flex: 1; }\n\n.list-group {\n  display: flex;\n  flex-direction: column;\n  padding-left: 0;\n  margin-bottom: 0; }\n\n.list-group-item-action {\n  width: 100%;\n  color: #495057;\n  text-align: inherit; }\n  .list-group-item-action:hover, .list-group-item-action:focus {\n    color: #495057;\n    text-decoration: none;\n    background-color: #f8f9fa; }\n  .list-group-item-action:active {\n    color: #212529;\n    background-color: #e9ecef; }\n\n.list-group-item {\n  position: relative;\n  display: block;\n  padding: 0.75rem 1.25rem;\n  margin-bottom: -1px;\n  background-color: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.125); }\n  .list-group-item:first-child {\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n  .list-group-item:last-child {\n    margin-bottom: 0;\n    border-bottom-right-radius: 0.25rem;\n    border-bottom-left-radius: 0.25rem; }\n  .list-group-item:hover, .list-group-item:focus {\n    z-index: 1;\n    text-decoration: none; }\n  .list-group-item.disabled, .list-group-item:disabled {\n    color: #6c757d;\n    background-color: #fff; }\n  .list-group-item.active {\n    z-index: 2;\n    color: #fff;\n    background-color: #007bff;\n    border-color: #007bff; }\n\n.list-group-flush .list-group-item {\n  border-right: 0;\n  border-left: 0;\n  border-radius: 0; }\n\n.list-group-flush:first-child .list-group-item:first-child {\n  border-top: 0; }\n\n.list-group-flush:last-child .list-group-item:last-child {\n  border-bottom: 0; }\n\n.list-group-item-primary {\n  color: #004085;\n  background-color: #b8daff; }\n  .list-group-item-primary.list-group-item-action:hover, .list-group-item-primary.list-group-item-action:focus {\n    color: #004085;\n    background-color: #9fcdff; }\n  .list-group-item-primary.list-group-item-action.active {\n    color: #fff;\n    background-color: #004085;\n    border-color: #004085; }\n\n.list-group-item-secondary {\n  color: #383d41;\n  background-color: #d6d8db; }\n  .list-group-item-secondary.list-group-item-action:hover, .list-group-item-secondary.list-group-item-action:focus {\n    color: #383d41;\n    background-color: #c8cbcf; }\n  .list-group-item-secondary.list-group-item-action.active {\n    color: #fff;\n    background-color: #383d41;\n    border-color: #383d41; }\n\n.list-group-item-success {\n  color: #155724;\n  background-color: #c3e6cb; }\n  .list-group-item-success.list-group-item-action:hover, .list-group-item-success.list-group-item-action:focus {\n    color: #155724;\n    background-color: #b1dfbb; }\n  .list-group-item-success.list-group-item-action.active {\n    color: #fff;\n    background-color: #155724;\n    border-color: #155724; }\n\n.list-group-item-info {\n  color: #0c5460;\n  background-color: #bee5eb; }\n  .list-group-item-info.list-group-item-action:hover, .list-group-item-info.list-group-item-action:focus {\n    color: #0c5460;\n    background-color: #abdde5; }\n  .list-group-item-info.list-group-item-action.active {\n    color: #fff;\n    background-color: #0c5460;\n    border-color: #0c5460; }\n\n.list-group-item-warning {\n  color: #856404;\n  background-color: #ffeeba; }\n  .list-group-item-warning.list-group-item-action:hover, .list-group-item-warning.list-group-item-action:focus {\n    color: #856404;\n    background-color: #ffe8a1; }\n  .list-group-item-warning.list-group-item-action.active {\n    color: #fff;\n    background-color: #856404;\n    border-color: #856404; }\n\n.list-group-item-danger {\n  color: #721c24;\n  background-color: #f5c6cb; }\n  .list-group-item-danger.list-group-item-action:hover, .list-group-item-danger.list-group-item-action:focus {\n    color: #721c24;\n    background-color: #f1b0b7; }\n  .list-group-item-danger.list-group-item-action.active {\n    color: #fff;\n    background-color: #721c24;\n    border-color: #721c24; }\n\n.list-group-item-light {\n  color: #818182;\n  background-color: #fdfdfe; }\n  .list-group-item-light.list-group-item-action:hover, .list-group-item-light.list-group-item-action:focus {\n    color: #818182;\n    background-color: #ececf6; }\n  .list-group-item-light.list-group-item-action.active {\n    color: #fff;\n    background-color: #818182;\n    border-color: #818182; }\n\n.list-group-item-dark {\n  color: #1b1e21;\n  background-color: #c6c8ca; }\n  .list-group-item-dark.list-group-item-action:hover, .list-group-item-dark.list-group-item-action:focus {\n    color: #1b1e21;\n    background-color: #b9bbbe; }\n  .list-group-item-dark.list-group-item-action.active {\n    color: #fff;\n    background-color: #1b1e21;\n    border-color: #1b1e21; }\n\n.close {\n  float: right;\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 1;\n  color: #000;\n  text-shadow: 0 1px 0 #fff;\n  opacity: .5; }\n  .close:hover, .close:focus {\n    color: #000;\n    text-decoration: none;\n    opacity: .75; }\n  .close:not(:disabled):not(.disabled) {\n    cursor: pointer; }\n\nbutton.close {\n  padding: 0;\n  background-color: transparent;\n  border: 0;\n  -webkit-appearance: none; }\n\n.modal-open {\n  overflow: hidden; }\n\n.modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1050;\n  display: none;\n  overflow: hidden;\n  outline: 0; }\n  .modal-open .modal {\n    overflow-x: hidden;\n    overflow-y: auto; }\n\n.modal-dialog {\n  position: relative;\n  width: auto;\n  margin: 0.5rem;\n  pointer-events: none; }\n  .modal.fade .modal-dialog {\n    transition: transform 0.3s ease-out;\n    transform: translate(0, -25%); }\n    @media screen and (prefers-reduced-motion: reduce) {\n      .modal.fade .modal-dialog {\n        transition: none; } }\n  .modal.show .modal-dialog {\n    transform: translate(0, 0); }\n\n.modal-dialog-centered {\n  display: flex;\n  align-items: center;\n  min-height: calc(100% - (0.5rem * 2)); }\n\n.modal-content {\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  pointer-events: auto;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 0.3rem;\n  outline: 0; }\n\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1040;\n  background-color: #000; }\n  .modal-backdrop.fade {\n    opacity: 0; }\n  .modal-backdrop.show {\n    opacity: 0.5; }\n\n.modal-header {\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n  padding: 1rem;\n  border-bottom: 1px solid #e9ecef;\n  border-top-left-radius: 0.3rem;\n  border-top-right-radius: 0.3rem; }\n  .modal-header .close {\n    padding: 1rem;\n    margin: -1rem -1rem -1rem auto; }\n\n.modal-title {\n  margin-bottom: 0;\n  line-height: 1.5; }\n\n.modal-body {\n  position: relative;\n  flex: 1 1 auto;\n  padding: 1rem; }\n\n.modal-footer {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  padding: 1rem;\n  border-top: 1px solid #e9ecef; }\n  .modal-footer > :not(:first-child) {\n    margin-left: .25rem; }\n  .modal-footer > :not(:last-child) {\n    margin-right: .25rem; }\n\n.modal-scrollbar-measure {\n  position: absolute;\n  top: -9999px;\n  width: 50px;\n  height: 50px;\n  overflow: scroll; }\n\n@media (min-width: 576px) {\n  .modal-dialog {\n    max-width: 500px;\n    margin: 1.75rem auto; }\n  .modal-dialog-centered {\n    min-height: calc(100% - (1.75rem * 2)); }\n  .modal-sm {\n    max-width: 300px; } }\n\n@media (min-width: 992px) {\n  .modal-lg {\n    max-width: 800px; } }\n\n.tooltip {\n  position: absolute;\n  z-index: 1070;\n  display: block;\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-style: normal;\n  font-weight: 400;\n  line-height: 1.5;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  letter-spacing: normal;\n  word-break: normal;\n  word-spacing: normal;\n  white-space: normal;\n  line-break: auto;\n  font-size: 0.875rem;\n  word-wrap: break-word;\n  opacity: 0; }\n  .tooltip.show {\n    opacity: 0.9; }\n  .tooltip .arrow {\n    position: absolute;\n    display: block;\n    width: 0.8rem;\n    height: 0.4rem; }\n    .tooltip .arrow::before {\n      position: absolute;\n      content: \"\";\n      border-color: transparent;\n      border-style: solid; }\n\n.bs-tooltip-top, .bs-tooltip-auto[x-placement^=\"top\"] {\n  padding: 0.4rem 0; }\n  .bs-tooltip-top .arrow, .bs-tooltip-auto[x-placement^=\"top\"] .arrow {\n    bottom: 0; }\n    .bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^=\"top\"] .arrow::before {\n      top: 0;\n      border-width: 0.4rem 0.4rem 0;\n      border-top-color: #000; }\n\n.bs-tooltip-right, .bs-tooltip-auto[x-placement^=\"right\"] {\n  padding: 0 0.4rem; }\n  .bs-tooltip-right .arrow, .bs-tooltip-auto[x-placement^=\"right\"] .arrow {\n    left: 0;\n    width: 0.4rem;\n    height: 0.8rem; }\n    .bs-tooltip-right .arrow::before, .bs-tooltip-auto[x-placement^=\"right\"] .arrow::before {\n      right: 0;\n      border-width: 0.4rem 0.4rem 0.4rem 0;\n      border-right-color: #000; }\n\n.bs-tooltip-bottom, .bs-tooltip-auto[x-placement^=\"bottom\"] {\n  padding: 0.4rem 0; }\n  .bs-tooltip-bottom .arrow, .bs-tooltip-auto[x-placement^=\"bottom\"] .arrow {\n    top: 0; }\n    .bs-tooltip-bottom .arrow::before, .bs-tooltip-auto[x-placement^=\"bottom\"] .arrow::before {\n      bottom: 0;\n      border-width: 0 0.4rem 0.4rem;\n      border-bottom-color: #000; }\n\n.bs-tooltip-left, .bs-tooltip-auto[x-placement^=\"left\"] {\n  padding: 0 0.4rem; }\n  .bs-tooltip-left .arrow, .bs-tooltip-auto[x-placement^=\"left\"] .arrow {\n    right: 0;\n    width: 0.4rem;\n    height: 0.8rem; }\n    .bs-tooltip-left .arrow::before, .bs-tooltip-auto[x-placement^=\"left\"] .arrow::before {\n      left: 0;\n      border-width: 0.4rem 0 0.4rem 0.4rem;\n      border-left-color: #000; }\n\n.tooltip-inner {\n  max-width: 200px;\n  padding: 0.25rem 0.5rem;\n  color: #fff;\n  text-align: center;\n  background-color: #000;\n  border-radius: 0.25rem; }\n\n.popover {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 1060;\n  display: block;\n  max-width: 276px;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-style: normal;\n  font-weight: 400;\n  line-height: 1.5;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  letter-spacing: normal;\n  word-break: normal;\n  word-spacing: normal;\n  white-space: normal;\n  line-break: auto;\n  font-size: 0.875rem;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 0.3rem; }\n  .popover .arrow {\n    position: absolute;\n    display: block;\n    width: 1rem;\n    height: 0.5rem;\n    margin: 0 0.3rem; }\n    .popover .arrow::before, .popover .arrow::after {\n      position: absolute;\n      display: block;\n      content: \"\";\n      border-color: transparent;\n      border-style: solid; }\n\n.bs-popover-top, .bs-popover-auto[x-placement^=\"top\"] {\n  margin-bottom: 0.5rem; }\n  .bs-popover-top .arrow, .bs-popover-auto[x-placement^=\"top\"] .arrow {\n    bottom: calc((0.5rem + 1px) * -1); }\n  .bs-popover-top .arrow::before, .bs-popover-auto[x-placement^=\"top\"] .arrow::before,\n  .bs-popover-top .arrow::after,\n  .bs-popover-auto[x-placement^=\"top\"] .arrow::after {\n    border-width: 0.5rem 0.5rem 0; }\n  .bs-popover-top .arrow::before, .bs-popover-auto[x-placement^=\"top\"] .arrow::before {\n    bottom: 0;\n    border-top-color: rgba(0, 0, 0, 0.25); }\n  \n  .bs-popover-top .arrow::after,\n  .bs-popover-auto[x-placement^=\"top\"] .arrow::after {\n    bottom: 1px;\n    border-top-color: #fff; }\n\n.bs-popover-right, .bs-popover-auto[x-placement^=\"right\"] {\n  margin-left: 0.5rem; }\n  .bs-popover-right .arrow, .bs-popover-auto[x-placement^=\"right\"] .arrow {\n    left: calc((0.5rem + 1px) * -1);\n    width: 0.5rem;\n    height: 1rem;\n    margin: 0.3rem 0; }\n  .bs-popover-right .arrow::before, .bs-popover-auto[x-placement^=\"right\"] .arrow::before,\n  .bs-popover-right .arrow::after,\n  .bs-popover-auto[x-placement^=\"right\"] .arrow::after {\n    border-width: 0.5rem 0.5rem 0.5rem 0; }\n  .bs-popover-right .arrow::before, .bs-popover-auto[x-placement^=\"right\"] .arrow::before {\n    left: 0;\n    border-right-color: rgba(0, 0, 0, 0.25); }\n  \n  .bs-popover-right .arrow::after,\n  .bs-popover-auto[x-placement^=\"right\"] .arrow::after {\n    left: 1px;\n    border-right-color: #fff; }\n\n.bs-popover-bottom, .bs-popover-auto[x-placement^=\"bottom\"] {\n  margin-top: 0.5rem; }\n  .bs-popover-bottom .arrow, .bs-popover-auto[x-placement^=\"bottom\"] .arrow {\n    top: calc((0.5rem + 1px) * -1); }\n  .bs-popover-bottom .arrow::before, .bs-popover-auto[x-placement^=\"bottom\"] .arrow::before,\n  .bs-popover-bottom .arrow::after,\n  .bs-popover-auto[x-placement^=\"bottom\"] .arrow::after {\n    border-width: 0 0.5rem 0.5rem 0.5rem; }\n  .bs-popover-bottom .arrow::before, .bs-popover-auto[x-placement^=\"bottom\"] .arrow::before {\n    top: 0;\n    border-bottom-color: rgba(0, 0, 0, 0.25); }\n  \n  .bs-popover-bottom .arrow::after,\n  .bs-popover-auto[x-placement^=\"bottom\"] .arrow::after {\n    top: 1px;\n    border-bottom-color: #fff; }\n  .bs-popover-bottom .popover-header::before, .bs-popover-auto[x-placement^=\"bottom\"] .popover-header::before {\n    position: absolute;\n    top: 0;\n    left: 50%;\n    display: block;\n    width: 1rem;\n    margin-left: -0.5rem;\n    content: \"\";\n    border-bottom: 1px solid #f7f7f7; }\n\n.bs-popover-left, .bs-popover-auto[x-placement^=\"left\"] {\n  margin-right: 0.5rem; }\n  .bs-popover-left .arrow, .bs-popover-auto[x-placement^=\"left\"] .arrow {\n    right: calc((0.5rem + 1px) * -1);\n    width: 0.5rem;\n    height: 1rem;\n    margin: 0.3rem 0; }\n  .bs-popover-left .arrow::before, .bs-popover-auto[x-placement^=\"left\"] .arrow::before,\n  .bs-popover-left .arrow::after,\n  .bs-popover-auto[x-placement^=\"left\"] .arrow::after {\n    border-width: 0.5rem 0 0.5rem 0.5rem; }\n  .bs-popover-left .arrow::before, .bs-popover-auto[x-placement^=\"left\"] .arrow::before {\n    right: 0;\n    border-left-color: rgba(0, 0, 0, 0.25); }\n  \n  .bs-popover-left .arrow::after,\n  .bs-popover-auto[x-placement^=\"left\"] .arrow::after {\n    right: 1px;\n    border-left-color: #fff; }\n\n.popover-header {\n  padding: 0.5rem 0.75rem;\n  margin-bottom: 0;\n  font-size: 1rem;\n  color: inherit;\n  background-color: #f7f7f7;\n  border-bottom: 1px solid #ebebeb;\n  border-top-left-radius: calc(0.3rem - 1px);\n  border-top-right-radius: calc(0.3rem - 1px); }\n  .popover-header:empty {\n    display: none; }\n\n.popover-body {\n  padding: 0.5rem 0.75rem;\n  color: #212529; }\n\n.carousel {\n  position: relative; }\n\n.carousel-inner {\n  position: relative;\n  width: 100%;\n  overflow: hidden; }\n\n.carousel-item {\n  position: relative;\n  display: none;\n  align-items: center;\n  width: 100%;\n  transition: transform 0.6s ease;\n  backface-visibility: hidden;\n  perspective: 1000px; }\n  @media screen and (prefers-reduced-motion: reduce) {\n    .carousel-item {\n      transition: none; } }\n\n.carousel-item.active,\n.carousel-item-next,\n.carousel-item-prev {\n  display: block; }\n\n.carousel-item-next,\n.carousel-item-prev {\n  position: absolute;\n  top: 0; }\n\n.carousel-item-next.carousel-item-left,\n.carousel-item-prev.carousel-item-right {\n  transform: translateX(0); }\n  @supports (transform-style: preserve-3d) {\n    .carousel-item-next.carousel-item-left,\n    .carousel-item-prev.carousel-item-right {\n      transform: translate3d(0, 0, 0); } }\n\n.carousel-item-next,\n.active.carousel-item-right {\n  transform: translateX(100%); }\n  @supports (transform-style: preserve-3d) {\n    .carousel-item-next,\n    .active.carousel-item-right {\n      transform: translate3d(100%, 0, 0); } }\n\n.carousel-item-prev,\n.active.carousel-item-left {\n  transform: translateX(-100%); }\n  @supports (transform-style: preserve-3d) {\n    .carousel-item-prev,\n    .active.carousel-item-left {\n      transform: translate3d(-100%, 0, 0); } }\n\n.carousel-fade .carousel-item {\n  opacity: 0;\n  transition-duration: .6s;\n  transition-property: opacity; }\n\n.carousel-fade .carousel-item.active,\n.carousel-fade .carousel-item-next.carousel-item-left,\n.carousel-fade .carousel-item-prev.carousel-item-right {\n  opacity: 1; }\n\n.carousel-fade .active.carousel-item-left,\n.carousel-fade .active.carousel-item-right {\n  opacity: 0; }\n\n.carousel-fade .carousel-item-next,\n.carousel-fade .carousel-item-prev,\n.carousel-fade .carousel-item.active,\n.carousel-fade .active.carousel-item-left,\n.carousel-fade .active.carousel-item-prev {\n  transform: translateX(0); }\n  @supports (transform-style: preserve-3d) {\n    .carousel-fade .carousel-item-next,\n    .carousel-fade .carousel-item-prev,\n    .carousel-fade .carousel-item.active,\n    .carousel-fade .active.carousel-item-left,\n    .carousel-fade .active.carousel-item-prev {\n      transform: translate3d(0, 0, 0); } }\n\n.carousel-control-prev,\n.carousel-control-next {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 15%;\n  color: #fff;\n  text-align: center;\n  opacity: 0.5; }\n  .carousel-control-prev:hover, .carousel-control-prev:focus,\n  .carousel-control-next:hover,\n  .carousel-control-next:focus {\n    color: #fff;\n    text-decoration: none;\n    outline: 0;\n    opacity: .9; }\n\n.carousel-control-prev {\n  left: 0; }\n\n.carousel-control-next {\n  right: 0; }\n\n.carousel-control-prev-icon,\n.carousel-control-next-icon {\n  display: inline-block;\n  width: 20px;\n  height: 20px;\n  background: transparent no-repeat center center;\n  background-size: 100% 100%; }\n\n.carousel-control-prev-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E\"); }\n\n.carousel-control-next-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E\"); }\n\n.carousel-indicators {\n  position: absolute;\n  right: 0;\n  bottom: 10px;\n  left: 0;\n  z-index: 15;\n  display: flex;\n  justify-content: center;\n  padding-left: 0;\n  margin-right: 15%;\n  margin-left: 15%;\n  list-style: none; }\n  .carousel-indicators li {\n    position: relative;\n    flex: 0 1 auto;\n    width: 30px;\n    height: 3px;\n    margin-right: 3px;\n    margin-left: 3px;\n    text-indent: -999px;\n    cursor: pointer;\n    background-color: rgba(255, 255, 255, 0.5); }\n    .carousel-indicators li::before {\n      position: absolute;\n      top: -10px;\n      left: 0;\n      display: inline-block;\n      width: 100%;\n      height: 10px;\n      content: \"\"; }\n    .carousel-indicators li::after {\n      position: absolute;\n      bottom: -10px;\n      left: 0;\n      display: inline-block;\n      width: 100%;\n      height: 10px;\n      content: \"\"; }\n  .carousel-indicators .active {\n    background-color: #fff; }\n\n.carousel-caption {\n  position: absolute;\n  right: 15%;\n  bottom: 20px;\n  left: 15%;\n  z-index: 10;\n  padding-top: 20px;\n  padding-bottom: 20px;\n  color: #fff;\n  text-align: center; }\n\n.align-baseline {\n  vertical-align: baseline !important; }\n\n.align-top {\n  vertical-align: top !important; }\n\n.align-middle {\n  vertical-align: middle !important; }\n\n.align-bottom {\n  vertical-align: bottom !important; }\n\n.align-text-bottom {\n  vertical-align: text-bottom !important; }\n\n.align-text-top {\n  vertical-align: text-top !important; }\n\n.bg-primary {\n  background-color: #007bff !important; }\n\na.bg-primary:hover, a.bg-primary:focus,\nbutton.bg-primary:hover,\nbutton.bg-primary:focus {\n  background-color: #0062cc !important; }\n\n.bg-secondary {\n  background-color: #6c757d !important; }\n\na.bg-secondary:hover, a.bg-secondary:focus,\nbutton.bg-secondary:hover,\nbutton.bg-secondary:focus {\n  background-color: #545b62 !important; }\n\n.bg-success {\n  background-color: #28a745 !important; }\n\na.bg-success:hover, a.bg-success:focus,\nbutton.bg-success:hover,\nbutton.bg-success:focus {\n  background-color: #1e7e34 !important; }\n\n.bg-info {\n  background-color: #17a2b8 !important; }\n\na.bg-info:hover, a.bg-info:focus,\nbutton.bg-info:hover,\nbutton.bg-info:focus {\n  background-color: #117a8b !important; }\n\n.bg-warning {\n  background-color: #ffc107 !important; }\n\na.bg-warning:hover, a.bg-warning:focus,\nbutton.bg-warning:hover,\nbutton.bg-warning:focus {\n  background-color: #d39e00 !important; }\n\n.bg-danger {\n  background-color: #dc3545 !important; }\n\na.bg-danger:hover, a.bg-danger:focus,\nbutton.bg-danger:hover,\nbutton.bg-danger:focus {\n  background-color: #bd2130 !important; }\n\n.bg-light {\n  background-color: #f8f9fa !important; }\n\na.bg-light:hover, a.bg-light:focus,\nbutton.bg-light:hover,\nbutton.bg-light:focus {\n  background-color: #dae0e5 !important; }\n\n.bg-dark {\n  background-color: #343a40 !important; }\n\na.bg-dark:hover, a.bg-dark:focus,\nbutton.bg-dark:hover,\nbutton.bg-dark:focus {\n  background-color: #1d2124 !important; }\n\n.bg-white {\n  background-color: #fff !important; }\n\n.bg-transparent {\n  background-color: transparent !important; }\n\n.border {\n  border: 1px solid #dee2e6 !important; }\n\n.border-top {\n  border-top: 1px solid #dee2e6 !important; }\n\n.border-right {\n  border-right: 1px solid #dee2e6 !important; }\n\n.border-bottom {\n  border-bottom: 1px solid #dee2e6 !important; }\n\n.border-left {\n  border-left: 1px solid #dee2e6 !important; }\n\n.border-0 {\n  border: 0 !important; }\n\n.border-top-0 {\n  border-top: 0 !important; }\n\n.border-right-0 {\n  border-right: 0 !important; }\n\n.border-bottom-0 {\n  border-bottom: 0 !important; }\n\n.border-left-0 {\n  border-left: 0 !important; }\n\n.border-primary {\n  border-color: #007bff !important; }\n\n.border-secondary {\n  border-color: #6c757d !important; }\n\n.border-success {\n  border-color: #28a745 !important; }\n\n.border-info {\n  border-color: #17a2b8 !important; }\n\n.border-warning {\n  border-color: #ffc107 !important; }\n\n.border-danger {\n  border-color: #dc3545 !important; }\n\n.border-light {\n  border-color: #f8f9fa !important; }\n\n.border-dark {\n  border-color: #343a40 !important; }\n\n.border-white {\n  border-color: #fff !important; }\n\n.rounded {\n  border-radius: 0.25rem !important; }\n\n.rounded-top {\n  border-top-left-radius: 0.25rem !important;\n  border-top-right-radius: 0.25rem !important; }\n\n.rounded-right {\n  border-top-right-radius: 0.25rem !important;\n  border-bottom-right-radius: 0.25rem !important; }\n\n.rounded-bottom {\n  border-bottom-right-radius: 0.25rem !important;\n  border-bottom-left-radius: 0.25rem !important; }\n\n.rounded-left {\n  border-top-left-radius: 0.25rem !important;\n  border-bottom-left-radius: 0.25rem !important; }\n\n.rounded-circle {\n  border-radius: 50% !important; }\n\n.rounded-0 {\n  border-radius: 0 !important; }\n\n.clearfix::after {\n  display: block;\n  clear: both;\n  content: \"\"; }\n\n.d-none {\n  display: none !important; }\n\n.d-inline {\n  display: inline !important; }\n\n.d-inline-block {\n  display: inline-block !important; }\n\n.d-block {\n  display: block !important; }\n\n.d-table {\n  display: table !important; }\n\n.d-table-row {\n  display: table-row !important; }\n\n.d-table-cell {\n  display: table-cell !important; }\n\n.d-flex {\n  display: flex !important; }\n\n.d-inline-flex {\n  display: inline-flex !important; }\n\n@media (min-width: 576px) {\n  .d-sm-none {\n    display: none !important; }\n  .d-sm-inline {\n    display: inline !important; }\n  .d-sm-inline-block {\n    display: inline-block !important; }\n  .d-sm-block {\n    display: block !important; }\n  .d-sm-table {\n    display: table !important; }\n  .d-sm-table-row {\n    display: table-row !important; }\n  .d-sm-table-cell {\n    display: table-cell !important; }\n  .d-sm-flex {\n    display: flex !important; }\n  .d-sm-inline-flex {\n    display: inline-flex !important; } }\n\n@media (min-width: 768px) {\n  .d-md-none {\n    display: none !important; }\n  .d-md-inline {\n    display: inline !important; }\n  .d-md-inline-block {\n    display: inline-block !important; }\n  .d-md-block {\n    display: block !important; }\n  .d-md-table {\n    display: table !important; }\n  .d-md-table-row {\n    display: table-row !important; }\n  .d-md-table-cell {\n    display: table-cell !important; }\n  .d-md-flex {\n    display: flex !important; }\n  .d-md-inline-flex {\n    display: inline-flex !important; } }\n\n@media (min-width: 992px) {\n  .d-lg-none {\n    display: none !important; }\n  .d-lg-inline {\n    display: inline !important; }\n  .d-lg-inline-block {\n    display: inline-block !important; }\n  .d-lg-block {\n    display: block !important; }\n  .d-lg-table {\n    display: table !important; }\n  .d-lg-table-row {\n    display: table-row !important; }\n  .d-lg-table-cell {\n    display: table-cell !important; }\n  .d-lg-flex {\n    display: flex !important; }\n  .d-lg-inline-flex {\n    display: inline-flex !important; } }\n\n@media (min-width: 1200px) {\n  .d-xl-none {\n    display: none !important; }\n  .d-xl-inline {\n    display: inline !important; }\n  .d-xl-inline-block {\n    display: inline-block !important; }\n  .d-xl-block {\n    display: block !important; }\n  .d-xl-table {\n    display: table !important; }\n  .d-xl-table-row {\n    display: table-row !important; }\n  .d-xl-table-cell {\n    display: table-cell !important; }\n  .d-xl-flex {\n    display: flex !important; }\n  .d-xl-inline-flex {\n    display: inline-flex !important; } }\n\n@media print {\n  .d-print-none {\n    display: none !important; }\n  .d-print-inline {\n    display: inline !important; }\n  .d-print-inline-block {\n    display: inline-block !important; }\n  .d-print-block {\n    display: block !important; }\n  .d-print-table {\n    display: table !important; }\n  .d-print-table-row {\n    display: table-row !important; }\n  .d-print-table-cell {\n    display: table-cell !important; }\n  .d-print-flex {\n    display: flex !important; }\n  .d-print-inline-flex {\n    display: inline-flex !important; } }\n\n.embed-responsive {\n  position: relative;\n  display: block;\n  width: 100%;\n  padding: 0;\n  overflow: hidden; }\n  .embed-responsive::before {\n    display: block;\n    content: \"\"; }\n  .embed-responsive .embed-responsive-item,\n  .embed-responsive iframe,\n  .embed-responsive embed,\n  .embed-responsive object,\n  .embed-responsive video {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border: 0; }\n\n.embed-responsive-21by9::before {\n  padding-top: 42.85714%; }\n\n.embed-responsive-16by9::before {\n  padding-top: 56.25%; }\n\n.embed-responsive-4by3::before {\n  padding-top: 75%; }\n\n.embed-responsive-1by1::before {\n  padding-top: 100%; }\n\n.flex-row {\n  flex-direction: row !important; }\n\n.flex-column {\n  flex-direction: column !important; }\n\n.flex-row-reverse {\n  flex-direction: row-reverse !important; }\n\n.flex-column-reverse {\n  flex-direction: column-reverse !important; }\n\n.flex-wrap {\n  flex-wrap: wrap !important; }\n\n.flex-nowrap {\n  flex-wrap: nowrap !important; }\n\n.flex-wrap-reverse {\n  flex-wrap: wrap-reverse !important; }\n\n.flex-fill {\n  flex: 1 1 auto !important; }\n\n.flex-grow-0 {\n  flex-grow: 0 !important; }\n\n.flex-grow-1 {\n  flex-grow: 1 !important; }\n\n.flex-shrink-0 {\n  flex-shrink: 0 !important; }\n\n.flex-shrink-1 {\n  flex-shrink: 1 !important; }\n\n.justify-content-start {\n  justify-content: flex-start !important; }\n\n.justify-content-end {\n  justify-content: flex-end !important; }\n\n.justify-content-center {\n  justify-content: center !important; }\n\n.justify-content-between {\n  justify-content: space-between !important; }\n\n.justify-content-around {\n  justify-content: space-around !important; }\n\n.align-items-start {\n  align-items: flex-start !important; }\n\n.align-items-end {\n  align-items: flex-end !important; }\n\n.align-items-center {\n  align-items: center !important; }\n\n.align-items-baseline {\n  align-items: baseline !important; }\n\n.align-items-stretch {\n  align-items: stretch !important; }\n\n.align-content-start {\n  align-content: flex-start !important; }\n\n.align-content-end {\n  align-content: flex-end !important; }\n\n.align-content-center {\n  align-content: center !important; }\n\n.align-content-between {\n  align-content: space-between !important; }\n\n.align-content-around {\n  align-content: space-around !important; }\n\n.align-content-stretch {\n  align-content: stretch !important; }\n\n.align-self-auto {\n  align-self: auto !important; }\n\n.align-self-start {\n  align-self: flex-start !important; }\n\n.align-self-end {\n  align-self: flex-end !important; }\n\n.align-self-center {\n  align-self: center !important; }\n\n.align-self-baseline {\n  align-self: baseline !important; }\n\n.align-self-stretch {\n  align-self: stretch !important; }\n\n@media (min-width: 576px) {\n  .flex-sm-row {\n    flex-direction: row !important; }\n  .flex-sm-column {\n    flex-direction: column !important; }\n  .flex-sm-row-reverse {\n    flex-direction: row-reverse !important; }\n  .flex-sm-column-reverse {\n    flex-direction: column-reverse !important; }\n  .flex-sm-wrap {\n    flex-wrap: wrap !important; }\n  .flex-sm-nowrap {\n    flex-wrap: nowrap !important; }\n  .flex-sm-wrap-reverse {\n    flex-wrap: wrap-reverse !important; }\n  .flex-sm-fill {\n    flex: 1 1 auto !important; }\n  .flex-sm-grow-0 {\n    flex-grow: 0 !important; }\n  .flex-sm-grow-1 {\n    flex-grow: 1 !important; }\n  .flex-sm-shrink-0 {\n    flex-shrink: 0 !important; }\n  .flex-sm-shrink-1 {\n    flex-shrink: 1 !important; }\n  .justify-content-sm-start {\n    justify-content: flex-start !important; }\n  .justify-content-sm-end {\n    justify-content: flex-end !important; }\n  .justify-content-sm-center {\n    justify-content: center !important; }\n  .justify-content-sm-between {\n    justify-content: space-between !important; }\n  .justify-content-sm-around {\n    justify-content: space-around !important; }\n  .align-items-sm-start {\n    align-items: flex-start !important; }\n  .align-items-sm-end {\n    align-items: flex-end !important; }\n  .align-items-sm-center {\n    align-items: center !important; }\n  .align-items-sm-baseline {\n    align-items: baseline !important; }\n  .align-items-sm-stretch {\n    align-items: stretch !important; }\n  .align-content-sm-start {\n    align-content: flex-start !important; }\n  .align-content-sm-end {\n    align-content: flex-end !important; }\n  .align-content-sm-center {\n    align-content: center !important; }\n  .align-content-sm-between {\n    align-content: space-between !important; }\n  .align-content-sm-around {\n    align-content: space-around !important; }\n  .align-content-sm-stretch {\n    align-content: stretch !important; }\n  .align-self-sm-auto {\n    align-self: auto !important; }\n  .align-self-sm-start {\n    align-self: flex-start !important; }\n  .align-self-sm-end {\n    align-self: flex-end !important; }\n  .align-self-sm-center {\n    align-self: center !important; }\n  .align-self-sm-baseline {\n    align-self: baseline !important; }\n  .align-self-sm-stretch {\n    align-self: stretch !important; } }\n\n@media (min-width: 768px) {\n  .flex-md-row {\n    flex-direction: row !important; }\n  .flex-md-column {\n    flex-direction: column !important; }\n  .flex-md-row-reverse {\n    flex-direction: row-reverse !important; }\n  .flex-md-column-reverse {\n    flex-direction: column-reverse !important; }\n  .flex-md-wrap {\n    flex-wrap: wrap !important; }\n  .flex-md-nowrap {\n    flex-wrap: nowrap !important; }\n  .flex-md-wrap-reverse {\n    flex-wrap: wrap-reverse !important; }\n  .flex-md-fill {\n    flex: 1 1 auto !important; }\n  .flex-md-grow-0 {\n    flex-grow: 0 !important; }\n  .flex-md-grow-1 {\n    flex-grow: 1 !important; }\n  .flex-md-shrink-0 {\n    flex-shrink: 0 !important; }\n  .flex-md-shrink-1 {\n    flex-shrink: 1 !important; }\n  .justify-content-md-start {\n    justify-content: flex-start !important; }\n  .justify-content-md-end {\n    justify-content: flex-end !important; }\n  .justify-content-md-center {\n    justify-content: center !important; }\n  .justify-content-md-between {\n    justify-content: space-between !important; }\n  .justify-content-md-around {\n    justify-content: space-around !important; }\n  .align-items-md-start {\n    align-items: flex-start !important; }\n  .align-items-md-end {\n    align-items: flex-end !important; }\n  .align-items-md-center {\n    align-items: center !important; }\n  .align-items-md-baseline {\n    align-items: baseline !important; }\n  .align-items-md-stretch {\n    align-items: stretch !important; }\n  .align-content-md-start {\n    align-content: flex-start !important; }\n  .align-content-md-end {\n    align-content: flex-end !important; }\n  .align-content-md-center {\n    align-content: center !important; }\n  .align-content-md-between {\n    align-content: space-between !important; }\n  .align-content-md-around {\n    align-content: space-around !important; }\n  .align-content-md-stretch {\n    align-content: stretch !important; }\n  .align-self-md-auto {\n    align-self: auto !important; }\n  .align-self-md-start {\n    align-self: flex-start !important; }\n  .align-self-md-end {\n    align-self: flex-end !important; }\n  .align-self-md-center {\n    align-self: center !important; }\n  .align-self-md-baseline {\n    align-self: baseline !important; }\n  .align-self-md-stretch {\n    align-self: stretch !important; } }\n\n@media (min-width: 992px) {\n  .flex-lg-row {\n    flex-direction: row !important; }\n  .flex-lg-column {\n    flex-direction: column !important; }\n  .flex-lg-row-reverse {\n    flex-direction: row-reverse !important; }\n  .flex-lg-column-reverse {\n    flex-direction: column-reverse !important; }\n  .flex-lg-wrap {\n    flex-wrap: wrap !important; }\n  .flex-lg-nowrap {\n    flex-wrap: nowrap !important; }\n  .flex-lg-wrap-reverse {\n    flex-wrap: wrap-reverse !important; }\n  .flex-lg-fill {\n    flex: 1 1 auto !important; }\n  .flex-lg-grow-0 {\n    flex-grow: 0 !important; }\n  .flex-lg-grow-1 {\n    flex-grow: 1 !important; }\n  .flex-lg-shrink-0 {\n    flex-shrink: 0 !important; }\n  .flex-lg-shrink-1 {\n    flex-shrink: 1 !important; }\n  .justify-content-lg-start {\n    justify-content: flex-start !important; }\n  .justify-content-lg-end {\n    justify-content: flex-end !important; }\n  .justify-content-lg-center {\n    justify-content: center !important; }\n  .justify-content-lg-between {\n    justify-content: space-between !important; }\n  .justify-content-lg-around {\n    justify-content: space-around !important; }\n  .align-items-lg-start {\n    align-items: flex-start !important; }\n  .align-items-lg-end {\n    align-items: flex-end !important; }\n  .align-items-lg-center {\n    align-items: center !important; }\n  .align-items-lg-baseline {\n    align-items: baseline !important; }\n  .align-items-lg-stretch {\n    align-items: stretch !important; }\n  .align-content-lg-start {\n    align-content: flex-start !important; }\n  .align-content-lg-end {\n    align-content: flex-end !important; }\n  .align-content-lg-center {\n    align-content: center !important; }\n  .align-content-lg-between {\n    align-content: space-between !important; }\n  .align-content-lg-around {\n    align-content: space-around !important; }\n  .align-content-lg-stretch {\n    align-content: stretch !important; }\n  .align-self-lg-auto {\n    align-self: auto !important; }\n  .align-self-lg-start {\n    align-self: flex-start !important; }\n  .align-self-lg-end {\n    align-self: flex-end !important; }\n  .align-self-lg-center {\n    align-self: center !important; }\n  .align-self-lg-baseline {\n    align-self: baseline !important; }\n  .align-self-lg-stretch {\n    align-self: stretch !important; } }\n\n@media (min-width: 1200px) {\n  .flex-xl-row {\n    flex-direction: row !important; }\n  .flex-xl-column {\n    flex-direction: column !important; }\n  .flex-xl-row-reverse {\n    flex-direction: row-reverse !important; }\n  .flex-xl-column-reverse {\n    flex-direction: column-reverse !important; }\n  .flex-xl-wrap {\n    flex-wrap: wrap !important; }\n  .flex-xl-nowrap {\n    flex-wrap: nowrap !important; }\n  .flex-xl-wrap-reverse {\n    flex-wrap: wrap-reverse !important; }\n  .flex-xl-fill {\n    flex: 1 1 auto !important; }\n  .flex-xl-grow-0 {\n    flex-grow: 0 !important; }\n  .flex-xl-grow-1 {\n    flex-grow: 1 !important; }\n  .flex-xl-shrink-0 {\n    flex-shrink: 0 !important; }\n  .flex-xl-shrink-1 {\n    flex-shrink: 1 !important; }\n  .justify-content-xl-start {\n    justify-content: flex-start !important; }\n  .justify-content-xl-end {\n    justify-content: flex-end !important; }\n  .justify-content-xl-center {\n    justify-content: center !important; }\n  .justify-content-xl-between {\n    justify-content: space-between !important; }\n  .justify-content-xl-around {\n    justify-content: space-around !important; }\n  .align-items-xl-start {\n    align-items: flex-start !important; }\n  .align-items-xl-end {\n    align-items: flex-end !important; }\n  .align-items-xl-center {\n    align-items: center !important; }\n  .align-items-xl-baseline {\n    align-items: baseline !important; }\n  .align-items-xl-stretch {\n    align-items: stretch !important; }\n  .align-content-xl-start {\n    align-content: flex-start !important; }\n  .align-content-xl-end {\n    align-content: flex-end !important; }\n  .align-content-xl-center {\n    align-content: center !important; }\n  .align-content-xl-between {\n    align-content: space-between !important; }\n  .align-content-xl-around {\n    align-content: space-around !important; }\n  .align-content-xl-stretch {\n    align-content: stretch !important; }\n  .align-self-xl-auto {\n    align-self: auto !important; }\n  .align-self-xl-start {\n    align-self: flex-start !important; }\n  .align-self-xl-end {\n    align-self: flex-end !important; }\n  .align-self-xl-center {\n    align-self: center !important; }\n  .align-self-xl-baseline {\n    align-self: baseline !important; }\n  .align-self-xl-stretch {\n    align-self: stretch !important; } }\n\n.float-left {\n  float: left !important; }\n\n.float-right {\n  float: right !important; }\n\n.float-none {\n  float: none !important; }\n\n@media (min-width: 576px) {\n  .float-sm-left {\n    float: left !important; }\n  .float-sm-right {\n    float: right !important; }\n  .float-sm-none {\n    float: none !important; } }\n\n@media (min-width: 768px) {\n  .float-md-left {\n    float: left !important; }\n  .float-md-right {\n    float: right !important; }\n  .float-md-none {\n    float: none !important; } }\n\n@media (min-width: 992px) {\n  .float-lg-left {\n    float: left !important; }\n  .float-lg-right {\n    float: right !important; }\n  .float-lg-none {\n    float: none !important; } }\n\n@media (min-width: 1200px) {\n  .float-xl-left {\n    float: left !important; }\n  .float-xl-right {\n    float: right !important; }\n  .float-xl-none {\n    float: none !important; } }\n\n.position-static {\n  position: static !important; }\n\n.position-relative {\n  position: relative !important; }\n\n.position-absolute {\n  position: absolute !important; }\n\n.position-fixed {\n  position: fixed !important; }\n\n.position-sticky {\n  position: sticky !important; }\n\n.fixed-top {\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 1030; }\n\n.fixed-bottom {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1030; }\n\n@supports (position: sticky) {\n  .sticky-top {\n    position: sticky;\n    top: 0;\n    z-index: 1020; } }\n\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  border: 0; }\n\n.sr-only-focusable:active, .sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  overflow: visible;\n  clip: auto;\n  white-space: normal; }\n\n.shadow-sm {\n  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; }\n\n.shadow {\n  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; }\n\n.shadow-lg {\n  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }\n\n.shadow-none {\n  box-shadow: none !important; }\n\n.w-25 {\n  width: 25% !important; }\n\n.w-50 {\n  width: 50% !important; }\n\n.w-75 {\n  width: 75% !important; }\n\n.w-100 {\n  width: 100% !important; }\n\n.w-auto {\n  width: auto !important; }\n\n.h-25 {\n  height: 25% !important; }\n\n.h-50 {\n  height: 50% !important; }\n\n.h-75 {\n  height: 75% !important; }\n\n.h-100 {\n  height: 100% !important; }\n\n.h-auto {\n  height: auto !important; }\n\n.mw-100 {\n  max-width: 100% !important; }\n\n.mh-100 {\n  max-height: 100% !important; }\n\n.m-0 {\n  margin: 0 !important; }\n\n.mt-0,\n.my-0 {\n  margin-top: 0 !important; }\n\n.mr-0,\n.mx-0 {\n  margin-right: 0 !important; }\n\n.mb-0,\n.my-0 {\n  margin-bottom: 0 !important; }\n\n.ml-0,\n.mx-0 {\n  margin-left: 0 !important; }\n\n.m-1 {\n  margin: 0.25rem !important; }\n\n.mt-1,\n.my-1 {\n  margin-top: 0.25rem !important; }\n\n.mr-1,\n.mx-1 {\n  margin-right: 0.25rem !important; }\n\n.mb-1,\n.my-1 {\n  margin-bottom: 0.25rem !important; }\n\n.ml-1,\n.mx-1 {\n  margin-left: 0.25rem !important; }\n\n.m-2 {\n  margin: 0.5rem !important; }\n\n.mt-2,\n.my-2 {\n  margin-top: 0.5rem !important; }\n\n.mr-2,\n.mx-2 {\n  margin-right: 0.5rem !important; }\n\n.mb-2,\n.my-2 {\n  margin-bottom: 0.5rem !important; }\n\n.ml-2,\n.mx-2 {\n  margin-left: 0.5rem !important; }\n\n.m-3 {\n  margin: 1rem !important; }\n\n.mt-3,\n.my-3 {\n  margin-top: 1rem !important; }\n\n.mr-3,\n.mx-3 {\n  margin-right: 1rem !important; }\n\n.mb-3,\n.my-3 {\n  margin-bottom: 1rem !important; }\n\n.ml-3,\n.mx-3 {\n  margin-left: 1rem !important; }\n\n.m-4 {\n  margin: 1.5rem !important; }\n\n.mt-4,\n.my-4 {\n  margin-top: 1.5rem !important; }\n\n.mr-4,\n.mx-4 {\n  margin-right: 1.5rem !important; }\n\n.mb-4,\n.my-4 {\n  margin-bottom: 1.5rem !important; }\n\n.ml-4,\n.mx-4 {\n  margin-left: 1.5rem !important; }\n\n.m-5 {\n  margin: 3rem !important; }\n\n.mt-5,\n.my-5 {\n  margin-top: 3rem !important; }\n\n.mr-5,\n.mx-5 {\n  margin-right: 3rem !important; }\n\n.mb-5,\n.my-5 {\n  margin-bottom: 3rem !important; }\n\n.ml-5,\n.mx-5 {\n  margin-left: 3rem !important; }\n\n.p-0 {\n  padding: 0 !important; }\n\n.pt-0,\n.py-0 {\n  padding-top: 0 !important; }\n\n.pr-0,\n.px-0 {\n  padding-right: 0 !important; }\n\n.pb-0,\n.py-0 {\n  padding-bottom: 0 !important; }\n\n.pl-0,\n.px-0 {\n  padding-left: 0 !important; }\n\n.p-1 {\n  padding: 0.25rem !important; }\n\n.pt-1,\n.py-1 {\n  padding-top: 0.25rem !important; }\n\n.pr-1,\n.px-1 {\n  padding-right: 0.25rem !important; }\n\n.pb-1,\n.py-1 {\n  padding-bottom: 0.25rem !important; }\n\n.pl-1,\n.px-1 {\n  padding-left: 0.25rem !important; }\n\n.p-2 {\n  padding: 0.5rem !important; }\n\n.pt-2,\n.py-2 {\n  padding-top: 0.5rem !important; }\n\n.pr-2,\n.px-2 {\n  padding-right: 0.5rem !important; }\n\n.pb-2,\n.py-2 {\n  padding-bottom: 0.5rem !important; }\n\n.pl-2,\n.px-2 {\n  padding-left: 0.5rem !important; }\n\n.p-3 {\n  padding: 1rem !important; }\n\n.pt-3,\n.py-3 {\n  padding-top: 1rem !important; }\n\n.pr-3,\n.px-3 {\n  padding-right: 1rem !important; }\n\n.pb-3,\n.py-3 {\n  padding-bottom: 1rem !important; }\n\n.pl-3,\n.px-3 {\n  padding-left: 1rem !important; }\n\n.p-4 {\n  padding: 1.5rem !important; }\n\n.pt-4,\n.py-4 {\n  padding-top: 1.5rem !important; }\n\n.pr-4,\n.px-4 {\n  padding-right: 1.5rem !important; }\n\n.pb-4,\n.py-4 {\n  padding-bottom: 1.5rem !important; }\n\n.pl-4,\n.px-4 {\n  padding-left: 1.5rem !important; }\n\n.p-5 {\n  padding: 3rem !important; }\n\n.pt-5,\n.py-5 {\n  padding-top: 3rem !important; }\n\n.pr-5,\n.px-5 {\n  padding-right: 3rem !important; }\n\n.pb-5,\n.py-5 {\n  padding-bottom: 3rem !important; }\n\n.pl-5,\n.px-5 {\n  padding-left: 3rem !important; }\n\n.m-auto {\n  margin: auto !important; }\n\n.mt-auto,\n.my-auto {\n  margin-top: auto !important; }\n\n.mr-auto,\n.mx-auto {\n  margin-right: auto !important; }\n\n.mb-auto,\n.my-auto {\n  margin-bottom: auto !important; }\n\n.ml-auto,\n.mx-auto {\n  margin-left: auto !important; }\n\n@media (min-width: 576px) {\n  .m-sm-0 {\n    margin: 0 !important; }\n  .mt-sm-0,\n  .my-sm-0 {\n    margin-top: 0 !important; }\n  .mr-sm-0,\n  .mx-sm-0 {\n    margin-right: 0 !important; }\n  .mb-sm-0,\n  .my-sm-0 {\n    margin-bottom: 0 !important; }\n  .ml-sm-0,\n  .mx-sm-0 {\n    margin-left: 0 !important; }\n  .m-sm-1 {\n    margin: 0.25rem !important; }\n  .mt-sm-1,\n  .my-sm-1 {\n    margin-top: 0.25rem !important; }\n  .mr-sm-1,\n  .mx-sm-1 {\n    margin-right: 0.25rem !important; }\n  .mb-sm-1,\n  .my-sm-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-sm-1,\n  .mx-sm-1 {\n    margin-left: 0.25rem !important; }\n  .m-sm-2 {\n    margin: 0.5rem !important; }\n  .mt-sm-2,\n  .my-sm-2 {\n    margin-top: 0.5rem !important; }\n  .mr-sm-2,\n  .mx-sm-2 {\n    margin-right: 0.5rem !important; }\n  .mb-sm-2,\n  .my-sm-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-sm-2,\n  .mx-sm-2 {\n    margin-left: 0.5rem !important; }\n  .m-sm-3 {\n    margin: 1rem !important; }\n  .mt-sm-3,\n  .my-sm-3 {\n    margin-top: 1rem !important; }\n  .mr-sm-3,\n  .mx-sm-3 {\n    margin-right: 1rem !important; }\n  .mb-sm-3,\n  .my-sm-3 {\n    margin-bottom: 1rem !important; }\n  .ml-sm-3,\n  .mx-sm-3 {\n    margin-left: 1rem !important; }\n  .m-sm-4 {\n    margin: 1.5rem !important; }\n  .mt-sm-4,\n  .my-sm-4 {\n    margin-top: 1.5rem !important; }\n  .mr-sm-4,\n  .mx-sm-4 {\n    margin-right: 1.5rem !important; }\n  .mb-sm-4,\n  .my-sm-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-sm-4,\n  .mx-sm-4 {\n    margin-left: 1.5rem !important; }\n  .m-sm-5 {\n    margin: 3rem !important; }\n  .mt-sm-5,\n  .my-sm-5 {\n    margin-top: 3rem !important; }\n  .mr-sm-5,\n  .mx-sm-5 {\n    margin-right: 3rem !important; }\n  .mb-sm-5,\n  .my-sm-5 {\n    margin-bottom: 3rem !important; }\n  .ml-sm-5,\n  .mx-sm-5 {\n    margin-left: 3rem !important; }\n  .p-sm-0 {\n    padding: 0 !important; }\n  .pt-sm-0,\n  .py-sm-0 {\n    padding-top: 0 !important; }\n  .pr-sm-0,\n  .px-sm-0 {\n    padding-right: 0 !important; }\n  .pb-sm-0,\n  .py-sm-0 {\n    padding-bottom: 0 !important; }\n  .pl-sm-0,\n  .px-sm-0 {\n    padding-left: 0 !important; }\n  .p-sm-1 {\n    padding: 0.25rem !important; }\n  .pt-sm-1,\n  .py-sm-1 {\n    padding-top: 0.25rem !important; }\n  .pr-sm-1,\n  .px-sm-1 {\n    padding-right: 0.25rem !important; }\n  .pb-sm-1,\n  .py-sm-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-sm-1,\n  .px-sm-1 {\n    padding-left: 0.25rem !important; }\n  .p-sm-2 {\n    padding: 0.5rem !important; }\n  .pt-sm-2,\n  .py-sm-2 {\n    padding-top: 0.5rem !important; }\n  .pr-sm-2,\n  .px-sm-2 {\n    padding-right: 0.5rem !important; }\n  .pb-sm-2,\n  .py-sm-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-sm-2,\n  .px-sm-2 {\n    padding-left: 0.5rem !important; }\n  .p-sm-3 {\n    padding: 1rem !important; }\n  .pt-sm-3,\n  .py-sm-3 {\n    padding-top: 1rem !important; }\n  .pr-sm-3,\n  .px-sm-3 {\n    padding-right: 1rem !important; }\n  .pb-sm-3,\n  .py-sm-3 {\n    padding-bottom: 1rem !important; }\n  .pl-sm-3,\n  .px-sm-3 {\n    padding-left: 1rem !important; }\n  .p-sm-4 {\n    padding: 1.5rem !important; }\n  .pt-sm-4,\n  .py-sm-4 {\n    padding-top: 1.5rem !important; }\n  .pr-sm-4,\n  .px-sm-4 {\n    padding-right: 1.5rem !important; }\n  .pb-sm-4,\n  .py-sm-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-sm-4,\n  .px-sm-4 {\n    padding-left: 1.5rem !important; }\n  .p-sm-5 {\n    padding: 3rem !important; }\n  .pt-sm-5,\n  .py-sm-5 {\n    padding-top: 3rem !important; }\n  .pr-sm-5,\n  .px-sm-5 {\n    padding-right: 3rem !important; }\n  .pb-sm-5,\n  .py-sm-5 {\n    padding-bottom: 3rem !important; }\n  .pl-sm-5,\n  .px-sm-5 {\n    padding-left: 3rem !important; }\n  .m-sm-auto {\n    margin: auto !important; }\n  .mt-sm-auto,\n  .my-sm-auto {\n    margin-top: auto !important; }\n  .mr-sm-auto,\n  .mx-sm-auto {\n    margin-right: auto !important; }\n  .mb-sm-auto,\n  .my-sm-auto {\n    margin-bottom: auto !important; }\n  .ml-sm-auto,\n  .mx-sm-auto {\n    margin-left: auto !important; } }\n\n@media (min-width: 768px) {\n  .m-md-0 {\n    margin: 0 !important; }\n  .mt-md-0,\n  .my-md-0 {\n    margin-top: 0 !important; }\n  .mr-md-0,\n  .mx-md-0 {\n    margin-right: 0 !important; }\n  .mb-md-0,\n  .my-md-0 {\n    margin-bottom: 0 !important; }\n  .ml-md-0,\n  .mx-md-0 {\n    margin-left: 0 !important; }\n  .m-md-1 {\n    margin: 0.25rem !important; }\n  .mt-md-1,\n  .my-md-1 {\n    margin-top: 0.25rem !important; }\n  .mr-md-1,\n  .mx-md-1 {\n    margin-right: 0.25rem !important; }\n  .mb-md-1,\n  .my-md-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-md-1,\n  .mx-md-1 {\n    margin-left: 0.25rem !important; }\n  .m-md-2 {\n    margin: 0.5rem !important; }\n  .mt-md-2,\n  .my-md-2 {\n    margin-top: 0.5rem !important; }\n  .mr-md-2,\n  .mx-md-2 {\n    margin-right: 0.5rem !important; }\n  .mb-md-2,\n  .my-md-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-md-2,\n  .mx-md-2 {\n    margin-left: 0.5rem !important; }\n  .m-md-3 {\n    margin: 1rem !important; }\n  .mt-md-3,\n  .my-md-3 {\n    margin-top: 1rem !important; }\n  .mr-md-3,\n  .mx-md-3 {\n    margin-right: 1rem !important; }\n  .mb-md-3,\n  .my-md-3 {\n    margin-bottom: 1rem !important; }\n  .ml-md-3,\n  .mx-md-3 {\n    margin-left: 1rem !important; }\n  .m-md-4 {\n    margin: 1.5rem !important; }\n  .mt-md-4,\n  .my-md-4 {\n    margin-top: 1.5rem !important; }\n  .mr-md-4,\n  .mx-md-4 {\n    margin-right: 1.5rem !important; }\n  .mb-md-4,\n  .my-md-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-md-4,\n  .mx-md-4 {\n    margin-left: 1.5rem !important; }\n  .m-md-5 {\n    margin: 3rem !important; }\n  .mt-md-5,\n  .my-md-5 {\n    margin-top: 3rem !important; }\n  .mr-md-5,\n  .mx-md-5 {\n    margin-right: 3rem !important; }\n  .mb-md-5,\n  .my-md-5 {\n    margin-bottom: 3rem !important; }\n  .ml-md-5,\n  .mx-md-5 {\n    margin-left: 3rem !important; }\n  .p-md-0 {\n    padding: 0 !important; }\n  .pt-md-0,\n  .py-md-0 {\n    padding-top: 0 !important; }\n  .pr-md-0,\n  .px-md-0 {\n    padding-right: 0 !important; }\n  .pb-md-0,\n  .py-md-0 {\n    padding-bottom: 0 !important; }\n  .pl-md-0,\n  .px-md-0 {\n    padding-left: 0 !important; }\n  .p-md-1 {\n    padding: 0.25rem !important; }\n  .pt-md-1,\n  .py-md-1 {\n    padding-top: 0.25rem !important; }\n  .pr-md-1,\n  .px-md-1 {\n    padding-right: 0.25rem !important; }\n  .pb-md-1,\n  .py-md-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-md-1,\n  .px-md-1 {\n    padding-left: 0.25rem !important; }\n  .p-md-2 {\n    padding: 0.5rem !important; }\n  .pt-md-2,\n  .py-md-2 {\n    padding-top: 0.5rem !important; }\n  .pr-md-2,\n  .px-md-2 {\n    padding-right: 0.5rem !important; }\n  .pb-md-2,\n  .py-md-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-md-2,\n  .px-md-2 {\n    padding-left: 0.5rem !important; }\n  .p-md-3 {\n    padding: 1rem !important; }\n  .pt-md-3,\n  .py-md-3 {\n    padding-top: 1rem !important; }\n  .pr-md-3,\n  .px-md-3 {\n    padding-right: 1rem !important; }\n  .pb-md-3,\n  .py-md-3 {\n    padding-bottom: 1rem !important; }\n  .pl-md-3,\n  .px-md-3 {\n    padding-left: 1rem !important; }\n  .p-md-4 {\n    padding: 1.5rem !important; }\n  .pt-md-4,\n  .py-md-4 {\n    padding-top: 1.5rem !important; }\n  .pr-md-4,\n  .px-md-4 {\n    padding-right: 1.5rem !important; }\n  .pb-md-4,\n  .py-md-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-md-4,\n  .px-md-4 {\n    padding-left: 1.5rem !important; }\n  .p-md-5 {\n    padding: 3rem !important; }\n  .pt-md-5,\n  .py-md-5 {\n    padding-top: 3rem !important; }\n  .pr-md-5,\n  .px-md-5 {\n    padding-right: 3rem !important; }\n  .pb-md-5,\n  .py-md-5 {\n    padding-bottom: 3rem !important; }\n  .pl-md-5,\n  .px-md-5 {\n    padding-left: 3rem !important; }\n  .m-md-auto {\n    margin: auto !important; }\n  .mt-md-auto,\n  .my-md-auto {\n    margin-top: auto !important; }\n  .mr-md-auto,\n  .mx-md-auto {\n    margin-right: auto !important; }\n  .mb-md-auto,\n  .my-md-auto {\n    margin-bottom: auto !important; }\n  .ml-md-auto,\n  .mx-md-auto {\n    margin-left: auto !important; } }\n\n@media (min-width: 992px) {\n  .m-lg-0 {\n    margin: 0 !important; }\n  .mt-lg-0,\n  .my-lg-0 {\n    margin-top: 0 !important; }\n  .mr-lg-0,\n  .mx-lg-0 {\n    margin-right: 0 !important; }\n  .mb-lg-0,\n  .my-lg-0 {\n    margin-bottom: 0 !important; }\n  .ml-lg-0,\n  .mx-lg-0 {\n    margin-left: 0 !important; }\n  .m-lg-1 {\n    margin: 0.25rem !important; }\n  .mt-lg-1,\n  .my-lg-1 {\n    margin-top: 0.25rem !important; }\n  .mr-lg-1,\n  .mx-lg-1 {\n    margin-right: 0.25rem !important; }\n  .mb-lg-1,\n  .my-lg-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-lg-1,\n  .mx-lg-1 {\n    margin-left: 0.25rem !important; }\n  .m-lg-2 {\n    margin: 0.5rem !important; }\n  .mt-lg-2,\n  .my-lg-2 {\n    margin-top: 0.5rem !important; }\n  .mr-lg-2,\n  .mx-lg-2 {\n    margin-right: 0.5rem !important; }\n  .mb-lg-2,\n  .my-lg-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-lg-2,\n  .mx-lg-2 {\n    margin-left: 0.5rem !important; }\n  .m-lg-3 {\n    margin: 1rem !important; }\n  .mt-lg-3,\n  .my-lg-3 {\n    margin-top: 1rem !important; }\n  .mr-lg-3,\n  .mx-lg-3 {\n    margin-right: 1rem !important; }\n  .mb-lg-3,\n  .my-lg-3 {\n    margin-bottom: 1rem !important; }\n  .ml-lg-3,\n  .mx-lg-3 {\n    margin-left: 1rem !important; }\n  .m-lg-4 {\n    margin: 1.5rem !important; }\n  .mt-lg-4,\n  .my-lg-4 {\n    margin-top: 1.5rem !important; }\n  .mr-lg-4,\n  .mx-lg-4 {\n    margin-right: 1.5rem !important; }\n  .mb-lg-4,\n  .my-lg-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-lg-4,\n  .mx-lg-4 {\n    margin-left: 1.5rem !important; }\n  .m-lg-5 {\n    margin: 3rem !important; }\n  .mt-lg-5,\n  .my-lg-5 {\n    margin-top: 3rem !important; }\n  .mr-lg-5,\n  .mx-lg-5 {\n    margin-right: 3rem !important; }\n  .mb-lg-5,\n  .my-lg-5 {\n    margin-bottom: 3rem !important; }\n  .ml-lg-5,\n  .mx-lg-5 {\n    margin-left: 3rem !important; }\n  .p-lg-0 {\n    padding: 0 !important; }\n  .pt-lg-0,\n  .py-lg-0 {\n    padding-top: 0 !important; }\n  .pr-lg-0,\n  .px-lg-0 {\n    padding-right: 0 !important; }\n  .pb-lg-0,\n  .py-lg-0 {\n    padding-bottom: 0 !important; }\n  .pl-lg-0,\n  .px-lg-0 {\n    padding-left: 0 !important; }\n  .p-lg-1 {\n    padding: 0.25rem !important; }\n  .pt-lg-1,\n  .py-lg-1 {\n    padding-top: 0.25rem !important; }\n  .pr-lg-1,\n  .px-lg-1 {\n    padding-right: 0.25rem !important; }\n  .pb-lg-1,\n  .py-lg-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-lg-1,\n  .px-lg-1 {\n    padding-left: 0.25rem !important; }\n  .p-lg-2 {\n    padding: 0.5rem !important; }\n  .pt-lg-2,\n  .py-lg-2 {\n    padding-top: 0.5rem !important; }\n  .pr-lg-2,\n  .px-lg-2 {\n    padding-right: 0.5rem !important; }\n  .pb-lg-2,\n  .py-lg-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-lg-2,\n  .px-lg-2 {\n    padding-left: 0.5rem !important; }\n  .p-lg-3 {\n    padding: 1rem !important; }\n  .pt-lg-3,\n  .py-lg-3 {\n    padding-top: 1rem !important; }\n  .pr-lg-3,\n  .px-lg-3 {\n    padding-right: 1rem !important; }\n  .pb-lg-3,\n  .py-lg-3 {\n    padding-bottom: 1rem !important; }\n  .pl-lg-3,\n  .px-lg-3 {\n    padding-left: 1rem !important; }\n  .p-lg-4 {\n    padding: 1.5rem !important; }\n  .pt-lg-4,\n  .py-lg-4 {\n    padding-top: 1.5rem !important; }\n  .pr-lg-4,\n  .px-lg-4 {\n    padding-right: 1.5rem !important; }\n  .pb-lg-4,\n  .py-lg-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-lg-4,\n  .px-lg-4 {\n    padding-left: 1.5rem !important; }\n  .p-lg-5 {\n    padding: 3rem !important; }\n  .pt-lg-5,\n  .py-lg-5 {\n    padding-top: 3rem !important; }\n  .pr-lg-5,\n  .px-lg-5 {\n    padding-right: 3rem !important; }\n  .pb-lg-5,\n  .py-lg-5 {\n    padding-bottom: 3rem !important; }\n  .pl-lg-5,\n  .px-lg-5 {\n    padding-left: 3rem !important; }\n  .m-lg-auto {\n    margin: auto !important; }\n  .mt-lg-auto,\n  .my-lg-auto {\n    margin-top: auto !important; }\n  .mr-lg-auto,\n  .mx-lg-auto {\n    margin-right: auto !important; }\n  .mb-lg-auto,\n  .my-lg-auto {\n    margin-bottom: auto !important; }\n  .ml-lg-auto,\n  .mx-lg-auto {\n    margin-left: auto !important; } }\n\n@media (min-width: 1200px) {\n  .m-xl-0 {\n    margin: 0 !important; }\n  .mt-xl-0,\n  .my-xl-0 {\n    margin-top: 0 !important; }\n  .mr-xl-0,\n  .mx-xl-0 {\n    margin-right: 0 !important; }\n  .mb-xl-0,\n  .my-xl-0 {\n    margin-bottom: 0 !important; }\n  .ml-xl-0,\n  .mx-xl-0 {\n    margin-left: 0 !important; }\n  .m-xl-1 {\n    margin: 0.25rem !important; }\n  .mt-xl-1,\n  .my-xl-1 {\n    margin-top: 0.25rem !important; }\n  .mr-xl-1,\n  .mx-xl-1 {\n    margin-right: 0.25rem !important; }\n  .mb-xl-1,\n  .my-xl-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-xl-1,\n  .mx-xl-1 {\n    margin-left: 0.25rem !important; }\n  .m-xl-2 {\n    margin: 0.5rem !important; }\n  .mt-xl-2,\n  .my-xl-2 {\n    margin-top: 0.5rem !important; }\n  .mr-xl-2,\n  .mx-xl-2 {\n    margin-right: 0.5rem !important; }\n  .mb-xl-2,\n  .my-xl-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-xl-2,\n  .mx-xl-2 {\n    margin-left: 0.5rem !important; }\n  .m-xl-3 {\n    margin: 1rem !important; }\n  .mt-xl-3,\n  .my-xl-3 {\n    margin-top: 1rem !important; }\n  .mr-xl-3,\n  .mx-xl-3 {\n    margin-right: 1rem !important; }\n  .mb-xl-3,\n  .my-xl-3 {\n    margin-bottom: 1rem !important; }\n  .ml-xl-3,\n  .mx-xl-3 {\n    margin-left: 1rem !important; }\n  .m-xl-4 {\n    margin: 1.5rem !important; }\n  .mt-xl-4,\n  .my-xl-4 {\n    margin-top: 1.5rem !important; }\n  .mr-xl-4,\n  .mx-xl-4 {\n    margin-right: 1.5rem !important; }\n  .mb-xl-4,\n  .my-xl-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-xl-4,\n  .mx-xl-4 {\n    margin-left: 1.5rem !important; }\n  .m-xl-5 {\n    margin: 3rem !important; }\n  .mt-xl-5,\n  .my-xl-5 {\n    margin-top: 3rem !important; }\n  .mr-xl-5,\n  .mx-xl-5 {\n    margin-right: 3rem !important; }\n  .mb-xl-5,\n  .my-xl-5 {\n    margin-bottom: 3rem !important; }\n  .ml-xl-5,\n  .mx-xl-5 {\n    margin-left: 3rem !important; }\n  .p-xl-0 {\n    padding: 0 !important; }\n  .pt-xl-0,\n  .py-xl-0 {\n    padding-top: 0 !important; }\n  .pr-xl-0,\n  .px-xl-0 {\n    padding-right: 0 !important; }\n  .pb-xl-0,\n  .py-xl-0 {\n    padding-bottom: 0 !important; }\n  .pl-xl-0,\n  .px-xl-0 {\n    padding-left: 0 !important; }\n  .p-xl-1 {\n    padding: 0.25rem !important; }\n  .pt-xl-1,\n  .py-xl-1 {\n    padding-top: 0.25rem !important; }\n  .pr-xl-1,\n  .px-xl-1 {\n    padding-right: 0.25rem !important; }\n  .pb-xl-1,\n  .py-xl-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-xl-1,\n  .px-xl-1 {\n    padding-left: 0.25rem !important; }\n  .p-xl-2 {\n    padding: 0.5rem !important; }\n  .pt-xl-2,\n  .py-xl-2 {\n    padding-top: 0.5rem !important; }\n  .pr-xl-2,\n  .px-xl-2 {\n    padding-right: 0.5rem !important; }\n  .pb-xl-2,\n  .py-xl-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-xl-2,\n  .px-xl-2 {\n    padding-left: 0.5rem !important; }\n  .p-xl-3 {\n    padding: 1rem !important; }\n  .pt-xl-3,\n  .py-xl-3 {\n    padding-top: 1rem !important; }\n  .pr-xl-3,\n  .px-xl-3 {\n    padding-right: 1rem !important; }\n  .pb-xl-3,\n  .py-xl-3 {\n    padding-bottom: 1rem !important; }\n  .pl-xl-3,\n  .px-xl-3 {\n    padding-left: 1rem !important; }\n  .p-xl-4 {\n    padding: 1.5rem !important; }\n  .pt-xl-4,\n  .py-xl-4 {\n    padding-top: 1.5rem !important; }\n  .pr-xl-4,\n  .px-xl-4 {\n    padding-right: 1.5rem !important; }\n  .pb-xl-4,\n  .py-xl-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-xl-4,\n  .px-xl-4 {\n    padding-left: 1.5rem !important; }\n  .p-xl-5 {\n    padding: 3rem !important; }\n  .pt-xl-5,\n  .py-xl-5 {\n    padding-top: 3rem !important; }\n  .pr-xl-5,\n  .px-xl-5 {\n    padding-right: 3rem !important; }\n  .pb-xl-5,\n  .py-xl-5 {\n    padding-bottom: 3rem !important; }\n  .pl-xl-5,\n  .px-xl-5 {\n    padding-left: 3rem !important; }\n  .m-xl-auto {\n    margin: auto !important; }\n  .mt-xl-auto,\n  .my-xl-auto {\n    margin-top: auto !important; }\n  .mr-xl-auto,\n  .mx-xl-auto {\n    margin-right: auto !important; }\n  .mb-xl-auto,\n  .my-xl-auto {\n    margin-bottom: auto !important; }\n  .ml-xl-auto,\n  .mx-xl-auto {\n    margin-left: auto !important; } }\n\n.text-monospace {\n  font-family: SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; }\n\n.text-justify {\n  text-align: justify !important; }\n\n.text-nowrap {\n  white-space: nowrap !important; }\n\n.text-truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap; }\n\n.text-left {\n  text-align: left !important; }\n\n.text-right {\n  text-align: right !important; }\n\n.text-center {\n  text-align: center !important; }\n\n@media (min-width: 576px) {\n  .text-sm-left {\n    text-align: left !important; }\n  .text-sm-right {\n    text-align: right !important; }\n  .text-sm-center {\n    text-align: center !important; } }\n\n@media (min-width: 768px) {\n  .text-md-left {\n    text-align: left !important; }\n  .text-md-right {\n    text-align: right !important; }\n  .text-md-center {\n    text-align: center !important; } }\n\n@media (min-width: 992px) {\n  .text-lg-left {\n    text-align: left !important; }\n  .text-lg-right {\n    text-align: right !important; }\n  .text-lg-center {\n    text-align: center !important; } }\n\n@media (min-width: 1200px) {\n  .text-xl-left {\n    text-align: left !important; }\n  .text-xl-right {\n    text-align: right !important; }\n  .text-xl-center {\n    text-align: center !important; } }\n\n.text-lowercase {\n  text-transform: lowercase !important; }\n\n.text-uppercase {\n  text-transform: uppercase !important; }\n\n.text-capitalize {\n  text-transform: capitalize !important; }\n\n.font-weight-light {\n  font-weight: 300 !important; }\n\n.font-weight-normal {\n  font-weight: 400 !important; }\n\n.font-weight-bold {\n  font-weight: 700 !important; }\n\n.font-italic {\n  font-style: italic !important; }\n\n.text-white {\n  color: #fff !important; }\n\n.text-primary {\n  color: #007bff !important; }\n\na.text-primary:hover, a.text-primary:focus {\n  color: #0062cc !important; }\n\n.text-secondary {\n  color: #6c757d !important; }\n\na.text-secondary:hover, a.text-secondary:focus {\n  color: #545b62 !important; }\n\n.text-success {\n  color: #28a745 !important; }\n\na.text-success:hover, a.text-success:focus {\n  color: #1e7e34 !important; }\n\n.text-info {\n  color: #17a2b8 !important; }\n\na.text-info:hover, a.text-info:focus {\n  color: #117a8b !important; }\n\n.text-warning {\n  color: #ffc107 !important; }\n\na.text-warning:hover, a.text-warning:focus {\n  color: #d39e00 !important; }\n\n.text-danger {\n  color: #dc3545 !important; }\n\na.text-danger:hover, a.text-danger:focus {\n  color: #bd2130 !important; }\n\n.text-light {\n  color: #f8f9fa !important; }\n\na.text-light:hover, a.text-light:focus {\n  color: #dae0e5 !important; }\n\n.text-dark {\n  color: #343a40 !important; }\n\na.text-dark:hover, a.text-dark:focus {\n  color: #1d2124 !important; }\n\n.text-body {\n  color: #212529 !important; }\n\n.text-muted {\n  color: #6c757d !important; }\n\n.text-black-50 {\n  color: rgba(0, 0, 0, 0.5) !important; }\n\n.text-white-50 {\n  color: rgba(255, 255, 255, 0.5) !important; }\n\n.text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0; }\n\n.visible {\n  visibility: visible !important; }\n\n.invisible {\n  visibility: hidden !important; }\n\n@media print {\n  *,\n  *::before,\n  *::after {\n    text-shadow: none !important;\n    box-shadow: none !important; }\n  a:not(.btn) {\n    text-decoration: underline; }\n  abbr[title]::after {\n    content: \" (\" attr(title) \")\"; }\n  pre {\n    white-space: pre-wrap !important; }\n  pre,\n  blockquote {\n    border: 1px solid #adb5bd;\n    page-break-inside: avoid; }\n  thead {\n    display: table-header-group; }\n  tr,\n  img {\n    page-break-inside: avoid; }\n  p,\n  h2,\n  h3 {\n    orphans: 3;\n    widows: 3; }\n  h2,\n  h3 {\n    page-break-after: avoid; }\n  @page {\n    size: a3; }\n  body {\n    min-width: 992px !important; }\n  .container {\n    min-width: 992px !important; }\n  .navbar {\n    display: none; }\n  .badge {\n    border: 1px solid #000; }\n  .table {\n    border-collapse: collapse !important; }\n    .table td,\n    .table th {\n      background-color: #fff !important; }\n  .table-bordered th,\n  .table-bordered td {\n    border: 1px solid #dee2e6 !important; }\n  .table-dark {\n    color: inherit; }\n    .table-dark th,\n    .table-dark td,\n    .table-dark thead th,\n    .table-dark tbody + tbody {\n      border-color: #dee2e6; }\n  .table .thead-dark th {\n    color: inherit;\n    border-color: #dee2e6; } }\n\nli {\n  list-style: none; }\n", ""]);
 
 // exports
 
@@ -2595,6 +2869,678 @@ function toComment(sourceMap) {
 	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
 
 	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/css/lib/parse/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/css/lib/parse/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// http://www.w3.org/TR/CSS21/grammar.html
+// https://github.com/visionmedia/css-parse/pull/49#issuecomment-30088027
+var commentre = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g
+
+module.exports = function(css, options){
+  options = options || {};
+
+  /**
+   * Positional.
+   */
+
+  var lineno = 1;
+  var column = 1;
+
+  /**
+   * Update lineno and column based on `str`.
+   */
+
+  function updatePosition(str) {
+    var lines = str.match(/\n/g);
+    if (lines) lineno += lines.length;
+    var i = str.lastIndexOf('\n');
+    column = ~i ? str.length - i : column + str.length;
+  }
+
+  /**
+   * Mark position and patch `node.position`.
+   */
+
+  function position() {
+    var start = { line: lineno, column: column };
+    return function(node){
+      node.position = new Position(start);
+      whitespace();
+      return node;
+    };
+  }
+
+  /**
+   * Store position information for a node
+   */
+
+  function Position(start) {
+    this.start = start;
+    this.end = { line: lineno, column: column };
+    this.source = options.source;
+  }
+
+  /**
+   * Non-enumerable source string
+   */
+
+  Position.prototype.content = css;
+
+  /**
+   * Error `msg`.
+   */
+
+  var errorsList = [];
+
+  function error(msg) {
+    var err = new Error(options.source + ':' + lineno + ':' + column + ': ' + msg);
+    err.reason = msg;
+    err.filename = options.source;
+    err.line = lineno;
+    err.column = column;
+    err.source = css;
+
+    if (options.silent) {
+      errorsList.push(err);
+    } else {
+      throw err;
+    }
+  }
+
+  /**
+   * Parse stylesheet.
+   */
+
+  function stylesheet() {
+    var rulesList = rules();
+
+    return {
+      type: 'stylesheet',
+      stylesheet: {
+        source: options.source,
+        rules: rulesList,
+        parsingErrors: errorsList
+      }
+    };
+  }
+
+  /**
+   * Opening brace.
+   */
+
+  function open() {
+    return match(/^{\s*/);
+  }
+
+  /**
+   * Closing brace.
+   */
+
+  function close() {
+    return match(/^}/);
+  }
+
+  /**
+   * Parse ruleset.
+   */
+
+  function rules() {
+    var node;
+    var rules = [];
+    whitespace();
+    comments(rules);
+    while (css.length && css.charAt(0) != '}' && (node = atrule() || rule())) {
+      if (node !== false) {
+        rules.push(node);
+        comments(rules);
+      }
+    }
+    return rules;
+  }
+
+  /**
+   * Match `re` and return captures.
+   */
+
+  function match(re) {
+    var m = re.exec(css);
+    if (!m) return;
+    var str = m[0];
+    updatePosition(str);
+    css = css.slice(str.length);
+    return m;
+  }
+
+  /**
+   * Parse whitespace.
+   */
+
+  function whitespace() {
+    match(/^\s*/);
+  }
+
+  /**
+   * Parse comments;
+   */
+
+  function comments(rules) {
+    var c;
+    rules = rules || [];
+    while (c = comment()) {
+      if (c !== false) {
+        rules.push(c);
+      }
+    }
+    return rules;
+  }
+
+  /**
+   * Parse comment.
+   */
+
+  function comment() {
+    var pos = position();
+    if ('/' != css.charAt(0) || '*' != css.charAt(1)) return;
+
+    var i = 2;
+    while ("" != css.charAt(i) && ('*' != css.charAt(i) || '/' != css.charAt(i + 1))) ++i;
+    i += 2;
+
+    if ("" === css.charAt(i-1)) {
+      return error('End of comment missing');
+    }
+
+    var str = css.slice(2, i - 2);
+    column += 2;
+    updatePosition(str);
+    css = css.slice(i);
+    column += 2;
+
+    return pos({
+      type: 'comment',
+      comment: str
+    });
+  }
+
+  /**
+   * Parse selector.
+   */
+
+  function selector() {
+    var m = match(/^([^{]+)/);
+    if (!m) return;
+    /* @fix Remove all comments from selectors
+     * http://ostermiller.org/findcomment.html */
+    return trim(m[0])
+      .replace(/\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*\/+/g, '')
+      .replace(/"(?:\\"|[^"])*"|'(?:\\'|[^'])*'/g, function(m) {
+        return m.replace(/,/g, '\u200C');
+      })
+      .split(/\s*(?![^(]*\)),\s*/)
+      .map(function(s) {
+        return s.replace(/\u200C/g, ',');
+      });
+  }
+
+  /**
+   * Parse declaration.
+   */
+
+  function declaration() {
+    var pos = position();
+
+    // prop
+    var prop = match(/^(\*?[-#\/\*\\\w]+(\[[0-9a-z_-]+\])?)\s*/);
+    if (!prop) return;
+    prop = trim(prop[0]);
+
+    // :
+    if (!match(/^:\s*/)) return error("property missing ':'");
+
+    // val
+    var val = match(/^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^\)]*?\)|[^};])+)/);
+
+    var ret = pos({
+      type: 'declaration',
+      property: prop.replace(commentre, ''),
+      value: val ? trim(val[0]).replace(commentre, '') : ''
+    });
+
+    // ;
+    match(/^[;\s]*/);
+
+    return ret;
+  }
+
+  /**
+   * Parse declarations.
+   */
+
+  function declarations() {
+    var decls = [];
+
+    if (!open()) return error("missing '{'");
+    comments(decls);
+
+    // declarations
+    var decl;
+    while (decl = declaration()) {
+      if (decl !== false) {
+        decls.push(decl);
+        comments(decls);
+      }
+    }
+
+    if (!close()) return error("missing '}'");
+    return decls;
+  }
+
+  /**
+   * Parse keyframe.
+   */
+
+  function keyframe() {
+    var m;
+    var vals = [];
+    var pos = position();
+
+    while (m = match(/^((\d+\.\d+|\.\d+|\d+)%?|[a-z]+)\s*/)) {
+      vals.push(m[1]);
+      match(/^,\s*/);
+    }
+
+    if (!vals.length) return;
+
+    return pos({
+      type: 'keyframe',
+      values: vals,
+      declarations: declarations()
+    });
+  }
+
+  /**
+   * Parse keyframes.
+   */
+
+  function atkeyframes() {
+    var pos = position();
+    var m = match(/^@([-\w]+)?keyframes\s*/);
+
+    if (!m) return;
+    var vendor = m[1];
+
+    // identifier
+    var m = match(/^([-\w]+)\s*/);
+    if (!m) return error("@keyframes missing name");
+    var name = m[1];
+
+    if (!open()) return error("@keyframes missing '{'");
+
+    var frame;
+    var frames = comments();
+    while (frame = keyframe()) {
+      frames.push(frame);
+      frames = frames.concat(comments());
+    }
+
+    if (!close()) return error("@keyframes missing '}'");
+
+    return pos({
+      type: 'keyframes',
+      name: name,
+      vendor: vendor,
+      keyframes: frames
+    });
+  }
+
+  /**
+   * Parse supports.
+   */
+
+  function atsupports() {
+    var pos = position();
+    var m = match(/^@supports *([^{]+)/);
+
+    if (!m) return;
+    var supports = trim(m[1]);
+
+    if (!open()) return error("@supports missing '{'");
+
+    var style = comments().concat(rules());
+
+    if (!close()) return error("@supports missing '}'");
+
+    return pos({
+      type: 'supports',
+      supports: supports,
+      rules: style
+    });
+  }
+
+  /**
+   * Parse host.
+   */
+
+  function athost() {
+    var pos = position();
+    var m = match(/^@host\s*/);
+
+    if (!m) return;
+
+    if (!open()) return error("@host missing '{'");
+
+    var style = comments().concat(rules());
+
+    if (!close()) return error("@host missing '}'");
+
+    return pos({
+      type: 'host',
+      rules: style
+    });
+  }
+
+  /**
+   * Parse media.
+   */
+
+  function atmedia() {
+    var pos = position();
+    var m = match(/^@media *([^{]+)/);
+
+    if (!m) return;
+    var media = trim(m[1]);
+
+    if (!open()) return error("@media missing '{'");
+
+    var style = comments().concat(rules());
+
+    if (!close()) return error("@media missing '}'");
+
+    return pos({
+      type: 'media',
+      media: media,
+      rules: style
+    });
+  }
+
+
+  /**
+   * Parse custom-media.
+   */
+
+  function atcustommedia() {
+    var pos = position();
+    var m = match(/^@custom-media\s+(--[^\s]+)\s*([^{;]+);/);
+    if (!m) return;
+
+    return pos({
+      type: 'custom-media',
+      name: trim(m[1]),
+      media: trim(m[2])
+    });
+  }
+
+  /**
+   * Parse paged media.
+   */
+
+  function atpage() {
+    var pos = position();
+    var m = match(/^@page */);
+    if (!m) return;
+
+    var sel = selector() || [];
+
+    if (!open()) return error("@page missing '{'");
+    var decls = comments();
+
+    // declarations
+    var decl;
+    while (decl = declaration()) {
+      decls.push(decl);
+      decls = decls.concat(comments());
+    }
+
+    if (!close()) return error("@page missing '}'");
+
+    return pos({
+      type: 'page',
+      selectors: sel,
+      declarations: decls
+    });
+  }
+
+  /**
+   * Parse document.
+   */
+
+  function atdocument() {
+    var pos = position();
+    var m = match(/^@([-\w]+)?document *([^{]+)/);
+    if (!m) return;
+
+    var vendor = trim(m[1]);
+    var doc = trim(m[2]);
+
+    if (!open()) return error("@document missing '{'");
+
+    var style = comments().concat(rules());
+
+    if (!close()) return error("@document missing '}'");
+
+    return pos({
+      type: 'document',
+      document: doc,
+      vendor: vendor,
+      rules: style
+    });
+  }
+
+  /**
+   * Parse font-face.
+   */
+
+  function atfontface() {
+    var pos = position();
+    var m = match(/^@font-face\s*/);
+    if (!m) return;
+
+    if (!open()) return error("@font-face missing '{'");
+    var decls = comments();
+
+    // declarations
+    var decl;
+    while (decl = declaration()) {
+      decls.push(decl);
+      decls = decls.concat(comments());
+    }
+
+    if (!close()) return error("@font-face missing '}'");
+
+    return pos({
+      type: 'font-face',
+      declarations: decls
+    });
+  }
+
+  /**
+   * Parse import
+   */
+
+  var atimport = _compileAtrule('import');
+
+  /**
+   * Parse charset
+   */
+
+  var atcharset = _compileAtrule('charset');
+
+  /**
+   * Parse namespace
+   */
+
+  var atnamespace = _compileAtrule('namespace');
+
+  /**
+   * Parse non-block at-rules
+   */
+
+
+  function _compileAtrule(name) {
+    var re = new RegExp('^@' + name + '\\s*([^;]+);');
+    return function() {
+      var pos = position();
+      var m = match(re);
+      if (!m) return;
+      var ret = { type: name };
+      ret[name] = m[1].trim();
+      return pos(ret);
+    }
+  }
+
+  /**
+   * Parse at rule.
+   */
+
+  function atrule() {
+    if (css[0] != '@') return;
+
+    return atkeyframes()
+      || atmedia()
+      || atcustommedia()
+      || atsupports()
+      || atimport()
+      || atcharset()
+      || atnamespace()
+      || atdocument()
+      || atpage()
+      || athost()
+      || atfontface();
+  }
+
+  /**
+   * Parse rule.
+   */
+
+  function rule() {
+    var pos = position();
+    var sel = selector();
+
+    if (!sel) return error('selector missing');
+    comments();
+
+    return pos({
+      type: 'rule',
+      selectors: sel,
+      declarations: declarations()
+    });
+  }
+
+  return addParent(stylesheet());
+};
+
+/**
+ * Trim `str`.
+ */
+
+function trim(str) {
+  return str ? str.replace(/^\s+|\s+$/g, '') : '';
+}
+
+/**
+ * Adds non-enumerable parent node reference to each node.
+ */
+
+function addParent(obj, parent) {
+  var isNode = obj && typeof obj.type === 'string';
+  var childParent = isNode ? obj : parent;
+
+  for (var k in obj) {
+    var value = obj[k];
+    if (Array.isArray(value)) {
+      value.forEach(function(v) { addParent(v, childParent); });
+    } else if (value && typeof value === 'object') {
+      addParent(value, childParent);
+    }
+  }
+
+  if (isNode) {
+    Object.defineProperty(obj, 'parent', {
+      configurable: true,
+      writable: true,
+      enumerable: false,
+      value: parent || null
+    });
+  }
+
+  return obj;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/detab/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/detab/index.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = detab;
+
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js");
+
+var TAB = 0x09;
+var LF = 0x0A;
+var CR = 0x0D;
+
+/* Replace tabs with spaces, being smart about which
+ * column the tab is at and which size should be used. */
+function detab(value, size) {
+  var string = typeof value === 'string';
+  var length = string && value.length;
+  var start = 0;
+  var index = -1;
+  var column = -1;
+  var tabSize = size || 4;
+  var results = [];
+  var code;
+  var add;
+
+  if (!string) {
+    throw new Error('detab expected string');
+  }
+
+  while (++index < length) {
+    code = value.charCodeAt(index);
+
+    if (code === TAB) {
+      add = tabSize - ((column + 1) % tabSize);
+      column += add;
+      results.push(value.slice(start, index) + repeat(' ', add));
+      start = index + 1;
+    } else if (code === LF || code === CR) {
+      column = -1;
+    } else {
+      column++;
+    }
+  }
+
+  results.push(value.slice(start));
+
+  return results.join('');
 }
 
 
@@ -2909,6 +3855,104 @@ function isObject(arg) {
 function isUndefined(arg) {
   return arg === void 0;
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/extend/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/extend/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var hasOwn = Object.prototype.hasOwnProperty;
+var toStr = Object.prototype.toString;
+
+var isArray = function isArray(arr) {
+	if (typeof Array.isArray === 'function') {
+		return Array.isArray(arr);
+	}
+
+	return toStr.call(arr) === '[object Array]';
+};
+
+var isPlainObject = function isPlainObject(obj) {
+	if (!obj || toStr.call(obj) !== '[object Object]') {
+		return false;
+	}
+
+	var hasOwnConstructor = hasOwn.call(obj, 'constructor');
+	var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
+	// Not own constructor property must be Object
+	if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
+		return false;
+	}
+
+	// Own properties are enumerated firstly, so to speed up,
+	// if last one is own, then all properties are own.
+	var key;
+	for (key in obj) { /**/ }
+
+	return typeof key === 'undefined' || hasOwn.call(obj, key);
+};
+
+module.exports = function extend() {
+	var options, name, src, copy, copyIsArray, clone;
+	var target = arguments[0];
+	var i = 1;
+	var length = arguments.length;
+	var deep = false;
+
+	// Handle a deep copy situation
+	if (typeof target === 'boolean') {
+		deep = target;
+		target = arguments[1] || {};
+		// skip the boolean and the target
+		i = 2;
+	}
+	if (target == null || (typeof target !== 'object' && typeof target !== 'function')) {
+		target = {};
+	}
+
+	for (; i < length; ++i) {
+		options = arguments[i];
+		// Only deal with non-null/undefined values
+		if (options != null) {
+			// Extend the base object
+			for (name in options) {
+				src = target[name];
+				copy = options[name];
+
+				// Prevent never-ending loop
+				if (target !== copy) {
+					// Recurse if we're merging plain objects or arrays
+					if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
+						if (copyIsArray) {
+							copyIsArray = false;
+							clone = src && isArray(src) ? src : [];
+						} else {
+							clone = src && isPlainObject(src) ? src : {};
+						}
+
+						// Never move original objects, clone them
+						target[name] = extend(deep, clone, copy);
+
+					// Don't bring in undefined values
+					} else if (typeof copy !== 'undefined') {
+						target[name] = copy;
+					}
+				}
+			}
+		}
+	}
+
+	// Return the modified object
+	return target;
+};
 
 
 /***/ }),
@@ -3388,6 +4432,4226 @@ module.exports = Dispatcher;
 
 /***/ }),
 
+/***/ "./node_modules/gray-percentage/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/gray-percentage/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+
+module.exports = function(lightness, hue, darkBackground) {
+  if (typeof hue === "undefined") {
+    hue = 0;
+  }
+  if (typeof darkBackground === "undefined") {
+    darkBackground = false;
+  }
+
+  // Convert named hues into numeric lightness value.
+  if (hue === "cool") {
+    hue = 237;
+  }
+  else if (hue === "slate") {
+    hue = 122;
+  }
+  else if (hue === "warm") {
+    hue = 69;
+  }
+
+  if (!isNumeric(hue)) {
+    throw new Error("Hue is not a number");
+  }
+
+  if (!isNumeric(lightness)) {
+    throw new Error("Lightness is not a number");
+  }
+
+  if (lightness > 100) {
+    lightness = 100;
+  }
+  if (lightness < 0) {
+    lightness = 0;
+  }
+
+  var saturation = 0;
+  if (hue !== 0) {
+    var a = 19.92978;
+    var b = -0.3651759;
+    var c = 0.001737214;
+    saturation = a + b * lightness + c * Math.pow(lightness, 2);
+  }
+
+  var opacity = 0
+  if (darkBackground) {
+    opacity = lightness / 100
+    lightness = '100%,'
+  } else {
+    opacity = (100 - lightness) / 100
+    lightness = '0%,'
+  }
+
+  return "hsla(" + hue + "," + saturation + "%," + lightness + opacity + ")";
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/hast-to-hyperscript/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/hast-to-hyperscript/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var html = __webpack_require__(/*! property-information/html */ "./node_modules/property-information/html.js")
+var svg = __webpack_require__(/*! property-information/svg */ "./node_modules/property-information/svg.js")
+var find = __webpack_require__(/*! property-information/find */ "./node_modules/property-information/find.js")
+var spaces = __webpack_require__(/*! space-separated-tokens */ "./node_modules/space-separated-tokens/index.js")
+var commas = __webpack_require__(/*! comma-separated-tokens */ "./node_modules/comma-separated-tokens/index.js")
+var style = __webpack_require__(/*! style-to-object */ "./node_modules/style-to-object/index.js")
+var ns = __webpack_require__(/*! web-namespaces */ "./node_modules/web-namespaces/index.json")
+var is = __webpack_require__(/*! unist-util-is */ "./node_modules/unist-util-is/index.js")
+
+var dashes = /-([a-z])/g
+
+module.exports = wrapper
+
+function wrapper(h, node, options) {
+  var settings = options || {}
+  var prefix
+  var r
+  var v
+
+  if (typeof h !== 'function') {
+    throw new Error('h is not a function')
+  }
+
+  if (typeof settings === 'string' || typeof settings === 'boolean') {
+    prefix = settings
+    settings = {}
+  } else {
+    prefix = settings.prefix
+  }
+
+  r = react(h)
+  v = vdom(h)
+
+  if (prefix === null || prefix === undefined) {
+    prefix = r === true || v === true ? 'h-' : false
+  }
+
+  if (is('root', node)) {
+    if (node.children.length === 1 && is('element', node.children[0])) {
+      node = node.children[0]
+    } else {
+      node = {
+        type: 'element',
+        tagName: 'div',
+        properties: {},
+        children: node.children
+      }
+    }
+  } else if (!is('element', node)) {
+    throw new Error(
+      'Expected root or element, not `' + ((node && node.type) || node) + '`'
+    )
+  }
+
+  return toH(h, node, {
+    schema: settings.space === 'svg' ? svg : html,
+    prefix: prefix,
+    key: 0,
+    react: r,
+    vdom: v,
+    hyperscript: hyperscript(h)
+  })
+}
+
+// Transform a HAST node through a hyperscript interface
+// to *anything*!
+function toH(h, node, ctx) {
+  var parentSchema = ctx.schema
+  var schema = parentSchema
+  var name = node.tagName
+  var properties
+  var attributes
+  var children
+  var property
+  var elements
+  var length
+  var index
+  var value
+  var result
+
+  if (parentSchema.space === 'html' && name.toLowerCase() === 'svg') {
+    schema = svg
+    ctx.schema = schema
+  }
+
+  if (ctx.vdom === true && schema.space === 'html') {
+    name = name.toUpperCase()
+  }
+
+  properties = node.properties
+  attributes = {}
+
+  for (property in properties) {
+    addAttribute(attributes, property, properties[property], ctx)
+  }
+
+  if (
+    typeof attributes.style === 'string' &&
+    (ctx.vdom === true || ctx.react === true)
+  ) {
+    // VDOM and React accept `style` as object.
+    attributes.style = parseStyle(attributes.style, name)
+  }
+
+  if (ctx.prefix) {
+    ctx.key++
+    attributes.key = ctx.prefix + ctx.key
+  }
+
+  if (ctx.vdom && schema.space !== 'html') {
+    attributes.namespace = ns[schema.space]
+  }
+
+  elements = []
+  children = node.children
+  length = children ? children.length : 0
+  index = -1
+
+  while (++index < length) {
+    value = children[index]
+
+    if (is('element', value)) {
+      elements.push(toH(h, value, ctx))
+    } else if (is('text', value)) {
+      elements.push(value.value)
+    }
+  }
+
+  // Ensure no React warnings are triggered for
+  // void elements having children passed in.
+  result =
+    elements.length === 0 ? h(name, attributes) : h(name, attributes, elements)
+
+  // Restore parent schema.
+  ctx.schema = parentSchema
+
+  return result
+}
+
+function addAttribute(props, prop, value, ctx) {
+  var schema = ctx.schema
+  var info = find(schema, prop)
+  var subprop
+
+  // Ignore nully, `false`, `NaN`, and falsey known booleans.
+  if (
+    value === null ||
+    value === undefined ||
+    value === false ||
+    value !== value ||
+    (info.boolean && !value)
+  ) {
+    return
+  }
+
+  if (value !== null && typeof value === 'object' && 'length' in value) {
+    // Accept `array`.  Most props are space-separater.
+    value = (info.commaSeparated ? commas : spaces).stringify(value)
+  }
+
+  // Treat `true` and truthy known booleans.
+  if (info.boolean && ctx.hyperscript === true) {
+    value = ''
+  }
+
+  if (!info.mustUseProperty) {
+    if (ctx.vdom === true) {
+      subprop = 'attributes'
+    } else if (ctx.hyperscript === true) {
+      subprop = 'attrs'
+    }
+  }
+
+  if (subprop) {
+    if (props[subprop] === undefined) {
+      props[subprop] = {}
+    }
+
+    props[subprop][info.attribute] = value
+  } else {
+    props[ctx.react && info.space ? info.property : info.attribute] = value
+  }
+}
+
+// Check if `h` is `react.createElement`.
+function react(h) {
+  var node = h && h('div')
+  return Boolean(
+    node && ('_owner' in node || '_store' in node) && node.key === null
+  )
+}
+
+// Check if `h` is `hyperscript`.
+function hyperscript(h) {
+  return Boolean(h && h.context && h.cleanup)
+}
+
+// Check if `h` is `virtual-dom/h`.
+function vdom(h) {
+  return h && h('div').type === 'VirtualNode'
+}
+
+function parseStyle(value, tagName) {
+  var result = {}
+
+  try {
+    style(value, iterator)
+  } catch (error) {
+    error.message =
+      tagName + '[style]' + error.message.slice('undefined'.length)
+    throw error
+  }
+
+  return result
+
+  function iterator(name, value) {
+    result[styleCase(name)] = value
+  }
+}
+
+function styleCase(val) {
+  if (val.slice(0, 4) === '-ms-') {
+    val = 'ms-' + val.slice(4)
+  }
+
+  return val.replace(dashes, styleReplacer)
+}
+
+function styleReplacer($0, $1) {
+  return $1.toUpperCase()
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/hast-util-parse-selector/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/hast-util-parse-selector/index.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = parse
+
+var dot = '.'.charCodeAt(0)
+var hash = '#'.charCodeAt(0)
+
+/* Parse a simple CSS selector into a HAST node. */
+function parse(selector, defaultTagName) {
+  var value = selector || ''
+  var name = defaultTagName || 'div'
+  var props = {}
+  var index = -1
+  var length = value.length
+  var className
+  var type
+  var code
+  var subvalue
+  var lastIndex
+
+  while (++index <= length) {
+    code = value.charCodeAt(index)
+
+    if (!code || code === dot || code === hash) {
+      subvalue = value.slice(lastIndex, index)
+
+      if (subvalue) {
+        if (type === dot) {
+          if (className) {
+            className.push(subvalue)
+          } else {
+            className = [subvalue]
+            props.className = className
+          }
+        } else if (type === hash) {
+          props.id = subvalue
+        } else {
+          name = subvalue
+        }
+      }
+
+      lastIndex = index + 1
+      type = code
+    }
+  }
+
+  return {
+    type: 'element',
+    tagName: name,
+    properties: props,
+    children: []
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/hast-util-sanitize/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/hast-util-sanitize/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+module.exports = __webpack_require__(/*! ./lib */ "./node_modules/hast-util-sanitize/lib/index.js")
+
+
+/***/ }),
+
+/***/ "./node_modules/hast-util-sanitize/lib/github.json":
+/*!*********************************************************!*\
+  !*** ./node_modules/hast-util-sanitize/lib/github.json ***!
+  \*********************************************************/
+/*! exports provided: strip, clobberPrefix, clobber, ancestors, protocols, tagNames, attributes, required, default */
+/***/ (function(module) {
+
+module.exports = {"strip":["script"],"clobberPrefix":"user-content-","clobber":["name","id"],"ancestors":{"li":["ol","ul"],"tbody":["table"],"tfoot":["table"],"thead":["table"],"td":["table"],"th":["table"],"tr":["table"]},"protocols":{"href":["http","https","mailto"],"cite":["http","https"],"src":["http","https"],"longDesc":["http","https"]},"tagNames":["h1","h2","h3","h4","h5","h6","h7","h8","br","b","i","strong","em","a","pre","code","img","tt","div","ins","del","sup","sub","p","ol","ul","table","thead","tbody","tfoot","blockquote","dl","dt","dd","kbd","q","samp","var","hr","ruby","rt","rp","li","tr","td","th","s","strike","summary","details","input"],"attributes":{"a":["href"],"img":["src","longDesc"],"input":[["type","checkbox"],["disabled",true]],"li":[["className","task-list-item"]],"div":["itemScope","itemType"],"blockquote":["cite"],"del":["cite"],"ins":["cite"],"q":["cite"],"*":["abbr","accept","acceptCharset","accessKey","action","align","alt","axis","border","cellPadding","cellSpacing","char","charoff","charSet","checked","clear","cols","colSpan","color","compact","coords","dateTime","dir","disabled","encType","htmlFor","frame","headers","height","hrefLang","hspace","isMap","id","label","lang","maxLength","media","method","multiple","name","nohref","noshade","nowrap","open","prompt","readOnly","rel","rev","rows","rowSpan","rules","scope","selected","shape","size","span","start","summary","tabIndex","target","title","type","useMap","valign","value","vspace","width","itemProp"]},"required":{"input":{"type":"checkbox","disabled":true}}};
+
+/***/ }),
+
+/***/ "./node_modules/hast-util-sanitize/lib/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/hast-util-sanitize/lib/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var defaults = __webpack_require__(/*! ./github.json */ "./node_modules/hast-util-sanitize/lib/github.json")
+
+module.exports = wrapper
+
+var own = {}.hasOwnProperty
+
+var allData = 'data*'
+
+var NODES = {
+  root: {children: all},
+  doctype: handleDoctype,
+  comment: handleComment,
+  element: {
+    tagName: handleTagName,
+    properties: handleProperties,
+    children: all
+  },
+  text: {value: handleValue},
+  '*': {
+    data: allow,
+    position: allow
+  }
+}
+
+// Sanitize `node`, according to `schema`.
+function wrapper(node, schema) {
+  var ctx = {type: 'root', children: []}
+  var replace
+
+  if (!node || typeof node !== 'object' || !node.type) {
+    return ctx
+  }
+
+  replace = one(xtend(defaults, schema || {}), node, [])
+
+  if (!replace) {
+    return ctx
+  }
+
+  if ('length' in replace) {
+    if (replace.length === 1) {
+      return replace[0]
+    }
+
+    ctx.children = replace
+
+    return ctx
+  }
+
+  return replace
+}
+
+// Sanitize `node`.
+function one(schema, node, stack) {
+  var type = node && node.type
+  var replacement = {type: node.type}
+  var replace = true
+  var definition
+  var allowed
+  var result
+  var key
+
+  if (!own.call(NODES, type)) {
+    replace = false
+  } else {
+    definition = NODES[type]
+
+    if (typeof definition === 'function') {
+      definition = definition(schema, node)
+    }
+
+    if (!definition) {
+      replace = false
+    } else {
+      allowed = xtend(definition, NODES['*'])
+
+      for (key in allowed) {
+        result = allowed[key](schema, node[key], node, stack)
+
+        if (result === false) {
+          replace = false
+
+          // Set the non-safe value.
+          replacement[key] = node[key]
+        } else if (result !== null && result !== undefined) {
+          replacement[key] = result
+        }
+      }
+    }
+  }
+
+  if (!replace) {
+    if (
+      !replacement.children ||
+      replacement.children.length === 0 ||
+      schema.strip.indexOf(replacement.tagName) !== -1
+    ) {
+      return null
+    }
+
+    return replacement.children
+  }
+
+  return replacement
+}
+
+// Sanitize `children`.
+function all(schema, children, node, stack) {
+  var nodes = children || []
+  var length = nodes.length || 0
+  var results = []
+  var index = -1
+  var result
+
+  stack = stack.concat(node.tagName)
+
+  while (++index < length) {
+    result = one(schema, nodes[index], stack)
+
+    if (result) {
+      if ('length' in result) {
+        results = results.concat(result)
+      } else {
+        results.push(result)
+      }
+    }
+  }
+
+  return results
+}
+
+// Sanitize `properties`.
+function handleProperties(schema, properties, node, stack) {
+  var name = handleTagName(schema, node.tagName, node, stack)
+  var attrs = schema.attributes
+  var reqs = schema.required || /* istanbul ignore next */ {}
+  var props = properties || {}
+  var result = {}
+  var allowed
+  var required
+  var definition
+  var prop
+  var value
+
+  allowed = xtend(
+    toPropertyValueMap(attrs['*']),
+    toPropertyValueMap(own.call(attrs, name) ? attrs[name] : [])
+  )
+
+  for (prop in props) {
+    value = props[prop]
+
+    if (own.call(allowed, prop)) {
+      definition = allowed[prop]
+    } else if (data(prop) && own.call(allowed, allData)) {
+      definition = allowed[allData]
+    } else {
+      continue
+    }
+
+    if (value && typeof value === 'object' && 'length' in value) {
+      value = handlePropertyValues(schema, value, prop, definition)
+    } else {
+      value = handlePropertyValue(schema, value, prop, definition)
+    }
+
+    if (value !== null && value !== undefined) {
+      result[prop] = value
+    }
+  }
+
+  required = own.call(reqs, name) ? reqs[name] : {}
+
+  for (prop in required) {
+    if (!own.call(result, prop)) {
+      result[prop] = required[prop]
+    }
+  }
+
+  return result
+}
+
+// Sanitize a property value which is a list.
+function handlePropertyValues(schema, values, prop, definition) {
+  var length = values.length
+  var result = []
+  var index = -1
+  var value
+
+  while (++index < length) {
+    value = handlePropertyValue(schema, values[index], prop, definition)
+
+    if (value !== null && value !== undefined) {
+      result.push(value)
+    }
+  }
+
+  return result
+}
+
+// Sanitize a property value.
+function handlePropertyValue(schema, value, prop, definition) {
+  if (
+    typeof value !== 'boolean' &&
+    typeof value !== 'number' &&
+    typeof value !== 'string'
+  ) {
+    return null
+  }
+
+  if (!handleProtocol(schema, value, prop)) {
+    return null
+  }
+
+  if (definition.length !== 0 && definition.indexOf(value) === -1) {
+    return null
+  }
+
+  if (schema.clobber.indexOf(prop) !== -1) {
+    value = schema.clobberPrefix + value
+  }
+
+  return value
+}
+
+// Check whether `value` is a safe URL.
+function handleProtocol(schema, value, prop) {
+  var protocols = schema.protocols
+  var protocol
+  var first
+  var colon
+  var length
+  var index
+
+  protocols = own.call(protocols, prop) ? protocols[prop].concat() : []
+
+  if (protocols.length === 0) {
+    return true
+  }
+
+  value = String(value)
+  first = value.charAt(0)
+
+  if (first === '#' || first === '/') {
+    return true
+  }
+
+  colon = value.indexOf(':')
+
+  if (colon === -1) {
+    return true
+  }
+
+  length = protocols.length
+  index = -1
+
+  while (++index < length) {
+    protocol = protocols[index]
+
+    if (
+      colon === protocol.length &&
+      value.slice(0, protocol.length) === protocol
+    ) {
+      return true
+    }
+  }
+
+  index = value.indexOf('?')
+
+  if (index !== -1 && colon > index) {
+    return true
+  }
+
+  index = value.indexOf('#')
+
+  if (index !== -1 && colon > index) {
+    return true
+  }
+
+  return false
+}
+
+// Always return a valid HTML5 doctype.
+function handleDoctypeName() {
+  return 'html'
+}
+
+// Sanitize `tagName`.
+function handleTagName(schema, tagName, node, stack) {
+  var name = typeof tagName === 'string' ? tagName : null
+  var ancestors = schema.ancestors
+  var length
+  var index
+
+  if (!name || name === '*' || schema.tagNames.indexOf(name) === -1) {
+    return false
+  }
+
+  ancestors = own.call(ancestors, name) ? ancestors[name] : []
+
+  // Some nodes can break out of their context if they don’t have a certain
+  // ancestor.
+  if (ancestors.length !== 0) {
+    length = ancestors.length + 1
+    index = -1
+
+    while (++index < length) {
+      if (!ancestors[index]) {
+        return false
+      }
+
+      if (stack.indexOf(ancestors[index]) !== -1) {
+        break
+      }
+    }
+  }
+
+  return name
+}
+
+function handleDoctype(schema) {
+  return schema.allowDoctypes ? {name: handleDoctypeName} : null
+}
+
+function handleComment(schema) {
+  return schema.allowComments ? {value: handleValue} : null
+}
+
+// Sanitize `value`.
+function handleValue(schema, value) {
+  return typeof value === 'string' ? value : ''
+}
+
+// Create a map from a list of props or a list of properties and values.
+function toPropertyValueMap(values) {
+  var result = {}
+  var length = values.length
+  var index = -1
+  var value
+
+  while (++index < length) {
+    value = values[index]
+
+    if (value && typeof value === 'object' && 'length' in value) {
+      result[value[0]] = value.slice(1)
+    } else {
+      result[value] = []
+    }
+  }
+
+  return result
+}
+
+// Allow `value`.
+function allow(schema, value) {
+  return value
+}
+
+// Check if `prop` is a data property.
+function data(prop) {
+  return prop.length > 4 && prop.slice(0, 4).toLowerCase() === 'data'
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/hastscript/factory.js":
+/*!********************************************!*\
+  !*** ./node_modules/hastscript/factory.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var find = __webpack_require__(/*! property-information/find */ "./node_modules/property-information/find.js")
+var normalize = __webpack_require__(/*! property-information/normalize */ "./node_modules/property-information/normalize.js")
+var parseSelector = __webpack_require__(/*! hast-util-parse-selector */ "./node_modules/hast-util-parse-selector/index.js")
+var spaces = __webpack_require__(/*! space-separated-tokens */ "./node_modules/space-separated-tokens/index.js").parse
+var commas = __webpack_require__(/*! comma-separated-tokens */ "./node_modules/comma-separated-tokens/index.js").parse
+
+module.exports = factory
+
+function factory(schema, defaultTagName) {
+  return h
+
+  /* Hyperscript compatible DSL for creating virtual HAST trees. */
+  function h(selector, properties) {
+    var node = parseSelector(selector, defaultTagName)
+    var children = Array.prototype.slice.call(arguments, 2)
+    var property
+
+    if (properties && isChildren(properties, node)) {
+      children.unshift(properties)
+      properties = null
+    }
+
+    if (properties) {
+      for (property in properties) {
+        addProperty(node.properties, property, properties[property])
+      }
+    }
+
+    addChild(node.children, children)
+
+    if (node.tagName === 'template') {
+      node.content = {type: 'root', children: node.children}
+      node.children = []
+    }
+
+    return node
+  }
+
+  function addProperty(properties, key, value) {
+    var info
+    var property
+    var result
+
+    /* Ignore nully and NaN values. */
+    if (value === null || value === undefined || value !== value) {
+      return
+    }
+
+    info = find(schema, key)
+    property = info.property
+    result = value
+
+    /* Handle list values. */
+    if (typeof result === 'string') {
+      if (info.spaceSeparated) {
+        result = spaces(result)
+      } else if (info.commaSeparated) {
+        result = commas(result)
+      } else if (info.commaOrSpaceSeparated) {
+        result = spaces(commas(result).join(' '))
+      }
+    }
+
+    /* Accept `object` on style. */
+    if (property === 'style' && typeof value !== 'string') {
+      result = style(result)
+    }
+
+    /* Class-names (which can be added both on the `selector` and here). */
+    if (property === 'className' && properties.className) {
+      result = properties.className.concat(result)
+    }
+
+    properties[property] = parsePrimitives(info, property, result)
+  }
+}
+
+function isChildren(value, node) {
+  return (
+    typeof value === 'string' ||
+    'length' in value ||
+    isNode(node.tagName, value)
+  )
+}
+
+function isNode(tagName, value) {
+  var type = value.type
+
+  if (tagName === 'input' || !type || typeof type !== 'string') {
+    return false
+  }
+
+  if (typeof value.children === 'object' && 'length' in value.children) {
+    return true
+  }
+
+  type = type.toLowerCase()
+
+  if (tagName === 'button') {
+    return (
+      type !== 'menu' &&
+      type !== 'submit' &&
+      type !== 'reset' &&
+      type !== 'button'
+    )
+  }
+
+  return 'value' in value
+}
+
+function addChild(nodes, value) {
+  var index
+  var length
+
+  if (typeof value === 'string' || typeof value === 'number') {
+    nodes.push({type: 'text', value: String(value)})
+    return
+  }
+
+  if (typeof value === 'object' && 'length' in value) {
+    index = -1
+    length = value.length
+
+    while (++index < length) {
+      addChild(nodes, value[index])
+    }
+
+    return
+  }
+
+  if (typeof value !== 'object' || !('type' in value)) {
+    throw new Error('Expected node, nodes, or string, got `' + value + '`')
+  }
+
+  nodes.push(value)
+}
+
+/* Parse a (list of) primitives. */
+function parsePrimitives(info, name, value) {
+  var index
+  var length
+  var result
+
+  if (typeof value !== 'object' || !('length' in value)) {
+    return parsePrimitive(info, name, value)
+  }
+
+  length = value.length
+  index = -1
+  result = []
+
+  while (++index < length) {
+    result[index] = parsePrimitive(info, name, value[index])
+  }
+
+  return result
+}
+
+/* Parse a single primitives. */
+function parsePrimitive(info, name, value) {
+  var result = value
+
+  if (info.number || info.positiveNumber) {
+    if (!isNaN(result) && result !== '') {
+      result = Number(result)
+    }
+  } else if (info.boolean || info.overloadedBoolean) {
+    /* Accept `boolean` and `string`. */
+    if (
+      typeof result === 'string' &&
+      (result === '' || normalize(value) === normalize(name))
+    ) {
+      result = true
+    }
+  }
+
+  return result
+}
+
+function style(value) {
+  var result = []
+  var key
+
+  for (key in value) {
+    result.push([key, value[key]].join(': '))
+  }
+
+  return result.join('; ')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/hastscript/html.js":
+/*!*****************************************!*\
+  !*** ./node_modules/hastscript/html.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var schema = __webpack_require__(/*! property-information/html */ "./node_modules/property-information/html.js")
+var factory = __webpack_require__(/*! ./factory */ "./node_modules/hastscript/factory.js")
+
+var html = factory(schema, 'div')
+html.displayName = 'html'
+
+module.exports = html
+
+
+/***/ }),
+
+/***/ "./node_modules/hastscript/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/hastscript/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(/*! ./html */ "./node_modules/hastscript/html.js")
+
+
+/***/ }),
+
+/***/ "./node_modules/inherits/inherits_browser.js":
+/*!***************************************************!*\
+  !*** ./node_modules/inherits/inherits_browser.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/is-alphabetical/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/is-alphabetical/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = alphabetical
+
+/* Check if the given character code, or the character
+ * code at the first character, is alphabetical. */
+function alphabetical(character) {
+  var code = typeof character === 'string' ? character.charCodeAt(0) : character
+
+  return (
+    (code >= 97 && code <= 122) /* a-z */ ||
+    (code >= 65 && code <= 90) /* A-Z */
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/is-alphanumeric/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/is-alphanumeric/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+module.exports = function (str) {
+	if (typeof str !== 'string') {
+		throw new TypeError('Expected a string');
+	}
+
+	return !/[^0-9a-z\xDF-\xFF]/.test(str.toLowerCase());
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/is-alphanumerical/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/is-alphanumerical/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var alphabetical = __webpack_require__(/*! is-alphabetical */ "./node_modules/is-alphabetical/index.js")
+var decimal = __webpack_require__(/*! is-decimal */ "./node_modules/is-decimal/index.js")
+
+module.exports = alphanumerical
+
+/* Check if the given character code, or the character
+ * code at the first character, is alphanumerical. */
+function alphanumerical(character) {
+  return alphabetical(character) || decimal(character)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/is-decimal/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/is-decimal/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = decimal
+
+/* Check if the given character code, or the character
+ * code at the first character, is decimal. */
+function decimal(character) {
+  var code = typeof character === 'string' ? character.charCodeAt(0) : character
+
+  return code >= 48 && code <= 57 /* 0-9 */
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/is-hexadecimal/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/is-hexadecimal/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = hexadecimal
+
+/* Check if the given character code, or the character
+ * code at the first character, is hexadecimal. */
+function hexadecimal(character) {
+  var code = typeof character === 'string' ? character.charCodeAt(0) : character
+
+  return (
+    (code >= 97 /* a */ && code <= 102) /* z */ ||
+    (code >= 65 /* A */ && code <= 70) /* Z */ ||
+    (code >= 48 /* A */ && code <= 57) /* Z */
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/is-plain-obj/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/is-plain-obj/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var toString = Object.prototype.toString;
+
+module.exports = function (x) {
+	var prototype;
+	return toString.call(x) === '[object Object]' && (prototype = Object.getPrototypeOf(x), prototype === null || prototype === Object.getPrototypeOf({}));
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/is-whitespace-character/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/is-whitespace-character/index.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = whitespace
+
+var fromCode = String.fromCharCode
+var re = /\s/
+
+/* Check if the given character code, or the character
+ * code at the first character, is a whitespace character. */
+function whitespace(character) {
+  return re.test(
+    typeof character === 'number' ? fromCode(character) : character.charAt(0)
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/is-word-character/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/is-word-character/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = wordCharacter
+
+var fromCode = String.fromCharCode
+var re = /\w/
+
+/* Check if the given character code, or the character
+ * code at the first character, is a word character. */
+function wordCharacter(character) {
+  return re.test(
+    typeof character === 'number' ? fromCode(character) : character.charAt(0)
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash.toarray/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash.toarray/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    mapTag = '[object Map]',
+    objectTag = '[object Object]',
+    promiseTag = '[object Promise]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    weakMapTag = '[object WeakMap]';
+
+var dataViewTag = '[object DataView]';
+
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+
+/** Used to detect host constructors (Safari). */
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+/** Used to detect unsigned integer values. */
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+
+/** Used to compose unicode character classes. */
+var rsAstralRange = '\\ud800-\\udfff',
+    rsComboMarksRange = '\\u0300-\\u036f\\ufe20-\\ufe23',
+    rsComboSymbolsRange = '\\u20d0-\\u20f0',
+    rsVarRange = '\\ufe0e\\ufe0f';
+
+/** Used to compose unicode capture groups. */
+var rsAstral = '[' + rsAstralRange + ']',
+    rsCombo = '[' + rsComboMarksRange + rsComboSymbolsRange + ']',
+    rsFitz = '\\ud83c[\\udffb-\\udfff]',
+    rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')',
+    rsNonAstral = '[^' + rsAstralRange + ']',
+    rsRegional = '(?:\\ud83c[\\udde6-\\uddff]){2}',
+    rsSurrPair = '[\\ud800-\\udbff][\\udc00-\\udfff]',
+    rsZWJ = '\\u200d';
+
+/** Used to compose unicode regexes. */
+var reOptMod = rsModifier + '?',
+    rsOptVar = '[' + rsVarRange + ']?',
+    rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
+    rsSeq = rsOptVar + reOptMod + rsOptJoin,
+    rsSymbol = '(?:' + [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral].join('|') + ')';
+
+/** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
+var reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
+
+/** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
+var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboMarksRange + rsComboSymbolsRange + rsVarRange + ']');
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function arrayMap(array, iteratee) {
+  var index = -1,
+      length = array ? array.length : 0,
+      result = Array(length);
+
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
+}
+
+/**
+ * Converts an ASCII `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function asciiToArray(string) {
+  return string.split('');
+}
+
+/**
+ * The base implementation of `_.times` without support for iteratee shorthands
+ * or max array length checks.
+ *
+ * @private
+ * @param {number} n The number of times to invoke `iteratee`.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the array of results.
+ */
+function baseTimes(n, iteratee) {
+  var index = -1,
+      result = Array(n);
+
+  while (++index < n) {
+    result[index] = iteratee(index);
+  }
+  return result;
+}
+
+/**
+ * The base implementation of `_.values` and `_.valuesIn` which creates an
+ * array of `object` property values corresponding to the property names
+ * of `props`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array} props The property names to get values for.
+ * @returns {Object} Returns the array of property values.
+ */
+function baseValues(object, props) {
+  return arrayMap(props, function(key) {
+    return object[key];
+  });
+}
+
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
+function getValue(object, key) {
+  return object == null ? undefined : object[key];
+}
+
+/**
+ * Checks if `string` contains Unicode symbols.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {boolean} Returns `true` if a symbol is found, else `false`.
+ */
+function hasUnicode(string) {
+  return reHasUnicode.test(string);
+}
+
+/**
+ * Checks if `value` is a host object in IE < 9.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+ */
+function isHostObject(value) {
+  // Many host objects are `Object` objects that can coerce to strings
+  // despite having improperly defined `toString` methods.
+  var result = false;
+  if (value != null && typeof value.toString != 'function') {
+    try {
+      result = !!(value + '');
+    } catch (e) {}
+  }
+  return result;
+}
+
+/**
+ * Converts `iterator` to an array.
+ *
+ * @private
+ * @param {Object} iterator The iterator to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function iteratorToArray(iterator) {
+  var data,
+      result = [];
+
+  while (!(data = iterator.next()).done) {
+    result.push(data.value);
+  }
+  return result;
+}
+
+/**
+ * Converts `map` to its key-value pairs.
+ *
+ * @private
+ * @param {Object} map The map to convert.
+ * @returns {Array} Returns the key-value pairs.
+ */
+function mapToArray(map) {
+  var index = -1,
+      result = Array(map.size);
+
+  map.forEach(function(value, key) {
+    result[++index] = [key, value];
+  });
+  return result;
+}
+
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
+function overArg(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+
+/**
+ * Converts `set` to an array of its values.
+ *
+ * @private
+ * @param {Object} set The set to convert.
+ * @returns {Array} Returns the values.
+ */
+function setToArray(set) {
+  var index = -1,
+      result = Array(set.size);
+
+  set.forEach(function(value) {
+    result[++index] = value;
+  });
+  return result;
+}
+
+/**
+ * Converts `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function stringToArray(string) {
+  return hasUnicode(string)
+    ? unicodeToArray(string)
+    : asciiToArray(string);
+}
+
+/**
+ * Converts a Unicode `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function unicodeToArray(string) {
+  return string.match(reUnicode) || [];
+}
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype,
+    objectProto = Object.prototype;
+
+/** Used to detect overreaching core-js shims. */
+var coreJsData = root['__core-js_shared__'];
+
+/** Used to detect methods masquerading as native. */
+var maskSrcKey = (function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? ('Symbol(src)_1.' + uid) : '';
+}());
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/** Used to detect if a method is native. */
+var reIsNative = RegExp('^' +
+  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+);
+
+/** Built-in value references. */
+var Symbol = root.Symbol,
+    iteratorSymbol = Symbol ? Symbol.iterator : undefined,
+    propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object);
+
+/* Built-in method references that are verified to be native. */
+var DataView = getNative(root, 'DataView'),
+    Map = getNative(root, 'Map'),
+    Promise = getNative(root, 'Promise'),
+    Set = getNative(root, 'Set'),
+    WeakMap = getNative(root, 'WeakMap');
+
+/** Used to detect maps, sets, and weakmaps. */
+var dataViewCtorString = toSource(DataView),
+    mapCtorString = toSource(Map),
+    promiseCtorString = toSource(Promise),
+    setCtorString = toSource(Set),
+    weakMapCtorString = toSource(WeakMap);
+
+/**
+ * Creates an array of the enumerable property names of the array-like `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @param {boolean} inherited Specify returning inherited property names.
+ * @returns {Array} Returns the array of property names.
+ */
+function arrayLikeKeys(value, inherited) {
+  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
+  // Safari 9 makes `arguments.length` enumerable in strict mode.
+  var result = (isArray(value) || isArguments(value))
+    ? baseTimes(value.length, String)
+    : [];
+
+  var length = result.length,
+      skipIndexes = !!length;
+
+  for (var key in value) {
+    if ((inherited || hasOwnProperty.call(value, key)) &&
+        !(skipIndexes && (key == 'length' || isIndex(key, length)))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+/**
+ * The base implementation of `getTag`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  return objectToString.call(value);
+}
+
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = (isFunction(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+/**
+ * Copies the values of `source` to `array`.
+ *
+ * @private
+ * @param {Array} source The array to copy values from.
+ * @param {Array} [array=[]] The array to copy values to.
+ * @returns {Array} Returns `array`.
+ */
+function copyArray(source, array) {
+  var index = -1,
+      length = source.length;
+
+  array || (array = Array(length));
+  while (++index < length) {
+    array[index] = source[index];
+  }
+  return array;
+}
+
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+
+/**
+ * Gets the `toStringTag` of `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+var getTag = baseGetTag;
+
+// Fallback for data views, maps, sets, and weak maps in IE 11,
+// for data views in Edge < 14, and promises in Node.js.
+if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
+    (Map && getTag(new Map) != mapTag) ||
+    (Promise && getTag(Promise.resolve()) != promiseTag) ||
+    (Set && getTag(new Set) != setTag) ||
+    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
+  getTag = function(value) {
+    var result = objectToString.call(value),
+        Ctor = result == objectTag ? value.constructor : undefined,
+        ctorString = Ctor ? toSource(Ctor) : undefined;
+
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString: return dataViewTag;
+        case mapCtorString: return mapTag;
+        case promiseCtorString: return promiseTag;
+        case setCtorString: return setTag;
+        case weakMapCtorString: return weakMapTag;
+      }
+    }
+    return result;
+  };
+}
+
+/**
+ * Checks if `value` is a valid array-like index.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+ * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ */
+function isIndex(value, length) {
+  length = length == null ? MAX_SAFE_INTEGER : length;
+  return !!length &&
+    (typeof value == 'number' || reIsUint.test(value)) &&
+    (value > -1 && value % 1 == 0 && value < length);
+}
+
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
+function isMasked(func) {
+  return !!maskSrcKey && (maskSrcKey in func);
+}
+
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
+function isPrototype(value) {
+  var Ctor = value && value.constructor,
+      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
+
+  return value === proto;
+}
+
+/**
+ * Converts `func` to its source code.
+ *
+ * @private
+ * @param {Function} func The function to process.
+ * @returns {string} Returns the source code.
+ */
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString.call(func);
+    } catch (e) {}
+    try {
+      return (func + '');
+    } catch (e) {}
+  }
+  return '';
+}
+
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+function isArguments(value) {
+  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
+  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
+    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
+}
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+/**
+ * Checks if `value` is array-like. A value is considered array-like if it's
+ * not a function and has a `value.length` that's an integer greater than or
+ * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+ * @example
+ *
+ * _.isArrayLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLike(document.body.children);
+ * // => true
+ *
+ * _.isArrayLike('abc');
+ * // => true
+ *
+ * _.isArrayLike(_.noop);
+ * // => false
+ */
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
+}
+
+/**
+ * This method is like `_.isArrayLike` except that it also checks if `value`
+ * is an object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array-like object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArrayLikeObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLikeObject(document.body.children);
+ * // => true
+ *
+ * _.isArrayLikeObject('abc');
+ * // => false
+ *
+ * _.isArrayLikeObject(_.noop);
+ * // => false
+ */
+function isArrayLikeObject(value) {
+  return isObjectLike(value) && isArrayLike(value);
+}
+
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+function isFunction(value) {
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 8-9 which returns 'object' for typed array and other constructors.
+  var tag = isObject(value) ? objectToString.call(value) : '';
+  return tag == funcTag || tag == genTag;
+}
+
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ * @example
+ *
+ * _.isLength(3);
+ * // => true
+ *
+ * _.isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * _.isLength(Infinity);
+ * // => false
+ *
+ * _.isLength('3');
+ * // => false
+ */
+function isLength(value) {
+  return typeof value == 'number' &&
+    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `String` primitive or object.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a string, else `false`.
+ * @example
+ *
+ * _.isString('abc');
+ * // => true
+ *
+ * _.isString(1);
+ * // => false
+ */
+function isString(value) {
+  return typeof value == 'string' ||
+    (!isArray(value) && isObjectLike(value) && objectToString.call(value) == stringTag);
+}
+
+/**
+ * Converts `value` to an array.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {Array} Returns the converted array.
+ * @example
+ *
+ * _.toArray({ 'a': 1, 'b': 2 });
+ * // => [1, 2]
+ *
+ * _.toArray('abc');
+ * // => ['a', 'b', 'c']
+ *
+ * _.toArray(1);
+ * // => []
+ *
+ * _.toArray(null);
+ * // => []
+ */
+function toArray(value) {
+  if (!value) {
+    return [];
+  }
+  if (isArrayLike(value)) {
+    return isString(value) ? stringToArray(value) : copyArray(value);
+  }
+  if (iteratorSymbol && value[iteratorSymbol]) {
+    return iteratorToArray(value[iteratorSymbol]());
+  }
+  var tag = getTag(value),
+      func = tag == mapTag ? mapToArray : (tag == setTag ? setToArray : values);
+
+  return func(value);
+}
+
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+
+/**
+ * Creates an array of the own enumerable string keyed property values of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property values.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.values(new Foo);
+ * // => [1, 2] (iteration order is not guaranteed)
+ *
+ * _.values('hi');
+ * // => ['h', 'i']
+ */
+function values(object) {
+  return object ? baseValues(object, keys(object)) : [];
+}
+
+module.exports = toArray;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/longest-streak/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/longest-streak/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* Expose. */
+module.exports = longestStreak;
+
+/* Get the count of the longest repeating streak of
+ * `character` in `value`. */
+function longestStreak(value, character) {
+  var count = 0;
+  var maximum = 0;
+  var expected;
+  var index;
+
+  if (typeof character !== 'string' || character.length !== 1) {
+    throw new Error('Expected character');
+  }
+
+  value = String(value);
+  index = value.indexOf(character);
+  expected = index;
+
+  while (index !== -1) {
+    count++;
+
+    if (index === expected) {
+      if (count > maximum) {
+        maximum = count;
+      }
+    } else {
+      count = 1;
+    }
+
+    expected = index + 1;
+    index = value.indexOf(character, expected);
+  }
+
+  return maximum;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/markdown-escapes/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/markdown-escapes/index.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = escapes
+
+var defaults = [
+  '\\',
+  '`',
+  '*',
+  '{',
+  '}',
+  '[',
+  ']',
+  '(',
+  ')',
+  '#',
+  '+',
+  '-',
+  '.',
+  '!',
+  '_',
+  '>'
+]
+
+var gfm = defaults.concat(['~', '|'])
+
+var commonmark = gfm.concat([
+  '\n',
+  '"',
+  '$',
+  '%',
+  '&',
+  "'",
+  ',',
+  '/',
+  ':',
+  ';',
+  '<',
+  '=',
+  '?',
+  '@',
+  '^'
+])
+
+escapes.default = defaults
+escapes.gfm = gfm
+escapes.commonmark = commonmark
+
+/* Get markdown escapes. */
+function escapes(options) {
+  var settings = options || {}
+
+  if (settings.commonmark) {
+    return commonmark
+  }
+
+  return settings.gfm ? gfm : defaults
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/markdown-table/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/markdown-table/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* Expose. */
+module.exports = markdownTable
+
+/* Expressions. */
+var EXPRESSION_DOT = /\./
+var EXPRESSION_LAST_DOT = /\.[^.]*$/
+
+/* Allowed alignment values. */
+var LEFT = 'l'
+var RIGHT = 'r'
+var CENTER = 'c'
+var DOT = '.'
+var NULL = ''
+
+var ALLIGNMENT = [LEFT, RIGHT, CENTER, DOT, NULL]
+var MIN_CELL_SIZE = 3
+
+/* Characters. */
+var COLON = ':'
+var DASH = '-'
+var PIPE = '|'
+var SPACE = ' '
+var NEW_LINE = '\n'
+
+/* Create a table from a matrix of strings. */
+function markdownTable(table, options) {
+  var settings = options || {}
+  var delimiter = settings.delimiter
+  var start = settings.start
+  var end = settings.end
+  var alignment = settings.align
+  var calculateStringLength = settings.stringLength || lengthNoop
+  var cellCount = 0
+  var rowIndex = -1
+  var rowLength = table.length
+  var sizes = []
+  var align
+  var rule
+  var rows
+  var row
+  var cells
+  var index
+  var position
+  var size
+  var value
+  var spacing
+  var before
+  var after
+
+  alignment = alignment ? alignment.concat() : []
+
+  if (delimiter === null || delimiter === undefined) {
+    delimiter = SPACE + PIPE + SPACE
+  }
+
+  if (start === null || start === undefined) {
+    start = PIPE + SPACE
+  }
+
+  if (end === null || end === undefined) {
+    end = SPACE + PIPE
+  }
+
+  while (++rowIndex < rowLength) {
+    row = table[rowIndex]
+
+    index = -1
+
+    if (row.length > cellCount) {
+      cellCount = row.length
+    }
+
+    while (++index < cellCount) {
+      position = row[index] ? dotindex(row[index]) : null
+
+      if (!sizes[index]) {
+        sizes[index] = MIN_CELL_SIZE
+      }
+
+      if (position > sizes[index]) {
+        sizes[index] = position
+      }
+    }
+  }
+
+  if (typeof alignment === 'string') {
+    alignment = pad(cellCount, alignment).split('')
+  }
+
+  /* Make sure only valid alignments are used. */
+  index = -1
+
+  while (++index < cellCount) {
+    align = alignment[index]
+
+    if (typeof align === 'string') {
+      align = align.charAt(0).toLowerCase()
+    }
+
+    if (ALLIGNMENT.indexOf(align) === -1) {
+      align = NULL
+    }
+
+    alignment[index] = align
+  }
+
+  rowIndex = -1
+  rows = []
+
+  while (++rowIndex < rowLength) {
+    row = table[rowIndex]
+
+    index = -1
+    cells = []
+
+    while (++index < cellCount) {
+      value = row[index]
+
+      value = stringify(value)
+
+      if (alignment[index] === DOT) {
+        position = dotindex(value)
+
+        size =
+          sizes[index] +
+          (EXPRESSION_DOT.test(value) ? 0 : 1) -
+          (calculateStringLength(value) - position)
+
+        cells[index] = value + pad(size - 1)
+      } else {
+        cells[index] = value
+      }
+    }
+
+    rows[rowIndex] = cells
+  }
+
+  sizes = []
+  rowIndex = -1
+
+  while (++rowIndex < rowLength) {
+    cells = rows[rowIndex]
+
+    index = -1
+
+    while (++index < cellCount) {
+      value = cells[index]
+
+      if (!sizes[index]) {
+        sizes[index] = MIN_CELL_SIZE
+      }
+
+      size = calculateStringLength(value)
+
+      if (size > sizes[index]) {
+        sizes[index] = size
+      }
+    }
+  }
+
+  rowIndex = -1
+
+  while (++rowIndex < rowLength) {
+    cells = rows[rowIndex]
+
+    index = -1
+
+    if (settings.pad !== false) {
+      while (++index < cellCount) {
+        value = cells[index]
+
+        position = sizes[index] - (calculateStringLength(value) || 0)
+        spacing = pad(position)
+
+        if (alignment[index] === RIGHT || alignment[index] === DOT) {
+          value = spacing + value
+        } else if (alignment[index] === CENTER) {
+          position /= 2
+
+          if (position % 1 === 0) {
+            before = position
+            after = position
+          } else {
+            before = position + 0.5
+            after = position - 0.5
+          }
+
+          value = pad(before) + value + pad(after)
+        } else {
+          value += spacing
+        }
+
+        cells[index] = value
+      }
+    }
+
+    rows[rowIndex] = cells.join(delimiter)
+  }
+
+  if (settings.rule !== false) {
+    index = -1
+    rule = []
+
+    while (++index < cellCount) {
+      /* When `pad` is false, make the rule the same size as the first row. */
+      if (settings.pad === false) {
+        value = table[0][index]
+        spacing = calculateStringLength(stringify(value))
+        spacing = spacing > MIN_CELL_SIZE ? spacing : MIN_CELL_SIZE
+      } else {
+        spacing = sizes[index]
+      }
+
+      align = alignment[index]
+
+      /* When `align` is left, don't add colons. */
+      value = align === RIGHT || align === NULL ? DASH : COLON
+      value += pad(spacing - 2, DASH)
+      value += align !== LEFT && align !== NULL ? COLON : DASH
+
+      rule[index] = value
+    }
+
+    rows.splice(1, 0, rule.join(delimiter))
+  }
+
+  return start + rows.join(end + NEW_LINE + start) + end
+}
+
+function stringify(value) {
+  return value === null || value === undefined ? '' : String(value)
+}
+
+/* Get the length of `value`. */
+function lengthNoop(value) {
+  return String(value).length
+}
+
+/* Get a string consisting of `length` `character`s. */
+function pad(length, character) {
+  return new Array(length + 1).join(character || SPACE)
+}
+
+/* Get the position of the last dot in `value`. */
+function dotindex(value) {
+  var match = EXPRESSION_LAST_DOT.exec(value)
+
+  return match ? match.index + 1 : value.length
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-compact/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/mdast-util-compact/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var visit = __webpack_require__(/*! unist-util-visit */ "./node_modules/unist-util-visit/index.js")
+
+module.exports = compact
+
+/* Make an MDAST tree compact by merging adjacent text nodes. */
+function compact(tree, commonmark) {
+  visit(tree, visitor)
+
+  return tree
+
+  function visitor(child, index, parent) {
+    var siblings = parent ? parent.children : []
+    var prev = index && siblings[index - 1]
+
+    if (
+      prev &&
+      child.type === prev.type &&
+      mergeable(prev, commonmark) &&
+      mergeable(child, commonmark)
+    ) {
+      if (child.value) {
+        prev.value += child.value
+      }
+
+      if (child.children) {
+        prev.children = prev.children.concat(child.children)
+      }
+
+      siblings.splice(index, 1)
+
+      if (prev.position && child.position) {
+        prev.position.end = child.position.end
+      }
+
+      return index
+    }
+  }
+}
+
+function mergeable(node, commonmark) {
+  var start
+  var end
+
+  if (node.type === 'text') {
+    if (!node.position) {
+      return true
+    }
+
+    start = node.position.start
+    end = node.position.end
+
+    /* Only merge nodes which occupy the same size as their `value`. */
+    return (
+      start.line !== end.line || end.column - start.column === node.value.length
+    )
+  }
+
+  return commonmark && node.type === 'blockquote'
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-definitions/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/mdast-util-definitions/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var visit = __webpack_require__(/*! unist-util-visit */ "./node_modules/unist-util-visit/index.js")
+
+module.exports = getDefinitionFactory
+
+var own = {}.hasOwnProperty
+
+/* Get a definition in `node` by `identifier`. */
+function getDefinitionFactory(node, options) {
+  return getterFactory(gather(node, options))
+}
+
+/* Gather all definitions in `node` */
+function gather(node, options) {
+  var cache = {}
+
+  if (!node || !node.type) {
+    throw new Error('mdast-util-definitions expected node')
+  }
+
+  visit(node, 'definition', options && options.commonmark ? commonmark : normal)
+
+  return cache
+
+  function commonmark(definition) {
+    var id = normalise(definition.identifier)
+    if (!own.call(cache, id)) {
+      cache[id] = definition
+    }
+  }
+
+  function normal(definition) {
+    cache[normalise(definition.identifier)] = definition
+  }
+}
+
+/* Factory to get a node from the given definition-cache. */
+function getterFactory(cache) {
+  return getter
+
+  /* Get a node from the bound definition-cache. */
+  function getter(identifier) {
+    var id = identifier && normalise(identifier)
+    return id && own.call(cache, id) ? cache[id] : null
+  }
+}
+
+function normalise(identifier) {
+  return identifier.toUpperCase()
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+module.exports = __webpack_require__(/*! ./lib */ "./node_modules/mdast-util-to-hast/lib/index.js")
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/all.js":
+/*!****************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/all.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = all
+
+var trim = __webpack_require__(/*! trim */ "./node_modules/trim/index.js")
+var one = __webpack_require__(/*! ./one */ "./node_modules/mdast-util-to-hast/lib/one.js")
+
+function all(h, parent) {
+  var nodes = parent.children || []
+  var length = nodes.length
+  var values = []
+  var index = -1
+  var result
+  var head
+
+  while (++index < length) {
+    result = one(h, nodes[index], parent)
+
+    if (result) {
+      if (index && nodes[index - 1].type === 'break') {
+        if (result.value) {
+          result.value = trim.left(result.value)
+        }
+
+        head = result.children && result.children[0]
+
+        if (head && head.value) {
+          head.value = trim.left(head.value)
+        }
+      }
+
+      values = values.concat(result)
+    }
+  }
+
+  return values
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/footer.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/footer.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = generateFootnotes
+
+var thematicBreak = __webpack_require__(/*! ./handlers/thematic-break */ "./node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js")
+var list = __webpack_require__(/*! ./handlers/list */ "./node_modules/mdast-util-to-hast/lib/handlers/list.js")
+var wrap = __webpack_require__(/*! ./wrap */ "./node_modules/mdast-util-to-hast/lib/wrap.js")
+
+function generateFootnotes(h) {
+  var footnotes = h.footnotes
+  var length = footnotes.length
+  var index = -1
+  var listItems = []
+  var def
+  var backReference
+  var content
+  var tail
+
+  if (!length) {
+    return null
+  }
+
+  while (++index < length) {
+    def = footnotes[index]
+    content = def.children.concat()
+    tail = content[content.length - 1]
+    backReference = {
+      type: 'link',
+      url: '#fnref-' + def.identifier,
+      data: {hProperties: {className: ['footnote-backref']}},
+      children: [{type: 'text', value: '↩'}]
+    }
+
+    if (!tail || tail.type !== 'paragraph') {
+      tail = {type: 'paragraph', children: []}
+      content.push(tail)
+    }
+
+    tail.children.push(backReference)
+
+    listItems[index] = {
+      type: 'listItem',
+      data: {hProperties: {id: 'fn-' + def.identifier}},
+      children: content,
+      position: def.position
+    }
+  }
+
+  return h(
+    null,
+    'div',
+    {className: ['footnotes']},
+    wrap(
+      [
+        thematicBreak(h),
+        list(h, {type: 'list', ordered: true, children: listItems})
+      ],
+      true
+    )
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/blockquote.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/blockquote.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = blockquote
+
+var wrap = __webpack_require__(/*! ../wrap */ "./node_modules/mdast-util-to-hast/lib/wrap.js")
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function blockquote(h, node) {
+  return h(node, 'blockquote', wrap(all(h, node), true))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/break.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/break.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = hardBreak
+
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+
+function hardBreak(h, node) {
+  return [h(node, 'br'), u('text', '\n')]
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/code.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/code.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = code
+
+var detab = __webpack_require__(/*! detab */ "./node_modules/detab/index.js")
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+
+function code(h, node) {
+  var value = node.value ? detab(node.value + '\n') : ''
+  var lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
+  var props = {}
+
+  if (lang) {
+    props.className = ['language-' + lang]
+  }
+
+  return h(node.position, 'pre', [h(node, 'code', props, [u('text', value)])])
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/delete.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/delete.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = strikethrough
+
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function strikethrough(h, node) {
+  return h(node, 'del', all(h, node))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/emphasis.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/emphasis.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = emphasis
+
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function emphasis(h, node) {
+  return h(node, 'em', all(h, node))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = footnoteReference
+
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+
+function footnoteReference(h, node) {
+  var identifier = node.identifier
+
+  return h(node.position, 'sup', {id: 'fnref-' + identifier}, [
+    h(node, 'a', {href: '#fn-' + identifier, className: ['footnote-ref']}, [
+      u('text', identifier)
+    ])
+  ])
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/footnote.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/footnote.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = footnote
+
+var footnoteReference = __webpack_require__(/*! ./footnote-reference */ "./node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js")
+
+function footnote(h, node) {
+  var identifiers = []
+  var identifier = 1
+  var footnotes = h.footnotes
+  var length = footnotes.length
+  var index = -1
+
+  while (++index < length) {
+    identifiers[index] = footnotes[index].identifier
+  }
+
+  while (identifiers.indexOf(String(identifier)) !== -1) {
+    identifier++
+  }
+
+  identifier = String(identifier)
+
+  footnotes.push({
+    type: 'footnoteDefinition',
+    identifier: identifier,
+    children: [{type: 'paragraph', children: node.children}],
+    position: node.position
+  })
+
+  return footnoteReference(h, {
+    type: 'footnoteReference',
+    identifier: identifier,
+    position: node.position
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/heading.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/heading.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = heading
+
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function heading(h, node) {
+  return h(node, 'h' + node.depth, all(h, node))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/html.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/html.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = html
+
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+
+// Return either a `raw` node, in dangerous mode, or nothing.
+function html(h, node) {
+  return h.dangerous ? h.augment(node, u('raw', node.value)) : null
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/image-reference.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/image-reference.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = imageReference
+
+var normalize = __webpack_require__(/*! mdurl/encode */ "./node_modules/mdurl/encode.js")
+var revert = __webpack_require__(/*! ../revert */ "./node_modules/mdast-util-to-hast/lib/revert.js")
+
+function imageReference(h, node) {
+  var def = h.definition(node.identifier)
+  var props
+
+  if (!def) {
+    return revert(h, node)
+  }
+
+  props = {src: normalize(def.url || ''), alt: node.alt}
+
+  if (def.title !== null && def.title !== undefined) {
+    props.title = def.title
+  }
+
+  return h(node, 'img', props)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/image.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/image.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var normalize = __webpack_require__(/*! mdurl/encode */ "./node_modules/mdurl/encode.js")
+
+module.exports = image
+
+function image(h, node) {
+  var props = {src: normalize(node.url), alt: node.alt}
+
+  if (node.title !== null && node.title !== undefined) {
+    props.title = node.title
+  }
+
+  return h(node, 'img', props)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/index.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  blockquote: __webpack_require__(/*! ./blockquote */ "./node_modules/mdast-util-to-hast/lib/handlers/blockquote.js"),
+  break: __webpack_require__(/*! ./break */ "./node_modules/mdast-util-to-hast/lib/handlers/break.js"),
+  code: __webpack_require__(/*! ./code */ "./node_modules/mdast-util-to-hast/lib/handlers/code.js"),
+  delete: __webpack_require__(/*! ./delete */ "./node_modules/mdast-util-to-hast/lib/handlers/delete.js"),
+  emphasis: __webpack_require__(/*! ./emphasis */ "./node_modules/mdast-util-to-hast/lib/handlers/emphasis.js"),
+  footnoteReference: __webpack_require__(/*! ./footnote-reference */ "./node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js"),
+  footnote: __webpack_require__(/*! ./footnote */ "./node_modules/mdast-util-to-hast/lib/handlers/footnote.js"),
+  heading: __webpack_require__(/*! ./heading */ "./node_modules/mdast-util-to-hast/lib/handlers/heading.js"),
+  html: __webpack_require__(/*! ./html */ "./node_modules/mdast-util-to-hast/lib/handlers/html.js"),
+  imageReference: __webpack_require__(/*! ./image-reference */ "./node_modules/mdast-util-to-hast/lib/handlers/image-reference.js"),
+  image: __webpack_require__(/*! ./image */ "./node_modules/mdast-util-to-hast/lib/handlers/image.js"),
+  inlineCode: __webpack_require__(/*! ./inline-code */ "./node_modules/mdast-util-to-hast/lib/handlers/inline-code.js"),
+  linkReference: __webpack_require__(/*! ./link-reference */ "./node_modules/mdast-util-to-hast/lib/handlers/link-reference.js"),
+  link: __webpack_require__(/*! ./link */ "./node_modules/mdast-util-to-hast/lib/handlers/link.js"),
+  listItem: __webpack_require__(/*! ./list-item */ "./node_modules/mdast-util-to-hast/lib/handlers/list-item.js"),
+  list: __webpack_require__(/*! ./list */ "./node_modules/mdast-util-to-hast/lib/handlers/list.js"),
+  paragraph: __webpack_require__(/*! ./paragraph */ "./node_modules/mdast-util-to-hast/lib/handlers/paragraph.js"),
+  root: __webpack_require__(/*! ./root */ "./node_modules/mdast-util-to-hast/lib/handlers/root.js"),
+  strong: __webpack_require__(/*! ./strong */ "./node_modules/mdast-util-to-hast/lib/handlers/strong.js"),
+  table: __webpack_require__(/*! ./table */ "./node_modules/mdast-util-to-hast/lib/handlers/table.js"),
+  text: __webpack_require__(/*! ./text */ "./node_modules/mdast-util-to-hast/lib/handlers/text.js"),
+  thematicBreak: __webpack_require__(/*! ./thematic-break */ "./node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js"),
+  toml: ignore,
+  yaml: ignore,
+  definition: ignore,
+  footnoteDefinition: ignore
+}
+
+// Return nothing for nodes which are ignored.
+function ignore() {
+  return null
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/inline-code.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/inline-code.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = inlineCode
+
+var collapse = __webpack_require__(/*! collapse-white-space */ "./node_modules/collapse-white-space/index.js")
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+
+function inlineCode(h, node) {
+  return h(node, 'code', [u('text', collapse(node.value))])
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/link-reference.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/link-reference.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = linkReference
+
+var normalize = __webpack_require__(/*! mdurl/encode */ "./node_modules/mdurl/encode.js")
+var revert = __webpack_require__(/*! ../revert */ "./node_modules/mdast-util-to-hast/lib/revert.js")
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function linkReference(h, node) {
+  var def = h.definition(node.identifier)
+  var props
+
+  if (!def) {
+    return revert(h, node)
+  }
+
+  props = {href: normalize(def.url || '')}
+
+  if (def.title !== null && def.title !== undefined) {
+    props.title = def.title
+  }
+
+  return h(node, 'a', props, all(h, node))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/link.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/link.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var normalize = __webpack_require__(/*! mdurl/encode */ "./node_modules/mdurl/encode.js")
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+module.exports = link
+
+function link(h, node) {
+  var props = {href: normalize(node.url)}
+
+  if (node.title !== null && node.title !== undefined) {
+    props.title = node.title
+  }
+
+  return h(node, 'a', props, all(h, node))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/list-item.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/list-item.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = listItem
+
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+var wrap = __webpack_require__(/*! ../wrap */ "./node_modules/mdast-util-to-hast/lib/wrap.js")
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function listItem(h, node, parent) {
+  var children = node.children
+  var head = children[0]
+  var raw = all(h, node)
+  var loose = parent ? listLoose(parent) : listItemLoose(node)
+  var props = {}
+  var result
+  var container
+  var index
+  var length
+  var child
+
+  /* Tight lists should not render 'paragraph' nodes as 'p' tags */
+  if (loose) {
+    result = raw
+  } else {
+    result = []
+    length = raw.length
+    index = -1
+
+    while (++index < length) {
+      child = raw[index]
+
+      if (child.tagName === 'p') {
+        result = result.concat(child.children)
+      } else {
+        result.push(child)
+      }
+    }
+  }
+
+  if (typeof node.checked === 'boolean') {
+    if (loose && (!head || head.type !== 'paragraph')) {
+      result.unshift(h(null, 'p', []))
+    }
+
+    container = loose ? result[0].children : result
+
+    if (container.length !== 0) {
+      container.unshift(u('text', ' '))
+    }
+
+    container.unshift(
+      h(null, 'input', {
+        type: 'checkbox',
+        checked: node.checked,
+        disabled: true
+      })
+    )
+
+    // According to github-markdown-css, this class hides bullet.
+    props.className = ['task-list-item']
+  }
+
+  if (loose && result.length !== 0) {
+    result = wrap(result, true)
+  }
+
+  return h(node, 'li', props, result)
+}
+
+function listLoose(node) {
+  var loose = node.spread
+  var children = node.children
+  var length = children.length
+  var index = -1
+
+  while (!loose && ++index < length) {
+    loose = listItemLoose(children[index])
+  }
+
+  return loose
+}
+
+function listItemLoose(node) {
+  var spread = node.spread
+
+  return spread === undefined || spread === null
+    ? node.children.length > 1
+    : spread
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/list.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/list.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = list
+
+var wrap = __webpack_require__(/*! ../wrap */ "./node_modules/mdast-util-to-hast/lib/wrap.js")
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function list(h, node) {
+  var props = {}
+  var name = node.ordered ? 'ol' : 'ul'
+
+  if (typeof node.start === 'number' && node.start !== 1) {
+    props.start = node.start
+  }
+
+  return h(node, name, props, wrap(all(h, node), true))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/paragraph.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/paragraph.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = paragraph
+
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function paragraph(h, node) {
+  return h(node, 'p', all(h, node))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/root.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/root.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = root
+
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+var wrap = __webpack_require__(/*! ../wrap */ "./node_modules/mdast-util-to-hast/lib/wrap.js")
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function root(h, node) {
+  return h.augment(node, u('root', wrap(all(h, node))))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/strong.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/strong.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = strong
+
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function strong(h, node) {
+  return h(node, 'strong', all(h, node))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/table.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/table.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = table
+
+var position = __webpack_require__(/*! unist-util-position */ "./node_modules/unist-util-position/index.js")
+var wrap = __webpack_require__(/*! ../wrap */ "./node_modules/mdast-util-to-hast/lib/wrap.js")
+var all = __webpack_require__(/*! ../all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+function table(h, node) {
+  var rows = node.children
+  var index = rows.length
+  var align = node.align
+  var alignLength = align.length
+  var result = []
+  var pos
+  var row
+  var out
+  var name
+  var cell
+
+  while (index--) {
+    row = rows[index].children
+    name = index === 0 ? 'th' : 'td'
+    pos = alignLength
+    out = []
+
+    while (pos--) {
+      cell = row[pos]
+      out[pos] = h(cell, name, {align: align[pos]}, cell ? all(h, cell) : [])
+    }
+
+    result[index] = h(rows[index], 'tr', wrap(out, true))
+  }
+
+  return h(
+    node,
+    'table',
+    wrap(
+      [
+        h(result[0].position, 'thead', wrap([result[0]], true)),
+        h(
+          {
+            start: position.start(result[1]),
+            end: position.end(result[result.length - 1])
+          },
+          'tbody',
+          wrap(result.slice(1), true)
+        )
+      ],
+      true
+    )
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/text.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/text.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = text
+
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+var trimLines = __webpack_require__(/*! trim-lines */ "./node_modules/trim-lines/index.js")
+
+function text(h, node) {
+  return h.augment(node, u('text', trimLines(node.value)))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = thematicBreak
+
+function thematicBreak(h, node) {
+  return h(node, 'hr')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = toHast
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+var visit = __webpack_require__(/*! unist-util-visit */ "./node_modules/unist-util-visit/index.js")
+var position = __webpack_require__(/*! unist-util-position */ "./node_modules/unist-util-position/index.js")
+var generated = __webpack_require__(/*! unist-util-generated */ "./node_modules/unist-util-generated/index.js")
+var definitions = __webpack_require__(/*! mdast-util-definitions */ "./node_modules/mdast-util-definitions/index.js")
+var one = __webpack_require__(/*! ./one */ "./node_modules/mdast-util-to-hast/lib/one.js")
+var footer = __webpack_require__(/*! ./footer */ "./node_modules/mdast-util-to-hast/lib/footer.js")
+var handlers = __webpack_require__(/*! ./handlers */ "./node_modules/mdast-util-to-hast/lib/handlers/index.js")
+
+// Factory to transform.
+function factory(tree, options) {
+  var settings = options || {}
+  var dangerous = settings.allowDangerousHTML
+
+  h.dangerous = dangerous
+  h.definition = definitions(tree, settings)
+  h.footnotes = []
+  h.augment = augment
+  h.handlers = xtend(handlers, settings.handlers || {})
+
+  visit(tree, 'footnoteDefinition', visitor)
+
+  return h
+
+  // Finalise the created `right`, a hast node, from `left`, an mdast node.
+  function augment(left, right) {
+    var data
+    var ctx
+
+    // Handle `data.hName`, `data.hProperties, `hChildren`.
+    if (left && 'data' in left) {
+      data = left.data
+
+      if (right.type === 'element' && data.hName) {
+        right.tagName = data.hName
+      }
+
+      if (right.type === 'element' && data.hProperties) {
+        right.properties = xtend(right.properties, data.hProperties)
+      }
+
+      if (right.children && data.hChildren) {
+        right.children = data.hChildren
+      }
+    }
+
+    ctx = left && left.position ? left : {position: left}
+
+    if (!generated(ctx)) {
+      right.position = {
+        start: position.start(ctx),
+        end: position.end(ctx)
+      }
+    }
+
+    return right
+  }
+
+  // Create an element for a `node`.
+  function h(node, tagName, props, children) {
+    if (
+      (children === undefined || children === null) &&
+      typeof props === 'object' &&
+      'length' in props
+    ) {
+      children = props
+      props = {}
+    }
+
+    return augment(node, {
+      type: 'element',
+      tagName: tagName,
+      properties: props || {},
+      children: children || []
+    })
+  }
+
+  function visitor(definition) {
+    h.footnotes.push(definition)
+  }
+}
+
+// Transform `tree`, which is an mdast node, to a hast node.
+function toHast(tree, options) {
+  var h = factory(tree, options)
+  var node = one(h, tree)
+  var footnotes = footer(h)
+
+  if (node && node.children && footnotes) {
+    node.children = node.children.concat(u('text', '\n'), footnotes)
+  }
+
+  return node
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/one.js":
+/*!****************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/one.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = one
+
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+var all = __webpack_require__(/*! ./all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+var own = {}.hasOwnProperty
+
+// Transform an unknown node.
+function unknown(h, node) {
+  if (text(node)) {
+    return h.augment(node, u('text', node.value))
+  }
+
+  return h(node, 'div', all(h, node))
+}
+
+// Visit a node.
+function one(h, node, parent) {
+  var type = node && node.type
+  var fn = own.call(h.handlers, type) ? h.handlers[type] : null
+
+  // Fail on non-nodes.
+  if (!type) {
+    throw new Error('Expected node, got `' + node + '`')
+  }
+
+  return (typeof fn === 'function' ? fn : unknown)(h, node, parent)
+}
+
+// Check if the node should be renderered a text node.
+function text(node) {
+  var data = node.data || {}
+
+  if (
+    own.call(data, 'hName') ||
+    own.call(data, 'hProperties') ||
+    own.call(data, 'hChildren')
+  ) {
+    return false
+  }
+
+  return 'value' in node
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/revert.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/revert.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = revert
+
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+var all = __webpack_require__(/*! ./all */ "./node_modules/mdast-util-to-hast/lib/all.js")
+
+// Return the content of a reference without definition as markdown.
+function revert(h, node) {
+  var subtype = node.referenceType
+  var suffix = ']'
+  var contents
+  var head
+  var tail
+
+  if (subtype === 'collapsed') {
+    suffix += '[]'
+  } else if (subtype === 'full') {
+    suffix += '[' + (node.label || node.identifier) + ']'
+  }
+
+  if (node.type === 'imageReference') {
+    return u('text', '![' + node.alt + suffix)
+  }
+
+  contents = all(h, node)
+  head = contents[0]
+
+  if (head && head.type === 'text') {
+    head.value = '[' + head.value
+  } else {
+    contents.unshift(u('text', '['))
+  }
+
+  tail = contents[contents.length - 1]
+
+  if (tail && tail.type === 'text') {
+    tail.value += suffix
+  } else {
+    contents.push(u('text', suffix))
+  }
+
+  return contents
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdast-util-to-hast/lib/wrap.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/mdast-util-to-hast/lib/wrap.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = wrap
+
+var u = __webpack_require__(/*! unist-builder */ "./node_modules/unist-builder/index.js")
+
+// Wrap `nodes` with newlines between each entry.  Optionally adds newlines at
+// the start and end.
+function wrap(nodes, loose) {
+  var result = []
+  var index = -1
+  var length = nodes.length
+
+  if (loose) {
+    result.push(u('text', '\n'))
+  }
+
+  while (++index < length) {
+    if (index) {
+      result.push(u('text', '\n'))
+    }
+
+    result.push(nodes[index])
+  }
+
+  if (loose && nodes.length !== 0) {
+    result.push(u('text', '\n'))
+  }
+
+  return result
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/mdurl/encode.js":
+/*!**************************************!*\
+  !*** ./node_modules/mdurl/encode.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+
+var encodeCache = {};
+
+
+// Create a lookup array where anything but characters in `chars` string
+// and alphanumeric chars is percent-encoded.
+//
+function getEncodeCache(exclude) {
+  var i, ch, cache = encodeCache[exclude];
+  if (cache) { return cache; }
+
+  cache = encodeCache[exclude] = [];
+
+  for (i = 0; i < 128; i++) {
+    ch = String.fromCharCode(i);
+
+    if (/^[0-9a-z]$/i.test(ch)) {
+      // always allow unencoded alphanumeric characters
+      cache.push(ch);
+    } else {
+      cache.push('%' + ('0' + i.toString(16).toUpperCase()).slice(-2));
+    }
+  }
+
+  for (i = 0; i < exclude.length; i++) {
+    cache[exclude.charCodeAt(i)] = exclude[i];
+  }
+
+  return cache;
+}
+
+
+// Encode unsafe characters with percent-encoding, skipping already
+// encoded sequences.
+//
+//  - string       - string to encode
+//  - exclude      - list of characters to ignore (in addition to a-zA-Z0-9)
+//  - keepEscaped  - don't encode '%' in a correct escape sequence (default: true)
+//
+function encode(string, exclude, keepEscaped) {
+  var i, l, code, nextCode, cache,
+      result = '';
+
+  if (typeof exclude !== 'string') {
+    // encode(string, keepEscaped)
+    keepEscaped  = exclude;
+    exclude = encode.defaultChars;
+  }
+
+  if (typeof keepEscaped === 'undefined') {
+    keepEscaped = true;
+  }
+
+  cache = getEncodeCache(exclude);
+
+  for (i = 0, l = string.length; i < l; i++) {
+    code = string.charCodeAt(i);
+
+    if (keepEscaped && code === 0x25 /* % */ && i + 2 < l) {
+      if (/^[0-9a-f]{2}$/i.test(string.slice(i + 1, i + 3))) {
+        result += string.slice(i, i + 3);
+        i += 2;
+        continue;
+      }
+    }
+
+    if (code < 128) {
+      result += cache[code];
+      continue;
+    }
+
+    if (code >= 0xD800 && code <= 0xDFFF) {
+      if (code >= 0xD800 && code <= 0xDBFF && i + 1 < l) {
+        nextCode = string.charCodeAt(i + 1);
+        if (nextCode >= 0xDC00 && nextCode <= 0xDFFF) {
+          result += encodeURIComponent(string[i] + string[i + 1]);
+          i++;
+          continue;
+        }
+      }
+      result += '%EF%BF%BD';
+      continue;
+    }
+
+    result += encodeURIComponent(string[i]);
+  }
+
+  return result;
+}
+
+encode.defaultChars   = ";/?:@&=+$,-_.!~*'()#";
+encode.componentChars = "-_.!~*'()";
+
+
+module.exports = encode;
+
+
+/***/ }),
+
+/***/ "./node_modules/node-emoji/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/node-emoji/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! ./lib/emoji */ "./node_modules/node-emoji/lib/emoji.js");
+
+/***/ }),
+
+/***/ "./node_modules/node-emoji/lib/emoji.js":
+/*!**********************************************!*\
+  !*** ./node_modules/node-emoji/lib/emoji.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*jslint node: true*/
+var toArray = __webpack_require__(/*! lodash.toarray */ "./node_modules/lodash.toarray/index.js");
+var emojiByName = __webpack_require__(/*! ./emoji.json */ "./node_modules/node-emoji/lib/emoji.json");
+
+"use strict";
+
+/**
+ * regex to parse emoji in a string - finds emoji, e.g. :coffee:
+ */
+var emojiNameRegex = /:([a-zA-Z0-9_\-\+]+):/g;
+
+/**
+ * regex to trim whitespace
+ * use instead of String.prototype.trim() for IE8 support
+ */
+var trimSpaceRegex = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+
+/**
+ * Removes colons on either side
+ * of the string if present
+ * @param  {string} str
+ * @return {string}
+ */
+function stripColons (str) {
+  var colonIndex = str.indexOf(':');
+  if (colonIndex > -1) {
+    // :emoji: (http://www.emoji-cheat-sheet.com/)
+    if (colonIndex === str.length - 1) {
+      str = str.substring(0, colonIndex);
+      return stripColons(str);
+    } else {
+      str = str.substr(colonIndex + 1);
+      return stripColons(str);
+    }
+  }
+
+  return str;
+}
+
+/**
+ * Adds colons to either side
+ * of the string
+ * @param {string} str
+ * @return {string}
+ */
+function wrapColons (str) {
+  return (typeof str === 'string' && str.length > 0) ? ':' + str + ':' : str;
+}
+
+/**
+ * Ensure that the word is wrapped in colons
+ * by only adding them, if they are not there.
+ * @param {string} str
+ * @return {string}
+ */
+function ensureColons (str) {
+  return (typeof str === 'string' && str[0] !== ':') ? wrapColons(str) : str;
+}
+
+// Non spacing mark, some emoticons have them. It's the 'Variant Form',
+// which provides more information so that emoticons can be rendered as
+// more colorful graphics. FE0E is a unicode text version, where as FE0F
+// should be rendered as a graphical version. The code gracefully degrades.
+var NON_SPACING_MARK = String.fromCharCode(65039); // 65039 - '️' - 0xFE0F;
+var nonSpacingRegex = new RegExp(NON_SPACING_MARK, 'g')
+
+// Remove the non-spacing-mark from the code, never send a stripped version
+// to the client, as it kills graphical emoticons.
+function stripNSB (code) {
+  return code.replace(nonSpacingRegex, '');
+};
+
+// Reversed hash table, where as emojiByName contains a { heart: '❤' }
+// dictionary emojiByCode contains { ❤: 'heart' }. The codes are normalized
+// to the text version.
+var emojiByCode = Object.keys(emojiByName).reduce(function(h,k) {
+  h[stripNSB(emojiByName[k])] = k;
+  return h;
+}, {});
+
+/**
+ * Emoji namespace
+ */
+var Emoji = {
+  emoji: emojiByName,
+};
+
+/**
+ * get emoji code from name
+ * @param  {string} emoji
+ * @return {string}
+ */
+Emoji._get = function _get (emoji) {
+  if (emojiByName.hasOwnProperty(emoji)) {
+    return emojiByName[emoji];
+  }
+
+  return ensureColons(emoji);
+};
+
+/**
+ * get emoji code from :emoji: string or name
+ * @param  {string} emoji
+ * @return {string}
+ */
+Emoji.get = function get (emoji) {
+  emoji = stripColons(emoji);
+
+  return Emoji._get(emoji);
+};
+
+/**
+ * find the emoji by either code or name
+ * @param {string} nameOrCode The emoji to find, either `coffee`, `:coffee:` or `☕`;
+ * @return {object}
+ */
+Emoji.find = function find (nameOrCode) {
+  return Emoji.findByName(nameOrCode) || Emoji.findByCode(nameOrCode);
+};
+
+/**
+ * find the emoji by name
+ * @param {string} name The emoji to find either `coffee` or `:coffee:`;
+ * @return {object}
+ */
+Emoji.findByName = function findByName (name) {
+  var stripped = stripColons(name);
+  var emoji = emojiByName[stripped];
+
+  return emoji ? ({ emoji: emoji, key: stripped }) : undefined;
+};
+
+/**
+ * find the emoji by code (emoji)
+ * @param {string} code The emoji to find; for example `☕` or `☔`
+ * @return {object}
+ */
+Emoji.findByCode = function findByCode (code) {
+  var stripped = stripNSB(code);
+  var name = emojiByCode[stripped];
+
+  // lookup emoji to ensure the Variant Form is returned
+  return name ? ({ emoji: emojiByName[name], key: name }) : undefined;
+};
+
+
+/**
+ * Check if an emoji is known by this library
+ * @param {string} nameOrCode The emoji to validate, either `coffee`, `:coffee:` or `☕`;
+ * @return {object}
+ */
+Emoji.hasEmoji = function hasEmoji (nameOrCode) {
+  return Emoji.hasEmojiByName(nameOrCode) || Emoji.hasEmojiByCode(nameOrCode);
+};
+
+/**
+ * Check if an emoji with given name is known by this library
+ * @param {string} name The emoji to validate either `coffee` or `:coffee:`;
+ * @return {object}
+ */
+Emoji.hasEmojiByName = function hasEmojiByName (name) {
+  var result = Emoji.findByName(name);
+  return !!result && result.key === stripColons(name);
+};
+
+/**
+ * Check if a given emoji is known by this library
+ * @param {string} code The emoji to validate; for example `☕` or `☔`
+ * @return {object}
+ */
+Emoji.hasEmojiByCode = function hasEmojiByCode (code) {
+  var result = Emoji.findByCode(code);
+  return !!result && stripNSB(result.emoji) === stripNSB(code);
+};
+
+/**
+ * get emoji name from code
+ * @param  {string} emoji
+ * @param  {boolean} includeColons should the result include the ::
+ * @return {string}
+ */
+Emoji.which = function which (emoji_code, includeColons) {
+  var code = stripNSB(emoji_code);
+  var word = emojiByCode[code];
+
+  return includeColons ? wrapColons(word) : word;
+};
+
+/**
+ * emojify a string (replace :emoji: with an emoji)
+ * @param  {string} str
+ * @param  {function} on_missing (gets emoji name without :: and returns a proper emoji if no emoji was found)
+ * @param  {function} format (wrap the returned emoji in a custom element)
+ * @return {string}
+ */
+Emoji.emojify = function emojify (str, on_missing, format) {
+  if (!str) return '';
+
+  return str.split(emojiNameRegex) // parse emoji via regex
+            .map(function parseEmoji(s, i) {
+              // every second element is an emoji, e.g. "test :fast_forward:" -> [ "test ", "fast_forward" ]
+              if (i % 2 === 0) return s;
+              var emoji = Emoji._get(s);
+              var isMissing = emoji.indexOf(':') > -1;
+
+              if (isMissing && typeof on_missing === 'function') {
+                return on_missing(s);
+              }
+
+              if (!isMissing && typeof format === 'function') {
+                return format(emoji, s);
+              }
+
+              return emoji;
+            })
+            .join('') // convert back to string
+  ;
+};
+
+/**
+ * return a random emoji
+ * @return {string}
+ */
+Emoji.random = function random () {
+  var emojiKeys = Object.keys(emojiByName);
+  var randomIndex = Math.floor(Math.random() * emojiKeys.length);
+  var key = emojiKeys[randomIndex];
+  var emoji = Emoji._get(key);
+  return { key: key, emoji: emoji };
+}
+
+/**
+ *  return an collection of potential emoji matches
+ *  @param {string} str
+ *  @return {Array.<Object>}
+ */
+Emoji.search = function search (str) {
+  var emojiKeys = Object.keys(emojiByName);
+  var matcher = stripColons(str)
+  var matchingKeys = emojiKeys.filter(function(key) {
+    return key.toString().indexOf(matcher) === 0;
+  });
+  return matchingKeys.map(function(key) {
+    return {
+      key: key,
+      emoji: Emoji._get(key),
+    };
+  });
+}
+
+/**
+ * unemojify a string (replace emoji with :emoji:)
+ * @param  {string} str
+ * @return {string}
+ */
+Emoji.unemojify = function unemojify (str) {
+  if (!str) return '';
+  var words = toArray(str);
+
+  return words.map(function(word) {
+    return Emoji.which(word, true) || word;
+  }).join('');
+};
+
+/**
+ * replace emojis with replacement value
+ * @param {string} str
+ * @param {function|string} the string or callback function to replace the emoji with
+ * @param {boolean} should trailing whitespaces be cleaned? Defaults false
+ * @return {string}
+ */
+Emoji.replace = function replace (str, replacement, cleanSpaces) {
+  if (!str) return '';
+
+  var replace = typeof replacement === 'function' ? replacement : function() { return replacement; };
+  var words = toArray(str);
+
+  var replaced = words.map(function(word, idx) {
+    var emoji = Emoji.findByCode(word);
+    
+    if (emoji && cleanSpaces && words[idx + 1] === ' ') {
+      words[idx + 1] = '';
+    }
+
+    return emoji ? replace(emoji) : word;
+  }).join('');
+
+  return cleanSpaces ? replaced.replace(trimSpaceRegex, '') : replaced;
+};
+
+
+/**
+ * remove all emojis from a string
+ * @param {string} str
+ * @return {string}
+ */
+Emoji.strip = function strip (str) {
+  return Emoji.replace(str, '', true);
+};
+
+module.exports = Emoji;
+
+
+/***/ }),
+
+/***/ "./node_modules/node-emoji/lib/emoji.json":
+/*!************************************************!*\
+  !*** ./node_modules/node-emoji/lib/emoji.json ***!
+  \************************************************/
+/*! exports provided: 100, 1234, umbrella_with_rain_drops, coffee, aries, taurus, sagittarius, capricorn, aquarius, pisces, anchor, white_check_mark, sparkles, question, grey_question, grey_exclamation, exclamation, heavy_exclamation_mark, heavy_plus_sign, heavy_minus_sign, heavy_division_sign, hash, keycap_star, zero, one, two, three, four, five, six, seven, eight, nine, copyright, registered, mahjong, black_joker, a, b, o2, parking, ab, cl, cool, free, id, new, ng, ok, sos, up, vs, flag-ac, flag-ad, flag-ae, flag-af, flag-ag, flag-ai, flag-al, flag-am, flag-ao, flag-aq, flag-ar, flag-as, flag-at, flag-au, flag-aw, flag-ax, flag-az, flag-ba, flag-bb, flag-bd, flag-be, flag-bf, flag-bg, flag-bh, flag-bi, flag-bj, flag-bl, flag-bm, flag-bn, flag-bo, flag-bq, flag-br, flag-bs, flag-bt, flag-bv, flag-bw, flag-by, flag-bz, flag-ca, flag-cc, flag-cd, flag-cf, flag-cg, flag-ch, flag-ci, flag-ck, flag-cl, flag-cm, cn, flag-cn, flag-co, flag-cp, flag-cr, flag-cu, flag-cv, flag-cw, flag-cx, flag-cy, flag-cz, de, flag-de, flag-dg, flag-dj, flag-dk, flag-dm, flag-do, flag-dz, flag-ea, flag-ec, flag-ee, flag-eg, flag-eh, flag-er, es, flag-es, flag-et, flag-eu, flag-fi, flag-fj, flag-fk, flag-fm, flag-fo, fr, flag-fr, flag-ga, gb, uk, flag-gb, flag-gd, flag-ge, flag-gf, flag-gg, flag-gh, flag-gi, flag-gl, flag-gm, flag-gn, flag-gp, flag-gq, flag-gr, flag-gs, flag-gt, flag-gu, flag-gw, flag-gy, flag-hk, flag-hm, flag-hn, flag-hr, flag-ht, flag-hu, flag-ic, flag-id, flag-ie, flag-il, flag-im, flag-in, flag-io, flag-iq, flag-ir, flag-is, it, flag-it, flag-je, flag-jm, flag-jo, jp, flag-jp, flag-ke, flag-kg, flag-kh, flag-ki, flag-km, flag-kn, flag-kp, kr, flag-kr, flag-kw, flag-ky, flag-kz, flag-la, flag-lb, flag-lc, flag-li, flag-lk, flag-lr, flag-ls, flag-lt, flag-lu, flag-lv, flag-ly, flag-ma, flag-mc, flag-md, flag-me, flag-mf, flag-mg, flag-mh, flag-mk, flag-ml, flag-mm, flag-mn, flag-mo, flag-mp, flag-mq, flag-mr, flag-ms, flag-mt, flag-mu, flag-mv, flag-mw, flag-mx, flag-my, flag-mz, flag-na, flag-nc, flag-ne, flag-nf, flag-ng, flag-ni, flag-nl, flag-no, flag-np, flag-nr, flag-nu, flag-nz, flag-om, flag-pa, flag-pe, flag-pf, flag-pg, flag-ph, flag-pk, flag-pl, flag-pm, flag-pn, flag-pr, flag-ps, flag-pt, flag-pw, flag-py, flag-qa, flag-re, flag-ro, flag-rs, ru, flag-ru, flag-rw, flag-sa, flag-sb, flag-sc, flag-sd, flag-se, flag-sg, flag-sh, flag-si, flag-sj, flag-sk, flag-sl, flag-sm, flag-sn, flag-so, flag-sr, flag-ss, flag-st, flag-sv, flag-sx, flag-sy, flag-sz, flag-ta, flag-tc, flag-td, flag-tf, flag-tg, flag-th, flag-tj, flag-tk, flag-tl, flag-tm, flag-tn, flag-to, flag-tr, flag-tt, flag-tv, flag-tw, flag-tz, flag-ua, flag-ug, flag-um, flag-un, us, flag-us, flag-uy, flag-uz, flag-va, flag-vc, flag-ve, flag-vg, flag-vi, flag-vn, flag-vu, flag-wf, flag-ws, flag-xk, flag-ye, flag-yt, flag-za, flag-zm, flag-zw, koko, sa, u7121, u6307, u7981, u7a7a, u5408, u6e80, u6709, u6708, u7533, u5272, u55b6, ideograph_advantage, accept, cyclone, foggy, closed_umbrella, night_with_stars, sunrise_over_mountains, sunrise, city_sunset, city_sunrise, rainbow, bridge_at_night, ocean, volcano, milky_way, earth_africa, earth_americas, earth_asia, globe_with_meridians, new_moon, waxing_crescent_moon, first_quarter_moon, moon, waxing_gibbous_moon, full_moon, waning_gibbous_moon, last_quarter_moon, waning_crescent_moon, crescent_moon, new_moon_with_face, first_quarter_moon_with_face, last_quarter_moon_with_face, full_moon_with_face, sun_with_face, star2, stars, thermometer, mostly_sunny, sun_small_cloud, barely_sunny, sun_behind_cloud, partly_sunny_rain, sun_behind_rain_cloud, rain_cloud, snow_cloud, lightning, lightning_cloud, tornado, tornado_cloud, fog, wind_blowing_face, hotdog, taco, burrito, chestnut, seedling, evergreen_tree, deciduous_tree, palm_tree, cactus, hot_pepper, tulip, cherry_blossom, rose, hibiscus, sunflower, blossom, corn, ear_of_rice, herb, four_leaf_clover, maple_leaf, fallen_leaf, leaves, mushroom, tomato, eggplant, grapes, melon, watermelon, tangerine, lemon, banana, pineapple, apple, green_apple, pear, peach, cherries, strawberry, hamburger, pizza, meat_on_bone, poultry_leg, rice_cracker, rice_ball, rice, curry, ramen, spaghetti, bread, fries, sweet_potato, dango, oden, sushi, fried_shrimp, fish_cake, icecream, shaved_ice, ice_cream, doughnut, cookie, chocolate_bar, candy, lollipop, custard, honey_pot, cake, bento, stew, fried_egg, cooking, fork_and_knife, tea, sake, wine_glass, cocktail, tropical_drink, beer, beers, baby_bottle, knife_fork_plate, champagne, popcorn, ribbon, gift, birthday, jack_o_lantern, christmas_tree, santa, fireworks, sparkler, balloon, tada, confetti_ball, tanabata_tree, crossed_flags, bamboo, dolls, flags, wind_chime, rice_scene, school_satchel, mortar_board, medal, reminder_ribbon, studio_microphone, level_slider, control_knobs, film_frames, admission_tickets, carousel_horse, ferris_wheel, roller_coaster, fishing_pole_and_fish, microphone, movie_camera, cinema, headphones, art, tophat, circus_tent, ticket, clapper, performing_arts, video_game, dart, slot_machine, 8ball, game_die, bowling, flower_playing_cards, musical_note, notes, saxophone, guitar, musical_keyboard, trumpet, violin, musical_score, running_shirt_with_sash, tennis, ski, basketball, checkered_flag, snowboarder, woman-running, man-running, runner, running, woman-surfing, man-surfing, surfer, sports_medal, trophy, horse_racing, football, rugby_football, woman-swimming, man-swimming, swimmer, woman-lifting-weights, man-lifting-weights, weight_lifter, woman-golfing, man-golfing, golfer, racing_motorcycle, racing_car, cricket_bat_and_ball, volleyball, field_hockey_stick_and_ball, ice_hockey_stick_and_puck, table_tennis_paddle_and_ball, snow_capped_mountain, camping, beach_with_umbrella, building_construction, house_buildings, cityscape, derelict_house_building, classical_building, desert, desert_island, national_park, stadium, house, house_with_garden, office, post_office, european_post_office, hospital, bank, atm, hotel, love_hotel, convenience_store, school, department_store, factory, izakaya_lantern, lantern, japanese_castle, european_castle, rainbow-flag, waving_white_flag, flag-england, flag-scotland, flag-wales, waving_black_flag, rosette, label, badminton_racquet_and_shuttlecock, bow_and_arrow, amphora, skin-tone-2, skin-tone-3, skin-tone-4, skin-tone-5, skin-tone-6, rat, mouse2, ox, water_buffalo, cow2, tiger2, leopard, rabbit2, cat2, dragon, crocodile, whale2, snail, snake, racehorse, ram, goat, sheep, monkey, rooster, chicken, dog2, pig2, boar, elephant, octopus, shell, bug, ant, bee, honeybee, beetle, fish, tropical_fish, blowfish, turtle, hatching_chick, baby_chick, hatched_chick, bird, penguin, koala, poodle, dromedary_camel, camel, dolphin, flipper, mouse, cow, tiger, rabbit, cat, dragon_face, whale, horse, monkey_face, dog, pig, frog, hamster, wolf, bear, panda_face, pig_nose, feet, paw_prints, chipmunk, eyes, eye-in-speech-bubble, eye, ear, nose, lips, tongue, point_up_2, point_down, point_left, point_right, facepunch, punch, wave, ok_hand, +1, thumbsup, -1, thumbsdown, clap, open_hands, crown, womans_hat, eyeglasses, necktie, shirt, tshirt, jeans, dress, kimono, bikini, womans_clothes, purse, handbag, pouch, mans_shoe, shoe, athletic_shoe, high_heel, sandal, boot, footprints, bust_in_silhouette, busts_in_silhouette, boy, girl, male-farmer, male-cook, male-student, male-singer, male-artist, male-teacher, male-factory-worker, man-boy-boy, man-boy, man-girl-boy, man-girl-girl, man-girl, man-man-boy, man-man-boy-boy, man-man-girl, man-man-girl-boy, man-man-girl-girl, man-woman-boy, family, man-woman-boy-boy, man-woman-girl, man-woman-girl-boy, man-woman-girl-girl, male-technologist, male-office-worker, male-mechanic, male-scientist, male-astronaut, male-firefighter, male-doctor, male-judge, male-pilot, man-heart-man, man-kiss-man, man, female-farmer, female-cook, female-student, female-singer, female-artist, female-teacher, female-factory-worker, woman-boy-boy, woman-boy, woman-girl-boy, woman-girl-girl, woman-girl, woman-woman-boy, woman-woman-boy-boy, woman-woman-girl, woman-woman-girl-boy, woman-woman-girl-girl, female-technologist, female-office-worker, female-mechanic, female-scientist, female-astronaut, female-firefighter, female-doctor, female-judge, female-pilot, woman-heart-man, couple_with_heart, woman-heart-woman, woman-kiss-man, couplekiss, woman-kiss-woman, woman, couple, man_and_woman_holding_hands, two_men_holding_hands, two_women_holding_hands, female-police-officer, male-police-officer, cop, woman-with-bunny-ears-partying, dancers, man-with-bunny-ears-partying, bride_with_veil, blond-haired-woman, blond-haired-man, person_with_blond_hair, man_with_gua_pi_mao, woman-wearing-turban, man-wearing-turban, man_with_turban, older_man, older_woman, baby, female-construction-worker, male-construction-worker, construction_worker, princess, japanese_ogre, japanese_goblin, ghost, angel, alien, space_invader, imp, skull, woman-tipping-hand, information_desk_person, man-tipping-hand, female-guard, male-guard, guardsman, dancer, lipstick, nail_care, woman-getting-massage, massage, man-getting-massage, woman-getting-haircut, haircut, man-getting-haircut, barber, syringe, pill, kiss, love_letter, ring, gem, bouquet, wedding, heartbeat, broken_heart, two_hearts, sparkling_heart, heartpulse, cupid, blue_heart, green_heart, yellow_heart, purple_heart, gift_heart, revolving_hearts, heart_decoration, diamond_shape_with_a_dot_inside, bulb, anger, bomb, zzz, boom, collision, sweat_drops, droplet, dash, hankey, poop, shit, muscle, dizzy, speech_balloon, thought_balloon, white_flower, moneybag, currency_exchange, heavy_dollar_sign, credit_card, yen, dollar, euro, pound, money_with_wings, chart, seat, computer, briefcase, minidisc, floppy_disk, cd, dvd, file_folder, open_file_folder, page_with_curl, page_facing_up, date, calendar, card_index, chart_with_upwards_trend, chart_with_downwards_trend, bar_chart, clipboard, pushpin, round_pushpin, paperclip, straight_ruler, triangular_ruler, bookmark_tabs, ledger, notebook, notebook_with_decorative_cover, closed_book, book, open_book, green_book, blue_book, orange_book, books, name_badge, scroll, memo, pencil, telephone_receiver, pager, fax, satellite_antenna, loudspeaker, mega, outbox_tray, inbox_tray, package, e-mail, incoming_envelope, envelope_with_arrow, mailbox_closed, mailbox, mailbox_with_mail, mailbox_with_no_mail, postbox, postal_horn, newspaper, iphone, calling, vibration_mode, mobile_phone_off, no_mobile_phones, signal_strength, camera, camera_with_flash, video_camera, tv, radio, vhs, film_projector, prayer_beads, twisted_rightwards_arrows, repeat, repeat_one, arrows_clockwise, arrows_counterclockwise, low_brightness, high_brightness, mute, speaker, sound, loud_sound, battery, electric_plug, mag, mag_right, lock_with_ink_pen, closed_lock_with_key, key, lock, unlock, bell, no_bell, bookmark, link, radio_button, back, end, on, soon, top, underage, keycap_ten, capital_abcd, abcd, symbols, abc, fire, flashlight, wrench, hammer, nut_and_bolt, hocho, knife, gun, microscope, telescope, crystal_ball, six_pointed_star, beginner, trident, black_square_button, white_square_button, red_circle, large_blue_circle, large_orange_diamond, large_blue_diamond, small_orange_diamond, small_blue_diamond, small_red_triangle, small_red_triangle_down, arrow_up_small, arrow_down_small, om_symbol, dove_of_peace, kaaba, mosque, synagogue, menorah_with_nine_branches, clock1, clock2, clock3, clock4, clock5, clock6, clock7, clock8, clock9, clock10, clock11, clock12, clock130, clock230, clock330, clock430, clock530, clock630, clock730, clock830, clock930, clock1030, clock1130, clock1230, candle, mantelpiece_clock, hole, man_in_business_suit_levitating, female-detective, male-detective, sleuth_or_spy, dark_sunglasses, spider, spider_web, joystick, man_dancing, linked_paperclips, lower_left_ballpoint_pen, lower_left_fountain_pen, lower_left_paintbrush, lower_left_crayon, raised_hand_with_fingers_splayed, middle_finger, reversed_hand_with_middle_finger_extended, spock-hand, black_heart, desktop_computer, printer, three_button_mouse, trackball, frame_with_picture, card_index_dividers, card_file_box, file_cabinet, wastebasket, spiral_note_pad, spiral_calendar_pad, compression, old_key, rolled_up_newspaper, dagger_knife, speaking_head_in_silhouette, left_speech_bubble, right_anger_bubble, ballot_box_with_ballot, world_map, mount_fuji, tokyo_tower, statue_of_liberty, japan, moyai, grinning, grin, joy, smiley, smile, sweat_smile, laughing, satisfied, innocent, smiling_imp, wink, blush, yum, relieved, heart_eyes, sunglasses, smirk, neutral_face, expressionless, unamused, sweat, pensive, confused, confounded, kissing, kissing_heart, kissing_smiling_eyes, kissing_closed_eyes, stuck_out_tongue, stuck_out_tongue_winking_eye, stuck_out_tongue_closed_eyes, disappointed, worried, angry, rage, cry, persevere, triumph, disappointed_relieved, frowning, anguished, fearful, weary, sleepy, tired_face, grimacing, sob, open_mouth, hushed, cold_sweat, scream, astonished, flushed, sleeping, dizzy_face, no_mouth, mask, smile_cat, joy_cat, smiley_cat, heart_eyes_cat, smirk_cat, kissing_cat, pouting_cat, crying_cat_face, scream_cat, slightly_frowning_face, slightly_smiling_face, upside_down_face, face_with_rolling_eyes, woman-gesturing-no, no_good, man-gesturing-no, woman-gesturing-ok, ok_woman, man-gesturing-ok, woman-bowing, man-bowing, bow, see_no_evil, hear_no_evil, speak_no_evil, woman-raising-hand, raising_hand, man-raising-hand, raised_hands, woman-frowning, person_frowning, man-frowning, woman-pouting, person_with_pouting_face, man-pouting, pray, rocket, helicopter, steam_locomotive, railway_car, bullettrain_side, bullettrain_front, train2, metro, light_rail, station, tram, train, bus, oncoming_bus, trolleybus, busstop, minibus, ambulance, fire_engine, police_car, oncoming_police_car, taxi, oncoming_taxi, car, red_car, oncoming_automobile, blue_car, truck, articulated_lorry, tractor, monorail, mountain_railway, suspension_railway, mountain_cableway, aerial_tramway, ship, woman-rowing-boat, man-rowing-boat, rowboat, speedboat, traffic_light, vertical_traffic_light, construction, rotating_light, triangular_flag_on_post, door, no_entry_sign, smoking, no_smoking, put_litter_in_its_place, do_not_litter, potable_water, non-potable_water, bike, no_bicycles, woman-biking, man-biking, bicyclist, woman-mountain-biking, man-mountain-biking, mountain_bicyclist, woman-walking, man-walking, walking, no_pedestrians, children_crossing, mens, womens, restroom, baby_symbol, toilet, wc, shower, bath, bathtub, passport_control, customs, baggage_claim, left_luggage, couch_and_lamp, sleeping_accommodation, shopping_bags, bellhop_bell, bed, place_of_worship, octagonal_sign, shopping_trolley, hammer_and_wrench, shield, oil_drum, motorway, railway_track, motor_boat, small_airplane, airplane_departure, airplane_arriving, satellite, passenger_ship, scooter, motor_scooter, canoe, sled, flying_saucer, zipper_mouth_face, money_mouth_face, face_with_thermometer, nerd_face, thinking_face, face_with_head_bandage, robot_face, hugging_face, the_horns, sign_of_the_horns, call_me_hand, raised_back_of_hand, left-facing_fist, right-facing_fist, handshake, crossed_fingers, hand_with_index_and_middle_fingers_crossed, i_love_you_hand_sign, face_with_cowboy_hat, clown_face, nauseated_face, rolling_on_the_floor_laughing, drooling_face, lying_face, woman-facepalming, man-facepalming, face_palm, sneezing_face, face_with_raised_eyebrow, face_with_one_eyebrow_raised, star-struck, grinning_face_with_star_eyes, zany_face, grinning_face_with_one_large_and_one_small_eye, shushing_face, face_with_finger_covering_closed_lips, face_with_symbols_on_mouth, serious_face_with_symbols_covering_mouth, face_with_hand_over_mouth, smiling_face_with_smiling_eyes_and_hand_covering_mouth, face_vomiting, face_with_open_mouth_vomiting, exploding_head, shocked_face_with_exploding_head, pregnant_woman, breast-feeding, palms_up_together, selfie, prince, man_in_tuxedo, mrs_claus, mother_christmas, woman-shrugging, man-shrugging, shrug, woman-cartwheeling, man-cartwheeling, person_doing_cartwheel, woman-juggling, man-juggling, juggling, fencer, woman-wrestling, man-wrestling, wrestlers, woman-playing-water-polo, man-playing-water-polo, water_polo, woman-playing-handball, man-playing-handball, handball, wilted_flower, drum_with_drumsticks, clinking_glasses, tumbler_glass, spoon, goal_net, first_place_medal, second_place_medal, third_place_medal, boxing_glove, martial_arts_uniform, curling_stone, croissant, avocado, cucumber, bacon, potato, carrot, baguette_bread, green_salad, shallow_pan_of_food, stuffed_flatbread, egg, glass_of_milk, peanuts, kiwifruit, pancakes, dumpling, fortune_cookie, takeout_box, chopsticks, bowl_with_spoon, cup_with_straw, coconut, broccoli, pie, pretzel, cut_of_meat, sandwich, canned_food, crab, lion_face, scorpion, turkey, unicorn_face, eagle, duck, bat, shark, owl, fox_face, butterfly, deer, gorilla, lizard, rhinoceros, shrimp, squid, giraffe_face, zebra_face, hedgehog, sauropod, t-rex, cricket, cheese_wedge, face_with_monocle, adult, child, older_adult, bearded_person, person_with_headscarf, woman_in_steamy_room, man_in_steamy_room, person_in_steamy_room, woman_climbing, person_climbing, man_climbing, woman_in_lotus_position, person_in_lotus_position, man_in_lotus_position, female_mage, mage, male_mage, female_fairy, fairy, male_fairy, female_vampire, vampire, male_vampire, mermaid, merman, merperson, female_elf, male_elf, elf, female_genie, male_genie, genie, female_zombie, male_zombie, zombie, brain, orange_heart, billed_cap, scarf, gloves, coat, socks, bangbang, interrobang, tm, information_source, left_right_arrow, arrow_up_down, arrow_upper_left, arrow_upper_right, arrow_lower_right, arrow_lower_left, leftwards_arrow_with_hook, arrow_right_hook, watch, hourglass, keyboard, eject, fast_forward, rewind, arrow_double_up, arrow_double_down, black_right_pointing_double_triangle_with_vertical_bar, black_left_pointing_double_triangle_with_vertical_bar, black_right_pointing_triangle_with_double_vertical_bar, alarm_clock, stopwatch, timer_clock, hourglass_flowing_sand, double_vertical_bar, black_square_for_stop, black_circle_for_record, m, black_small_square, white_small_square, arrow_forward, arrow_backward, white_medium_square, black_medium_square, white_medium_small_square, black_medium_small_square, sunny, cloud, umbrella, snowman, comet, phone, telephone, ballot_box_with_check, shamrock, point_up, skull_and_crossbones, radioactive_sign, biohazard_sign, orthodox_cross, star_and_crescent, peace_symbol, yin_yang, wheel_of_dharma, white_frowning_face, relaxed, female_sign, male_sign, gemini, cancer, leo, virgo, libra, scorpius, spades, clubs, hearts, diamonds, hotsprings, recycle, wheelchair, hammer_and_pick, crossed_swords, medical_symbol, staff_of_aesculapius, scales, alembic, gear, atom_symbol, fleur_de_lis, warning, zap, white_circle, black_circle, coffin, funeral_urn, soccer, baseball, snowman_without_snow, partly_sunny, thunder_cloud_and_rain, ophiuchus, pick, helmet_with_white_cross, chains, no_entry, shinto_shrine, church, mountain, umbrella_on_ground, fountain, golf, ferry, boat, sailboat, skier, ice_skate, woman-bouncing-ball, man-bouncing-ball, person_with_ball, tent, fuelpump, scissors, airplane, email, envelope, fist, hand, raised_hand, v, writing_hand, pencil2, black_nib, heavy_check_mark, heavy_multiplication_x, latin_cross, star_of_david, eight_spoked_asterisk, eight_pointed_black_star, snowflake, sparkle, x, negative_squared_cross_mark, heavy_heart_exclamation_mark_ornament, heart, arrow_right, curly_loop, loop, arrow_heading_up, arrow_heading_down, arrow_left, arrow_up, arrow_down, black_large_square, white_large_square, star, o, wavy_dash, part_alternation_mark, congratulations, secret, default */
+/***/ (function(module) {
+
+module.exports = {"100":"💯","1234":"🔢","umbrella_with_rain_drops":"☔","coffee":"☕","aries":"♈","taurus":"♉","sagittarius":"♐","capricorn":"♑","aquarius":"♒","pisces":"♓","anchor":"⚓","white_check_mark":"✅","sparkles":"✨","question":"❓","grey_question":"❔","grey_exclamation":"❕","exclamation":"❗","heavy_exclamation_mark":"❗","heavy_plus_sign":"➕","heavy_minus_sign":"➖","heavy_division_sign":"➗","hash":"#️⃣","keycap_star":"*️⃣","zero":"0️⃣","one":"1️⃣","two":"2️⃣","three":"3️⃣","four":"4️⃣","five":"5️⃣","six":"6️⃣","seven":"7️⃣","eight":"8️⃣","nine":"9️⃣","copyright":"©️","registered":"®️","mahjong":"🀄","black_joker":"🃏","a":"🅰️","b":"🅱️","o2":"🅾️","parking":"🅿️","ab":"🆎","cl":"🆑","cool":"🆒","free":"🆓","id":"🆔","new":"🆕","ng":"🆖","ok":"🆗","sos":"🆘","up":"🆙","vs":"🆚","flag-ac":"🇦🇨","flag-ad":"🇦🇩","flag-ae":"🇦🇪","flag-af":"🇦🇫","flag-ag":"🇦🇬","flag-ai":"🇦🇮","flag-al":"🇦🇱","flag-am":"🇦🇲","flag-ao":"🇦🇴","flag-aq":"🇦🇶","flag-ar":"🇦🇷","flag-as":"🇦🇸","flag-at":"🇦🇹","flag-au":"🇦🇺","flag-aw":"🇦🇼","flag-ax":"🇦🇽","flag-az":"🇦🇿","flag-ba":"🇧🇦","flag-bb":"🇧🇧","flag-bd":"🇧🇩","flag-be":"🇧🇪","flag-bf":"🇧🇫","flag-bg":"🇧🇬","flag-bh":"🇧🇭","flag-bi":"🇧🇮","flag-bj":"🇧🇯","flag-bl":"🇧🇱","flag-bm":"🇧🇲","flag-bn":"🇧🇳","flag-bo":"🇧🇴","flag-bq":"🇧🇶","flag-br":"🇧🇷","flag-bs":"🇧🇸","flag-bt":"🇧🇹","flag-bv":"🇧🇻","flag-bw":"🇧🇼","flag-by":"🇧🇾","flag-bz":"🇧🇿","flag-ca":"🇨🇦","flag-cc":"🇨🇨","flag-cd":"🇨🇩","flag-cf":"🇨🇫","flag-cg":"🇨🇬","flag-ch":"🇨🇭","flag-ci":"🇨🇮","flag-ck":"🇨🇰","flag-cl":"🇨🇱","flag-cm":"🇨🇲","cn":"🇨🇳","flag-cn":"🇨🇳","flag-co":"🇨🇴","flag-cp":"🇨🇵","flag-cr":"🇨🇷","flag-cu":"🇨🇺","flag-cv":"🇨🇻","flag-cw":"🇨🇼","flag-cx":"🇨🇽","flag-cy":"🇨🇾","flag-cz":"🇨🇿","de":"🇩🇪","flag-de":"🇩🇪","flag-dg":"🇩🇬","flag-dj":"🇩🇯","flag-dk":"🇩🇰","flag-dm":"🇩🇲","flag-do":"🇩🇴","flag-dz":"🇩🇿","flag-ea":"🇪🇦","flag-ec":"🇪🇨","flag-ee":"🇪🇪","flag-eg":"🇪🇬","flag-eh":"🇪🇭","flag-er":"🇪🇷","es":"🇪🇸","flag-es":"🇪🇸","flag-et":"🇪🇹","flag-eu":"🇪🇺","flag-fi":"🇫🇮","flag-fj":"🇫🇯","flag-fk":"🇫🇰","flag-fm":"🇫🇲","flag-fo":"🇫🇴","fr":"🇫🇷","flag-fr":"🇫🇷","flag-ga":"🇬🇦","gb":"🇬🇧","uk":"🇬🇧","flag-gb":"🇬🇧","flag-gd":"🇬🇩","flag-ge":"🇬🇪","flag-gf":"🇬🇫","flag-gg":"🇬🇬","flag-gh":"🇬🇭","flag-gi":"🇬🇮","flag-gl":"🇬🇱","flag-gm":"🇬🇲","flag-gn":"🇬🇳","flag-gp":"🇬🇵","flag-gq":"🇬🇶","flag-gr":"🇬🇷","flag-gs":"🇬🇸","flag-gt":"🇬🇹","flag-gu":"🇬🇺","flag-gw":"🇬🇼","flag-gy":"🇬🇾","flag-hk":"🇭🇰","flag-hm":"🇭🇲","flag-hn":"🇭🇳","flag-hr":"🇭🇷","flag-ht":"🇭🇹","flag-hu":"🇭🇺","flag-ic":"🇮🇨","flag-id":"🇮🇩","flag-ie":"🇮🇪","flag-il":"🇮🇱","flag-im":"🇮🇲","flag-in":"🇮🇳","flag-io":"🇮🇴","flag-iq":"🇮🇶","flag-ir":"🇮🇷","flag-is":"🇮🇸","it":"🇮🇹","flag-it":"🇮🇹","flag-je":"🇯🇪","flag-jm":"🇯🇲","flag-jo":"🇯🇴","jp":"🇯🇵","flag-jp":"🇯🇵","flag-ke":"🇰🇪","flag-kg":"🇰🇬","flag-kh":"🇰🇭","flag-ki":"🇰🇮","flag-km":"🇰🇲","flag-kn":"🇰🇳","flag-kp":"🇰🇵","kr":"🇰🇷","flag-kr":"🇰🇷","flag-kw":"🇰🇼","flag-ky":"🇰🇾","flag-kz":"🇰🇿","flag-la":"🇱🇦","flag-lb":"🇱🇧","flag-lc":"🇱🇨","flag-li":"🇱🇮","flag-lk":"🇱🇰","flag-lr":"🇱🇷","flag-ls":"🇱🇸","flag-lt":"🇱🇹","flag-lu":"🇱🇺","flag-lv":"🇱🇻","flag-ly":"🇱🇾","flag-ma":"🇲🇦","flag-mc":"🇲🇨","flag-md":"🇲🇩","flag-me":"🇲🇪","flag-mf":"🇲🇫","flag-mg":"🇲🇬","flag-mh":"🇲🇭","flag-mk":"🇲🇰","flag-ml":"🇲🇱","flag-mm":"🇲🇲","flag-mn":"🇲🇳","flag-mo":"🇲🇴","flag-mp":"🇲🇵","flag-mq":"🇲🇶","flag-mr":"🇲🇷","flag-ms":"🇲🇸","flag-mt":"🇲🇹","flag-mu":"🇲🇺","flag-mv":"🇲🇻","flag-mw":"🇲🇼","flag-mx":"🇲🇽","flag-my":"🇲🇾","flag-mz":"🇲🇿","flag-na":"🇳🇦","flag-nc":"🇳🇨","flag-ne":"🇳🇪","flag-nf":"🇳🇫","flag-ng":"🇳🇬","flag-ni":"🇳🇮","flag-nl":"🇳🇱","flag-no":"🇳🇴","flag-np":"🇳🇵","flag-nr":"🇳🇷","flag-nu":"🇳🇺","flag-nz":"🇳🇿","flag-om":"🇴🇲","flag-pa":"🇵🇦","flag-pe":"🇵🇪","flag-pf":"🇵🇫","flag-pg":"🇵🇬","flag-ph":"🇵🇭","flag-pk":"🇵🇰","flag-pl":"🇵🇱","flag-pm":"🇵🇲","flag-pn":"🇵🇳","flag-pr":"🇵🇷","flag-ps":"🇵🇸","flag-pt":"🇵🇹","flag-pw":"🇵🇼","flag-py":"🇵🇾","flag-qa":"🇶🇦","flag-re":"🇷🇪","flag-ro":"🇷🇴","flag-rs":"🇷🇸","ru":"🇷🇺","flag-ru":"🇷🇺","flag-rw":"🇷🇼","flag-sa":"🇸🇦","flag-sb":"🇸🇧","flag-sc":"🇸🇨","flag-sd":"🇸🇩","flag-se":"🇸🇪","flag-sg":"🇸🇬","flag-sh":"🇸🇭","flag-si":"🇸🇮","flag-sj":"🇸🇯","flag-sk":"🇸🇰","flag-sl":"🇸🇱","flag-sm":"🇸🇲","flag-sn":"🇸🇳","flag-so":"🇸🇴","flag-sr":"🇸🇷","flag-ss":"🇸🇸","flag-st":"🇸🇹","flag-sv":"🇸🇻","flag-sx":"🇸🇽","flag-sy":"🇸🇾","flag-sz":"🇸🇿","flag-ta":"🇹🇦","flag-tc":"🇹🇨","flag-td":"🇹🇩","flag-tf":"🇹🇫","flag-tg":"🇹🇬","flag-th":"🇹🇭","flag-tj":"🇹🇯","flag-tk":"🇹🇰","flag-tl":"🇹🇱","flag-tm":"🇹🇲","flag-tn":"🇹🇳","flag-to":"🇹🇴","flag-tr":"🇹🇷","flag-tt":"🇹🇹","flag-tv":"🇹🇻","flag-tw":"🇹🇼","flag-tz":"🇹🇿","flag-ua":"🇺🇦","flag-ug":"🇺🇬","flag-um":"🇺🇲","flag-un":"🇺🇳","us":"🇺🇸","flag-us":"🇺🇸","flag-uy":"🇺🇾","flag-uz":"🇺🇿","flag-va":"🇻🇦","flag-vc":"🇻🇨","flag-ve":"🇻🇪","flag-vg":"🇻🇬","flag-vi":"🇻🇮","flag-vn":"🇻🇳","flag-vu":"🇻🇺","flag-wf":"🇼🇫","flag-ws":"🇼🇸","flag-xk":"🇽🇰","flag-ye":"🇾🇪","flag-yt":"🇾🇹","flag-za":"🇿🇦","flag-zm":"🇿🇲","flag-zw":"🇿🇼","koko":"🈁","sa":"🈂️","u7121":"🈚","u6307":"🈯","u7981":"🈲","u7a7a":"🈳","u5408":"🈴","u6e80":"🈵","u6709":"🈶","u6708":"🈷️","u7533":"🈸","u5272":"🈹","u55b6":"🈺","ideograph_advantage":"🉐","accept":"🉑","cyclone":"🌀","foggy":"🌁","closed_umbrella":"🌂","night_with_stars":"🌃","sunrise_over_mountains":"🌄","sunrise":"🌅","city_sunset":"🌆","city_sunrise":"🌇","rainbow":"🌈","bridge_at_night":"🌉","ocean":"🌊","volcano":"🌋","milky_way":"🌌","earth_africa":"🌍","earth_americas":"🌎","earth_asia":"🌏","globe_with_meridians":"🌐","new_moon":"🌑","waxing_crescent_moon":"🌒","first_quarter_moon":"🌓","moon":"🌔","waxing_gibbous_moon":"🌔","full_moon":"🌕","waning_gibbous_moon":"🌖","last_quarter_moon":"🌗","waning_crescent_moon":"🌘","crescent_moon":"🌙","new_moon_with_face":"🌚","first_quarter_moon_with_face":"🌛","last_quarter_moon_with_face":"🌜","full_moon_with_face":"🌝","sun_with_face":"🌞","star2":"🌟","stars":"🌠","thermometer":"🌡️","mostly_sunny":"🌤️","sun_small_cloud":"🌤️","barely_sunny":"🌥️","sun_behind_cloud":"🌥️","partly_sunny_rain":"🌦️","sun_behind_rain_cloud":"🌦️","rain_cloud":"🌧️","snow_cloud":"🌨️","lightning":"🌩️","lightning_cloud":"🌩️","tornado":"🌪️","tornado_cloud":"🌪️","fog":"🌫️","wind_blowing_face":"🌬️","hotdog":"🌭","taco":"🌮","burrito":"🌯","chestnut":"🌰","seedling":"🌱","evergreen_tree":"🌲","deciduous_tree":"🌳","palm_tree":"🌴","cactus":"🌵","hot_pepper":"🌶️","tulip":"🌷","cherry_blossom":"🌸","rose":"🌹","hibiscus":"🌺","sunflower":"🌻","blossom":"🌼","corn":"🌽","ear_of_rice":"🌾","herb":"🌿","four_leaf_clover":"🍀","maple_leaf":"🍁","fallen_leaf":"🍂","leaves":"🍃","mushroom":"🍄","tomato":"🍅","eggplant":"🍆","grapes":"🍇","melon":"🍈","watermelon":"🍉","tangerine":"🍊","lemon":"🍋","banana":"🍌","pineapple":"🍍","apple":"🍎","green_apple":"🍏","pear":"🍐","peach":"🍑","cherries":"🍒","strawberry":"🍓","hamburger":"🍔","pizza":"🍕","meat_on_bone":"🍖","poultry_leg":"🍗","rice_cracker":"🍘","rice_ball":"🍙","rice":"🍚","curry":"🍛","ramen":"🍜","spaghetti":"🍝","bread":"🍞","fries":"🍟","sweet_potato":"🍠","dango":"🍡","oden":"🍢","sushi":"🍣","fried_shrimp":"🍤","fish_cake":"🍥","icecream":"🍦","shaved_ice":"🍧","ice_cream":"🍨","doughnut":"🍩","cookie":"🍪","chocolate_bar":"🍫","candy":"🍬","lollipop":"🍭","custard":"🍮","honey_pot":"🍯","cake":"🍰","bento":"🍱","stew":"🍲","fried_egg":"🍳","cooking":"🍳","fork_and_knife":"🍴","tea":"🍵","sake":"🍶","wine_glass":"🍷","cocktail":"🍸","tropical_drink":"🍹","beer":"🍺","beers":"🍻","baby_bottle":"🍼","knife_fork_plate":"🍽️","champagne":"🍾","popcorn":"🍿","ribbon":"🎀","gift":"🎁","birthday":"🎂","jack_o_lantern":"🎃","christmas_tree":"🎄","santa":"🎅","fireworks":"🎆","sparkler":"🎇","balloon":"🎈","tada":"🎉","confetti_ball":"🎊","tanabata_tree":"🎋","crossed_flags":"🎌","bamboo":"🎍","dolls":"🎎","flags":"🎏","wind_chime":"🎐","rice_scene":"🎑","school_satchel":"🎒","mortar_board":"🎓","medal":"🎖️","reminder_ribbon":"🎗️","studio_microphone":"🎙️","level_slider":"🎚️","control_knobs":"🎛️","film_frames":"🎞️","admission_tickets":"🎟️","carousel_horse":"🎠","ferris_wheel":"🎡","roller_coaster":"🎢","fishing_pole_and_fish":"🎣","microphone":"🎤","movie_camera":"🎥","cinema":"🎦","headphones":"🎧","art":"🎨","tophat":"🎩","circus_tent":"🎪","ticket":"🎫","clapper":"🎬","performing_arts":"🎭","video_game":"🎮","dart":"🎯","slot_machine":"🎰","8ball":"🎱","game_die":"🎲","bowling":"🎳","flower_playing_cards":"🎴","musical_note":"🎵","notes":"🎶","saxophone":"🎷","guitar":"🎸","musical_keyboard":"🎹","trumpet":"🎺","violin":"🎻","musical_score":"🎼","running_shirt_with_sash":"🎽","tennis":"🎾","ski":"🎿","basketball":"🏀","checkered_flag":"🏁","snowboarder":"🏂","woman-running":"🏃‍♀️","man-running":"🏃‍♂️","runner":"🏃‍♂️","running":"🏃‍♂️","woman-surfing":"🏄‍♀️","man-surfing":"🏄‍♂️","surfer":"🏄‍♂️","sports_medal":"🏅","trophy":"🏆","horse_racing":"🏇","football":"🏈","rugby_football":"🏉","woman-swimming":"🏊‍♀️","man-swimming":"🏊‍♂️","swimmer":"🏊‍♂️","woman-lifting-weights":"🏋️‍♀️","man-lifting-weights":"🏋️‍♂️","weight_lifter":"🏋️‍♂️","woman-golfing":"🏌️‍♀️","man-golfing":"🏌️‍♂️","golfer":"🏌️‍♂️","racing_motorcycle":"🏍️","racing_car":"🏎️","cricket_bat_and_ball":"🏏","volleyball":"🏐","field_hockey_stick_and_ball":"🏑","ice_hockey_stick_and_puck":"🏒","table_tennis_paddle_and_ball":"🏓","snow_capped_mountain":"🏔️","camping":"🏕️","beach_with_umbrella":"🏖️","building_construction":"🏗️","house_buildings":"🏘️","cityscape":"🏙️","derelict_house_building":"🏚️","classical_building":"🏛️","desert":"🏜️","desert_island":"🏝️","national_park":"🏞️","stadium":"🏟️","house":"🏠","house_with_garden":"🏡","office":"🏢","post_office":"🏣","european_post_office":"🏤","hospital":"🏥","bank":"🏦","atm":"🏧","hotel":"🏨","love_hotel":"🏩","convenience_store":"🏪","school":"🏫","department_store":"🏬","factory":"🏭","izakaya_lantern":"🏮","lantern":"🏮","japanese_castle":"🏯","european_castle":"🏰","rainbow-flag":"🏳️‍🌈","waving_white_flag":"🏳️","flag-england":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","flag-scotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","flag-wales":"🏴󠁧󠁢󠁷󠁬󠁳󠁿","waving_black_flag":"🏴","rosette":"🏵️","label":"🏷️","badminton_racquet_and_shuttlecock":"🏸","bow_and_arrow":"🏹","amphora":"🏺","skin-tone-2":"🏻","skin-tone-3":"🏼","skin-tone-4":"🏽","skin-tone-5":"🏾","skin-tone-6":"🏿","rat":"🐀","mouse2":"🐁","ox":"🐂","water_buffalo":"🐃","cow2":"🐄","tiger2":"🐅","leopard":"🐆","rabbit2":"🐇","cat2":"🐈","dragon":"🐉","crocodile":"🐊","whale2":"🐋","snail":"🐌","snake":"🐍","racehorse":"🐎","ram":"🐏","goat":"🐐","sheep":"🐑","monkey":"🐒","rooster":"🐓","chicken":"🐔","dog2":"🐕","pig2":"🐖","boar":"🐗","elephant":"🐘","octopus":"🐙","shell":"🐚","bug":"🐛","ant":"🐜","bee":"🐝","honeybee":"🐝","beetle":"🐞","fish":"🐟","tropical_fish":"🐠","blowfish":"🐡","turtle":"🐢","hatching_chick":"🐣","baby_chick":"🐤","hatched_chick":"🐥","bird":"🐦","penguin":"🐧","koala":"🐨","poodle":"🐩","dromedary_camel":"🐪","camel":"🐫","dolphin":"🐬","flipper":"🐬","mouse":"🐭","cow":"🐮","tiger":"🐯","rabbit":"🐰","cat":"🐱","dragon_face":"🐲","whale":"🐳","horse":"🐴","monkey_face":"🐵","dog":"🐶","pig":"🐷","frog":"🐸","hamster":"🐹","wolf":"🐺","bear":"🐻","panda_face":"🐼","pig_nose":"🐽","feet":"🐾","paw_prints":"🐾","chipmunk":"🐿️","eyes":"👀","eye-in-speech-bubble":"👁️‍🗨️","eye":"👁️","ear":"👂","nose":"👃","lips":"👄","tongue":"👅","point_up_2":"👆","point_down":"👇","point_left":"👈","point_right":"👉","facepunch":"👊","punch":"👊","wave":"👋","ok_hand":"👌","+1":"👍","thumbsup":"👍","-1":"👎","thumbsdown":"👎","clap":"👏","open_hands":"👐","crown":"👑","womans_hat":"👒","eyeglasses":"👓","necktie":"👔","shirt":"👕","tshirt":"👕","jeans":"👖","dress":"👗","kimono":"👘","bikini":"👙","womans_clothes":"👚","purse":"👛","handbag":"👜","pouch":"👝","mans_shoe":"👞","shoe":"👞","athletic_shoe":"👟","high_heel":"👠","sandal":"👡","boot":"👢","footprints":"👣","bust_in_silhouette":"👤","busts_in_silhouette":"👥","boy":"👦","girl":"👧","male-farmer":"👨‍🌾","male-cook":"👨‍🍳","male-student":"👨‍🎓","male-singer":"👨‍🎤","male-artist":"👨‍🎨","male-teacher":"👨‍🏫","male-factory-worker":"👨‍🏭","man-boy-boy":"👨‍👦‍👦","man-boy":"👨‍👦","man-girl-boy":"👨‍👧‍👦","man-girl-girl":"👨‍👧‍👧","man-girl":"👨‍👧","man-man-boy":"👨‍👨‍👦","man-man-boy-boy":"👨‍👨‍👦‍👦","man-man-girl":"👨‍👨‍👧","man-man-girl-boy":"👨‍👨‍👧‍👦","man-man-girl-girl":"👨‍👨‍👧‍👧","man-woman-boy":"👨‍👩‍👦","family":"👨‍👩‍👦","man-woman-boy-boy":"👨‍👩‍👦‍👦","man-woman-girl":"👨‍👩‍👧","man-woman-girl-boy":"👨‍👩‍👧‍👦","man-woman-girl-girl":"👨‍👩‍👧‍👧","male-technologist":"👨‍💻","male-office-worker":"👨‍💼","male-mechanic":"👨‍🔧","male-scientist":"👨‍🔬","male-astronaut":"👨‍🚀","male-firefighter":"👨‍🚒","male-doctor":"👨‍⚕️","male-judge":"👨‍⚖️","male-pilot":"👨‍✈️","man-heart-man":"👨‍❤️‍👨","man-kiss-man":"👨‍❤️‍💋‍👨","man":"👨","female-farmer":"👩‍🌾","female-cook":"👩‍🍳","female-student":"👩‍🎓","female-singer":"👩‍🎤","female-artist":"👩‍🎨","female-teacher":"👩‍🏫","female-factory-worker":"👩‍🏭","woman-boy-boy":"👩‍👦‍👦","woman-boy":"👩‍👦","woman-girl-boy":"👩‍👧‍👦","woman-girl-girl":"👩‍👧‍👧","woman-girl":"👩‍👧","woman-woman-boy":"👩‍👩‍👦","woman-woman-boy-boy":"👩‍👩‍👦‍👦","woman-woman-girl":"👩‍👩‍👧","woman-woman-girl-boy":"👩‍👩‍👧‍👦","woman-woman-girl-girl":"👩‍👩‍👧‍👧","female-technologist":"👩‍💻","female-office-worker":"👩‍💼","female-mechanic":"👩‍🔧","female-scientist":"👩‍🔬","female-astronaut":"👩‍🚀","female-firefighter":"👩‍🚒","female-doctor":"👩‍⚕️","female-judge":"👩‍⚖️","female-pilot":"👩‍✈️","woman-heart-man":"👩‍❤️‍👨","couple_with_heart":"👩‍❤️‍👨","woman-heart-woman":"👩‍❤️‍👩","woman-kiss-man":"👩‍❤️‍💋‍👨","couplekiss":"👩‍❤️‍💋‍👨","woman-kiss-woman":"👩‍❤️‍💋‍👩","woman":"👩","couple":"👫","man_and_woman_holding_hands":"👫","two_men_holding_hands":"👬","two_women_holding_hands":"👭","female-police-officer":"👮‍♀️","male-police-officer":"👮‍♂️","cop":"👮‍♂️","woman-with-bunny-ears-partying":"👯‍♀️","dancers":"👯‍♀️","man-with-bunny-ears-partying":"👯‍♂️","bride_with_veil":"👰","blond-haired-woman":"👱‍♀️","blond-haired-man":"👱‍♂️","person_with_blond_hair":"👱‍♂️","man_with_gua_pi_mao":"👲","woman-wearing-turban":"👳‍♀️","man-wearing-turban":"👳‍♂️","man_with_turban":"👳‍♂️","older_man":"👴","older_woman":"👵","baby":"👶","female-construction-worker":"👷‍♀️","male-construction-worker":"👷‍♂️","construction_worker":"👷‍♂️","princess":"👸","japanese_ogre":"👹","japanese_goblin":"👺","ghost":"👻","angel":"👼","alien":"👽","space_invader":"👾","imp":"👿","skull":"💀","woman-tipping-hand":"💁‍♀️","information_desk_person":"💁‍♀️","man-tipping-hand":"💁‍♂️","female-guard":"💂‍♀️","male-guard":"💂‍♂️","guardsman":"💂‍♂️","dancer":"💃","lipstick":"💄","nail_care":"💅","woman-getting-massage":"💆‍♀️","massage":"💆‍♀️","man-getting-massage":"💆‍♂️","woman-getting-haircut":"💇‍♀️","haircut":"💇‍♀️","man-getting-haircut":"💇‍♂️","barber":"💈","syringe":"💉","pill":"💊","kiss":"💋","love_letter":"💌","ring":"💍","gem":"💎","bouquet":"💐","wedding":"💒","heartbeat":"💓","broken_heart":"💔","two_hearts":"💕","sparkling_heart":"💖","heartpulse":"💗","cupid":"💘","blue_heart":"💙","green_heart":"💚","yellow_heart":"💛","purple_heart":"💜","gift_heart":"💝","revolving_hearts":"💞","heart_decoration":"💟","diamond_shape_with_a_dot_inside":"💠","bulb":"💡","anger":"💢","bomb":"💣","zzz":"💤","boom":"💥","collision":"💥","sweat_drops":"💦","droplet":"💧","dash":"💨","hankey":"💩","poop":"💩","shit":"💩","muscle":"💪","dizzy":"💫","speech_balloon":"💬","thought_balloon":"💭","white_flower":"💮","moneybag":"💰","currency_exchange":"💱","heavy_dollar_sign":"💲","credit_card":"💳","yen":"💴","dollar":"💵","euro":"💶","pound":"💷","money_with_wings":"💸","chart":"💹","seat":"💺","computer":"💻","briefcase":"💼","minidisc":"💽","floppy_disk":"💾","cd":"💿","dvd":"📀","file_folder":"📁","open_file_folder":"📂","page_with_curl":"📃","page_facing_up":"📄","date":"📅","calendar":"📆","card_index":"📇","chart_with_upwards_trend":"📈","chart_with_downwards_trend":"📉","bar_chart":"📊","clipboard":"📋","pushpin":"📌","round_pushpin":"📍","paperclip":"📎","straight_ruler":"📏","triangular_ruler":"📐","bookmark_tabs":"📑","ledger":"📒","notebook":"📓","notebook_with_decorative_cover":"📔","closed_book":"📕","book":"📖","open_book":"📖","green_book":"📗","blue_book":"📘","orange_book":"📙","books":"📚","name_badge":"📛","scroll":"📜","memo":"📝","pencil":"📝","telephone_receiver":"📞","pager":"📟","fax":"📠","satellite_antenna":"📡","loudspeaker":"📢","mega":"📣","outbox_tray":"📤","inbox_tray":"📥","package":"📦","e-mail":"📧","incoming_envelope":"📨","envelope_with_arrow":"📩","mailbox_closed":"📪","mailbox":"📫","mailbox_with_mail":"📬","mailbox_with_no_mail":"📭","postbox":"📮","postal_horn":"📯","newspaper":"📰","iphone":"📱","calling":"📲","vibration_mode":"📳","mobile_phone_off":"📴","no_mobile_phones":"📵","signal_strength":"📶","camera":"📷","camera_with_flash":"📸","video_camera":"📹","tv":"📺","radio":"📻","vhs":"📼","film_projector":"📽️","prayer_beads":"📿","twisted_rightwards_arrows":"🔀","repeat":"🔁","repeat_one":"🔂","arrows_clockwise":"🔃","arrows_counterclockwise":"🔄","low_brightness":"🔅","high_brightness":"🔆","mute":"🔇","speaker":"🔈","sound":"🔉","loud_sound":"🔊","battery":"🔋","electric_plug":"🔌","mag":"🔍","mag_right":"🔎","lock_with_ink_pen":"🔏","closed_lock_with_key":"🔐","key":"🔑","lock":"🔒","unlock":"🔓","bell":"🔔","no_bell":"🔕","bookmark":"🔖","link":"🔗","radio_button":"🔘","back":"🔙","end":"🔚","on":"🔛","soon":"🔜","top":"🔝","underage":"🔞","keycap_ten":"🔟","capital_abcd":"🔠","abcd":"🔡","symbols":"🔣","abc":"🔤","fire":"🔥","flashlight":"🔦","wrench":"🔧","hammer":"🔨","nut_and_bolt":"🔩","hocho":"🔪","knife":"🔪","gun":"🔫","microscope":"🔬","telescope":"🔭","crystal_ball":"🔮","six_pointed_star":"🔯","beginner":"🔰","trident":"🔱","black_square_button":"🔲","white_square_button":"🔳","red_circle":"🔴","large_blue_circle":"🔵","large_orange_diamond":"🔶","large_blue_diamond":"🔷","small_orange_diamond":"🔸","small_blue_diamond":"🔹","small_red_triangle":"🔺","small_red_triangle_down":"🔻","arrow_up_small":"🔼","arrow_down_small":"🔽","om_symbol":"🕉️","dove_of_peace":"🕊️","kaaba":"🕋","mosque":"🕌","synagogue":"🕍","menorah_with_nine_branches":"🕎","clock1":"🕐","clock2":"🕑","clock3":"🕒","clock4":"🕓","clock5":"🕔","clock6":"🕕","clock7":"🕖","clock8":"🕗","clock9":"🕘","clock10":"🕙","clock11":"🕚","clock12":"🕛","clock130":"🕜","clock230":"🕝","clock330":"🕞","clock430":"🕟","clock530":"🕠","clock630":"🕡","clock730":"🕢","clock830":"🕣","clock930":"🕤","clock1030":"🕥","clock1130":"🕦","clock1230":"🕧","candle":"🕯️","mantelpiece_clock":"🕰️","hole":"🕳️","man_in_business_suit_levitating":"🕴️","female-detective":"🕵️‍♀️","male-detective":"🕵️‍♂️","sleuth_or_spy":"🕵️‍♂️","dark_sunglasses":"🕶️","spider":"🕷️","spider_web":"🕸️","joystick":"🕹️","man_dancing":"🕺","linked_paperclips":"🖇️","lower_left_ballpoint_pen":"🖊️","lower_left_fountain_pen":"🖋️","lower_left_paintbrush":"🖌️","lower_left_crayon":"🖍️","raised_hand_with_fingers_splayed":"🖐️","middle_finger":"🖕","reversed_hand_with_middle_finger_extended":"🖕","spock-hand":"🖖","black_heart":"🖤","desktop_computer":"🖥️","printer":"🖨️","three_button_mouse":"🖱️","trackball":"🖲️","frame_with_picture":"🖼️","card_index_dividers":"🗂️","card_file_box":"🗃️","file_cabinet":"🗄️","wastebasket":"🗑️","spiral_note_pad":"🗒️","spiral_calendar_pad":"🗓️","compression":"🗜️","old_key":"🗝️","rolled_up_newspaper":"🗞️","dagger_knife":"🗡️","speaking_head_in_silhouette":"🗣️","left_speech_bubble":"🗨️","right_anger_bubble":"🗯️","ballot_box_with_ballot":"🗳️","world_map":"🗺️","mount_fuji":"🗻","tokyo_tower":"🗼","statue_of_liberty":"🗽","japan":"🗾","moyai":"🗿","grinning":"😀","grin":"😁","joy":"😂","smiley":"😃","smile":"😄","sweat_smile":"😅","laughing":"😆","satisfied":"😆","innocent":"😇","smiling_imp":"😈","wink":"😉","blush":"😊","yum":"😋","relieved":"😌","heart_eyes":"😍","sunglasses":"😎","smirk":"😏","neutral_face":"😐","expressionless":"😑","unamused":"😒","sweat":"😓","pensive":"😔","confused":"😕","confounded":"😖","kissing":"😗","kissing_heart":"😘","kissing_smiling_eyes":"😙","kissing_closed_eyes":"😚","stuck_out_tongue":"😛","stuck_out_tongue_winking_eye":"😜","stuck_out_tongue_closed_eyes":"😝","disappointed":"😞","worried":"😟","angry":"😠","rage":"😡","cry":"😢","persevere":"😣","triumph":"😤","disappointed_relieved":"😥","frowning":"😦","anguished":"😧","fearful":"😨","weary":"😩","sleepy":"😪","tired_face":"😫","grimacing":"😬","sob":"😭","open_mouth":"😮","hushed":"😯","cold_sweat":"😰","scream":"😱","astonished":"😲","flushed":"😳","sleeping":"😴","dizzy_face":"😵","no_mouth":"😶","mask":"😷","smile_cat":"😸","joy_cat":"😹","smiley_cat":"😺","heart_eyes_cat":"😻","smirk_cat":"😼","kissing_cat":"😽","pouting_cat":"😾","crying_cat_face":"😿","scream_cat":"🙀","slightly_frowning_face":"🙁","slightly_smiling_face":"🙂","upside_down_face":"🙃","face_with_rolling_eyes":"🙄","woman-gesturing-no":"🙅‍♀️","no_good":"🙅‍♀️","man-gesturing-no":"🙅‍♂️","woman-gesturing-ok":"🙆‍♀️","ok_woman":"🙆‍♀️","man-gesturing-ok":"🙆‍♂️","woman-bowing":"🙇‍♀️","man-bowing":"🙇‍♂️","bow":"🙇‍♂️","see_no_evil":"🙈","hear_no_evil":"🙉","speak_no_evil":"🙊","woman-raising-hand":"🙋‍♀️","raising_hand":"🙋‍♀️","man-raising-hand":"🙋‍♂️","raised_hands":"🙌","woman-frowning":"🙍‍♀️","person_frowning":"🙍‍♀️","man-frowning":"🙍‍♂️","woman-pouting":"🙎‍♀️","person_with_pouting_face":"🙎‍♀️","man-pouting":"🙎‍♂️","pray":"🙏","rocket":"🚀","helicopter":"🚁","steam_locomotive":"🚂","railway_car":"🚃","bullettrain_side":"🚄","bullettrain_front":"🚅","train2":"🚆","metro":"🚇","light_rail":"🚈","station":"🚉","tram":"🚊","train":"🚋","bus":"🚌","oncoming_bus":"🚍","trolleybus":"🚎","busstop":"🚏","minibus":"🚐","ambulance":"🚑","fire_engine":"🚒","police_car":"🚓","oncoming_police_car":"🚔","taxi":"🚕","oncoming_taxi":"🚖","car":"🚗","red_car":"🚗","oncoming_automobile":"🚘","blue_car":"🚙","truck":"🚚","articulated_lorry":"🚛","tractor":"🚜","monorail":"🚝","mountain_railway":"🚞","suspension_railway":"🚟","mountain_cableway":"🚠","aerial_tramway":"🚡","ship":"🚢","woman-rowing-boat":"🚣‍♀️","man-rowing-boat":"🚣‍♂️","rowboat":"🚣‍♂️","speedboat":"🚤","traffic_light":"🚥","vertical_traffic_light":"🚦","construction":"🚧","rotating_light":"🚨","triangular_flag_on_post":"🚩","door":"🚪","no_entry_sign":"🚫","smoking":"🚬","no_smoking":"🚭","put_litter_in_its_place":"🚮","do_not_litter":"🚯","potable_water":"🚰","non-potable_water":"🚱","bike":"🚲","no_bicycles":"🚳","woman-biking":"🚴‍♀️","man-biking":"🚴‍♂️","bicyclist":"🚴‍♂️","woman-mountain-biking":"🚵‍♀️","man-mountain-biking":"🚵‍♂️","mountain_bicyclist":"🚵‍♂️","woman-walking":"🚶‍♀️","man-walking":"🚶‍♂️","walking":"🚶‍♂️","no_pedestrians":"🚷","children_crossing":"🚸","mens":"🚹","womens":"🚺","restroom":"🚻","baby_symbol":"🚼","toilet":"🚽","wc":"🚾","shower":"🚿","bath":"🛀","bathtub":"🛁","passport_control":"🛂","customs":"🛃","baggage_claim":"🛄","left_luggage":"🛅","couch_and_lamp":"🛋️","sleeping_accommodation":"🛌","shopping_bags":"🛍️","bellhop_bell":"🛎️","bed":"🛏️","place_of_worship":"🛐","octagonal_sign":"🛑","shopping_trolley":"🛒","hammer_and_wrench":"🛠️","shield":"🛡️","oil_drum":"🛢️","motorway":"🛣️","railway_track":"🛤️","motor_boat":"🛥️","small_airplane":"🛩️","airplane_departure":"🛫","airplane_arriving":"🛬","satellite":"🛰️","passenger_ship":"🛳️","scooter":"🛴","motor_scooter":"🛵","canoe":"🛶","sled":"🛷","flying_saucer":"🛸","zipper_mouth_face":"🤐","money_mouth_face":"🤑","face_with_thermometer":"🤒","nerd_face":"🤓","thinking_face":"🤔","face_with_head_bandage":"🤕","robot_face":"🤖","hugging_face":"🤗","the_horns":"🤘","sign_of_the_horns":"🤘","call_me_hand":"🤙","raised_back_of_hand":"🤚","left-facing_fist":"🤛","right-facing_fist":"🤜","handshake":"🤝","crossed_fingers":"🤞","hand_with_index_and_middle_fingers_crossed":"🤞","i_love_you_hand_sign":"🤟","face_with_cowboy_hat":"🤠","clown_face":"🤡","nauseated_face":"🤢","rolling_on_the_floor_laughing":"🤣","drooling_face":"🤤","lying_face":"🤥","woman-facepalming":"🤦‍♀️","man-facepalming":"🤦‍♂️","face_palm":"🤦","sneezing_face":"🤧","face_with_raised_eyebrow":"🤨","face_with_one_eyebrow_raised":"🤨","star-struck":"🤩","grinning_face_with_star_eyes":"🤩","zany_face":"🤪","grinning_face_with_one_large_and_one_small_eye":"🤪","shushing_face":"🤫","face_with_finger_covering_closed_lips":"🤫","face_with_symbols_on_mouth":"🤬","serious_face_with_symbols_covering_mouth":"🤬","face_with_hand_over_mouth":"🤭","smiling_face_with_smiling_eyes_and_hand_covering_mouth":"🤭","face_vomiting":"🤮","face_with_open_mouth_vomiting":"🤮","exploding_head":"🤯","shocked_face_with_exploding_head":"🤯","pregnant_woman":"🤰","breast-feeding":"🤱","palms_up_together":"🤲","selfie":"🤳","prince":"🤴","man_in_tuxedo":"🤵","mrs_claus":"🤶","mother_christmas":"🤶","woman-shrugging":"🤷‍♀️","man-shrugging":"🤷‍♂️","shrug":"🤷","woman-cartwheeling":"🤸‍♀️","man-cartwheeling":"🤸‍♂️","person_doing_cartwheel":"🤸","woman-juggling":"🤹‍♀️","man-juggling":"🤹‍♂️","juggling":"🤹","fencer":"🤺","woman-wrestling":"🤼‍♀️","man-wrestling":"🤼‍♂️","wrestlers":"🤼","woman-playing-water-polo":"🤽‍♀️","man-playing-water-polo":"🤽‍♂️","water_polo":"🤽","woman-playing-handball":"🤾‍♀️","man-playing-handball":"🤾‍♂️","handball":"🤾","wilted_flower":"🥀","drum_with_drumsticks":"🥁","clinking_glasses":"🥂","tumbler_glass":"🥃","spoon":"🥄","goal_net":"🥅","first_place_medal":"🥇","second_place_medal":"🥈","third_place_medal":"🥉","boxing_glove":"🥊","martial_arts_uniform":"🥋","curling_stone":"🥌","croissant":"🥐","avocado":"🥑","cucumber":"🥒","bacon":"🥓","potato":"🥔","carrot":"🥕","baguette_bread":"🥖","green_salad":"🥗","shallow_pan_of_food":"🥘","stuffed_flatbread":"🥙","egg":"🥚","glass_of_milk":"🥛","peanuts":"🥜","kiwifruit":"🥝","pancakes":"🥞","dumpling":"🥟","fortune_cookie":"🥠","takeout_box":"🥡","chopsticks":"🥢","bowl_with_spoon":"🥣","cup_with_straw":"🥤","coconut":"🥥","broccoli":"🥦","pie":"🥧","pretzel":"🥨","cut_of_meat":"🥩","sandwich":"🥪","canned_food":"🥫","crab":"🦀","lion_face":"🦁","scorpion":"🦂","turkey":"🦃","unicorn_face":"🦄","eagle":"🦅","duck":"🦆","bat":"🦇","shark":"🦈","owl":"🦉","fox_face":"🦊","butterfly":"🦋","deer":"🦌","gorilla":"🦍","lizard":"🦎","rhinoceros":"🦏","shrimp":"🦐","squid":"🦑","giraffe_face":"🦒","zebra_face":"🦓","hedgehog":"🦔","sauropod":"🦕","t-rex":"🦖","cricket":"🦗","cheese_wedge":"🧀","face_with_monocle":"🧐","adult":"🧑","child":"🧒","older_adult":"🧓","bearded_person":"🧔","person_with_headscarf":"🧕","woman_in_steamy_room":"🧖‍♀️","man_in_steamy_room":"🧖‍♂️","person_in_steamy_room":"🧖‍♂️","woman_climbing":"🧗‍♀️","person_climbing":"🧗‍♀️","man_climbing":"🧗‍♂️","woman_in_lotus_position":"🧘‍♀️","person_in_lotus_position":"🧘‍♀️","man_in_lotus_position":"🧘‍♂️","female_mage":"🧙‍♀️","mage":"🧙‍♀️","male_mage":"🧙‍♂️","female_fairy":"🧚‍♀️","fairy":"🧚‍♀️","male_fairy":"🧚‍♂️","female_vampire":"🧛‍♀️","vampire":"🧛‍♀️","male_vampire":"🧛‍♂️","mermaid":"🧜‍♀️","merman":"🧜‍♂️","merperson":"🧜‍♂️","female_elf":"🧝‍♀️","male_elf":"🧝‍♂️","elf":"🧝‍♂️","female_genie":"🧞‍♀️","male_genie":"🧞‍♂️","genie":"🧞‍♂️","female_zombie":"🧟‍♀️","male_zombie":"🧟‍♂️","zombie":"🧟‍♂️","brain":"🧠","orange_heart":"🧡","billed_cap":"🧢","scarf":"🧣","gloves":"🧤","coat":"🧥","socks":"🧦","bangbang":"‼️","interrobang":"⁉️","tm":"™️","information_source":"ℹ️","left_right_arrow":"↔️","arrow_up_down":"↕️","arrow_upper_left":"↖️","arrow_upper_right":"↗️","arrow_lower_right":"↘️","arrow_lower_left":"↙️","leftwards_arrow_with_hook":"↩️","arrow_right_hook":"↪️","watch":"⌚","hourglass":"⌛","keyboard":"⌨️","eject":"⏏️","fast_forward":"⏩","rewind":"⏪","arrow_double_up":"⏫","arrow_double_down":"⏬","black_right_pointing_double_triangle_with_vertical_bar":"⏭️","black_left_pointing_double_triangle_with_vertical_bar":"⏮️","black_right_pointing_triangle_with_double_vertical_bar":"⏯️","alarm_clock":"⏰","stopwatch":"⏱️","timer_clock":"⏲️","hourglass_flowing_sand":"⏳","double_vertical_bar":"⏸️","black_square_for_stop":"⏹️","black_circle_for_record":"⏺️","m":"Ⓜ️","black_small_square":"▪️","white_small_square":"▫️","arrow_forward":"▶️","arrow_backward":"◀️","white_medium_square":"◻️","black_medium_square":"◼️","white_medium_small_square":"◽","black_medium_small_square":"◾","sunny":"☀️","cloud":"☁️","umbrella":"☂️","snowman":"☃️","comet":"☄️","phone":"☎️","telephone":"☎️","ballot_box_with_check":"☑️","shamrock":"☘️","point_up":"☝️","skull_and_crossbones":"☠️","radioactive_sign":"☢️","biohazard_sign":"☣️","orthodox_cross":"☦️","star_and_crescent":"☪️","peace_symbol":"☮️","yin_yang":"☯️","wheel_of_dharma":"☸️","white_frowning_face":"☹️","relaxed":"☺️","female_sign":"♀️","male_sign":"♂️","gemini":"♊","cancer":"♋","leo":"♌","virgo":"♍","libra":"♎","scorpius":"♏","spades":"♠️","clubs":"♣️","hearts":"♥️","diamonds":"♦️","hotsprings":"♨️","recycle":"♻️","wheelchair":"♿","hammer_and_pick":"⚒️","crossed_swords":"⚔️","medical_symbol":"⚕️","staff_of_aesculapius":"⚕️","scales":"⚖️","alembic":"⚗️","gear":"⚙️","atom_symbol":"⚛️","fleur_de_lis":"⚜️","warning":"⚠️","zap":"⚡","white_circle":"⚪","black_circle":"⚫","coffin":"⚰️","funeral_urn":"⚱️","soccer":"⚽","baseball":"⚾","snowman_without_snow":"⛄","partly_sunny":"⛅","thunder_cloud_and_rain":"⛈️","ophiuchus":"⛎","pick":"⛏️","helmet_with_white_cross":"⛑️","chains":"⛓️","no_entry":"⛔","shinto_shrine":"⛩️","church":"⛪","mountain":"⛰️","umbrella_on_ground":"⛱️","fountain":"⛲","golf":"⛳","ferry":"⛴️","boat":"⛵","sailboat":"⛵","skier":"⛷️","ice_skate":"⛸️","woman-bouncing-ball":"⛹️‍♀️","man-bouncing-ball":"⛹️‍♂️","person_with_ball":"⛹️‍♂️","tent":"⛺","fuelpump":"⛽","scissors":"✂️","airplane":"✈️","email":"✉️","envelope":"✉️","fist":"✊","hand":"✋","raised_hand":"✋","v":"✌️","writing_hand":"✍️","pencil2":"✏️","black_nib":"✒️","heavy_check_mark":"✔️","heavy_multiplication_x":"✖️","latin_cross":"✝️","star_of_david":"✡️","eight_spoked_asterisk":"✳️","eight_pointed_black_star":"✴️","snowflake":"❄️","sparkle":"❇️","x":"❌","negative_squared_cross_mark":"❎","heavy_heart_exclamation_mark_ornament":"❣️","heart":"❤️","arrow_right":"➡️","curly_loop":"➰","loop":"➿","arrow_heading_up":"⤴️","arrow_heading_down":"⤵️","arrow_left":"⬅️","arrow_up":"⬆️","arrow_down":"⬇️","black_large_square":"⬛","white_large_square":"⬜","star":"⭐","o":"⭕","wavy_dash":"〰️","part_alternation_mark":"〽️","congratulations":"㊗️","secret":"㊙️"};
+
+/***/ }),
+
 /***/ "./node_modules/object-assign/index.js":
 /*!*********************************************!*\
   !*** ./node_modules/object-assign/index.js ***!
@@ -3487,6 +8751,1306 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
+
+/***/ }),
+
+/***/ "./node_modules/parse-entities/decode-entity.browser.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/parse-entities/decode-entity.browser.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* eslint-env browser */
+
+var el
+
+module.exports = decodeEntity
+
+function decodeEntity(characters) {
+  var entity = '&' + characters + ';'
+  var char
+
+  el = el || document.createElement('i')
+  el.innerHTML = entity
+  char = el.textContent
+
+  // Some entities do not require the closing semicolon (&not - for instance),
+  // which leads to situations where parsing the assumed entity of &notit; will
+  // result in the string `¬it;`.  When we encounter a trailing semicolon after
+  // parsing and the entity to decode was not a semicolon (&semi;), we can
+  // assume that the matching was incomplete
+  if (char.slice(-1) === ';' && characters !== 'semi') {
+    return false
+  }
+
+  // If the decoded string is equal to the input, the entity was not valid
+  return char === entity ? false : char
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/parse-entities/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/parse-entities/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var legacy = __webpack_require__(/*! character-entities-legacy */ "./node_modules/character-entities-legacy/index.json")
+var invalid = __webpack_require__(/*! character-reference-invalid */ "./node_modules/character-reference-invalid/index.json")
+var decimal = __webpack_require__(/*! is-decimal */ "./node_modules/is-decimal/index.js")
+var hexadecimal = __webpack_require__(/*! is-hexadecimal */ "./node_modules/is-hexadecimal/index.js")
+var alphanumerical = __webpack_require__(/*! is-alphanumerical */ "./node_modules/is-alphanumerical/index.js")
+var decodeEntity = __webpack_require__(/*! ./decode-entity */ "./node_modules/parse-entities/decode-entity.browser.js")
+
+module.exports = parseEntities
+
+var own = {}.hasOwnProperty
+var fromCharCode = String.fromCharCode
+var noop = Function.prototype
+
+/* Default settings. */
+var defaults = {
+  warning: null,
+  reference: null,
+  text: null,
+  warningContext: null,
+  referenceContext: null,
+  textContext: null,
+  position: {},
+  additional: null,
+  attribute: false,
+  nonTerminated: true
+}
+
+/* Reference types. */
+var NAMED = 'named'
+var HEXADECIMAL = 'hexadecimal'
+var DECIMAL = 'decimal'
+
+/* Map of bases. */
+var BASE = {}
+
+BASE[HEXADECIMAL] = 16
+BASE[DECIMAL] = 10
+
+/* Map of types to tests. Each type of character reference
+ * accepts different characters. This test is used to
+ * detect whether a reference has ended (as the semicolon
+ * is not strictly needed). */
+var TESTS = {}
+
+TESTS[NAMED] = alphanumerical
+TESTS[DECIMAL] = decimal
+TESTS[HEXADECIMAL] = hexadecimal
+
+/* Warning messages. */
+var NAMED_NOT_TERMINATED = 1
+var NUMERIC_NOT_TERMINATED = 2
+var NAMED_EMPTY = 3
+var NUMERIC_EMPTY = 4
+var NAMED_UNKNOWN = 5
+var NUMERIC_DISALLOWED = 6
+var NUMERIC_PROHIBITED = 7
+
+var MESSAGES = {}
+
+MESSAGES[NAMED_NOT_TERMINATED] =
+  'Named character references must be terminated by a semicolon'
+MESSAGES[NUMERIC_NOT_TERMINATED] =
+  'Numeric character references must be terminated by a semicolon'
+MESSAGES[NAMED_EMPTY] = 'Named character references cannot be empty'
+MESSAGES[NUMERIC_EMPTY] = 'Numeric character references cannot be empty'
+MESSAGES[NAMED_UNKNOWN] = 'Named character references must be known'
+MESSAGES[NUMERIC_DISALLOWED] =
+  'Numeric character references cannot be disallowed'
+MESSAGES[NUMERIC_PROHIBITED] =
+  'Numeric character references cannot be outside the permissible Unicode range'
+
+/* Wrap to ensure clean parameters are given to `parse`. */
+function parseEntities(value, options) {
+  var settings = {}
+  var option
+  var key
+
+  if (!options) {
+    options = {}
+  }
+
+  for (key in defaults) {
+    option = options[key]
+    settings[key] =
+      option === null || option === undefined ? defaults[key] : option
+  }
+
+  if (settings.position.indent || settings.position.start) {
+    settings.indent = settings.position.indent || []
+    settings.position = settings.position.start
+  }
+
+  return parse(value, settings)
+}
+
+/* Parse entities. */
+function parse(value, settings) {
+  var additional = settings.additional
+  var nonTerminated = settings.nonTerminated
+  var handleText = settings.text
+  var handleReference = settings.reference
+  var handleWarning = settings.warning
+  var textContext = settings.textContext
+  var referenceContext = settings.referenceContext
+  var warningContext = settings.warningContext
+  var pos = settings.position
+  var indent = settings.indent || []
+  var length = value.length
+  var index = 0
+  var lines = -1
+  var column = pos.column || 1
+  var line = pos.line || 1
+  var queue = ''
+  var result = []
+  var entityCharacters
+  var namedEntity
+  var terminated
+  var characters
+  var character
+  var reference
+  var following
+  var warning
+  var reason
+  var output
+  var entity
+  var begin
+  var start
+  var type
+  var test
+  var prev
+  var next
+  var diff
+  var end
+
+  /* Cache the current point. */
+  prev = now()
+
+  /* Wrap `handleWarning`. */
+  warning = handleWarning ? parseError : noop
+
+  /* Ensure the algorithm walks over the first character
+   * and the end (inclusive). */
+  index--
+  length++
+
+  while (++index < length) {
+    /* If the previous character was a newline. */
+    if (character === '\n') {
+      column = indent[lines] || 1
+    }
+
+    character = at(index)
+
+    /* Handle anything other than an ampersand,
+     * including newlines and EOF. */
+    if (character !== '&') {
+      if (character === '\n') {
+        line++
+        lines++
+        column = 0
+      }
+
+      if (character) {
+        queue += character
+        column++
+      } else {
+        flush()
+      }
+    } else {
+      following = at(index + 1)
+
+      /* The behaviour depends on the identity of the next
+       * character. */
+      if (
+        following === '\t' /* Tab */ ||
+        following === '\n' /* Newline */ ||
+        following === '\f' /* Form feed */ ||
+        following === ' ' /* Space */ ||
+        following === '<' /* Less-than */ ||
+        following === '&' /* Ampersand */ ||
+        following === '' ||
+        (additional && following === additional)
+      ) {
+        /* Not a character reference. No characters
+         * are consumed, and nothing is returned.
+         * This is not an error, either. */
+        queue += character
+        column++
+
+        continue
+      }
+
+      start = index + 1
+      begin = start
+      end = start
+
+      /* Numerical entity. */
+      if (following !== '#') {
+        type = NAMED
+      } else {
+        end = ++begin
+
+        /* The behaviour further depends on the
+         * character after the U+0023 NUMBER SIGN. */
+        following = at(end)
+
+        if (following === 'x' || following === 'X') {
+          /* ASCII hex digits. */
+          type = HEXADECIMAL
+          end = ++begin
+        } else {
+          /* ASCII digits. */
+          type = DECIMAL
+        }
+      }
+
+      entityCharacters = ''
+      entity = ''
+      characters = ''
+      test = TESTS[type]
+      end--
+
+      while (++end < length) {
+        following = at(end)
+
+        if (!test(following)) {
+          break
+        }
+
+        characters += following
+
+        /* Check if we can match a legacy named
+         * reference.  If so, we cache that as the
+         * last viable named reference.  This
+         * ensures we do not need to walk backwards
+         * later. */
+        if (type === NAMED && own.call(legacy, characters)) {
+          entityCharacters = characters
+          entity = legacy[characters]
+        }
+      }
+
+      terminated = at(end) === ';'
+
+      if (terminated) {
+        end++
+
+        namedEntity = type === NAMED ? decodeEntity(characters) : false
+
+        if (namedEntity) {
+          entityCharacters = characters
+          entity = namedEntity
+        }
+      }
+
+      diff = 1 + end - start
+
+      if (!terminated && !nonTerminated) {
+        /* Empty. */
+      } else if (!characters) {
+        /* An empty (possible) entity is valid, unless
+         * its numeric (thus an ampersand followed by
+         * an octothorp). */
+        if (type !== NAMED) {
+          warning(NUMERIC_EMPTY, diff)
+        }
+      } else if (type === NAMED) {
+        /* An ampersand followed by anything
+         * unknown, and not terminated, is invalid. */
+        if (terminated && !entity) {
+          warning(NAMED_UNKNOWN, 1)
+        } else {
+          /* If theres something after an entity
+           * name which is not known, cap the
+           * reference. */
+          if (entityCharacters !== characters) {
+            end = begin + entityCharacters.length
+            diff = 1 + end - begin
+            terminated = false
+          }
+
+          /* If the reference is not terminated,
+           * warn. */
+          if (!terminated) {
+            reason = entityCharacters ? NAMED_NOT_TERMINATED : NAMED_EMPTY
+
+            if (!settings.attribute) {
+              warning(reason, diff)
+            } else {
+              following = at(end)
+
+              if (following === '=') {
+                warning(reason, diff)
+                entity = null
+              } else if (alphanumerical(following)) {
+                entity = null
+              } else {
+                warning(reason, diff)
+              }
+            }
+          }
+        }
+
+        reference = entity
+      } else {
+        if (!terminated) {
+          /* All non-terminated numeric entities are
+           * not rendered, and trigger a warning. */
+          warning(NUMERIC_NOT_TERMINATED, diff)
+        }
+
+        /* When terminated and number, parse as
+         * either hexadecimal or decimal. */
+        reference = parseInt(characters, BASE[type])
+
+        /* Trigger a warning when the parsed number
+         * is prohibited, and replace with
+         * replacement character. */
+        if (prohibited(reference)) {
+          warning(NUMERIC_PROHIBITED, diff)
+          reference = '\uFFFD'
+        } else if (reference in invalid) {
+          /* Trigger a warning when the parsed number
+           * is disallowed, and replace by an
+           * alternative. */
+          warning(NUMERIC_DISALLOWED, diff)
+          reference = invalid[reference]
+        } else {
+          /* Parse the number. */
+          output = ''
+
+          /* Trigger a warning when the parsed
+           * number should not be used. */
+          if (disallowed(reference)) {
+            warning(NUMERIC_DISALLOWED, diff)
+          }
+
+          /* Stringify the number. */
+          if (reference > 0xffff) {
+            reference -= 0x10000
+            output += fromCharCode((reference >>> (10 & 0x3ff)) | 0xd800)
+            reference = 0xdc00 | (reference & 0x3ff)
+          }
+
+          reference = output + fromCharCode(reference)
+        }
+      }
+
+      /* If we could not find a reference, queue the
+       * checked characters (as normal characters),
+       * and move the pointer to their end. This is
+       * possible because we can be certain neither
+       * newlines nor ampersands are included. */
+      if (!reference) {
+        characters = value.slice(start - 1, end)
+        queue += characters
+        column += characters.length
+        index = end - 1
+      } else {
+        /* Found it! First eat the queued
+         * characters as normal text, then eat
+         * an entity. */
+        flush()
+
+        prev = now()
+        index = end - 1
+        column += end - start + 1
+        result.push(reference)
+        next = now()
+        next.offset++
+
+        if (handleReference) {
+          handleReference.call(
+            referenceContext,
+            reference,
+            {start: prev, end: next},
+            value.slice(start - 1, end)
+          )
+        }
+
+        prev = next
+      }
+    }
+  }
+
+  /* Return the reduced nodes, and any possible warnings. */
+  return result.join('')
+
+  /* Get current position. */
+  function now() {
+    return {
+      line: line,
+      column: column,
+      offset: index + (pos.offset || 0)
+    }
+  }
+
+  /* “Throw” a parse-error: a warning. */
+  function parseError(code, offset) {
+    var position = now()
+
+    position.column += offset
+    position.offset += offset
+
+    handleWarning.call(warningContext, MESSAGES[code], position, code)
+  }
+
+  /* Get character at position. */
+  function at(position) {
+    return value.charAt(position)
+  }
+
+  /* Flush `queue` (normal text). Macro invoked before
+   * each entity and at the end of `value`.
+   * Does nothing when `queue` is empty. */
+  function flush() {
+    if (queue) {
+      result.push(queue)
+
+      if (handleText) {
+        handleText.call(textContext, queue, {start: prev, end: now()})
+      }
+
+      queue = ''
+    }
+  }
+}
+
+/* Check if `character` is outside the permissible unicode range. */
+function prohibited(code) {
+  return (code >= 0xd800 && code <= 0xdfff) || code > 0x10ffff
+}
+
+/* Check if `character` is disallowed. */
+function disallowed(code) {
+  return (
+    (code >= 0x0001 && code <= 0x0008) ||
+    code === 0x000b ||
+    (code >= 0x000d && code <= 0x001f) ||
+    (code >= 0x007f && code <= 0x009f) ||
+    (code >= 0xfdd0 && code <= 0xfdef) ||
+    (code & 0xffff) === 0xffff ||
+    (code & 0xffff) === 0xfffe
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/path-browserify/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/path-browserify/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// resolves . and .. elements in a path array with directory names there
+// must be no slashes, empty elements, or device names (c:\) in the array
+// (so also no leading and trailing slashes - it does not distinguish
+// relative and absolute paths)
+function normalizeArray(parts, allowAboveRoot) {
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = parts.length - 1; i >= 0; i--) {
+    var last = parts[i];
+    if (last === '.') {
+      parts.splice(i, 1);
+    } else if (last === '..') {
+      parts.splice(i, 1);
+      up++;
+    } else if (up) {
+      parts.splice(i, 1);
+      up--;
+    }
+  }
+
+  // if the path is allowed to go above the root, restore leading ..s
+  if (allowAboveRoot) {
+    for (; up--; up) {
+      parts.unshift('..');
+    }
+  }
+
+  return parts;
+}
+
+// Split a filename into [root, dir, basename, ext], unix version
+// 'root' is just a slash, or nothing.
+var splitPathRe =
+    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
+var splitPath = function(filename) {
+  return splitPathRe.exec(filename).slice(1);
+};
+
+// path.resolve([from ...], to)
+// posix version
+exports.resolve = function() {
+  var resolvedPath = '',
+      resolvedAbsolute = false;
+
+  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+    var path = (i >= 0) ? arguments[i] : process.cwd();
+
+    // Skip empty and invalid entries
+    if (typeof path !== 'string') {
+      throw new TypeError('Arguments to path.resolve must be strings');
+    } else if (!path) {
+      continue;
+    }
+
+    resolvedPath = path + '/' + resolvedPath;
+    resolvedAbsolute = path.charAt(0) === '/';
+  }
+
+  // At this point the path should be resolved to a full absolute path, but
+  // handle relative paths to be safe (might happen when process.cwd() fails)
+
+  // Normalize the path
+  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+    return !!p;
+  }), !resolvedAbsolute).join('/');
+
+  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+};
+
+// path.normalize(path)
+// posix version
+exports.normalize = function(path) {
+  var isAbsolute = exports.isAbsolute(path),
+      trailingSlash = substr(path, -1) === '/';
+
+  // Normalize the path
+  path = normalizeArray(filter(path.split('/'), function(p) {
+    return !!p;
+  }), !isAbsolute).join('/');
+
+  if (!path && !isAbsolute) {
+    path = '.';
+  }
+  if (path && trailingSlash) {
+    path += '/';
+  }
+
+  return (isAbsolute ? '/' : '') + path;
+};
+
+// posix version
+exports.isAbsolute = function(path) {
+  return path.charAt(0) === '/';
+};
+
+// posix version
+exports.join = function() {
+  var paths = Array.prototype.slice.call(arguments, 0);
+  return exports.normalize(filter(paths, function(p, index) {
+    if (typeof p !== 'string') {
+      throw new TypeError('Arguments to path.join must be strings');
+    }
+    return p;
+  }).join('/'));
+};
+
+
+// path.relative(from, to)
+// posix version
+exports.relative = function(from, to) {
+  from = exports.resolve(from).substr(1);
+  to = exports.resolve(to).substr(1);
+
+  function trim(arr) {
+    var start = 0;
+    for (; start < arr.length; start++) {
+      if (arr[start] !== '') break;
+    }
+
+    var end = arr.length - 1;
+    for (; end >= 0; end--) {
+      if (arr[end] !== '') break;
+    }
+
+    if (start > end) return [];
+    return arr.slice(start, end - start + 1);
+  }
+
+  var fromParts = trim(from.split('/'));
+  var toParts = trim(to.split('/'));
+
+  var length = Math.min(fromParts.length, toParts.length);
+  var samePartsLength = length;
+  for (var i = 0; i < length; i++) {
+    if (fromParts[i] !== toParts[i]) {
+      samePartsLength = i;
+      break;
+    }
+  }
+
+  var outputParts = [];
+  for (var i = samePartsLength; i < fromParts.length; i++) {
+    outputParts.push('..');
+  }
+
+  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+  return outputParts.join('/');
+};
+
+exports.sep = '/';
+exports.delimiter = ':';
+
+exports.dirname = function(path) {
+  var result = splitPath(path),
+      root = result[0],
+      dir = result[1];
+
+  if (!root && !dir) {
+    // No dirname whatsoever
+    return '.';
+  }
+
+  if (dir) {
+    // It has a dirname, strip trailing slash
+    dir = dir.substr(0, dir.length - 1);
+  }
+
+  return root + dir;
+};
+
+
+exports.basename = function(path, ext) {
+  var f = splitPath(path)[2];
+  // TODO: make this comparison case-insensitive on windows?
+  if (ext && f.substr(-1 * ext.length) === ext) {
+    f = f.substr(0, f.length - ext.length);
+  }
+  return f;
+};
+
+
+exports.extname = function(path) {
+  return splitPath(path)[3];
+};
+
+function filter (xs, f) {
+    if (xs.filter) return xs.filter(f);
+    var res = [];
+    for (var i = 0; i < xs.length; i++) {
+        if (f(xs[i], i, xs)) res.push(xs[i]);
+    }
+    return res;
+}
+
+// String.prototype.substr - negative index don't work in IE8
+var substr = 'ab'.substr(-1) === 'b'
+    ? function (str, start, len) { return str.substr(start, len) }
+    : function (str, start, len) {
+        if (start < 0) start = str.length + start;
+        return str.substr(start, len);
+    }
+;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/prismjs/components/prism-core.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/prismjs/components/prism-core.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var _self = (typeof window !== 'undefined')
+	? window   // if in browser
+	: (
+		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
+		? self // if in worker
+		: {}   // if in node js
+	);
+
+/**
+ * Prism: Lightweight, robust, elegant syntax highlighting
+ * MIT license http://www.opensource.org/licenses/mit-license.php/
+ * @author Lea Verou http://lea.verou.me
+ */
+
+var Prism = (function (_self){
+
+// Private helper vars
+var lang = /\blang(?:uage)?-([\w-]+)\b/i;
+var uniqueId = 0;
+
+var _ = {
+	manual: _self.Prism && _self.Prism.manual,
+	disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
+	util: {
+		encode: function (tokens) {
+			if (tokens instanceof Token) {
+				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+			} else if (Array.isArray(tokens)) {
+				return tokens.map(_.util.encode);
+			} else {
+				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
+			}
+		},
+
+		type: function (o) {
+			return Object.prototype.toString.call(o).slice(8, -1);
+		},
+
+		objId: function (obj) {
+			if (!obj['__id']) {
+				Object.defineProperty(obj, '__id', { value: ++uniqueId });
+			}
+			return obj['__id'];
+		},
+
+		// Deep clone a language definition (e.g. to extend it)
+		clone: function deepClone(o, visited) {
+			var clone, id, type = _.util.type(o);
+			visited = visited || {};
+
+			switch (type) {
+				case 'Object':
+					id = _.util.objId(o);
+					if (visited[id]) {
+						return visited[id];
+					}
+					clone = {};
+					visited[id] = clone;
+
+					for (var key in o) {
+						if (o.hasOwnProperty(key)) {
+							clone[key] = deepClone(o[key], visited);
+						}
+					}
+
+					return clone;
+
+				case 'Array':
+					id = _.util.objId(o);
+					if (visited[id]) {
+						return visited[id];
+					}
+					clone = [];
+					visited[id] = clone;
+
+					o.forEach(function (v, i) {
+						clone[i] = deepClone(v, visited);
+					});
+
+					return clone;
+
+				default:
+					return o;
+			}
+		}
+	},
+
+	languages: {
+		extend: function (id, redef) {
+			var lang = _.util.clone(_.languages[id]);
+
+			for (var key in redef) {
+				lang[key] = redef[key];
+			}
+
+			return lang;
+		},
+
+		/**
+		 * Insert a token before another token in a language literal
+		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
+		 * we cannot just provide an object, we need an object and a key.
+		 * @param inside The key (or language id) of the parent
+		 * @param before The key to insert before.
+		 * @param insert Object with the key/value pairs to insert
+		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
+		 */
+		insertBefore: function (inside, before, insert, root) {
+			root = root || _.languages;
+			var grammar = root[inside];
+			var ret = {};
+
+			for (var token in grammar) {
+				if (grammar.hasOwnProperty(token)) {
+
+					if (token == before) {
+						for (var newToken in insert) {
+							if (insert.hasOwnProperty(newToken)) {
+								ret[newToken] = insert[newToken];
+							}
+						}
+					}
+
+					// Do not insert token which also occur in insert. See #1525
+					if (!insert.hasOwnProperty(token)) {
+						ret[token] = grammar[token];
+					}
+				}
+			}
+
+			var old = root[inside];
+			root[inside] = ret;
+
+			// Update references in other language definitions
+			_.languages.DFS(_.languages, function(key, value) {
+				if (value === old && key != inside) {
+					this[key] = ret;
+				}
+			});
+
+			return ret;
+		},
+
+		// Traverse a language definition with Depth First Search
+		DFS: function DFS(o, callback, type, visited) {
+			visited = visited || {};
+
+			var objId = _.util.objId;
+
+			for (var i in o) {
+				if (o.hasOwnProperty(i)) {
+					callback.call(o, i, o[i], type || i);
+
+					var property = o[i],
+					    propertyType = _.util.type(property);
+
+					if (propertyType === 'Object' && !visited[objId(property)]) {
+						visited[objId(property)] = true;
+						DFS(property, callback, null, visited);
+					}
+					else if (propertyType === 'Array' && !visited[objId(property)]) {
+						visited[objId(property)] = true;
+						DFS(property, callback, i, visited);
+					}
+				}
+			}
+		}
+	},
+	plugins: {},
+
+	highlightAll: function(async, callback) {
+		_.highlightAllUnder(document, async, callback);
+	},
+
+	highlightAllUnder: function(container, async, callback) {
+		var env = {
+			callback: callback,
+			selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
+		};
+
+		_.hooks.run("before-highlightall", env);
+
+		var elements = env.elements || container.querySelectorAll(env.selector);
+
+		for (var i=0, element; element = elements[i++];) {
+			_.highlightElement(element, async === true, env.callback);
+		}
+	},
+
+	highlightElement: function(element, async, callback) {
+		// Find language
+		var language, grammar, parent = element;
+
+		while (parent && !lang.test(parent.className)) {
+			parent = parent.parentNode;
+		}
+
+		if (parent) {
+			language = (parent.className.match(lang) || [,''])[1].toLowerCase();
+			grammar = _.languages[language];
+		}
+
+		// Set language on the element, if not present
+		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+
+		if (element.parentNode) {
+			// Set language on the parent, for styling
+			parent = element.parentNode;
+
+			if (/pre/i.test(parent.nodeName)) {
+				parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+			}
+		}
+
+		var code = element.textContent;
+
+		var env = {
+			element: element,
+			language: language,
+			grammar: grammar,
+			code: code
+		};
+
+		var insertHighlightedCode = function (highlightedCode) {
+			env.highlightedCode = highlightedCode;
+
+			_.hooks.run('before-insert', env);
+
+			env.element.innerHTML = env.highlightedCode;
+
+			_.hooks.run('after-highlight', env);
+			_.hooks.run('complete', env);
+			callback && callback.call(env.element);
+		}
+
+		_.hooks.run('before-sanity-check', env);
+
+		if (!env.code) {
+			_.hooks.run('complete', env);
+			return;
+		}
+
+		_.hooks.run('before-highlight', env);
+
+		if (!env.grammar) {
+			insertHighlightedCode(_.util.encode(env.code));
+			return;
+		}
+
+		if (async && _self.Worker) {
+			var worker = new Worker(_.filename);
+
+			worker.onmessage = function(evt) {
+				insertHighlightedCode(evt.data);
+			};
+
+			worker.postMessage(JSON.stringify({
+				language: env.language,
+				code: env.code,
+				immediateClose: true
+			}));
+		}
+		else {
+			insertHighlightedCode(_.highlight(env.code, env.grammar, env.language));
+		}
+	},
+
+	highlight: function (text, grammar, language) {
+		var env = {
+			code: text,
+			grammar: grammar,
+			language: language
+		};
+		_.hooks.run('before-tokenize', env);
+		env.tokens = _.tokenize(env.code, env.grammar);
+		_.hooks.run('after-tokenize', env);
+		return Token.stringify(_.util.encode(env.tokens), env.language);
+	},
+
+	matchGrammar: function (text, strarr, grammar, index, startPos, oneshot, target) {
+		for (var token in grammar) {
+			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
+				continue;
+			}
+
+			if (token == target) {
+				return;
+			}
+
+			var patterns = grammar[token];
+			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
+
+			for (var j = 0; j < patterns.length; ++j) {
+				var pattern = patterns[j],
+					inside = pattern.inside,
+					lookbehind = !!pattern.lookbehind,
+					greedy = !!pattern.greedy,
+					lookbehindLength = 0,
+					alias = pattern.alias;
+
+				if (greedy && !pattern.pattern.global) {
+					// Without the global flag, lastIndex won't work
+					var flags = pattern.pattern.toString().match(/[imuy]*$/)[0];
+					pattern.pattern = RegExp(pattern.pattern.source, flags + "g");
+				}
+
+				pattern = pattern.pattern || pattern;
+
+				// Don’t cache length as it changes during the loop
+				for (var i = index, pos = startPos; i < strarr.length; pos += strarr[i].length, ++i) {
+
+					var str = strarr[i];
+
+					if (strarr.length > text.length) {
+						// Something went terribly wrong, ABORT, ABORT!
+						return;
+					}
+
+					if (str instanceof Token) {
+						continue;
+					}
+
+					if (greedy && i != strarr.length - 1) {
+						pattern.lastIndex = pos;
+						var match = pattern.exec(text);
+						if (!match) {
+							break;
+						}
+
+						var from = match.index + (lookbehind ? match[1].length : 0),
+						    to = match.index + match[0].length,
+						    k = i,
+						    p = pos;
+
+						for (var len = strarr.length; k < len && (p < to || (!strarr[k].type && !strarr[k - 1].greedy)); ++k) {
+							p += strarr[k].length;
+							// Move the index i to the element in strarr that is closest to from
+							if (from >= p) {
+								++i;
+								pos = p;
+							}
+						}
+
+						// If strarr[i] is a Token, then the match starts inside another Token, which is invalid
+						if (strarr[i] instanceof Token) {
+							continue;
+						}
+
+						// Number of tokens to delete and replace with the new match
+						delNum = k - i;
+						str = text.slice(pos, p);
+						match.index -= pos;
+					} else {
+						pattern.lastIndex = 0;
+
+						var match = pattern.exec(str),
+							delNum = 1;
+					}
+
+					if (!match) {
+						if (oneshot) {
+							break;
+						}
+
+						continue;
+					}
+
+					if(lookbehind) {
+						lookbehindLength = match[1] ? match[1].length : 0;
+					}
+
+					var from = match.index + lookbehindLength,
+					    match = match[0].slice(lookbehindLength),
+					    to = from + match.length,
+					    before = str.slice(0, from),
+					    after = str.slice(to);
+
+					var args = [i, delNum];
+
+					if (before) {
+						++i;
+						pos += before.length;
+						args.push(before);
+					}
+
+					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias, match, greedy);
+
+					args.push(wrapped);
+
+					if (after) {
+						args.push(after);
+					}
+
+					Array.prototype.splice.apply(strarr, args);
+
+					if (delNum != 1)
+						_.matchGrammar(text, strarr, grammar, i, pos, true, token);
+
+					if (oneshot)
+						break;
+				}
+			}
+		}
+	},
+
+	tokenize: function(text, grammar) {
+		var strarr = [text];
+
+		var rest = grammar.rest;
+
+		if (rest) {
+			for (var token in rest) {
+				grammar[token] = rest[token];
+			}
+
+			delete grammar.rest;
+		}
+
+		_.matchGrammar(text, strarr, grammar, 0, 0, false);
+
+		return strarr;
+	},
+
+	hooks: {
+		all: {},
+
+		add: function (name, callback) {
+			var hooks = _.hooks.all;
+
+			hooks[name] = hooks[name] || [];
+
+			hooks[name].push(callback);
+		},
+
+		run: function (name, env) {
+			var callbacks = _.hooks.all[name];
+
+			if (!callbacks || !callbacks.length) {
+				return;
+			}
+
+			for (var i=0, callback; callback = callbacks[i++];) {
+				callback(env);
+			}
+		}
+	},
+
+	Token: Token
+};
+
+_self.Prism = _;
+
+function Token(type, content, alias, matchedStr, greedy) {
+	this.type = type;
+	this.content = content;
+	this.alias = alias;
+	// Copy of the full string this token was created from
+	this.length = (matchedStr || "").length|0;
+	this.greedy = !!greedy;
+}
+
+Token.stringify = function(o, language, parent) {
+	if (typeof o == 'string') {
+		return o;
+	}
+
+	if (Array.isArray(o)) {
+		return o.map(function(element) {
+			return Token.stringify(element, language, o);
+		}).join('');
+	}
+
+	var env = {
+		type: o.type,
+		content: Token.stringify(o.content, language, parent),
+		tag: 'span',
+		classes: ['token', o.type],
+		attributes: {},
+		language: language,
+		parent: parent
+	};
+
+	if (o.alias) {
+		var aliases = Array.isArray(o.alias) ? o.alias : [o.alias];
+		Array.prototype.push.apply(env.classes, aliases);
+	}
+
+	_.hooks.run('wrap', env);
+
+	var attributes = Object.keys(env.attributes).map(function(name) {
+		return name + '="' + (env.attributes[name] || '').replace(/"/g, '&quot;') + '"';
+	}).join(' ');
+
+	return '<' + env.tag + ' class="' + env.classes.join(' ') + '"' + (attributes ? ' ' + attributes : '') + '>' + env.content + '</' + env.tag + '>';
+
+};
+
+if (!_self.document) {
+	if (!_self.addEventListener) {
+		// in Node.js
+		return _;
+	}
+
+	if (!_.disableWorkerMessageHandler) {
+		// In worker
+		_self.addEventListener('message', function (evt) {
+			var message = JSON.parse(evt.data),
+				lang = message.language,
+				code = message.code,
+				immediateClose = message.immediateClose;
+
+			_self.postMessage(_.highlight(code, _.languages[lang], lang));
+			if (immediateClose) {
+				_self.close();
+			}
+		}, false);
+	}
+
+	return _;
+}
+
+//Get current script and highlight
+var script = document.currentScript || [].slice.call(document.getElementsByTagName("script")).pop();
+
+if (script) {
+	_.filename = script.src;
+
+	if (!_.manual && !script.hasAttribute('data-manual')) {
+		if(document.readyState !== "loading") {
+			if (window.requestAnimationFrame) {
+				window.requestAnimationFrame(_.highlightAll);
+			} else {
+				window.setTimeout(_.highlightAll, 16);
+			}
+		}
+		else {
+			document.addEventListener('DOMContentLoaded', _.highlightAll);
+		}
+	}
+}
+
+return _;
+
+})(_self);
+
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports = Prism;
+}
+
+// hack for components to work correctly in node.js
+if (typeof global !== 'undefined') {
+	global.Prism = Prism;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -4365,6 +10929,1230 @@ if (true) {
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/find.js":
+/*!***************************************************!*\
+  !*** ./node_modules/property-information/find.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var normalize = __webpack_require__(/*! ./normalize */ "./node_modules/property-information/normalize.js")
+var DefinedInfo = __webpack_require__(/*! ./lib/util/defined-info */ "./node_modules/property-information/lib/util/defined-info.js")
+var Info = __webpack_require__(/*! ./lib/util/info */ "./node_modules/property-information/lib/util/info.js")
+
+var data = 'data'
+
+module.exports = find
+
+var valid = /^data[-a-z0-9.:_]+$/i
+var dash = /-[a-z]/g
+var cap = /[A-Z]/g
+
+function find(schema, value) {
+  var normal = normalize(value)
+  var prop = value
+  var Type = Info
+
+  if (normal in schema.normal) {
+    return schema.property[schema.normal[normal]]
+  }
+
+  if (normal.length > 4 && normal.slice(0, 4) === data && valid.test(value)) {
+    // Attribute or property.
+    if (value.charAt(4) === '-') {
+      prop = datasetToProperty(value)
+    } else {
+      value = datasetToAttribute(value)
+    }
+
+    Type = DefinedInfo
+  }
+
+  return new Type(prop, value)
+}
+
+function datasetToProperty(attribute) {
+  var value = attribute.slice(5).replace(dash, camelcase)
+  return data + value.charAt(0).toUpperCase() + value.slice(1)
+}
+
+function datasetToAttribute(property) {
+  var value = property.slice(4)
+
+  if (dash.test(value)) {
+    return property
+  }
+
+  value = value.replace(cap, kebab)
+
+  if (value.charAt(0) !== '-') {
+    value = '-' + value
+  }
+
+  return data + value
+}
+
+function kebab($0) {
+  return '-' + $0.toLowerCase()
+}
+
+function camelcase($0) {
+  return $0.charAt(1).toUpperCase()
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/html.js":
+/*!***************************************************!*\
+  !*** ./node_modules/property-information/html.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var merge = __webpack_require__(/*! ./lib/util/merge */ "./node_modules/property-information/lib/util/merge.js")
+var xlink = __webpack_require__(/*! ./lib/xlink */ "./node_modules/property-information/lib/xlink.js")
+var xml = __webpack_require__(/*! ./lib/xml */ "./node_modules/property-information/lib/xml.js")
+var xmlns = __webpack_require__(/*! ./lib/xmlns */ "./node_modules/property-information/lib/xmlns.js")
+var aria = __webpack_require__(/*! ./lib/aria */ "./node_modules/property-information/lib/aria.js")
+var html = __webpack_require__(/*! ./lib/html */ "./node_modules/property-information/lib/html.js")
+
+module.exports = merge([xml, xlink, xmlns, aria, html])
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/aria.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/property-information/lib/aria.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var types = __webpack_require__(/*! ./util/types */ "./node_modules/property-information/lib/util/types.js")
+var create = __webpack_require__(/*! ./util/create */ "./node_modules/property-information/lib/util/create.js")
+
+var booleanish = types.booleanish
+var number = types.number
+var spaceSeparated = types.spaceSeparated
+
+module.exports = create({
+  transform: ariaTransform,
+  properties: {
+    ariaActiveDescendant: null,
+    ariaAtomic: booleanish,
+    ariaAutoComplete: null,
+    ariaBusy: booleanish,
+    ariaChecked: booleanish,
+    ariaColCount: number,
+    ariaColIndex: number,
+    ariaColSpan: number,
+    ariaControls: spaceSeparated,
+    ariaCurrent: null,
+    ariaDescribedBy: spaceSeparated,
+    ariaDetails: null,
+    ariaDisabled: booleanish,
+    ariaDropEffect: spaceSeparated,
+    ariaErrorMessage: null,
+    ariaExpanded: booleanish,
+    ariaFlowTo: spaceSeparated,
+    ariaGrabbed: booleanish,
+    ariaHasPopup: null,
+    ariaHidden: booleanish,
+    ariaInvalid: null,
+    ariaKeyShortcuts: null,
+    ariaLabel: null,
+    ariaLabelledBy: spaceSeparated,
+    ariaLevel: number,
+    ariaLive: null,
+    ariaModal: booleanish,
+    ariaMultiLine: booleanish,
+    ariaMultiSelectable: booleanish,
+    ariaOrientation: null,
+    ariaOwns: spaceSeparated,
+    ariaPlaceholder: null,
+    ariaPosInSet: number,
+    ariaPressed: booleanish,
+    ariaReadOnly: booleanish,
+    ariaRelevant: null,
+    ariaRequired: booleanish,
+    ariaRoleDescription: spaceSeparated,
+    ariaRowCount: number,
+    ariaRowIndex: number,
+    ariaRowSpan: number,
+    ariaSelected: booleanish,
+    ariaSetSize: number,
+    ariaSort: null,
+    ariaValueMax: number,
+    ariaValueMin: number,
+    ariaValueNow: number,
+    ariaValueText: null,
+    role: null
+  }
+})
+
+function ariaTransform(_, prop) {
+  return prop === 'role' ? prop : 'aria-' + prop.slice(4).toLowerCase()
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/html.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/property-information/lib/html.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var types = __webpack_require__(/*! ./util/types */ "./node_modules/property-information/lib/util/types.js")
+var create = __webpack_require__(/*! ./util/create */ "./node_modules/property-information/lib/util/create.js")
+var caseInsensitiveTransform = __webpack_require__(/*! ./util/case-insensitive-transform */ "./node_modules/property-information/lib/util/case-insensitive-transform.js")
+
+var boolean = types.boolean
+var overloadedBoolean = types.overloadedBoolean
+var booleanish = types.booleanish
+var number = types.number
+var spaceSeparated = types.spaceSeparated
+var commaSeparated = types.commaSeparated
+
+module.exports = create({
+  space: 'html',
+  attributes: {
+    acceptcharset: 'accept-charset',
+    classname: 'class',
+    htmlfor: 'for',
+    httpequiv: 'http-equiv'
+  },
+  transform: caseInsensitiveTransform,
+  mustUseProperty: ['checked', 'multiple', 'muted', 'selected'],
+  properties: {
+    // Standard Properties.
+    abbr: null,
+    accept: commaSeparated,
+    acceptCharset: spaceSeparated,
+    accessKey: spaceSeparated,
+    action: null,
+    allowFullScreen: boolean,
+    allowPaymentRequest: boolean,
+    allowUserMedia: boolean,
+    alt: null,
+    as: null,
+    async: boolean,
+    autoCapitalize: null,
+    autoComplete: spaceSeparated,
+    autoFocus: boolean,
+    autoPlay: boolean,
+    capture: boolean,
+    charSet: null,
+    checked: boolean,
+    cite: null,
+    className: spaceSeparated,
+    cols: number,
+    colSpan: null,
+    content: null,
+    contentEditable: booleanish,
+    controls: boolean,
+    controlsList: spaceSeparated,
+    coords: number | commaSeparated,
+    crossOrigin: null,
+    data: null,
+    dateTime: null,
+    decoding: null,
+    default: boolean,
+    defer: boolean,
+    dir: null,
+    dirName: null,
+    disabled: boolean,
+    download: overloadedBoolean,
+    draggable: booleanish,
+    encType: null,
+    form: null,
+    formAction: null,
+    formEncType: null,
+    formMethod: null,
+    formNoValidate: boolean,
+    formTarget: null,
+    headers: spaceSeparated,
+    height: number,
+    hidden: boolean,
+    high: number,
+    href: null,
+    hrefLang: null,
+    htmlFor: spaceSeparated,
+    httpEquiv: spaceSeparated,
+    id: null,
+    inputMode: null,
+    integrity: null,
+    is: null,
+    isMap: boolean,
+    itemId: null,
+    itemProp: spaceSeparated,
+    itemRef: spaceSeparated,
+    itemScope: boolean,
+    itemType: spaceSeparated,
+    kind: null,
+    label: null,
+    lang: null,
+    language: null,
+    list: null,
+    loop: boolean,
+    low: number,
+    manifest: null,
+    max: null,
+    maxLength: number,
+    media: null,
+    method: null,
+    min: null,
+    minLength: number,
+    multiple: boolean,
+    muted: boolean,
+    name: null,
+    nonce: null,
+    noModule: boolean,
+    noValidate: boolean,
+    open: boolean,
+    optimum: number,
+    pattern: null,
+    ping: spaceSeparated,
+    placeholder: null,
+    playsInline: boolean,
+    poster: null,
+    preload: null,
+    readOnly: boolean,
+    referrerPolicy: null,
+    rel: spaceSeparated,
+    required: boolean,
+    reversed: boolean,
+    rows: number,
+    rowSpan: number,
+    sandbox: spaceSeparated,
+    scope: null,
+    scoped: boolean,
+    seamless: boolean,
+    selected: boolean,
+    shape: null,
+    size: number,
+    sizes: null,
+    slot: null,
+    span: number,
+    spellCheck: booleanish,
+    src: null,
+    srcDoc: null,
+    srcLang: null,
+    srcSet: commaSeparated,
+    start: number,
+    step: null,
+    style: null,
+    tabIndex: number,
+    target: null,
+    title: null,
+    translate: null,
+    type: null,
+    typeMustMatch: boolean,
+    useMap: null,
+    value: booleanish,
+    width: number,
+    wrap: null,
+
+    // Legacy.
+    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
+    align: null, // Several. Use CSS `text-align` instead,
+    aLink: null, // `<body>`. Use CSS `a:active {color}` instead
+    archive: spaceSeparated, // `<object>`. List of URIs to archives
+    axis: null, // `<td>` and `<th>`. Use `scope` on `<th>`
+    background: null, // `<body>`. Use CSS `background-image` instead
+    bgColor: null, // `<body>` and table elements. Use CSS `background-color` instead
+    border: number, // `<table>`. Use CSS `border-width` instead,
+    borderColor: null, // `<table>`. Use CSS `border-color` instead,
+    bottomMargin: number, // `<body>`
+    cellPadding: null, // `<table>`
+    cellSpacing: null, // `<table>`
+    char: null, // Several table elements. When `align=char`, sets the character to align on
+    charOff: null, // Several table elements. When `char`, offsets the alignment
+    classId: null, // `<object>`
+    clear: null, // `<br>`. Use CSS `clear` instead
+    code: null, // `<object>`
+    codeBase: null, // `<object>`
+    codeType: null, // `<object>`
+    color: null, // `<font>` and `<hr>`. Use CSS instead
+    compact: boolean, // Lists. Use CSS to reduce space between items instead
+    declare: boolean, // `<object>`
+    event: null, // `<script>`
+    face: null, // `<font>`. Use CSS instead
+    frame: null, // `<table>`
+    frameBorder: null, // `<iframe>`. Use CSS `border` instead
+    hSpace: number, // `<img>` and `<object>`
+    leftMargin: number, // `<body>`
+    link: null, // `<body>`. Use CSS `a:link {color: *}` instead
+    longDesc: null, // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
+    lowSrc: null, // `<img>`. Use a `<picture>`
+    marginHeight: number, // `<body>`
+    marginWidth: number, // `<body>`
+    noResize: boolean, // `<frame>`
+    noHref: boolean, // `<area>`. Use no href instead of an explicit `nohref`
+    noShade: boolean, // `<hr>`. Use background-color and height instead of borders
+    noWrap: boolean, // `<td>` and `<th>`
+    object: null, // `<applet>`
+    profile: null, // `<head>`
+    prompt: null, // `<isindex>`
+    rev: null, // `<link>`
+    rightMargin: number, // `<body>`
+    rules: null, // `<table>`
+    scheme: null, // `<meta>`
+    scrolling: booleanish, // `<frame>`. Use overflow in the child context
+    standby: null, // `<object>`
+    summary: null, // `<table>`
+    text: null, // `<body>`. Use CSS `color` instead
+    topMargin: number, // `<body>`
+    valueType: null, // `<param>`
+    version: null, // `<html>`. Use a doctype.
+    vAlign: null, // Several. Use CSS `vertical-align` instead
+    vLink: null, // `<body>`. Use CSS `a:visited {color}` instead
+    vSpace: number, // `<img>` and `<object>`
+
+    // Non-standard Properties.
+    allowTransparency: null,
+    autoCorrect: null,
+    autoSave: null,
+    prefix: null,
+    property: null,
+    results: number,
+    security: null,
+    unselectable: null
+  }
+})
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/svg.js":
+/*!******************************************************!*\
+  !*** ./node_modules/property-information/lib/svg.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var types = __webpack_require__(/*! ./util/types */ "./node_modules/property-information/lib/util/types.js")
+var create = __webpack_require__(/*! ./util/create */ "./node_modules/property-information/lib/util/create.js")
+var caseSensitiveTransform = __webpack_require__(/*! ./util/case-sensitive-transform */ "./node_modules/property-information/lib/util/case-sensitive-transform.js")
+
+var boolean = types.boolean
+var number = types.number
+var spaceSeparated = types.spaceSeparated
+var commaSeparated = types.commaSeparated
+var commaOrSpaceSeparated = types.commaOrSpaceSeparated
+
+module.exports = create({
+  space: 'svg',
+  attributes: {
+    accentHeight: 'accent-height',
+    alignmentBaseline: 'alignment-baseline',
+    arabicForm: 'arabic-form',
+    baselineShift: 'baseline-shift',
+    capHeight: 'cap-height',
+    className: 'class',
+    clipPath: 'clip-path',
+    clipRule: 'clip-rule',
+    colorInterpolation: 'color-interpolation',
+    colorInterpolationFilters: 'color-interpolation-filters',
+    colorProfile: 'color-profile',
+    colorRendering: 'color-rendering',
+    crossOrigin: 'crossorigin',
+    dataType: 'datatype',
+    dominantBaseline: 'dominant-baseline',
+    enableBackground: 'enable-background',
+    fillOpacity: 'fill-opacity',
+    fillRule: 'fill-rule',
+    floodColor: 'flood-color',
+    floodOpacity: 'flood-opacity',
+    fontFamily: 'font-family',
+    fontSize: 'font-size',
+    fontSizeAdjust: 'font-size-adjust',
+    fontStretch: 'font-stretch',
+    fontStyle: 'font-style',
+    fontVariant: 'font-variant',
+    fontWeight: 'font-weight',
+    glyphName: 'glyph-name',
+    glyphOrientationHorizontal: 'glyph-orientation-horizontal',
+    glyphOrientationVertical: 'glyph-orientation-vertical',
+    hrefLang: 'hreflang',
+    horizAdvX: 'horiz-adv-x',
+    horizOriginX: 'horiz-origin-x',
+    horizOriginY: 'horiz-origin-y',
+    imageRendering: 'image-rendering',
+    letterSpacing: 'letter-spacing',
+    lightingColor: 'lighting-color',
+    markerEnd: 'marker-end',
+    markerMid: 'marker-mid',
+    markerStart: 'marker-start',
+    navDown: 'nav-down',
+    navDownLeft: 'nav-down-left',
+    navDownRight: 'nav-down-right',
+    navLeft: 'nav-left',
+    navNext: 'nav-next',
+    navPrev: 'nav-prev',
+    navRight: 'nav-right',
+    navUp: 'nav-up',
+    navUpLeft: 'nav-up-left',
+    navUpRight: 'nav-up-right',
+    overlinePosition: 'overline-position',
+    overlineThickness: 'overline-thickness',
+    paintOrder: 'paint-order',
+    panose1: 'panose-1',
+    pointerEvents: 'pointer-events',
+    renderingIntent: 'rendering-intent',
+    shapeRendering: 'shape-rendering',
+    stopColor: 'stop-color',
+    stopOpacity: 'stop-opacity',
+    strikethroughPosition: 'strikethrough-position',
+    strikethroughThickness: 'strikethrough-thickness',
+    strokeDashArray: 'stroke-dasharray',
+    strokeDashOffset: 'stroke-dashoffset',
+    strokeLineCap: 'stroke-linecap',
+    strokeLineJoin: 'stroke-linejoin',
+    strokeMiterLimit: 'stroke-miterlimit',
+    strokeOpacity: 'stroke-opacity',
+    strokeWidth: 'stroke-width',
+    tabIndex: 'tabindex',
+    textAnchor: 'text-anchor',
+    textDecoration: 'text-decoration',
+    textRendering: 'text-rendering',
+    typeOf: 'typeof',
+    underlinePosition: 'underline-position',
+    underlineThickness: 'underline-thickness',
+    unicodeBidi: 'unicode-bidi',
+    unicodeRange: 'unicode-range',
+    unitsPerEm: 'units-per-em',
+    vAlphabetic: 'v-alphabetic',
+    vHanging: 'v-hanging',
+    vIdeographic: 'v-ideographic',
+    vMathematical: 'v-mathematical',
+    vectorEffect: 'vector-effect',
+    vertAdvY: 'vert-adv-y',
+    vertOriginX: 'vert-origin-x',
+    vertOriginY: 'vert-origin-y',
+    wordSpacing: 'word-spacing',
+    writingMode: 'writing-mode',
+    xHeight: 'x-height',
+    // These were camelcased in Tiny. Now lowercased in SVG 2
+    playbackOrder: 'playbackorder',
+    timelineBegin: 'timelinebegin'
+  },
+  transform: caseSensitiveTransform,
+  properties: {
+    about: commaOrSpaceSeparated,
+    accentHeight: number,
+    accumulate: null,
+    additive: null,
+    alignmentBaseline: null,
+    alphabetic: number,
+    amplitude: number,
+    arabicForm: null,
+    ascent: number,
+    attributeName: null,
+    attributeType: null,
+    azimuth: number,
+    bandwidth: null,
+    baselineShift: null,
+    baseFrequency: null,
+    baseProfile: null,
+    bbox: null,
+    begin: null,
+    bias: number,
+    by: null,
+    calcMode: null,
+    capHeight: number,
+    className: spaceSeparated,
+    clip: null,
+    clipPath: null,
+    clipPathUnits: null,
+    clipRule: null,
+    color: null,
+    colorInterpolation: null,
+    colorInterpolationFilters: null,
+    colorProfile: null,
+    colorRendering: null,
+    content: null,
+    contentScriptType: null,
+    contentStyleType: null,
+    crossOrigin: null,
+    cursor: null,
+    cx: null,
+    cy: null,
+    d: null,
+    dataType: null,
+    defaultAction: null,
+    descent: number,
+    diffuseConstant: number,
+    direction: null,
+    display: null,
+    dur: null,
+    divisor: number,
+    dominantBaseline: null,
+    download: boolean,
+    dx: null,
+    dy: null,
+    edgeMode: null,
+    editable: null,
+    elevation: number,
+    enableBackground: null,
+    end: null,
+    event: null,
+    exponent: number,
+    externalResourcesRequired: null,
+    fill: null,
+    fillOpacity: number,
+    fillRule: null,
+    filter: null,
+    filterRes: null,
+    filterUnits: null,
+    floodColor: null,
+    floodOpacity: null,
+    focusable: null,
+    focusHighlight: null,
+    fontFamily: null,
+    fontSize: null,
+    fontSizeAdjust: null,
+    fontStretch: null,
+    fontStyle: null,
+    fontVariant: null,
+    fontWeight: null,
+    format: null,
+    fr: null,
+    from: null,
+    fx: null,
+    fy: null,
+    g1: commaSeparated,
+    g2: commaSeparated,
+    glyphName: commaSeparated,
+    glyphOrientationHorizontal: null,
+    glyphOrientationVertical: null,
+    glyphRef: null,
+    gradientTransform: null,
+    gradientUnits: null,
+    handler: null,
+    hanging: number,
+    hatchContentUnits: null,
+    hatchUnits: null,
+    height: null,
+    href: null,
+    hrefLang: null,
+    horizAdvX: number,
+    horizOriginX: number,
+    horizOriginY: number,
+    id: null,
+    ideographic: number,
+    imageRendering: null,
+    initialVisibility: null,
+    in: null,
+    in2: null,
+    intercept: number,
+    k: number,
+    k1: number,
+    k2: number,
+    k3: number,
+    k4: number,
+    kernelMatrix: commaOrSpaceSeparated,
+    kernelUnitLength: null,
+    keyPoints: null, // SEMI_COLON_SEPARATED
+    keySplines: null, // SEMI_COLON_SEPARATED
+    keyTimes: null, // SEMI_COLON_SEPARATED
+    kerning: null,
+    lang: null,
+    lengthAdjust: null,
+    letterSpacing: null,
+    lightingColor: null,
+    limitingConeAngle: number,
+    local: null,
+    markerEnd: null,
+    markerMid: null,
+    markerStart: null,
+    markerHeight: null,
+    markerUnits: null,
+    markerWidth: null,
+    mask: null,
+    maskContentUnits: null,
+    maskUnits: null,
+    mathematical: null,
+    max: null,
+    media: null,
+    mediaCharacterEncoding: null,
+    mediaContentEncodings: null,
+    mediaSize: number,
+    mediaTime: null,
+    method: null,
+    min: null,
+    mode: null,
+    name: null,
+    navDown: null,
+    navDownLeft: null,
+    navDownRight: null,
+    navLeft: null,
+    navNext: null,
+    navPrev: null,
+    navRight: null,
+    navUp: null,
+    navUpLeft: null,
+    navUpRight: null,
+    numOctaves: null,
+    observer: null,
+    offset: null,
+    opacity: null,
+    operator: null,
+    order: null,
+    orient: null,
+    orientation: null,
+    origin: null,
+    overflow: null,
+    overlay: null,
+    overlinePosition: number,
+    overlineThickness: number,
+    paintOrder: null,
+    panose1: null,
+    path: null,
+    pathLength: number,
+    patternContentUnits: null,
+    patternTransform: null,
+    patternUnits: null,
+    phase: null,
+    pitch: null,
+    playbackOrder: null,
+    pointerEvents: null,
+    points: null,
+    pointsAtX: number,
+    pointsAtY: number,
+    pointsAtZ: number,
+    preserveAlpha: null,
+    preserveAspectRatio: null,
+    primitiveUnits: null,
+    propagate: null,
+    property: commaOrSpaceSeparated,
+    r: null,
+    radius: null,
+    refX: null,
+    refY: null,
+    rel: commaOrSpaceSeparated,
+    rev: commaOrSpaceSeparated,
+    renderingIntent: null,
+    repeatCount: null,
+    repeatDur: null,
+    requiredExtensions: commaOrSpaceSeparated,
+    requiredFeatures: commaOrSpaceSeparated,
+    requiredFonts: commaOrSpaceSeparated,
+    requiredFormats: commaOrSpaceSeparated,
+    resource: null,
+    restart: null,
+    result: null,
+    rotate: null,
+    rx: null,
+    ry: null,
+    scale: null,
+    seed: null,
+    shapeRendering: null,
+    side: null,
+    slope: null,
+    snapshotTime: null,
+    specularConstant: number,
+    specularExponent: number,
+    spreadMethod: null,
+    spacing: null,
+    startOffset: null,
+    stdDeviation: null,
+    stemh: null,
+    stemv: null,
+    stitchTiles: null,
+    stopColor: null,
+    stopOpacity: null,
+    strikethroughPosition: number,
+    strikethroughThickness: number,
+    string: null,
+    stroke: null,
+    strokeDashArray: commaOrSpaceSeparated,
+    strokeDashOffset: null,
+    strokeLineCap: null,
+    strokeLineJoin: null,
+    strokeMiterLimit: number,
+    strokeOpacity: number,
+    strokeWidth: null,
+    style: null,
+    surfaceScale: number,
+    syncBehavior: null,
+    syncBehaviorDefault: null,
+    syncMaster: null,
+    syncTolerance: null,
+    syncToleranceDefault: null,
+    systemLanguage: commaOrSpaceSeparated,
+    tabIndex: number,
+    tableValues: null,
+    target: null,
+    targetX: number,
+    targetY: number,
+    textAnchor: null,
+    textDecoration: null,
+    textRendering: null,
+    textLength: null,
+    timelineBegin: null,
+    title: null,
+    transformBehavior: null,
+    type: null,
+    typeOf: commaOrSpaceSeparated,
+    to: null,
+    transform: null,
+    u1: null,
+    u2: null,
+    underlinePosition: number,
+    underlineThickness: number,
+    unicode: null,
+    unicodeBidi: null,
+    unicodeRange: null,
+    unitsPerEm: number,
+    values: null,
+    vAlphabetic: number,
+    vMathematical: number,
+    vectorEffect: null,
+    vHanging: number,
+    vIdeographic: number,
+    version: null,
+    vertAdvY: number,
+    vertOriginX: number,
+    vertOriginY: number,
+    viewBox: null,
+    viewTarget: null,
+    visibility: null,
+    width: null,
+    widths: null,
+    wordSpacing: null,
+    writingMode: null,
+    x: null,
+    x1: null,
+    x2: null,
+    xChannelSelector: null,
+    xHeight: number,
+    y: null,
+    y1: null,
+    y2: null,
+    yChannelSelector: null,
+    z: null,
+    zoomAndPan: null
+  }
+})
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/util/case-insensitive-transform.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/property-information/lib/util/case-insensitive-transform.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var caseSensitiveTransform = __webpack_require__(/*! ./case-sensitive-transform */ "./node_modules/property-information/lib/util/case-sensitive-transform.js")
+
+module.exports = caseInsensitiveTransform
+
+function caseInsensitiveTransform(attributes, property) {
+  return caseSensitiveTransform(attributes, property.toLowerCase())
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/util/case-sensitive-transform.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/property-information/lib/util/case-sensitive-transform.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = caseSensitiveTransform
+
+function caseSensitiveTransform(attributes, attribute) {
+  return attribute in attributes ? attributes[attribute] : attribute
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/util/create.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/property-information/lib/util/create.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var normalize = __webpack_require__(/*! ../../normalize */ "./node_modules/property-information/normalize.js")
+var Schema = __webpack_require__(/*! ./schema */ "./node_modules/property-information/lib/util/schema.js")
+var DefinedInfo = __webpack_require__(/*! ./defined-info */ "./node_modules/property-information/lib/util/defined-info.js")
+
+module.exports = create
+
+function create(definition) {
+  var space = definition.space
+  var mustUseProperty = definition.mustUseProperty || []
+  var attributes = definition.attributes || {}
+  var props = definition.properties
+  var transform = definition.transform
+  var property = {}
+  var normal = {}
+  var prop
+  var info
+
+  for (prop in props) {
+    info = new DefinedInfo(
+      prop,
+      transform(attributes, prop),
+      props[prop],
+      space
+    )
+
+    if (mustUseProperty.indexOf(prop) !== -1) {
+      info.mustUseProperty = true
+    }
+
+    property[prop] = info
+
+    normal[normalize(prop)] = prop
+    normal[normalize(info.attribute)] = prop
+  }
+
+  return new Schema(property, normal, space)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/util/defined-info.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/property-information/lib/util/defined-info.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Info = __webpack_require__(/*! ./info */ "./node_modules/property-information/lib/util/info.js")
+var types = __webpack_require__(/*! ./types */ "./node_modules/property-information/lib/util/types.js")
+
+module.exports = DefinedInfo
+
+DefinedInfo.prototype = new Info()
+DefinedInfo.prototype.defined = true
+
+function DefinedInfo(property, attribute, mask, space) {
+  mark(this, 'space', space)
+  Info.call(this, property, attribute)
+  mark(this, 'boolean', check(mask, types.boolean))
+  mark(this, 'booleanish', check(mask, types.booleanish))
+  mark(this, 'overloadedBoolean', check(mask, types.overloadedBoolean))
+  mark(this, 'number', check(mask, types.number))
+  mark(this, 'commaSeparated', check(mask, types.commaSeparated))
+  mark(this, 'spaceSeparated', check(mask, types.spaceSeparated))
+  mark(this, 'commaOrSpaceSeparated', check(mask, types.commaOrSpaceSeparated))
+}
+
+function mark(values, key, value) {
+  if (value) {
+    values[key] = value
+  }
+}
+
+function check(value, mask) {
+  return (value & mask) === mask
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/util/info.js":
+/*!************************************************************!*\
+  !*** ./node_modules/property-information/lib/util/info.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = Info
+
+var proto = Info.prototype
+
+proto.space = null
+proto.attribute = null
+proto.property = null
+proto.boolean = false
+proto.booleanish = false
+proto.overloadedBoolean = false
+proto.number = false
+proto.commaSeparated = false
+proto.spaceSeparated = false
+proto.commaOrSpaceSeparated = false
+proto.mustUseProperty = false
+proto.defined = false
+
+function Info(property, attribute) {
+  this.property = property
+  this.attribute = attribute
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/util/merge.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/property-information/lib/util/merge.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var Schema = __webpack_require__(/*! ./schema */ "./node_modules/property-information/lib/util/schema.js")
+
+module.exports = merge
+
+function merge(definitions) {
+  var length = definitions.length
+  var property = []
+  var normal = []
+  var index = -1
+  var info
+  var space
+
+  while (++index < length) {
+    info = definitions[index]
+    property.push(info.property)
+    normal.push(info.normal)
+    space = info.space
+  }
+
+  return new Schema(
+    xtend.apply(null, property),
+    xtend.apply(null, normal),
+    space
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/util/schema.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/property-information/lib/util/schema.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = Schema
+
+var proto = Schema.prototype
+
+proto.space = null
+proto.normal = {}
+proto.property = {}
+
+function Schema(property, normal, space) {
+  this.property = property
+  this.normal = normal
+
+  if (space) {
+    this.space = space
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/util/types.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/property-information/lib/util/types.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var powers = 0
+
+exports.boolean = increment()
+exports.booleanish = increment()
+exports.overloadedBoolean = increment()
+exports.number = increment()
+exports.spaceSeparated = increment()
+exports.commaSeparated = increment()
+exports.commaOrSpaceSeparated = increment()
+
+function increment() {
+  return Math.pow(2, ++powers)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/xlink.js":
+/*!********************************************************!*\
+  !*** ./node_modules/property-information/lib/xlink.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var create = __webpack_require__(/*! ./util/create */ "./node_modules/property-information/lib/util/create.js")
+
+module.exports = create({
+  space: 'xlink',
+  transform: xlinkTransform,
+  properties: {
+    xLinkActuate: null,
+    xLinkArcRole: null,
+    xLinkHref: null,
+    xLinkRole: null,
+    xLinkShow: null,
+    xLinkTitle: null,
+    xLinkType: null
+  }
+})
+
+function xlinkTransform(_, prop) {
+  return 'xlink:' + prop.slice(5).toLowerCase()
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/xml.js":
+/*!******************************************************!*\
+  !*** ./node_modules/property-information/lib/xml.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var create = __webpack_require__(/*! ./util/create */ "./node_modules/property-information/lib/util/create.js")
+
+module.exports = create({
+  space: 'xml',
+  transform: xmlTransform,
+  properties: {
+    xmlLang: null,
+    xmlBase: null,
+    xmlSpace: null
+  }
+})
+
+function xmlTransform(_, prop) {
+  return 'xml:' + prop.slice(3).toLowerCase()
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/lib/xmlns.js":
+/*!********************************************************!*\
+  !*** ./node_modules/property-information/lib/xmlns.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var create = __webpack_require__(/*! ./util/create */ "./node_modules/property-information/lib/util/create.js")
+var caseInsensitiveTransform = __webpack_require__(/*! ./util/case-insensitive-transform */ "./node_modules/property-information/lib/util/case-insensitive-transform.js")
+
+module.exports = create({
+  space: 'xmlns',
+  attributes: {
+    xmlnsxlink: 'xmlns:xlink'
+  },
+  transform: caseInsensitiveTransform,
+  properties: {
+    xmlns: null,
+    xmlnsXLink: null
+  }
+})
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/normalize.js":
+/*!********************************************************!*\
+  !*** ./node_modules/property-information/normalize.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = normalize
+
+function normalize(value) {
+  return value.toLowerCase()
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/property-information/svg.js":
+/*!**************************************************!*\
+  !*** ./node_modules/property-information/svg.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var merge = __webpack_require__(/*! ./lib/util/merge */ "./node_modules/property-information/lib/util/merge.js")
+var xlink = __webpack_require__(/*! ./lib/xlink */ "./node_modules/property-information/lib/xlink.js")
+var xml = __webpack_require__(/*! ./lib/xml */ "./node_modules/property-information/lib/xml.js")
+var xmlns = __webpack_require__(/*! ./lib/xmlns */ "./node_modules/property-information/lib/xmlns.js")
+var aria = __webpack_require__(/*! ./lib/aria */ "./node_modules/property-information/lib/aria.js")
+var svg = __webpack_require__(/*! ./lib/svg */ "./node_modules/property-information/lib/svg.js")
+
+module.exports = merge([xml, xlink, xmlns, aria, svg])
 
 
 /***/ }),
@@ -5872,6 +13660,8746 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/refractor/core.js":
+/*!****************************************!*\
+  !*** ./node_modules/refractor/core.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+/* global window, self */
+
+var restore = capture()
+
+// istanbul ignore next - Don't allow Prism to run on page load in browser or
+// to start messaging from workers.
+var ctx =
+  typeof window === 'undefined'
+    ? typeof self === 'undefined'
+      ? {}
+      : self
+    : window
+
+ctx.Prism = {manual: true, disableWorkerMessageHandler: true}
+
+// Load all stuff in `prism.js` itself, except for `prism-file-highlight.js`.
+// The wrapped non-leaky grammars are loaded instead of Prism’s originals.
+var h = __webpack_require__(/*! hastscript */ "./node_modules/hastscript/index.js")
+var decode = __webpack_require__(/*! parse-entities */ "./node_modules/parse-entities/index.js")
+var Prism = __webpack_require__(/*! prismjs/components/prism-core */ "./node_modules/prismjs/components/prism-core.js")
+var markup = __webpack_require__(/*! ./lang/markup */ "./node_modules/refractor/lang/markup.js")
+var css = __webpack_require__(/*! ./lang/css */ "./node_modules/refractor/lang/css.js")
+var clike = __webpack_require__(/*! ./lang/clike */ "./node_modules/refractor/lang/clike.js")
+var js = __webpack_require__(/*! ./lang/javascript */ "./node_modules/refractor/lang/javascript.js")
+
+restore()
+
+var own = {}.hasOwnProperty
+
+// Inherit.
+function Refractor() {}
+
+Refractor.prototype = Prism
+
+// Construct.
+var refract = new Refractor()
+
+// Expose.
+module.exports = refract
+
+// Create.
+refract.highlight = highlight
+refract.register = register
+refract.registered = registered
+refract.listLanguages = listLanguages
+
+// Register bundled grammars.
+register(markup)
+register(css)
+register(clike)
+register(js)
+
+refract.util.encode = encode
+refract.Token.stringify = stringify
+
+function register(grammar) {
+  if (typeof grammar !== 'function' || !grammar.displayName) {
+    throw new Error('Expected `function` for `grammar`, got `' + grammar + '`')
+  }
+
+  // Do not duplicate registrations.
+  if (refract.languages[grammar.displayName] === undefined) {
+    grammar(refract)
+  }
+}
+
+function highlight(value, name) {
+  var sup = Prism.highlight
+  var grammar
+
+  if (typeof value !== 'string') {
+    throw new Error('Expected `string` for `value`, got `' + value + '`')
+  }
+
+  // `name` is a grammar object.
+  if (refract.util.type(name) === 'Object') {
+    grammar = name
+    name = null
+  } else {
+    if (typeof name !== 'string') {
+      throw new Error('Expected `string` for `name`, got `' + name + '`')
+    }
+
+    if (own.call(refract.languages, name)) {
+      grammar = refract.languages[name]
+    } else {
+      throw new Error('Unknown language: `' + name + '` is not registered')
+    }
+  }
+
+  return sup.call(this, value, grammar, name)
+}
+
+function registered(language) {
+  if (typeof language !== 'string') {
+    throw new Error('Expected `string` for `language`, got `' + language + '`')
+  }
+
+  return own.call(refract.languages, language)
+}
+
+function listLanguages() {
+  var languages = refract.languages
+  var list = []
+  var language
+
+  for (language in languages) {
+    if (
+      own.call(languages, language) &&
+      typeof languages[language] === 'object'
+    ) {
+      list.push(language)
+    }
+  }
+
+  return list
+}
+
+function stringify(value, language, parent) {
+  var env
+
+  if (typeof value === 'string') {
+    return {type: 'text', value: value}
+  }
+
+  if (refract.util.type(value) === 'Array') {
+    return stringifyAll(value, language)
+  }
+
+  env = {
+    type: value.type,
+    content: refract.Token.stringify(value.content, language, parent),
+    tag: 'span',
+    classes: ['token', value.type],
+    attributes: {},
+    language: language,
+    parent: parent
+  }
+
+  if (value.alias) {
+    env.classes = env.classes.concat(value.alias)
+  }
+
+  refract.hooks.run('wrap', env)
+
+  return h(
+    env.tag + '.' + env.classes.join('.'),
+    attributes(env.attributes),
+    env.content
+  )
+}
+
+function stringifyAll(values, language) {
+  var result = []
+  var length = values.length
+  var index = -1
+  var value
+
+  while (++index < length) {
+    value = values[index]
+
+    if (value !== '' && value !== null && value !== undefined) {
+      result.push(value)
+    }
+  }
+
+  index = -1
+  length = result.length
+
+  while (++index < length) {
+    value = result[index]
+    result[index] = refract.Token.stringify(value, language, result)
+  }
+
+  return result
+}
+
+function encode(tokens) {
+  return tokens
+}
+
+function attributes(attrs) {
+  var key
+
+  for (key in attrs) {
+    attrs[key] = decode(attrs[key])
+  }
+
+  return attrs
+}
+
+function capture() {
+  var defined = 'Prism' in global
+  /* istanbul ignore next */
+  var current = defined ? global.Prism : undefined
+
+  return restore
+
+  function restore() {
+    /* istanbul ignore else - Clean leaks after Prism. */
+    if (defined) {
+      global.Prism = current
+    } else {
+      delete global.Prism
+    }
+
+    defined = undefined
+    current = undefined
+  }
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/refractor/lang/clike.js":
+/*!**********************************************!*\
+  !*** ./node_modules/refractor/lang/clike.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = clike
+clike.displayName = 'clike'
+clike.aliases = []
+function clike(Prism) {
+  Prism.languages.clike = {
+    comment: [
+      {
+        pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
+        lookbehind: true
+      },
+      {
+        pattern: /(^|[^\\:])\/\/.*/,
+        lookbehind: true,
+        greedy: true
+      }
+    ],
+    string: {
+      pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+      greedy: true
+    },
+    'class-name': {
+      pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,
+      lookbehind: true,
+      inside: {
+        punctuation: /[.\\]/
+      }
+    },
+    keyword: /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+    boolean: /\b(?:true|false)\b/,
+    function: /\w+(?=\()/,
+    number: /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
+    operator: /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
+    punctuation: /[{}[\];(),.:]/
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/refractor/lang/css.js":
+/*!********************************************!*\
+  !*** ./node_modules/refractor/lang/css.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = css
+css.displayName = 'css'
+css.aliases = []
+function css(Prism) {
+  ;(function(Prism) {
+    var string = /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/
+    Prism.languages.css = {
+      comment: /\/\*[\s\S]*?\*\//,
+      atrule: {
+        pattern: /@[\w-]+?[\s\S]*?(?:;|(?=\s*\{))/i,
+        inside: {
+          rule: /@[\w-]+/
+          // See rest below
+        }
+      },
+      url: RegExp('url\\((?:' + string.source + '|.*?)\\)', 'i'),
+      selector: RegExp(
+        '[^{}\\s](?:[^{};"\']|' + string.source + ')*?(?=\\s*\\{)'
+      ),
+      string: {
+        pattern: string,
+        greedy: true
+      },
+      property: /[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/i,
+      important: /!important\b/i,
+      function: /[-a-z0-9]+(?=\()/i,
+      punctuation: /[(){};:,]/
+    }
+    Prism.languages.css['atrule'].inside.rest = Prism.languages.css
+    var markup = Prism.languages.markup
+    if (markup) {
+      markup.tag.addInlined('style', 'css')
+      Prism.languages.insertBefore(
+        'inside',
+        'attr-value',
+        {
+          'style-attr': {
+            pattern: /\s*style=("|')(?:\\[\s\S]|(?!\1)[^\\])*\1/i,
+            inside: {
+              'attr-name': {
+                pattern: /^\s*style/i,
+                inside: markup.tag.inside
+              },
+              punctuation: /^\s*=\s*['"]|['"]\s*$/,
+              'attr-value': {
+                pattern: /.+/i,
+                inside: Prism.languages.css
+              }
+            },
+            alias: 'language-css'
+          }
+        },
+        markup.tag
+      )
+    }
+  })(Prism)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/refractor/lang/javascript.js":
+/*!***************************************************!*\
+  !*** ./node_modules/refractor/lang/javascript.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = javascript
+javascript.displayName = 'javascript'
+javascript.aliases = ['js']
+function javascript(Prism) {
+  Prism.languages.javascript = Prism.languages.extend('clike', {
+    'class-name': [
+      Prism.languages.clike['class-name'],
+      {
+        pattern: /(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,
+        lookbehind: true
+      }
+    ],
+    keyword: [
+      {
+        pattern: /((?:^|})\s*)(?:catch|finally)\b/,
+        lookbehind: true
+      },
+      {
+        pattern: /(^|[^.])\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
+        lookbehind: true
+      }
+    ],
+    number: /\b(?:(?:0[xX][\dA-Fa-f]+|0[bB][01]+|0[oO][0-7]+)n?|\d+n|NaN|Infinity)\b|(?:\b\d+\.?\d*|\B\.\d+)(?:[Ee][+-]?\d+)?/,
+    // Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
+    function: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
+    operator: /-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/
+  })
+  Prism.languages.javascript[
+    'class-name'
+  ][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/
+  Prism.languages.insertBefore('javascript', 'keyword', {
+    regex: {
+      pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})\]]))/,
+      lookbehind: true,
+      greedy: true
+    },
+    // This must be declared before keyword because we use "function" inside the look-forward
+    'function-variable': {
+      pattern: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/,
+      alias: 'function'
+    },
+    parameter: [
+      {
+        pattern: /(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,
+        lookbehind: true,
+        inside: Prism.languages.javascript
+      },
+      {
+        pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=>)/i,
+        inside: Prism.languages.javascript
+      },
+      {
+        pattern: /(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/,
+        lookbehind: true,
+        inside: Prism.languages.javascript
+      },
+      {
+        pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*)\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*\{)/,
+        lookbehind: true,
+        inside: Prism.languages.javascript
+      }
+    ],
+    constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/
+  })
+  Prism.languages.insertBefore('javascript', 'string', {
+    'template-string': {
+      pattern: /`(?:\\[\s\S]|\${[^}]+}|[^\\`])*`/,
+      greedy: true,
+      inside: {
+        interpolation: {
+          pattern: /\${[^}]+}/,
+          inside: {
+            'interpolation-punctuation': {
+              pattern: /^\${|}$/,
+              alias: 'punctuation'
+            },
+            rest: Prism.languages.javascript
+          }
+        },
+        string: /[\s\S]+/
+      }
+    }
+  })
+  if (Prism.languages.markup) {
+    Prism.languages.markup.tag.addInlined('script', 'javascript')
+  }
+  Prism.languages.js = Prism.languages.javascript
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/refractor/lang/jsx.js":
+/*!********************************************!*\
+  !*** ./node_modules/refractor/lang/jsx.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = jsx
+jsx.displayName = 'jsx'
+jsx.aliases = []
+function jsx(Prism) {
+  ;(function(Prism) {
+    var javascript = Prism.util.clone(Prism.languages.javascript)
+    Prism.languages.jsx = Prism.languages.extend('markup', javascript)
+    Prism.languages.jsx.tag.pattern = /<\/?(?:[\w.:-]+\s*(?:\s+(?:[\w.:-]+(?:=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s{'">=]+|\{(?:\{(?:\{[^}]*\}|[^{}])*\}|[^{}])+\}))?|\{\.{3}[a-z_$][\w$]*(?:\.[a-z_$][\w$]*)*\}))*\s*\/?)?>/i
+    Prism.languages.jsx.tag.inside['tag'].pattern = /^<\/?[^\s>\/]*/i
+    Prism.languages.jsx.tag.inside[
+      'attr-value'
+    ].pattern = /=(?!\{)(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">]+)/i
+    Prism.languages.jsx.tag.inside['tag'].inside[
+      'class-name'
+    ] = /^[A-Z]\w*(?:\.[A-Z]\w*)*$/
+    Prism.languages.insertBefore(
+      'inside',
+      'attr-name',
+      {
+        spread: {
+          pattern: /\{\.{3}[a-z_$][\w$]*(?:\.[a-z_$][\w$]*)*\}/,
+          inside: {
+            punctuation: /\.{3}|[{}.]/,
+            'attr-value': /\w+/
+          }
+        }
+      },
+      Prism.languages.jsx.tag
+    )
+    Prism.languages.insertBefore(
+      'inside',
+      'attr-value',
+      {
+        script: {
+          // Allow for two levels of nesting
+          pattern: /=(\{(?:\{(?:\{[^}]*\}|[^}])*\}|[^}])+\})/i,
+          inside: {
+            'script-punctuation': {
+              pattern: /^=(?={)/,
+              alias: 'punctuation'
+            },
+            rest: Prism.languages.jsx
+          },
+          alias: 'language-javascript'
+        }
+      },
+      Prism.languages.jsx.tag
+    )
+    // The following will handle plain text inside tags
+    var stringifyToken = function(token) {
+      if (!token) {
+        return ''
+      }
+      if (typeof token === 'string') {
+        return token
+      }
+      if (typeof token.content === 'string') {
+        return token.content
+      }
+      return token.content.map(stringifyToken).join('')
+    }
+    var walkTokens = function(tokens) {
+      var openedTags = []
+      for (var i = 0; i < tokens.length; i++) {
+        var token = tokens[i]
+        var notTagNorBrace = false
+        if (typeof token !== 'string') {
+          if (
+            token.type === 'tag' &&
+            token.content[0] &&
+            token.content[0].type === 'tag'
+          ) {
+            // We found a tag, now find its kind
+            if (token.content[0].content[0].content === '</') {
+              // Closing tag
+              if (
+                openedTags.length > 0 &&
+                openedTags[openedTags.length - 1].tagName ===
+                  stringifyToken(token.content[0].content[1])
+              ) {
+                // Pop matching opening tag
+                openedTags.pop()
+              }
+            } else {
+              if (token.content[token.content.length - 1].content === '/>') {
+                // Autoclosed tag, ignore
+              } else {
+                // Opening tag
+                openedTags.push({
+                  tagName: stringifyToken(token.content[0].content[1]),
+                  openedBraces: 0
+                })
+              }
+            }
+          } else if (
+            openedTags.length > 0 &&
+            token.type === 'punctuation' &&
+            token.content === '{'
+          ) {
+            // Here we might have entered a JSX context inside a tag
+            openedTags[openedTags.length - 1].openedBraces++
+          } else if (
+            openedTags.length > 0 &&
+            openedTags[openedTags.length - 1].openedBraces > 0 &&
+            token.type === 'punctuation' &&
+            token.content === '}'
+          ) {
+            // Here we might have left a JSX context inside a tag
+            openedTags[openedTags.length - 1].openedBraces--
+          } else {
+            notTagNorBrace = true
+          }
+        }
+        if (notTagNorBrace || typeof token === 'string') {
+          if (
+            openedTags.length > 0 &&
+            openedTags[openedTags.length - 1].openedBraces === 0
+          ) {
+            // Here we are inside a tag, and not inside a JSX context.
+            // That's plain text: drop any tokens matched.
+            var plainText = stringifyToken(token)
+            // And merge text with adjacent text
+            if (
+              i < tokens.length - 1 &&
+              (typeof tokens[i + 1] === 'string' ||
+                tokens[i + 1].type === 'plain-text')
+            ) {
+              plainText += stringifyToken(tokens[i + 1])
+              tokens.splice(i + 1, 1)
+            }
+            if (
+              i > 0 &&
+              (typeof tokens[i - 1] === 'string' ||
+                tokens[i - 1].type === 'plain-text')
+            ) {
+              plainText = stringifyToken(tokens[i - 1]) + plainText
+              tokens.splice(i - 1, 1)
+              i--
+            }
+            tokens[i] = new Prism.Token(
+              'plain-text',
+              plainText,
+              null,
+              plainText
+            )
+          }
+        }
+        if (token.content && typeof token.content !== 'string') {
+          walkTokens(token.content)
+        }
+      }
+    }
+    Prism.hooks.add('after-tokenize', function(env) {
+      if (env.language !== 'jsx' && env.language !== 'tsx') {
+        return
+      }
+      walkTokens(env.tokens)
+    })
+  })(Prism)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/refractor/lang/markup.js":
+/*!***********************************************!*\
+  !*** ./node_modules/refractor/lang/markup.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = markup
+markup.displayName = 'markup'
+markup.aliases = ['xml', 'html', 'mathml', 'svg']
+function markup(Prism) {
+  Prism.languages.markup = {
+    comment: /<!--[\s\S]*?-->/,
+    prolog: /<\?[\s\S]+?\?>/,
+    doctype: /<!DOCTYPE[\s\S]+?>/i,
+    cdata: /<!\[CDATA\[[\s\S]*?]]>/i,
+    tag: {
+      pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/i,
+      greedy: true,
+      inside: {
+        tag: {
+          pattern: /^<\/?[^\s>\/]+/i,
+          inside: {
+            punctuation: /^<\/?/,
+            namespace: /^[^\s>\/:]+:/
+          }
+        },
+        'attr-value': {
+          pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
+          inside: {
+            punctuation: [
+              /^=/,
+              {
+                pattern: /^(\s*)["']|["']$/,
+                lookbehind: true
+              }
+            ]
+          }
+        },
+        punctuation: /\/?>/,
+        'attr-name': {
+          pattern: /[^\s>\/]+/,
+          inside: {
+            namespace: /^[^\s>\/:]+:/
+          }
+        }
+      }
+    },
+    entity: /&#?[\da-z]{1,8};/i
+  }
+  Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] =
+    Prism.languages.markup['entity']
+  // Plugin to make entity title show the real entity, idea by Roman Komarov
+  Prism.hooks.add('wrap', function(env) {
+    if (env.type === 'entity') {
+      env.attributes['title'] = env.content.value.replace(/&amp;/, '&')
+    }
+  })
+  Object.defineProperty(Prism.languages.markup.tag, 'addInlined', {
+    /**
+     * Adds an inlined language to markup.
+     *
+     * An example of an inlined language is CSS with `<style>` tags.
+     *
+     * @param {string} tagName The name of the tag that contains the inlined language. This name will be treated as
+     * case insensitive.
+     * @param {string} lang The language key.
+     * @example
+     * addInlined('style', 'css');
+     */
+    value: function addInlined(tagName, lang) {
+      var includedCdataInside = {}
+      includedCdataInside['language-' + lang] = {
+        pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
+        lookbehind: true,
+        inside: Prism.languages[lang]
+      }
+      includedCdataInside['cdata'] = /^<!\[CDATA\[|\]\]>$/i
+      var inside = {
+        'included-cdata': {
+          pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
+          inside: includedCdataInside
+        }
+      }
+      inside['language-' + lang] = {
+        pattern: /[\s\S]+/,
+        inside: Prism.languages[lang]
+      }
+      var def = {}
+      def[tagName] = {
+        pattern: RegExp(
+          /(<__[\s\S]*?>)(?:<!\[CDATA\[[\s\S]*?\]\]>\s*|[\s\S])*?(?=<\/__>)/.source.replace(
+            /__/g,
+            tagName
+          ),
+          'i'
+        ),
+        lookbehind: true,
+        greedy: true,
+        inside: inside
+      }
+      Prism.languages.insertBefore('markup', 'cdata', def)
+    }
+  })
+  Prism.languages.xml = Prism.languages.extend('markup', {})
+  Prism.languages.html = Prism.languages.markup
+  Prism.languages.mathml = Prism.languages.markup
+  Prism.languages.svg = Prism.languages.markup
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-emoji/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/remark-emoji/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const visit = __webpack_require__(/*! unist-util-visit */ "./node_modules/unist-util-visit/index.js");
+const emoji = __webpack_require__(/*! node-emoji */ "./node_modules/node-emoji/index.js");
+
+const RE_EMOJI = /:\+1:|:-1:|:[\w-]+:/g;
+
+function plugin(settings) {
+    const pad = !!(settings || {}).padSpaceAfter;
+
+    function getEmoji(match) {
+        const got = emoji.get(match);
+        if (!pad || got === match) {
+            return got;
+        }
+
+        return got + ' ';
+    }
+
+    function transformer(tree) {
+        visit(tree, 'text', function (node) {
+            node.value = node.value.replace(RE_EMOJI, getEmoji);
+        });
+    }
+
+    return transformer;
+}
+
+module.exports = plugin;
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/remark-parse/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var unherit = __webpack_require__(/*! unherit */ "./node_modules/unherit/index.js")
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var Parser = __webpack_require__(/*! ./lib/parser.js */ "./node_modules/remark-parse/lib/parser.js")
+
+module.exports = parse
+parse.Parser = Parser
+
+function parse(options) {
+  var settings = this.data('settings')
+  var Local = unherit(Parser)
+
+  Local.prototype.options = xtend(Local.prototype.options, settings, options)
+
+  this.Parser = Local
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/block-elements.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/block-elements.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = [
+  'address',
+  'article',
+  'aside',
+  'base',
+  'basefont',
+  'blockquote',
+  'body',
+  'caption',
+  'center',
+  'col',
+  'colgroup',
+  'dd',
+  'details',
+  'dialog',
+  'dir',
+  'div',
+  'dl',
+  'dt',
+  'fieldset',
+  'figcaption',
+  'figure',
+  'footer',
+  'form',
+  'frame',
+  'frameset',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'head',
+  'header',
+  'hgroup',
+  'hr',
+  'html',
+  'iframe',
+  'legend',
+  'li',
+  'link',
+  'main',
+  'menu',
+  'menuitem',
+  'meta',
+  'nav',
+  'noframes',
+  'ol',
+  'optgroup',
+  'option',
+  'p',
+  'param',
+  'pre',
+  'section',
+  'source',
+  'title',
+  'summary',
+  'table',
+  'tbody',
+  'td',
+  'tfoot',
+  'th',
+  'thead',
+  'title',
+  'tr',
+  'track',
+  'ul'
+]
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/decode.js":
+/*!*************************************************!*\
+  !*** ./node_modules/remark-parse/lib/decode.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var entities = __webpack_require__(/*! parse-entities */ "./node_modules/parse-entities/index.js")
+
+module.exports = factory
+
+// Factory to create an entity decoder.
+function factory(ctx) {
+  decoder.raw = decodeRaw
+
+  return decoder
+
+  // Normalize `position` to add an `indent`.
+  function normalize(position) {
+    var offsets = ctx.offset
+    var line = position.line
+    var result = []
+
+    while (++line) {
+      if (!(line in offsets)) {
+        break
+      }
+
+      result.push((offsets[line] || 0) + 1)
+    }
+
+    return {start: position, indent: result}
+  }
+
+  // Decode `value` (at `position`) into text-nodes.
+  function decoder(value, position, handler) {
+    entities(value, {
+      position: normalize(position),
+      warning: handleWarning,
+      text: handler,
+      reference: handler,
+      textContext: ctx,
+      referenceContext: ctx
+    })
+  }
+
+  // Decode `value` (at `position`) into a string.
+  function decodeRaw(value, position, options) {
+    return entities(
+      value,
+      xtend(options, {position: normalize(position), warning: handleWarning})
+    )
+  }
+
+  // Handle a warning.
+  // See <https://github.com/wooorm/parse-entities> for the warnings.
+  function handleWarning(reason, position, code) {
+    if (code !== 3) {
+      ctx.file.message(reason, position)
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/defaults.js":
+/*!***************************************************!*\
+  !*** ./node_modules/remark-parse/lib/defaults.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  position: true,
+  gfm: true,
+  commonmark: false,
+  footnotes: false,
+  pedantic: false,
+  blocks: __webpack_require__(/*! ./block-elements */ "./node_modules/remark-parse/lib/block-elements.js")
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/locate/break.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/remark-parse/lib/locate/break.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = locate
+
+function locate(value, fromIndex) {
+  var index = value.indexOf('\n', fromIndex)
+
+  while (index > fromIndex) {
+    if (value.charAt(index - 1) !== ' ') {
+      break
+    }
+
+    index--
+  }
+
+  return index
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/locate/code-inline.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/locate/code-inline.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = locate
+
+function locate(value, fromIndex) {
+  return value.indexOf('`', fromIndex)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/locate/delete.js":
+/*!********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/locate/delete.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = locate
+
+function locate(value, fromIndex) {
+  return value.indexOf('~~', fromIndex)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/locate/emphasis.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/locate/emphasis.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = locate
+
+function locate(value, fromIndex) {
+  var asterisk = value.indexOf('*', fromIndex)
+  var underscore = value.indexOf('_', fromIndex)
+
+  if (underscore === -1) {
+    return asterisk
+  }
+
+  if (asterisk === -1) {
+    return underscore
+  }
+
+  return underscore < asterisk ? underscore : asterisk
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/locate/escape.js":
+/*!********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/locate/escape.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = locate
+
+function locate(value, fromIndex) {
+  return value.indexOf('\\', fromIndex)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/locate/link.js":
+/*!******************************************************!*\
+  !*** ./node_modules/remark-parse/lib/locate/link.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = locate
+
+function locate(value, fromIndex) {
+  var link = value.indexOf('[', fromIndex)
+  var image = value.indexOf('![', fromIndex)
+
+  if (image === -1) {
+    return link
+  }
+
+  // Link can never be `-1` if an image is found, so we don’t need to check
+  // for that :)
+  return link < image ? link : image
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/locate/strong.js":
+/*!********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/locate/strong.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = locate
+
+function locate(value, fromIndex) {
+  var asterisk = value.indexOf('**', fromIndex)
+  var underscore = value.indexOf('__', fromIndex)
+
+  if (underscore === -1) {
+    return asterisk
+  }
+
+  if (asterisk === -1) {
+    return underscore
+  }
+
+  return underscore < asterisk ? underscore : asterisk
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/locate/tag.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/remark-parse/lib/locate/tag.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = locate
+
+function locate(value, fromIndex) {
+  return value.indexOf('<', fromIndex)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/locate/url.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/remark-parse/lib/locate/url.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = locate
+
+var protocols = ['https://', 'http://', 'mailto:']
+
+function locate(value, fromIndex) {
+  var length = protocols.length
+  var index = -1
+  var min = -1
+  var position
+
+  if (!this.options.gfm) {
+    return -1
+  }
+
+  while (++index < length) {
+    position = value.indexOf(protocols[index], fromIndex)
+
+    if (position !== -1 && (position < min || min === -1)) {
+      min = position
+    }
+  }
+
+  return min
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/parse.js":
+/*!************************************************!*\
+  !*** ./node_modules/remark-parse/lib/parse.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var removePosition = __webpack_require__(/*! unist-util-remove-position */ "./node_modules/unist-util-remove-position/index.js")
+
+module.exports = parse
+
+var lineFeed = '\n'
+var lineBreaksExpression = /\r\n|\r/g
+
+// Parse the bound file.
+function parse() {
+  var self = this
+  var value = String(self.file)
+  var start = {line: 1, column: 1, offset: 0}
+  var content = xtend(start)
+  var node
+
+  // Clean non-unix newlines: `\r\n` and `\r` are all changed to `\n`.
+  // This should not affect positional information.
+  value = value.replace(lineBreaksExpression, lineFeed)
+
+  // BOM.
+  if (value.charCodeAt(0) === 0xfeff) {
+    value = value.slice(1)
+
+    content.column++
+    content.offset++
+  }
+
+  node = {
+    type: 'root',
+    children: self.tokenizeBlock(value, content),
+    position: {start: start, end: self.eof || xtend(start)}
+  }
+
+  if (!self.options.position) {
+    removePosition(node, true)
+  }
+
+  return node
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/parser.js":
+/*!*************************************************!*\
+  !*** ./node_modules/remark-parse/lib/parser.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var toggle = __webpack_require__(/*! state-toggle */ "./node_modules/state-toggle/index.js")
+var vfileLocation = __webpack_require__(/*! vfile-location */ "./node_modules/vfile-location/index.js")
+var unescape = __webpack_require__(/*! ./unescape */ "./node_modules/remark-parse/lib/unescape.js")
+var decode = __webpack_require__(/*! ./decode */ "./node_modules/remark-parse/lib/decode.js")
+var tokenizer = __webpack_require__(/*! ./tokenizer */ "./node_modules/remark-parse/lib/tokenizer.js")
+
+module.exports = Parser
+
+function Parser(doc, file) {
+  this.file = file
+  this.offset = {}
+  this.options = xtend(this.options)
+  this.setOptions({})
+
+  this.inList = false
+  this.inBlock = false
+  this.inLink = false
+  this.atStart = true
+
+  this.toOffset = vfileLocation(file).toOffset
+  this.unescape = unescape(this, 'escape')
+  this.decode = decode(this)
+}
+
+var proto = Parser.prototype
+
+// Expose core.
+proto.setOptions = __webpack_require__(/*! ./set-options */ "./node_modules/remark-parse/lib/set-options.js")
+proto.parse = __webpack_require__(/*! ./parse */ "./node_modules/remark-parse/lib/parse.js")
+
+// Expose `defaults`.
+proto.options = __webpack_require__(/*! ./defaults */ "./node_modules/remark-parse/lib/defaults.js")
+
+// Enter and exit helpers.
+proto.exitStart = toggle('atStart', true)
+proto.enterList = toggle('inList', false)
+proto.enterLink = toggle('inLink', false)
+proto.enterBlock = toggle('inBlock', false)
+
+// Nodes that can interupt a paragraph:
+//
+// ```markdown
+// A paragraph, followed by a thematic break.
+// ___
+// ```
+//
+// In the above example, the thematic break “interupts” the paragraph.
+proto.interruptParagraph = [
+  ['thematicBreak'],
+  ['atxHeading'],
+  ['fencedCode'],
+  ['blockquote'],
+  ['html'],
+  ['setextHeading', {commonmark: false}],
+  ['definition', {commonmark: false}],
+  ['footnote', {commonmark: false}]
+]
+
+// Nodes that can interupt a list:
+//
+// ```markdown
+// - One
+// ___
+// ```
+//
+// In the above example, the thematic break “interupts” the list.
+proto.interruptList = [
+  ['atxHeading', {pedantic: false}],
+  ['fencedCode', {pedantic: false}],
+  ['thematicBreak', {pedantic: false}],
+  ['definition', {commonmark: false}],
+  ['footnote', {commonmark: false}]
+]
+
+// Nodes that can interupt a blockquote:
+//
+// ```markdown
+// > A paragraph.
+// ___
+// ```
+//
+// In the above example, the thematic break “interupts” the blockquote.
+proto.interruptBlockquote = [
+  ['indentedCode', {commonmark: true}],
+  ['fencedCode', {commonmark: true}],
+  ['atxHeading', {commonmark: true}],
+  ['setextHeading', {commonmark: true}],
+  ['thematicBreak', {commonmark: true}],
+  ['html', {commonmark: true}],
+  ['list', {commonmark: true}],
+  ['definition', {commonmark: false}],
+  ['footnote', {commonmark: false}]
+]
+
+// Handlers.
+proto.blockTokenizers = {
+  newline: __webpack_require__(/*! ./tokenize/newline */ "./node_modules/remark-parse/lib/tokenize/newline.js"),
+  indentedCode: __webpack_require__(/*! ./tokenize/code-indented */ "./node_modules/remark-parse/lib/tokenize/code-indented.js"),
+  fencedCode: __webpack_require__(/*! ./tokenize/code-fenced */ "./node_modules/remark-parse/lib/tokenize/code-fenced.js"),
+  blockquote: __webpack_require__(/*! ./tokenize/blockquote */ "./node_modules/remark-parse/lib/tokenize/blockquote.js"),
+  atxHeading: __webpack_require__(/*! ./tokenize/heading-atx */ "./node_modules/remark-parse/lib/tokenize/heading-atx.js"),
+  thematicBreak: __webpack_require__(/*! ./tokenize/thematic-break */ "./node_modules/remark-parse/lib/tokenize/thematic-break.js"),
+  list: __webpack_require__(/*! ./tokenize/list */ "./node_modules/remark-parse/lib/tokenize/list.js"),
+  setextHeading: __webpack_require__(/*! ./tokenize/heading-setext */ "./node_modules/remark-parse/lib/tokenize/heading-setext.js"),
+  html: __webpack_require__(/*! ./tokenize/html-block */ "./node_modules/remark-parse/lib/tokenize/html-block.js"),
+  footnote: __webpack_require__(/*! ./tokenize/footnote-definition */ "./node_modules/remark-parse/lib/tokenize/footnote-definition.js"),
+  definition: __webpack_require__(/*! ./tokenize/definition */ "./node_modules/remark-parse/lib/tokenize/definition.js"),
+  table: __webpack_require__(/*! ./tokenize/table */ "./node_modules/remark-parse/lib/tokenize/table.js"),
+  paragraph: __webpack_require__(/*! ./tokenize/paragraph */ "./node_modules/remark-parse/lib/tokenize/paragraph.js")
+}
+
+proto.inlineTokenizers = {
+  escape: __webpack_require__(/*! ./tokenize/escape */ "./node_modules/remark-parse/lib/tokenize/escape.js"),
+  autoLink: __webpack_require__(/*! ./tokenize/auto-link */ "./node_modules/remark-parse/lib/tokenize/auto-link.js"),
+  url: __webpack_require__(/*! ./tokenize/url */ "./node_modules/remark-parse/lib/tokenize/url.js"),
+  html: __webpack_require__(/*! ./tokenize/html-inline */ "./node_modules/remark-parse/lib/tokenize/html-inline.js"),
+  link: __webpack_require__(/*! ./tokenize/link */ "./node_modules/remark-parse/lib/tokenize/link.js"),
+  reference: __webpack_require__(/*! ./tokenize/reference */ "./node_modules/remark-parse/lib/tokenize/reference.js"),
+  strong: __webpack_require__(/*! ./tokenize/strong */ "./node_modules/remark-parse/lib/tokenize/strong.js"),
+  emphasis: __webpack_require__(/*! ./tokenize/emphasis */ "./node_modules/remark-parse/lib/tokenize/emphasis.js"),
+  deletion: __webpack_require__(/*! ./tokenize/delete */ "./node_modules/remark-parse/lib/tokenize/delete.js"),
+  code: __webpack_require__(/*! ./tokenize/code-inline */ "./node_modules/remark-parse/lib/tokenize/code-inline.js"),
+  break: __webpack_require__(/*! ./tokenize/break */ "./node_modules/remark-parse/lib/tokenize/break.js"),
+  text: __webpack_require__(/*! ./tokenize/text */ "./node_modules/remark-parse/lib/tokenize/text.js")
+}
+
+// Expose precedence.
+proto.blockMethods = keys(proto.blockTokenizers)
+proto.inlineMethods = keys(proto.inlineTokenizers)
+
+// Tokenizers.
+proto.tokenizeBlock = tokenizer('block')
+proto.tokenizeInline = tokenizer('inline')
+proto.tokenizeFactory = tokenizer
+
+// Get all keys in `value`.
+function keys(value) {
+  var result = []
+  var key
+
+  for (key in value) {
+    result.push(key)
+  }
+
+  return result
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/set-options.js":
+/*!******************************************************!*\
+  !*** ./node_modules/remark-parse/lib/set-options.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var escapes = __webpack_require__(/*! markdown-escapes */ "./node_modules/markdown-escapes/index.js")
+var defaults = __webpack_require__(/*! ./defaults */ "./node_modules/remark-parse/lib/defaults.js")
+
+module.exports = setOptions
+
+function setOptions(options) {
+  var self = this
+  var current = self.options
+  var key
+  var value
+
+  if (options == null) {
+    options = {}
+  } else if (typeof options === 'object') {
+    options = xtend(options)
+  } else {
+    throw new Error('Invalid value `' + options + '` for setting `options`')
+  }
+
+  for (key in defaults) {
+    value = options[key]
+
+    if (value == null) {
+      value = current[key]
+    }
+
+    if (
+      (key !== 'blocks' && typeof value !== 'boolean') ||
+      (key === 'blocks' && typeof value !== 'object')
+    ) {
+      throw new Error(
+        'Invalid value `' + value + '` for setting `options.' + key + '`'
+      )
+    }
+
+    options[key] = value
+  }
+
+  self.options = options
+  self.escape = escapes(options)
+
+  return self
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/auto-link.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/auto-link.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var decode = __webpack_require__(/*! parse-entities */ "./node_modules/parse-entities/index.js")
+var locate = __webpack_require__(/*! ../locate/tag */ "./node_modules/remark-parse/lib/locate/tag.js")
+
+module.exports = autoLink
+autoLink.locator = locate
+autoLink.notInLink = true
+
+var lessThan = '<'
+var greaterThan = '>'
+var atSign = '@'
+var slash = '/'
+var mailto = 'mailto:'
+var mailtoLength = mailto.length
+
+function autoLink(eat, value, silent) {
+  var self = this
+  var subvalue = ''
+  var length = value.length
+  var index = 0
+  var queue = ''
+  var hasAtCharacter = false
+  var link = ''
+  var character
+  var now
+  var content
+  var tokenizers
+  var exit
+
+  if (value.charAt(0) !== lessThan) {
+    return
+  }
+
+  index++
+  subvalue = lessThan
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (
+      whitespace(character) ||
+      character === greaterThan ||
+      character === atSign ||
+      (character === ':' && value.charAt(index + 1) === slash)
+    ) {
+      break
+    }
+
+    queue += character
+    index++
+  }
+
+  if (!queue) {
+    return
+  }
+
+  link += queue
+  queue = ''
+
+  character = value.charAt(index)
+  link += character
+  index++
+
+  if (character === atSign) {
+    hasAtCharacter = true
+  } else {
+    if (character !== ':' || value.charAt(index + 1) !== slash) {
+      return
+    }
+
+    link += slash
+    index++
+  }
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (whitespace(character) || character === greaterThan) {
+      break
+    }
+
+    queue += character
+    index++
+  }
+
+  character = value.charAt(index)
+
+  if (!queue || character !== greaterThan) {
+    return
+  }
+
+  /* istanbul ignore if - never used (yet) */
+  if (silent) {
+    return true
+  }
+
+  link += queue
+  content = link
+  subvalue += link + character
+  now = eat.now()
+  now.column++
+  now.offset++
+
+  if (hasAtCharacter) {
+    if (link.slice(0, mailtoLength).toLowerCase() === mailto) {
+      content = content.substr(mailtoLength)
+      now.column += mailtoLength
+      now.offset += mailtoLength
+    } else {
+      link = mailto + link
+    }
+  }
+
+  // Temporarily remove all tokenizers except text in autolinks.
+  tokenizers = self.inlineTokenizers
+  self.inlineTokenizers = {text: tokenizers.text}
+
+  exit = self.enterLink()
+
+  content = self.tokenizeInline(content, now)
+
+  self.inlineTokenizers = tokenizers
+  exit()
+
+  return eat(subvalue)({
+    type: 'link',
+    title: null,
+    url: decode(link, {nonTerminated: false}),
+    children: content
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/blockquote.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/blockquote.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var trim = __webpack_require__(/*! trim */ "./node_modules/trim/index.js")
+var interrupt = __webpack_require__(/*! ../util/interrupt */ "./node_modules/remark-parse/lib/util/interrupt.js")
+
+module.exports = blockquote
+
+var lineFeed = '\n'
+var tab = '\t'
+var space = ' '
+var greaterThan = '>'
+
+function blockquote(eat, value, silent) {
+  var self = this
+  var offsets = self.offset
+  var tokenizers = self.blockTokenizers
+  var interruptors = self.interruptBlockquote
+  var now = eat.now()
+  var currentLine = now.line
+  var length = value.length
+  var values = []
+  var contents = []
+  var indents = []
+  var add
+  var index = 0
+  var character
+  var rest
+  var nextIndex
+  var content
+  var line
+  var startIndex
+  var prefixed
+  var exit
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== space && character !== tab) {
+      break
+    }
+
+    index++
+  }
+
+  if (value.charAt(index) !== greaterThan) {
+    return
+  }
+
+  if (silent) {
+    return true
+  }
+
+  index = 0
+
+  while (index < length) {
+    nextIndex = value.indexOf(lineFeed, index)
+    startIndex = index
+    prefixed = false
+
+    if (nextIndex === -1) {
+      nextIndex = length
+    }
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (character !== space && character !== tab) {
+        break
+      }
+
+      index++
+    }
+
+    if (value.charAt(index) === greaterThan) {
+      index++
+      prefixed = true
+
+      if (value.charAt(index) === space) {
+        index++
+      }
+    } else {
+      index = startIndex
+    }
+
+    content = value.slice(index, nextIndex)
+
+    if (!prefixed && !trim(content)) {
+      index = startIndex
+      break
+    }
+
+    if (!prefixed) {
+      rest = value.slice(index)
+
+      // Check if the following code contains a possible block.
+      if (interrupt(interruptors, tokenizers, self, [eat, rest, true])) {
+        break
+      }
+    }
+
+    line = startIndex === index ? content : value.slice(startIndex, nextIndex)
+
+    indents.push(index - startIndex)
+    values.push(line)
+    contents.push(content)
+
+    index = nextIndex + 1
+  }
+
+  index = -1
+  length = indents.length
+  add = eat(values.join(lineFeed))
+
+  while (++index < length) {
+    offsets[currentLine] = (offsets[currentLine] || 0) + indents[index]
+    currentLine++
+  }
+
+  exit = self.enterBlock()
+  contents = self.tokenizeBlock(contents.join(lineFeed), now)
+  exit()
+
+  return add({type: 'blockquote', children: contents})
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/break.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/break.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var locate = __webpack_require__(/*! ../locate/break */ "./node_modules/remark-parse/lib/locate/break.js")
+
+module.exports = hardBreak
+hardBreak.locator = locate
+
+var space = ' '
+var lineFeed = '\n'
+var minBreakLength = 2
+
+function hardBreak(eat, value, silent) {
+  var length = value.length
+  var index = -1
+  var queue = ''
+  var character
+
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (character === lineFeed) {
+      if (index < minBreakLength) {
+        return
+      }
+
+      /* istanbul ignore if - never used (yet) */
+      if (silent) {
+        return true
+      }
+
+      queue += character
+
+      return eat(queue)({type: 'break'})
+    }
+
+    if (character !== space) {
+      return
+    }
+
+    queue += character
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/code-fenced.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/code-fenced.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var trim = __webpack_require__(/*! trim-trailing-lines */ "./node_modules/trim-trailing-lines/index.js")
+
+module.exports = fencedCode
+
+var lineFeed = '\n'
+var tab = '\t'
+var space = ' '
+var tilde = '~'
+var graveAccent = '`'
+
+var minFenceCount = 3
+var tabSize = 4
+
+function fencedCode(eat, value, silent) {
+  var self = this
+  var gfm = self.options.gfm
+  var length = value.length + 1
+  var index = 0
+  var subvalue = ''
+  var fenceCount
+  var marker
+  var character
+  var flag
+  var lang
+  var meta
+  var queue
+  var content
+  var exdentedContent
+  var closing
+  var exdentedClosing
+  var indent
+  var now
+
+  if (!gfm) {
+    return
+  }
+
+  // Eat initial spacing.
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== space && character !== tab) {
+      break
+    }
+
+    subvalue += character
+    index++
+  }
+
+  indent = index
+
+  // Eat the fence.
+  character = value.charAt(index)
+
+  if (character !== tilde && character !== graveAccent) {
+    return
+  }
+
+  index++
+  marker = character
+  fenceCount = 1
+  subvalue += character
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== marker) {
+      break
+    }
+
+    subvalue += character
+    fenceCount++
+    index++
+  }
+
+  if (fenceCount < minFenceCount) {
+    return
+  }
+
+  // Eat spacing before flag.
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== space && character !== tab) {
+      break
+    }
+
+    subvalue += character
+    index++
+  }
+
+  // Eat flag.
+  flag = ''
+  queue = ''
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (
+      character === lineFeed ||
+      character === tilde ||
+      character === graveAccent
+    ) {
+      break
+    }
+
+    if (character === space || character === tab) {
+      queue += character
+    } else {
+      flag += queue + character
+      queue = ''
+    }
+
+    index++
+  }
+
+  character = value.charAt(index)
+
+  if (character && character !== lineFeed) {
+    return
+  }
+
+  if (silent) {
+    return true
+  }
+
+  now = eat.now()
+  now.column += subvalue.length
+  now.offset += subvalue.length
+
+  subvalue += flag
+  flag = self.decode.raw(self.unescape(flag), now)
+
+  if (queue) {
+    subvalue += queue
+  }
+
+  queue = ''
+  closing = ''
+  exdentedClosing = ''
+  content = ''
+  exdentedContent = ''
+
+  // Eat content.
+  while (index < length) {
+    character = value.charAt(index)
+    content += closing
+    exdentedContent += exdentedClosing
+    closing = ''
+    exdentedClosing = ''
+
+    if (character !== lineFeed) {
+      content += character
+      exdentedClosing += character
+      index++
+      continue
+    }
+
+    // Add the newline to `subvalue` if its the first character.  Otherwise,
+    // add it to the `closing` queue.
+    if (content) {
+      closing += character
+      exdentedClosing += character
+    } else {
+      subvalue += character
+    }
+
+    queue = ''
+    index++
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (character !== space) {
+        break
+      }
+
+      queue += character
+      index++
+    }
+
+    closing += queue
+    exdentedClosing += queue.slice(indent)
+
+    if (queue.length >= tabSize) {
+      continue
+    }
+
+    queue = ''
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (character !== marker) {
+        break
+      }
+
+      queue += character
+      index++
+    }
+
+    closing += queue
+    exdentedClosing += queue
+
+    if (queue.length < fenceCount) {
+      continue
+    }
+
+    queue = ''
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (character !== space && character !== tab) {
+        break
+      }
+
+      closing += character
+      exdentedClosing += character
+      index++
+    }
+
+    if (!character || character === lineFeed) {
+      break
+    }
+  }
+
+  subvalue += content + closing
+
+  // Get lang and meta from the flag.
+  index = -1
+  length = flag.length
+
+  while (++index < length) {
+    character = flag.charAt(index)
+
+    if (character === space || character === tab) {
+      if (!lang) {
+        lang = flag.slice(0, index)
+      }
+    } else if (lang) {
+      meta = flag.slice(index)
+      break
+    }
+  }
+
+  return eat(subvalue)({
+    type: 'code',
+    lang: lang || flag || null,
+    meta: meta || null,
+    value: trim(exdentedContent)
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/code-indented.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/code-indented.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+var trim = __webpack_require__(/*! trim-trailing-lines */ "./node_modules/trim-trailing-lines/index.js")
+
+module.exports = indentedCode
+
+var lineFeed = '\n'
+var tab = '\t'
+var space = ' '
+
+var tabSize = 4
+var codeIndent = repeat(space, tabSize)
+
+function indentedCode(eat, value, silent) {
+  var index = -1
+  var length = value.length
+  var subvalue = ''
+  var content = ''
+  var subvalueQueue = ''
+  var contentQueue = ''
+  var character
+  var blankQueue
+  var indent
+
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (indent) {
+      indent = false
+
+      subvalue += subvalueQueue
+      content += contentQueue
+      subvalueQueue = ''
+      contentQueue = ''
+
+      if (character === lineFeed) {
+        subvalueQueue = character
+        contentQueue = character
+      } else {
+        subvalue += character
+        content += character
+
+        while (++index < length) {
+          character = value.charAt(index)
+
+          if (!character || character === lineFeed) {
+            contentQueue = character
+            subvalueQueue = character
+            break
+          }
+
+          subvalue += character
+          content += character
+        }
+      }
+    } else if (
+      character === space &&
+      value.charAt(index + 1) === character &&
+      value.charAt(index + 2) === character &&
+      value.charAt(index + 3) === character
+    ) {
+      subvalueQueue += codeIndent
+      index += 3
+      indent = true
+    } else if (character === tab) {
+      subvalueQueue += character
+      indent = true
+    } else {
+      blankQueue = ''
+
+      while (character === tab || character === space) {
+        blankQueue += character
+        character = value.charAt(++index)
+      }
+
+      if (character !== lineFeed) {
+        break
+      }
+
+      subvalueQueue += blankQueue + character
+      contentQueue += character
+    }
+  }
+
+  if (content) {
+    if (silent) {
+      return true
+    }
+
+    return eat(subvalue)({
+      type: 'code',
+      lang: null,
+      meta: null,
+      value: trim(content)
+    })
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/code-inline.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/code-inline.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var locate = __webpack_require__(/*! ../locate/code-inline */ "./node_modules/remark-parse/lib/locate/code-inline.js")
+
+module.exports = inlineCode
+inlineCode.locator = locate
+
+var graveAccent = '`'
+
+function inlineCode(eat, value, silent) {
+  var length = value.length
+  var index = 0
+  var queue = ''
+  var tickQueue = ''
+  var contentQueue
+  var subqueue
+  var count
+  var openingCount
+  var subvalue
+  var character
+  var found
+  var next
+
+  while (index < length) {
+    if (value.charAt(index) !== graveAccent) {
+      break
+    }
+
+    queue += graveAccent
+    index++
+  }
+
+  if (!queue) {
+    return
+  }
+
+  subvalue = queue
+  openingCount = index
+  queue = ''
+  next = value.charAt(index)
+  count = 0
+
+  while (index < length) {
+    character = next
+    next = value.charAt(index + 1)
+
+    if (character === graveAccent) {
+      count++
+      tickQueue += character
+    } else {
+      count = 0
+      queue += character
+    }
+
+    if (count && next !== graveAccent) {
+      if (count === openingCount) {
+        subvalue += queue + tickQueue
+        found = true
+        break
+      }
+
+      queue += tickQueue
+      tickQueue = ''
+    }
+
+    index++
+  }
+
+  if (!found) {
+    if (openingCount % 2 !== 0) {
+      return
+    }
+
+    queue = ''
+  }
+
+  /* istanbul ignore if - never used (yet) */
+  if (silent) {
+    return true
+  }
+
+  contentQueue = ''
+  subqueue = ''
+  length = queue.length
+  index = -1
+
+  while (++index < length) {
+    character = queue.charAt(index)
+
+    if (whitespace(character)) {
+      subqueue += character
+      continue
+    }
+
+    if (subqueue) {
+      if (contentQueue) {
+        contentQueue += subqueue
+      }
+
+      subqueue = ''
+    }
+
+    contentQueue += character
+  }
+
+  return eat(subvalue)({type: 'inlineCode', value: contentQueue})
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/definition.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/definition.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var normalize = __webpack_require__(/*! ../util/normalize */ "./node_modules/remark-parse/lib/util/normalize.js")
+
+module.exports = definition
+definition.notInList = true
+definition.notInBlock = true
+
+var quotationMark = '"'
+var apostrophe = "'"
+var backslash = '\\'
+var lineFeed = '\n'
+var tab = '\t'
+var space = ' '
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+var leftParenthesis = '('
+var rightParenthesis = ')'
+var colon = ':'
+var lessThan = '<'
+var greaterThan = '>'
+
+function definition(eat, value, silent) {
+  var self = this
+  var commonmark = self.options.commonmark
+  var index = 0
+  var length = value.length
+  var subvalue = ''
+  var beforeURL
+  var beforeTitle
+  var queue
+  var character
+  var test
+  var identifier
+  var url
+  var title
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== space && character !== tab) {
+      break
+    }
+
+    subvalue += character
+    index++
+  }
+
+  character = value.charAt(index)
+
+  if (character !== leftSquareBracket) {
+    return
+  }
+
+  index++
+  subvalue += character
+  queue = ''
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character === rightSquareBracket) {
+      break
+    } else if (character === backslash) {
+      queue += character
+      index++
+      character = value.charAt(index)
+    }
+
+    queue += character
+    index++
+  }
+
+  if (
+    !queue ||
+    value.charAt(index) !== rightSquareBracket ||
+    value.charAt(index + 1) !== colon
+  ) {
+    return
+  }
+
+  identifier = queue
+  subvalue += queue + rightSquareBracket + colon
+  index = subvalue.length
+  queue = ''
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== tab && character !== space && character !== lineFeed) {
+      break
+    }
+
+    subvalue += character
+    index++
+  }
+
+  character = value.charAt(index)
+  queue = ''
+  beforeURL = subvalue
+
+  if (character === lessThan) {
+    index++
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (!isEnclosedURLCharacter(character)) {
+        break
+      }
+
+      queue += character
+      index++
+    }
+
+    character = value.charAt(index)
+
+    if (character === isEnclosedURLCharacter.delimiter) {
+      subvalue += lessThan + queue + character
+      index++
+    } else {
+      if (commonmark) {
+        return
+      }
+
+      index -= queue.length + 1
+      queue = ''
+    }
+  }
+
+  if (!queue) {
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (!isUnclosedURLCharacter(character)) {
+        break
+      }
+
+      queue += character
+      index++
+    }
+
+    subvalue += queue
+  }
+
+  if (!queue) {
+    return
+  }
+
+  url = queue
+  queue = ''
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== tab && character !== space && character !== lineFeed) {
+      break
+    }
+
+    queue += character
+    index++
+  }
+
+  character = value.charAt(index)
+  test = null
+
+  if (character === quotationMark) {
+    test = quotationMark
+  } else if (character === apostrophe) {
+    test = apostrophe
+  } else if (character === leftParenthesis) {
+    test = rightParenthesis
+  }
+
+  if (!test) {
+    queue = ''
+    index = subvalue.length
+  } else if (queue) {
+    subvalue += queue + character
+    index = subvalue.length
+    queue = ''
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (character === test) {
+        break
+      }
+
+      if (character === lineFeed) {
+        index++
+        character = value.charAt(index)
+
+        if (character === lineFeed || character === test) {
+          return
+        }
+
+        queue += lineFeed
+      }
+
+      queue += character
+      index++
+    }
+
+    character = value.charAt(index)
+
+    if (character !== test) {
+      return
+    }
+
+    beforeTitle = subvalue
+    subvalue += queue + character
+    index++
+    title = queue
+    queue = ''
+  } else {
+    return
+  }
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== tab && character !== space) {
+      break
+    }
+
+    subvalue += character
+    index++
+  }
+
+  character = value.charAt(index)
+
+  if (!character || character === lineFeed) {
+    if (silent) {
+      return true
+    }
+
+    beforeURL = eat(beforeURL).test().end
+    url = self.decode.raw(self.unescape(url), beforeURL, {nonTerminated: false})
+
+    if (title) {
+      beforeTitle = eat(beforeTitle).test().end
+      title = self.decode.raw(self.unescape(title), beforeTitle)
+    }
+
+    return eat(subvalue)({
+      type: 'definition',
+      identifier: normalize(identifier),
+      label: identifier,
+      title: title || null,
+      url: url
+    })
+  }
+}
+
+// Check if `character` can be inside an enclosed URI.
+function isEnclosedURLCharacter(character) {
+  return (
+    character !== greaterThan &&
+    character !== leftSquareBracket &&
+    character !== rightSquareBracket
+  )
+}
+
+isEnclosedURLCharacter.delimiter = greaterThan
+
+// Check if `character` can be inside an unclosed URI.
+function isUnclosedURLCharacter(character) {
+  return (
+    character !== leftSquareBracket &&
+    character !== rightSquareBracket &&
+    !whitespace(character)
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/delete.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/delete.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var locate = __webpack_require__(/*! ../locate/delete */ "./node_modules/remark-parse/lib/locate/delete.js")
+
+module.exports = strikethrough
+strikethrough.locator = locate
+
+var tilde = '~'
+var fence = '~~'
+
+function strikethrough(eat, value, silent) {
+  var self = this
+  var character = ''
+  var previous = ''
+  var preceding = ''
+  var subvalue = ''
+  var index
+  var length
+  var now
+
+  if (
+    !self.options.gfm ||
+    value.charAt(0) !== tilde ||
+    value.charAt(1) !== tilde ||
+    whitespace(value.charAt(2))
+  ) {
+    return
+  }
+
+  index = 1
+  length = value.length
+  now = eat.now()
+  now.column += 2
+  now.offset += 2
+
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (
+      character === tilde &&
+      previous === tilde &&
+      (!preceding || !whitespace(preceding))
+    ) {
+      /* istanbul ignore if - never used (yet) */
+      if (silent) {
+        return true
+      }
+
+      return eat(fence + subvalue + fence)({
+        type: 'delete',
+        children: self.tokenizeInline(subvalue, now)
+      })
+    }
+
+    subvalue += previous
+    preceding = previous
+    previous = character
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/emphasis.js":
+/*!************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/emphasis.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var trim = __webpack_require__(/*! trim */ "./node_modules/trim/index.js")
+var word = __webpack_require__(/*! is-word-character */ "./node_modules/is-word-character/index.js")
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var locate = __webpack_require__(/*! ../locate/emphasis */ "./node_modules/remark-parse/lib/locate/emphasis.js")
+
+module.exports = emphasis
+emphasis.locator = locate
+
+var asterisk = '*'
+var underscore = '_'
+var backslash = '\\'
+
+function emphasis(eat, value, silent) {
+  var self = this
+  var index = 0
+  var character = value.charAt(index)
+  var now
+  var pedantic
+  var marker
+  var queue
+  var subvalue
+  var length
+  var prev
+
+  if (character !== asterisk && character !== underscore) {
+    return
+  }
+
+  pedantic = self.options.pedantic
+  subvalue = character
+  marker = character
+  length = value.length
+  index++
+  queue = ''
+  character = ''
+
+  if (pedantic && whitespace(value.charAt(index))) {
+    return
+  }
+
+  while (index < length) {
+    prev = character
+    character = value.charAt(index)
+
+    if (character === marker && (!pedantic || !whitespace(prev))) {
+      character = value.charAt(++index)
+
+      if (character !== marker) {
+        if (!trim(queue) || prev === marker) {
+          return
+        }
+
+        if (!pedantic && marker === underscore && word(character)) {
+          queue += marker
+          continue
+        }
+
+        /* istanbul ignore if - never used (yet) */
+        if (silent) {
+          return true
+        }
+
+        now = eat.now()
+        now.column++
+        now.offset++
+
+        return eat(subvalue + queue + marker)({
+          type: 'emphasis',
+          children: self.tokenizeInline(queue, now)
+        })
+      }
+
+      queue += marker
+    }
+
+    if (!pedantic && character === backslash) {
+      queue += character
+      character = value.charAt(++index)
+    }
+
+    queue += character
+    index++
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/escape.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/escape.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var locate = __webpack_require__(/*! ../locate/escape */ "./node_modules/remark-parse/lib/locate/escape.js")
+
+module.exports = escape
+escape.locator = locate
+
+var lineFeed = '\n'
+var backslash = '\\'
+
+function escape(eat, value, silent) {
+  var self = this
+  var character
+  var node
+
+  if (value.charAt(0) === backslash) {
+    character = value.charAt(1)
+
+    if (self.escape.indexOf(character) !== -1) {
+      /* istanbul ignore if - never used (yet) */
+      if (silent) {
+        return true
+      }
+
+      if (character === lineFeed) {
+        node = {type: 'break'}
+      } else {
+        node = {type: 'text', value: character}
+      }
+
+      return eat(backslash + character)(node)
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/footnote-definition.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/footnote-definition.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var normalize = __webpack_require__(/*! ../util/normalize */ "./node_modules/remark-parse/lib/util/normalize.js")
+
+module.exports = footnoteDefinition
+footnoteDefinition.notInList = true
+footnoteDefinition.notInBlock = true
+
+var backslash = '\\'
+var lineFeed = '\n'
+var tab = '\t'
+var space = ' '
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+var caret = '^'
+var colon = ':'
+
+var EXPRESSION_INITIAL_TAB = /^( {4}|\t)?/gm
+
+function footnoteDefinition(eat, value, silent) {
+  var self = this
+  var offsets = self.offset
+  var index
+  var length
+  var subvalue
+  var now
+  var currentLine
+  var content
+  var queue
+  var subqueue
+  var character
+  var identifier
+  var add
+  var exit
+
+  if (!self.options.footnotes) {
+    return
+  }
+
+  index = 0
+  length = value.length
+  subvalue = ''
+  now = eat.now()
+  currentLine = now.line
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (!whitespace(character)) {
+      break
+    }
+
+    subvalue += character
+    index++
+  }
+
+  if (
+    value.charAt(index) !== leftSquareBracket ||
+    value.charAt(index + 1) !== caret
+  ) {
+    return
+  }
+
+  subvalue += leftSquareBracket + caret
+  index = subvalue.length
+  queue = ''
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character === rightSquareBracket) {
+      break
+    } else if (character === backslash) {
+      queue += character
+      index++
+      character = value.charAt(index)
+    }
+
+    queue += character
+    index++
+  }
+
+  if (
+    !queue ||
+    value.charAt(index) !== rightSquareBracket ||
+    value.charAt(index + 1) !== colon
+  ) {
+    return
+  }
+
+  if (silent) {
+    return true
+  }
+
+  identifier = queue
+  subvalue += queue + rightSquareBracket + colon
+  index = subvalue.length
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== tab && character !== space) {
+      break
+    }
+
+    subvalue += character
+    index++
+  }
+
+  now.column += subvalue.length
+  now.offset += subvalue.length
+  queue = ''
+  content = ''
+  subqueue = ''
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character === lineFeed) {
+      subqueue = character
+      index++
+
+      while (index < length) {
+        character = value.charAt(index)
+
+        if (character !== lineFeed) {
+          break
+        }
+
+        subqueue += character
+        index++
+      }
+
+      queue += subqueue
+      subqueue = ''
+
+      while (index < length) {
+        character = value.charAt(index)
+
+        if (character !== space) {
+          break
+        }
+
+        subqueue += character
+        index++
+      }
+
+      if (subqueue.length === 0) {
+        break
+      }
+
+      queue += subqueue
+    }
+
+    if (queue) {
+      content += queue
+      queue = ''
+    }
+
+    content += character
+    index++
+  }
+
+  subvalue += content
+
+  content = content.replace(EXPRESSION_INITIAL_TAB, function(line) {
+    offsets[currentLine] = (offsets[currentLine] || 0) + line.length
+    currentLine++
+
+    return ''
+  })
+
+  add = eat(subvalue)
+
+  exit = self.enterBlock()
+  content = self.tokenizeBlock(content, now)
+  exit()
+
+  return add({
+    type: 'footnoteDefinition',
+    identifier: normalize(identifier),
+    label: identifier,
+    children: content
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/heading-atx.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/heading-atx.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = atxHeading
+
+var lineFeed = '\n'
+var tab = '\t'
+var space = ' '
+var numberSign = '#'
+
+var maxFenceCount = 6
+
+function atxHeading(eat, value, silent) {
+  var self = this
+  var pedantic = self.options.pedantic
+  var length = value.length + 1
+  var index = -1
+  var now = eat.now()
+  var subvalue = ''
+  var content = ''
+  var character
+  var queue
+  var depth
+
+  // Eat initial spacing.
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (character !== space && character !== tab) {
+      index--
+      break
+    }
+
+    subvalue += character
+  }
+
+  // Eat hashes.
+  depth = 0
+
+  while (++index <= length) {
+    character = value.charAt(index)
+
+    if (character !== numberSign) {
+      index--
+      break
+    }
+
+    subvalue += character
+    depth++
+  }
+
+  if (depth > maxFenceCount) {
+    return
+  }
+
+  if (!depth || (!pedantic && value.charAt(index + 1) === numberSign)) {
+    return
+  }
+
+  length = value.length + 1
+
+  // Eat intermediate white-space.
+  queue = ''
+
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (character !== space && character !== tab) {
+      index--
+      break
+    }
+
+    queue += character
+  }
+
+  // Exit when not in pedantic mode without spacing.
+  if (!pedantic && queue.length === 0 && character && character !== lineFeed) {
+    return
+  }
+
+  if (silent) {
+    return true
+  }
+
+  // Eat content.
+  subvalue += queue
+  queue = ''
+  content = ''
+
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (!character || character === lineFeed) {
+      break
+    }
+
+    if (character !== space && character !== tab && character !== numberSign) {
+      content += queue + character
+      queue = ''
+      continue
+    }
+
+    while (character === space || character === tab) {
+      queue += character
+      character = value.charAt(++index)
+    }
+
+    // `#` without a queue is part of the content.
+    if (!pedantic && content && !queue && character === numberSign) {
+      content += character
+      continue
+    }
+
+    while (character === numberSign) {
+      queue += character
+      character = value.charAt(++index)
+    }
+
+    while (character === space || character === tab) {
+      queue += character
+      character = value.charAt(++index)
+    }
+
+    index--
+  }
+
+  now.column += subvalue.length
+  now.offset += subvalue.length
+  subvalue += content + queue
+
+  return eat(subvalue)({
+    type: 'heading',
+    depth: depth,
+    children: self.tokenizeInline(content, now)
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/heading-setext.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/heading-setext.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = setextHeading
+
+var lineFeed = '\n'
+var tab = '\t'
+var space = ' '
+var equalsTo = '='
+var dash = '-'
+
+var maxIndent = 3
+
+var equalsToDepth = 1
+var dashDepth = 2
+
+function setextHeading(eat, value, silent) {
+  var self = this
+  var now = eat.now()
+  var length = value.length
+  var index = -1
+  var subvalue = ''
+  var content
+  var queue
+  var character
+  var marker
+  var depth
+
+  // Eat initial indentation.
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (character !== space || index >= maxIndent) {
+      index--
+      break
+    }
+
+    subvalue += character
+  }
+
+  // Eat content.
+  content = ''
+  queue = ''
+
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (character === lineFeed) {
+      index--
+      break
+    }
+
+    if (character === space || character === tab) {
+      queue += character
+    } else {
+      content += queue + character
+      queue = ''
+    }
+  }
+
+  now.column += subvalue.length
+  now.offset += subvalue.length
+  subvalue += content + queue
+
+  // Ensure the content is followed by a newline and a valid marker.
+  character = value.charAt(++index)
+  marker = value.charAt(++index)
+
+  if (character !== lineFeed || (marker !== equalsTo && marker !== dash)) {
+    return
+  }
+
+  subvalue += character
+
+  // Eat Setext-line.
+  queue = marker
+  depth = marker === equalsTo ? equalsToDepth : dashDepth
+
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (character !== marker) {
+      if (character !== lineFeed) {
+        return
+      }
+
+      index--
+      break
+    }
+
+    queue += character
+  }
+
+  if (silent) {
+    return true
+  }
+
+  return eat(subvalue + queue)({
+    type: 'heading',
+    depth: depth,
+    children: self.tokenizeInline(content, now)
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/html-block.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/html-block.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var openCloseTag = __webpack_require__(/*! ../util/html */ "./node_modules/remark-parse/lib/util/html.js").openCloseTag
+
+module.exports = blockHtml
+
+var tab = '\t'
+var space = ' '
+var lineFeed = '\n'
+var lessThan = '<'
+
+var rawOpenExpression = /^<(script|pre|style)(?=(\s|>|$))/i
+var rawCloseExpression = /<\/(script|pre|style)>/i
+var commentOpenExpression = /^<!--/
+var commentCloseExpression = /-->/
+var instructionOpenExpression = /^<\?/
+var instructionCloseExpression = /\?>/
+var directiveOpenExpression = /^<![A-Za-z]/
+var directiveCloseExpression = />/
+var cdataOpenExpression = /^<!\[CDATA\[/
+var cdataCloseExpression = /\]\]>/
+var elementCloseExpression = /^$/
+var otherElementOpenExpression = new RegExp(openCloseTag.source + '\\s*$')
+
+function blockHtml(eat, value, silent) {
+  var self = this
+  var blocks = self.options.blocks.join('|')
+  var elementOpenExpression = new RegExp(
+    '^</?(' + blocks + ')(?=(\\s|/?>|$))',
+    'i'
+  )
+  var length = value.length
+  var index = 0
+  var next
+  var line
+  var offset
+  var character
+  var count
+  var sequence
+  var subvalue
+
+  var sequences = [
+    [rawOpenExpression, rawCloseExpression, true],
+    [commentOpenExpression, commentCloseExpression, true],
+    [instructionOpenExpression, instructionCloseExpression, true],
+    [directiveOpenExpression, directiveCloseExpression, true],
+    [cdataOpenExpression, cdataCloseExpression, true],
+    [elementOpenExpression, elementCloseExpression, true],
+    [otherElementOpenExpression, elementCloseExpression, false]
+  ]
+
+  // Eat initial spacing.
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== tab && character !== space) {
+      break
+    }
+
+    index++
+  }
+
+  if (value.charAt(index) !== lessThan) {
+    return
+  }
+
+  next = value.indexOf(lineFeed, index + 1)
+  next = next === -1 ? length : next
+  line = value.slice(index, next)
+  offset = -1
+  count = sequences.length
+
+  while (++offset < count) {
+    if (sequences[offset][0].test(line)) {
+      sequence = sequences[offset]
+      break
+    }
+  }
+
+  if (!sequence) {
+    return
+  }
+
+  if (silent) {
+    return sequence[2]
+  }
+
+  index = next
+
+  if (!sequence[1].test(line)) {
+    while (index < length) {
+      next = value.indexOf(lineFeed, index + 1)
+      next = next === -1 ? length : next
+      line = value.slice(index + 1, next)
+
+      if (sequence[1].test(line)) {
+        if (line) {
+          index = next
+        }
+
+        break
+      }
+
+      index = next
+    }
+  }
+
+  subvalue = value.slice(0, index)
+
+  return eat(subvalue)({type: 'html', value: subvalue})
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/html-inline.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/html-inline.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var alphabetical = __webpack_require__(/*! is-alphabetical */ "./node_modules/is-alphabetical/index.js")
+var locate = __webpack_require__(/*! ../locate/tag */ "./node_modules/remark-parse/lib/locate/tag.js")
+var tag = __webpack_require__(/*! ../util/html */ "./node_modules/remark-parse/lib/util/html.js").tag
+
+module.exports = inlineHTML
+inlineHTML.locator = locate
+
+var lessThan = '<'
+var questionMark = '?'
+var exclamationMark = '!'
+var slash = '/'
+
+var htmlLinkOpenExpression = /^<a /i
+var htmlLinkCloseExpression = /^<\/a>/i
+
+function inlineHTML(eat, value, silent) {
+  var self = this
+  var length = value.length
+  var character
+  var subvalue
+
+  if (value.charAt(0) !== lessThan || length < 3) {
+    return
+  }
+
+  character = value.charAt(1)
+
+  if (
+    !alphabetical(character) &&
+    character !== questionMark &&
+    character !== exclamationMark &&
+    character !== slash
+  ) {
+    return
+  }
+
+  subvalue = value.match(tag)
+
+  if (!subvalue) {
+    return
+  }
+
+  /* istanbul ignore if - not used yet. */
+  if (silent) {
+    return true
+  }
+
+  subvalue = subvalue[0]
+
+  if (!self.inLink && htmlLinkOpenExpression.test(subvalue)) {
+    self.inLink = true
+  } else if (self.inLink && htmlLinkCloseExpression.test(subvalue)) {
+    self.inLink = false
+  }
+
+  return eat(subvalue)({type: 'html', value: subvalue})
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/link.js":
+/*!********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/link.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var locate = __webpack_require__(/*! ../locate/link */ "./node_modules/remark-parse/lib/locate/link.js")
+
+module.exports = link
+link.locator = locate
+
+var lineFeed = '\n'
+var exclamationMark = '!'
+var quotationMark = '"'
+var apostrophe = "'"
+var leftParenthesis = '('
+var rightParenthesis = ')'
+var lessThan = '<'
+var greaterThan = '>'
+var leftSquareBracket = '['
+var backslash = '\\'
+var rightSquareBracket = ']'
+var graveAccent = '`'
+
+function link(eat, value, silent) {
+  var self = this
+  var subvalue = ''
+  var index = 0
+  var character = value.charAt(0)
+  var pedantic = self.options.pedantic
+  var commonmark = self.options.commonmark
+  var gfm = self.options.gfm
+  var closed
+  var count
+  var opening
+  var beforeURL
+  var beforeTitle
+  var subqueue
+  var hasMarker
+  var isImage
+  var content
+  var marker
+  var length
+  var title
+  var depth
+  var queue
+  var url
+  var now
+  var exit
+  var node
+
+  // Detect whether this is an image.
+  if (character === exclamationMark) {
+    isImage = true
+    subvalue = character
+    character = value.charAt(++index)
+  }
+
+  // Eat the opening.
+  if (character !== leftSquareBracket) {
+    return
+  }
+
+  // Exit when this is a link and we’re already inside a link.
+  if (!isImage && self.inLink) {
+    return
+  }
+
+  subvalue += character
+  queue = ''
+  index++
+
+  // Eat the content.
+  length = value.length
+  now = eat.now()
+  depth = 0
+
+  now.column += index
+  now.offset += index
+
+  while (index < length) {
+    character = value.charAt(index)
+    subqueue = character
+
+    if (character === graveAccent) {
+      // Inline-code in link content.
+      count = 1
+
+      while (value.charAt(index + 1) === graveAccent) {
+        subqueue += character
+        index++
+        count++
+      }
+
+      if (!opening) {
+        opening = count
+      } else if (count >= opening) {
+        opening = 0
+      }
+    } else if (character === backslash) {
+      // Allow brackets to be escaped.
+      index++
+      subqueue += value.charAt(index)
+    } else if ((!opening || gfm) && character === leftSquareBracket) {
+      // In GFM mode, brackets in code still count.  In all other modes,
+      // they don’t.
+      depth++
+    } else if ((!opening || gfm) && character === rightSquareBracket) {
+      if (depth) {
+        depth--
+      } else {
+        // Allow white-space between content and url in GFM mode.
+        if (!pedantic) {
+          while (index < length) {
+            character = value.charAt(index + 1)
+
+            if (!whitespace(character)) {
+              break
+            }
+
+            subqueue += character
+            index++
+          }
+        }
+
+        if (value.charAt(index + 1) !== leftParenthesis) {
+          return
+        }
+
+        subqueue += leftParenthesis
+        closed = true
+        index++
+
+        break
+      }
+    }
+
+    queue += subqueue
+    subqueue = ''
+    index++
+  }
+
+  // Eat the content closing.
+  if (!closed) {
+    return
+  }
+
+  content = queue
+  subvalue += queue + subqueue
+  index++
+
+  // Eat white-space.
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (!whitespace(character)) {
+      break
+    }
+
+    subvalue += character
+    index++
+  }
+
+  // Eat the URL.
+  character = value.charAt(index)
+  queue = ''
+  beforeURL = subvalue
+
+  if (character === lessThan) {
+    index++
+    beforeURL += lessThan
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (character === greaterThan) {
+        break
+      }
+
+      if (commonmark && character === lineFeed) {
+        return
+      }
+
+      queue += character
+      index++
+    }
+
+    if (value.charAt(index) !== greaterThan) {
+      return
+    }
+
+    subvalue += lessThan + queue + greaterThan
+    url = queue
+    index++
+  } else {
+    character = null
+    subqueue = ''
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (
+        subqueue &&
+        (character === quotationMark ||
+          character === apostrophe ||
+          (commonmark && character === leftParenthesis))
+      ) {
+        break
+      }
+
+      if (whitespace(character)) {
+        if (!pedantic) {
+          break
+        }
+
+        subqueue += character
+      } else {
+        if (character === leftParenthesis) {
+          depth++
+        } else if (character === rightParenthesis) {
+          if (depth === 0) {
+            break
+          }
+
+          depth--
+        }
+
+        queue += subqueue
+        subqueue = ''
+
+        if (character === backslash) {
+          queue += backslash
+          character = value.charAt(++index)
+        }
+
+        queue += character
+      }
+
+      index++
+    }
+
+    subvalue += queue
+    url = queue
+    index = subvalue.length
+  }
+
+  // Eat white-space.
+  queue = ''
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (!whitespace(character)) {
+      break
+    }
+
+    queue += character
+    index++
+  }
+
+  character = value.charAt(index)
+  subvalue += queue
+
+  // Eat the title.
+  if (
+    queue &&
+    (character === quotationMark ||
+      character === apostrophe ||
+      (commonmark && character === leftParenthesis))
+  ) {
+    index++
+    subvalue += character
+    queue = ''
+    marker = character === leftParenthesis ? rightParenthesis : character
+    beforeTitle = subvalue
+
+    // In commonmark-mode, things are pretty easy: the marker cannot occur
+    // inside the title.  Non-commonmark does, however, support nested
+    // delimiters.
+    if (commonmark) {
+      while (index < length) {
+        character = value.charAt(index)
+
+        if (character === marker) {
+          break
+        }
+
+        if (character === backslash) {
+          queue += backslash
+          character = value.charAt(++index)
+        }
+
+        index++
+        queue += character
+      }
+
+      character = value.charAt(index)
+
+      if (character !== marker) {
+        return
+      }
+
+      title = queue
+      subvalue += queue + character
+      index++
+
+      while (index < length) {
+        character = value.charAt(index)
+
+        if (!whitespace(character)) {
+          break
+        }
+
+        subvalue += character
+        index++
+      }
+    } else {
+      subqueue = ''
+
+      while (index < length) {
+        character = value.charAt(index)
+
+        if (character === marker) {
+          if (hasMarker) {
+            queue += marker + subqueue
+            subqueue = ''
+          }
+
+          hasMarker = true
+        } else if (!hasMarker) {
+          queue += character
+        } else if (character === rightParenthesis) {
+          subvalue += queue + marker + subqueue
+          title = queue
+          break
+        } else if (whitespace(character)) {
+          subqueue += character
+        } else {
+          queue += marker + subqueue + character
+          subqueue = ''
+          hasMarker = false
+        }
+
+        index++
+      }
+    }
+  }
+
+  if (value.charAt(index) !== rightParenthesis) {
+    return
+  }
+
+  /* istanbul ignore if - never used (yet) */
+  if (silent) {
+    return true
+  }
+
+  subvalue += rightParenthesis
+
+  url = self.decode.raw(self.unescape(url), eat(beforeURL).test().end, {
+    nonTerminated: false
+  })
+
+  if (title) {
+    beforeTitle = eat(beforeTitle).test().end
+    title = self.decode.raw(self.unescape(title), beforeTitle)
+  }
+
+  node = {
+    type: isImage ? 'image' : 'link',
+    title: title || null,
+    url: url
+  }
+
+  if (isImage) {
+    node.alt = self.decode.raw(self.unescape(content), now) || null
+  } else {
+    exit = self.enterLink()
+    node.children = self.tokenizeInline(content, now)
+    exit()
+  }
+
+  return eat(subvalue)(node)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/list.js":
+/*!********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/list.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* eslint-disable max-params */
+
+var trim = __webpack_require__(/*! trim */ "./node_modules/trim/index.js")
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+var decimal = __webpack_require__(/*! is-decimal */ "./node_modules/is-decimal/index.js")
+var getIndent = __webpack_require__(/*! ../util/get-indentation */ "./node_modules/remark-parse/lib/util/get-indentation.js")
+var removeIndent = __webpack_require__(/*! ../util/remove-indentation */ "./node_modules/remark-parse/lib/util/remove-indentation.js")
+var interrupt = __webpack_require__(/*! ../util/interrupt */ "./node_modules/remark-parse/lib/util/interrupt.js")
+
+module.exports = list
+
+var asterisk = '*'
+var underscore = '_'
+var plusSign = '+'
+var dash = '-'
+var dot = '.'
+var space = ' '
+var lineFeed = '\n'
+var tab = '\t'
+var rightParenthesis = ')'
+var lowercaseX = 'x'
+
+var tabSize = 4
+var looseListItemExpression = /\n\n(?!\s*$)/
+var taskItemExpression = /^\[([ \t]|x|X)][ \t]/
+var bulletExpression = /^([ \t]*)([*+-]|\d+[.)])( {1,4}(?! )| |\t|$|(?=\n))([^\n]*)/
+var pedanticBulletExpression = /^([ \t]*)([*+-]|\d+[.)])([ \t]+)/
+var initialIndentExpression = /^( {1,4}|\t)?/gm
+
+function list(eat, value, silent) {
+  var self = this
+  var commonmark = self.options.commonmark
+  var pedantic = self.options.pedantic
+  var tokenizers = self.blockTokenizers
+  var interuptors = self.interruptList
+  var index = 0
+  var length = value.length
+  var start = null
+  var size = 0
+  var queue
+  var ordered
+  var character
+  var marker
+  var nextIndex
+  var startIndex
+  var prefixed
+  var currentMarker
+  var content
+  var line
+  var prevEmpty
+  var empty
+  var items
+  var allLines
+  var emptyLines
+  var item
+  var enterTop
+  var exitBlockquote
+  var spread = false
+  var node
+  var now
+  var end
+  var indented
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character === tab) {
+      size += tabSize - (size % tabSize)
+    } else if (character === space) {
+      size++
+    } else {
+      break
+    }
+
+    index++
+  }
+
+  if (size >= tabSize) {
+    return
+  }
+
+  character = value.charAt(index)
+
+  if (character === asterisk || character === plusSign || character === dash) {
+    marker = character
+    ordered = false
+  } else {
+    ordered = true
+    queue = ''
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (!decimal(character)) {
+        break
+      }
+
+      queue += character
+      index++
+    }
+
+    character = value.charAt(index)
+
+    if (
+      !queue ||
+      !(character === dot || (commonmark && character === rightParenthesis))
+    ) {
+      return
+    }
+
+    start = parseInt(queue, 10)
+    marker = character
+  }
+
+  character = value.charAt(++index)
+
+  if (
+    character !== space &&
+    character !== tab &&
+    (pedantic || (character !== lineFeed && character !== ''))
+  ) {
+    return
+  }
+
+  if (silent) {
+    return true
+  }
+
+  index = 0
+  items = []
+  allLines = []
+  emptyLines = []
+
+  while (index < length) {
+    nextIndex = value.indexOf(lineFeed, index)
+    startIndex = index
+    prefixed = false
+    indented = false
+
+    if (nextIndex === -1) {
+      nextIndex = length
+    }
+
+    end = index + tabSize
+    size = 0
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (character === tab) {
+        size += tabSize - (size % tabSize)
+      } else if (character === space) {
+        size++
+      } else {
+        break
+      }
+
+      index++
+    }
+
+    if (size >= tabSize) {
+      indented = true
+    }
+
+    if (item && size >= item.indent) {
+      indented = true
+    }
+
+    character = value.charAt(index)
+    currentMarker = null
+
+    if (!indented) {
+      if (
+        character === asterisk ||
+        character === plusSign ||
+        character === dash
+      ) {
+        currentMarker = character
+        index++
+        size++
+      } else {
+        queue = ''
+
+        while (index < length) {
+          character = value.charAt(index)
+
+          if (!decimal(character)) {
+            break
+          }
+
+          queue += character
+          index++
+        }
+
+        character = value.charAt(index)
+        index++
+
+        if (
+          queue &&
+          (character === dot || (commonmark && character === rightParenthesis))
+        ) {
+          currentMarker = character
+          size += queue.length + 1
+        }
+      }
+
+      if (currentMarker) {
+        character = value.charAt(index)
+
+        if (character === tab) {
+          size += tabSize - (size % tabSize)
+          index++
+        } else if (character === space) {
+          end = index + tabSize
+
+          while (index < end) {
+            if (value.charAt(index) !== space) {
+              break
+            }
+
+            index++
+            size++
+          }
+
+          if (index === end && value.charAt(index) === space) {
+            index -= tabSize - 1
+            size -= tabSize - 1
+          }
+        } else if (character !== lineFeed && character !== '') {
+          currentMarker = null
+        }
+      }
+    }
+
+    if (currentMarker) {
+      if (!pedantic && marker !== currentMarker) {
+        break
+      }
+
+      prefixed = true
+    } else {
+      if (!commonmark && !indented && value.charAt(startIndex) === space) {
+        indented = true
+      } else if (commonmark && item) {
+        indented = size >= item.indent || size > tabSize
+      }
+
+      prefixed = false
+      index = startIndex
+    }
+
+    line = value.slice(startIndex, nextIndex)
+    content = startIndex === index ? line : value.slice(index, nextIndex)
+
+    if (
+      currentMarker === asterisk ||
+      currentMarker === underscore ||
+      currentMarker === dash
+    ) {
+      if (tokenizers.thematicBreak.call(self, eat, line, true)) {
+        break
+      }
+    }
+
+    prevEmpty = empty
+    empty = !prefixed && !trim(content).length
+
+    if (indented && item) {
+      item.value = item.value.concat(emptyLines, line)
+      allLines = allLines.concat(emptyLines, line)
+      emptyLines = []
+    } else if (prefixed) {
+      if (emptyLines.length !== 0) {
+        spread = true
+        item.value.push('')
+        item.trail = emptyLines.concat()
+      }
+
+      item = {
+        value: [line],
+        indent: size,
+        trail: []
+      }
+
+      items.push(item)
+      allLines = allLines.concat(emptyLines, line)
+      emptyLines = []
+    } else if (empty) {
+      if (prevEmpty && !commonmark) {
+        break
+      }
+
+      emptyLines.push(line)
+    } else {
+      if (prevEmpty) {
+        break
+      }
+
+      if (interrupt(interuptors, tokenizers, self, [eat, line, true])) {
+        break
+      }
+
+      item.value = item.value.concat(emptyLines, line)
+      allLines = allLines.concat(emptyLines, line)
+      emptyLines = []
+    }
+
+    index = nextIndex + 1
+  }
+
+  node = eat(allLines.join(lineFeed)).reset({
+    type: 'list',
+    ordered: ordered,
+    start: start,
+    spread: spread,
+    children: []
+  })
+
+  enterTop = self.enterList()
+  exitBlockquote = self.enterBlock()
+  index = -1
+  length = items.length
+
+  while (++index < length) {
+    item = items[index].value.join(lineFeed)
+    now = eat.now()
+
+    eat(item)(listItem(self, item, now), node)
+
+    item = items[index].trail.join(lineFeed)
+
+    if (index !== length - 1) {
+      item += lineFeed
+    }
+
+    eat(item)
+  }
+
+  enterTop()
+  exitBlockquote()
+
+  return node
+}
+
+function listItem(ctx, value, position) {
+  var offsets = ctx.offset
+  var fn = ctx.options.pedantic ? pedanticListItem : normalListItem
+  var checked = null
+  var task
+  var indent
+
+  value = fn.apply(null, arguments)
+
+  if (ctx.options.gfm) {
+    task = value.match(taskItemExpression)
+
+    if (task) {
+      indent = task[0].length
+      checked = task[1].toLowerCase() === lowercaseX
+      offsets[position.line] += indent
+      value = value.slice(indent)
+    }
+  }
+
+  return {
+    type: 'listItem',
+    spread: looseListItemExpression.test(value),
+    checked: checked,
+    children: ctx.tokenizeBlock(value, position)
+  }
+}
+
+// Create a list-item using overly simple mechanics.
+function pedanticListItem(ctx, value, position) {
+  var offsets = ctx.offset
+  var line = position.line
+
+  // Remove the list-item’s bullet.
+  value = value.replace(pedanticBulletExpression, replacer)
+
+  // The initial line was also matched by the below, so we reset the `line`.
+  line = position.line
+
+  return value.replace(initialIndentExpression, replacer)
+
+  // A simple replacer which removed all matches, and adds their length to
+  // `offset`.
+  function replacer($0) {
+    offsets[line] = (offsets[line] || 0) + $0.length
+    line++
+
+    return ''
+  }
+}
+
+// Create a list-item using sane mechanics.
+function normalListItem(ctx, value, position) {
+  var offsets = ctx.offset
+  var line = position.line
+  var max
+  var bullet
+  var rest
+  var lines
+  var trimmedLines
+  var index
+  var length
+
+  // Remove the list-item’s bullet.
+  value = value.replace(bulletExpression, replacer)
+
+  lines = value.split(lineFeed)
+
+  trimmedLines = removeIndent(value, getIndent(max).indent).split(lineFeed)
+
+  // We replaced the initial bullet with something else above, which was used
+  // to trick `removeIndentation` into removing some more characters when
+  // possible.  However, that could result in the initial line to be stripped
+  // more than it should be.
+  trimmedLines[0] = rest
+
+  offsets[line] = (offsets[line] || 0) + bullet.length
+  line++
+
+  index = 0
+  length = lines.length
+
+  while (++index < length) {
+    offsets[line] =
+      (offsets[line] || 0) + lines[index].length - trimmedLines[index].length
+    line++
+  }
+
+  return trimmedLines.join(lineFeed)
+
+  function replacer($0, $1, $2, $3, $4) {
+    bullet = $1 + $2 + $3
+    rest = $4
+
+    // Make sure that the first nine numbered list items can indent with an
+    // extra space.  That is, when the bullet did not receive an extra final
+    // space.
+    if (Number($2) < 10 && bullet.length % 2 === 1) {
+      $2 = space + $2
+    }
+
+    max = $1 + repeat(space, $2.length) + $3
+
+    return max + rest
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/newline.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/newline.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+
+module.exports = newline
+
+var lineFeed = '\n'
+
+function newline(eat, value, silent) {
+  var character = value.charAt(0)
+  var length
+  var subvalue
+  var queue
+  var index
+
+  if (character !== lineFeed) {
+    return
+  }
+
+  /* istanbul ignore if - never used (yet) */
+  if (silent) {
+    return true
+  }
+
+  index = 1
+  length = value.length
+  subvalue = character
+  queue = ''
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (!whitespace(character)) {
+      break
+    }
+
+    queue += character
+
+    if (character === lineFeed) {
+      subvalue += queue
+      queue = ''
+    }
+
+    index++
+  }
+
+  eat(subvalue)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/paragraph.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/paragraph.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var trim = __webpack_require__(/*! trim */ "./node_modules/trim/index.js")
+var decimal = __webpack_require__(/*! is-decimal */ "./node_modules/is-decimal/index.js")
+var trimTrailingLines = __webpack_require__(/*! trim-trailing-lines */ "./node_modules/trim-trailing-lines/index.js")
+var interrupt = __webpack_require__(/*! ../util/interrupt */ "./node_modules/remark-parse/lib/util/interrupt.js")
+
+module.exports = paragraph
+
+var tab = '\t'
+var lineFeed = '\n'
+var space = ' '
+
+var tabSize = 4
+
+// Tokenise paragraph.
+function paragraph(eat, value, silent) {
+  var self = this
+  var settings = self.options
+  var commonmark = settings.commonmark
+  var gfm = settings.gfm
+  var tokenizers = self.blockTokenizers
+  var interruptors = self.interruptParagraph
+  var index = value.indexOf(lineFeed)
+  var length = value.length
+  var position
+  var subvalue
+  var character
+  var size
+  var now
+
+  while (index < length) {
+    // Eat everything if there’s no following newline.
+    if (index === -1) {
+      index = length
+      break
+    }
+
+    // Stop if the next character is NEWLINE.
+    if (value.charAt(index + 1) === lineFeed) {
+      break
+    }
+
+    // In commonmark-mode, following indented lines are part of the paragraph.
+    if (commonmark) {
+      size = 0
+      position = index + 1
+
+      while (position < length) {
+        character = value.charAt(position)
+
+        if (character === tab) {
+          size = tabSize
+          break
+        } else if (character === space) {
+          size++
+        } else {
+          break
+        }
+
+        position++
+      }
+
+      if (size >= tabSize && character !== lineFeed) {
+        index = value.indexOf(lineFeed, index + 1)
+        continue
+      }
+    }
+
+    subvalue = value.slice(index + 1)
+
+    // Check if the following code contains a possible block.
+    if (interrupt(interruptors, tokenizers, self, [eat, subvalue, true])) {
+      break
+    }
+
+    // Break if the following line starts a list, when already in a list, or
+    // when in commonmark, or when in gfm mode and the bullet is *not* numeric.
+    if (
+      tokenizers.list.call(self, eat, subvalue, true) &&
+      (self.inList ||
+        commonmark ||
+        (gfm && !decimal(trim.left(subvalue).charAt(0))))
+    ) {
+      break
+    }
+
+    position = index
+    index = value.indexOf(lineFeed, index + 1)
+
+    if (index !== -1 && trim(value.slice(position, index)) === '') {
+      index = position
+      break
+    }
+  }
+
+  subvalue = value.slice(0, index)
+
+  if (trim(subvalue) === '') {
+    eat(subvalue)
+
+    return null
+  }
+
+  /* istanbul ignore if - never used (yet) */
+  if (silent) {
+    return true
+  }
+
+  now = eat.now()
+  subvalue = trimTrailingLines(subvalue)
+
+  return eat(subvalue)({
+    type: 'paragraph',
+    children: self.tokenizeInline(subvalue, now)
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/reference.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/reference.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var locate = __webpack_require__(/*! ../locate/link */ "./node_modules/remark-parse/lib/locate/link.js")
+var normalize = __webpack_require__(/*! ../util/normalize */ "./node_modules/remark-parse/lib/util/normalize.js")
+
+module.exports = reference
+reference.locator = locate
+
+var link = 'link'
+var image = 'image'
+var footnote = 'footnote'
+var shortcut = 'shortcut'
+var collapsed = 'collapsed'
+var full = 'full'
+var space = ' '
+var exclamationMark = '!'
+var leftSquareBracket = '['
+var backslash = '\\'
+var rightSquareBracket = ']'
+var caret = '^'
+
+function reference(eat, value, silent) {
+  var self = this
+  var commonmark = self.options.commonmark
+  var character = value.charAt(0)
+  var index = 0
+  var length = value.length
+  var subvalue = ''
+  var intro = ''
+  var type = link
+  var referenceType = shortcut
+  var content
+  var identifier
+  var now
+  var node
+  var exit
+  var queue
+  var bracketed
+  var depth
+
+  // Check whether we’re eating an image.
+  if (character === exclamationMark) {
+    type = image
+    intro = character
+    character = value.charAt(++index)
+  }
+
+  if (character !== leftSquareBracket) {
+    return
+  }
+
+  index++
+  intro += character
+  queue = ''
+
+  // Check whether we’re eating a footnote.
+  if (self.options.footnotes && value.charAt(index) === caret) {
+    // Exit if `![^` is found, so the `!` will be seen as text after this,
+    // and we’ll enter this function again when `[^` is found.
+    if (type === image) {
+      return
+    }
+
+    intro += caret
+    index++
+    type = footnote
+  }
+
+  // Eat the text.
+  depth = 0
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character === leftSquareBracket) {
+      bracketed = true
+      depth++
+    } else if (character === rightSquareBracket) {
+      if (!depth) {
+        break
+      }
+
+      depth--
+    }
+
+    if (character === backslash) {
+      queue += backslash
+      character = value.charAt(++index)
+    }
+
+    queue += character
+    index++
+  }
+
+  subvalue = queue
+  content = queue
+  character = value.charAt(index)
+
+  if (character !== rightSquareBracket) {
+    return
+  }
+
+  index++
+  subvalue += character
+  queue = ''
+
+  if (!commonmark) {
+    // The original markdown syntax definition explicitly allows for whitespace
+    // between the link text and link label; commonmark departs from this, in
+    // part to improve support for shortcut reference links
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (!whitespace(character)) {
+        break
+      }
+
+      queue += character
+      index++
+    }
+  }
+
+  character = value.charAt(index)
+
+  // Inline footnotes cannot have an identifier.
+  if (type !== footnote && character === leftSquareBracket) {
+    identifier = ''
+    queue += character
+    index++
+
+    while (index < length) {
+      character = value.charAt(index)
+
+      if (character === leftSquareBracket || character === rightSquareBracket) {
+        break
+      }
+
+      if (character === backslash) {
+        identifier += backslash
+        character = value.charAt(++index)
+      }
+
+      identifier += character
+      index++
+    }
+
+    character = value.charAt(index)
+
+    if (character === rightSquareBracket) {
+      referenceType = identifier ? full : collapsed
+      queue += identifier + character
+      index++
+    } else {
+      identifier = ''
+    }
+
+    subvalue += queue
+    queue = ''
+  } else {
+    if (!content) {
+      return
+    }
+
+    identifier = content
+  }
+
+  // Brackets cannot be inside the identifier.
+  if (referenceType !== full && bracketed) {
+    return
+  }
+
+  subvalue = intro + subvalue
+
+  if (type === link && self.inLink) {
+    return null
+  }
+
+  /* istanbul ignore if - never used (yet) */
+  if (silent) {
+    return true
+  }
+
+  if (type === footnote && content.indexOf(space) !== -1) {
+    return eat(subvalue)({
+      type: footnote,
+      children: this.tokenizeInline(content, eat.now())
+    })
+  }
+
+  now = eat.now()
+  now.column += intro.length
+  now.offset += intro.length
+  identifier = referenceType === full ? identifier : content
+
+  node = {
+    type: type + 'Reference',
+    identifier: normalize(identifier),
+    label: identifier
+  }
+
+  if (type === link || type === image) {
+    node.referenceType = referenceType
+  }
+
+  if (type === link) {
+    exit = self.enterLink()
+    node.children = self.tokenizeInline(content, now)
+    exit()
+  } else if (type === image) {
+    node.alt = self.decode.raw(self.unescape(content), now) || null
+  }
+
+  return eat(subvalue)(node)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/strong.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/strong.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var trim = __webpack_require__(/*! trim */ "./node_modules/trim/index.js")
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var locate = __webpack_require__(/*! ../locate/strong */ "./node_modules/remark-parse/lib/locate/strong.js")
+
+module.exports = strong
+strong.locator = locate
+
+var backslash = '\\'
+var asterisk = '*'
+var underscore = '_'
+
+function strong(eat, value, silent) {
+  var self = this
+  var index = 0
+  var character = value.charAt(index)
+  var now
+  var pedantic
+  var marker
+  var queue
+  var subvalue
+  var length
+  var prev
+
+  if (
+    (character !== asterisk && character !== underscore) ||
+    value.charAt(++index) !== character
+  ) {
+    return
+  }
+
+  pedantic = self.options.pedantic
+  marker = character
+  subvalue = marker + marker
+  length = value.length
+  index++
+  queue = ''
+  character = ''
+
+  if (pedantic && whitespace(value.charAt(index))) {
+    return
+  }
+
+  while (index < length) {
+    prev = character
+    character = value.charAt(index)
+
+    if (
+      character === marker &&
+      value.charAt(index + 1) === marker &&
+      (!pedantic || !whitespace(prev))
+    ) {
+      character = value.charAt(index + 2)
+
+      if (character !== marker) {
+        if (!trim(queue)) {
+          return
+        }
+
+        /* istanbul ignore if - never used (yet) */
+        if (silent) {
+          return true
+        }
+
+        now = eat.now()
+        now.column += 2
+        now.offset += 2
+
+        return eat(subvalue + queue + subvalue)({
+          type: 'strong',
+          children: self.tokenizeInline(queue, now)
+        })
+      }
+    }
+
+    if (!pedantic && character === backslash) {
+      queue += character
+      character = value.charAt(++index)
+    }
+
+    queue += character
+    index++
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/table.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/table.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+
+module.exports = table
+
+var tab = '\t'
+var lineFeed = '\n'
+var space = ' '
+var dash = '-'
+var colon = ':'
+var backslash = '\\'
+var graveAccent = '`'
+var verticalBar = '|'
+
+var minColumns = 1
+var minRows = 2
+
+var left = 'left'
+var center = 'center'
+var right = 'right'
+
+function table(eat, value, silent) {
+  var self = this
+  var index
+  var alignments
+  var alignment
+  var subvalue
+  var row
+  var length
+  var lines
+  var queue
+  var character
+  var hasDash
+  var align
+  var cell
+  var preamble
+  var count
+  var opening
+  var now
+  var position
+  var lineCount
+  var line
+  var rows
+  var table
+  var lineIndex
+  var pipeIndex
+  var first
+
+  // Exit when not in gfm-mode.
+  if (!self.options.gfm) {
+    return
+  }
+
+  // Get the rows.
+  // Detecting tables soon is hard, so there are some checks for performance
+  // here, such as the minimum number of rows, and allowed characters in the
+  // alignment row.
+  index = 0
+  lineCount = 0
+  length = value.length + 1
+  lines = []
+
+  while (index < length) {
+    lineIndex = value.indexOf(lineFeed, index)
+    pipeIndex = value.indexOf(verticalBar, index + 1)
+
+    if (lineIndex === -1) {
+      lineIndex = value.length
+    }
+
+    if (pipeIndex === -1 || pipeIndex > lineIndex) {
+      if (lineCount < minRows) {
+        return
+      }
+
+      break
+    }
+
+    lines.push(value.slice(index, lineIndex))
+    lineCount++
+    index = lineIndex + 1
+  }
+
+  // Parse the alignment row.
+  subvalue = lines.join(lineFeed)
+  alignments = lines.splice(1, 1)[0] || []
+  index = 0
+  length = alignments.length
+  lineCount--
+  alignment = false
+  align = []
+
+  while (index < length) {
+    character = alignments.charAt(index)
+
+    if (character === verticalBar) {
+      hasDash = null
+
+      if (alignment === false) {
+        if (first === false) {
+          return
+        }
+      } else {
+        align.push(alignment)
+        alignment = false
+      }
+
+      first = false
+    } else if (character === dash) {
+      hasDash = true
+      alignment = alignment || null
+    } else if (character === colon) {
+      if (alignment === left) {
+        alignment = center
+      } else if (hasDash && alignment === null) {
+        alignment = right
+      } else {
+        alignment = left
+      }
+    } else if (!whitespace(character)) {
+      return
+    }
+
+    index++
+  }
+
+  if (alignment !== false) {
+    align.push(alignment)
+  }
+
+  // Exit when without enough columns.
+  if (align.length < minColumns) {
+    return
+  }
+
+  /* istanbul ignore if - never used (yet) */
+  if (silent) {
+    return true
+  }
+
+  // Parse the rows.
+  position = -1
+  rows = []
+
+  table = eat(subvalue).reset({type: 'table', align: align, children: rows})
+
+  while (++position < lineCount) {
+    line = lines[position]
+    row = {type: 'tableRow', children: []}
+
+    // Eat a newline character when this is not the first row.
+    if (position) {
+      eat(lineFeed)
+    }
+
+    // Eat the row.
+    eat(line).reset(row, table)
+
+    length = line.length + 1
+    index = 0
+    queue = ''
+    cell = ''
+    preamble = true
+    count = null
+    opening = null
+
+    while (index < length) {
+      character = line.charAt(index)
+
+      if (character === tab || character === space) {
+        if (cell) {
+          queue += character
+        } else {
+          eat(character)
+        }
+
+        index++
+        continue
+      }
+
+      if (character === '' || character === verticalBar) {
+        if (preamble) {
+          eat(character)
+        } else {
+          if (character && opening) {
+            queue += character
+            index++
+            continue
+          }
+
+          if ((cell || character) && !preamble) {
+            subvalue = cell
+
+            if (queue.length > 1) {
+              if (character) {
+                subvalue += queue.slice(0, queue.length - 1)
+                queue = queue.charAt(queue.length - 1)
+              } else {
+                subvalue += queue
+                queue = ''
+              }
+            }
+
+            now = eat.now()
+
+            eat(subvalue)(
+              {type: 'tableCell', children: self.tokenizeInline(cell, now)},
+              row
+            )
+          }
+
+          eat(queue + character)
+
+          queue = ''
+          cell = ''
+        }
+      } else {
+        if (queue) {
+          cell += queue
+          queue = ''
+        }
+
+        cell += character
+
+        if (character === backslash && index !== length - 2) {
+          cell += line.charAt(index + 1)
+          index++
+        }
+
+        if (character === graveAccent) {
+          count = 1
+
+          while (line.charAt(index + 1) === character) {
+            cell += character
+            index++
+            count++
+          }
+
+          if (!opening) {
+            opening = count
+          } else if (count >= opening) {
+            opening = 0
+          }
+        }
+      }
+
+      preamble = false
+      index++
+    }
+
+    // Eat the alignment row.
+    if (!position) {
+      eat(lineFeed + alignments)
+    }
+  }
+
+  return table
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/text.js":
+/*!********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/text.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = text
+
+function text(eat, value, silent) {
+  var self = this
+  var methods
+  var tokenizers
+  var index
+  var length
+  var subvalue
+  var position
+  var tokenizer
+  var name
+  var min
+  var now
+
+  /* istanbul ignore if - never used (yet) */
+  if (silent) {
+    return true
+  }
+
+  methods = self.inlineMethods
+  length = methods.length
+  tokenizers = self.inlineTokenizers
+  index = -1
+  min = value.length
+
+  while (++index < length) {
+    name = methods[index]
+
+    if (name === 'text' || !tokenizers[name]) {
+      continue
+    }
+
+    tokenizer = tokenizers[name].locator
+
+    if (!tokenizer) {
+      eat.file.fail('Missing locator: `' + name + '`')
+    }
+
+    position = tokenizer.call(self, value, 1)
+
+    if (position !== -1 && position < min) {
+      min = position
+    }
+  }
+
+  subvalue = value.slice(0, min)
+  now = eat.now()
+
+  self.decode(subvalue, now, handler)
+
+  function handler(content, position, source) {
+    eat(source || content)({type: 'text', value: content})
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/thematic-break.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/thematic-break.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = thematicBreak
+
+var tab = '\t'
+var lineFeed = '\n'
+var space = ' '
+var asterisk = '*'
+var dash = '-'
+var underscore = '_'
+
+var maxCount = 3
+
+function thematicBreak(eat, value, silent) {
+  var index = -1
+  var length = value.length + 1
+  var subvalue = ''
+  var character
+  var marker
+  var markerCount
+  var queue
+
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (character !== tab && character !== space) {
+      break
+    }
+
+    subvalue += character
+  }
+
+  if (
+    character !== asterisk &&
+    character !== dash &&
+    character !== underscore
+  ) {
+    return
+  }
+
+  marker = character
+  subvalue += character
+  markerCount = 1
+  queue = ''
+
+  while (++index < length) {
+    character = value.charAt(index)
+
+    if (character === marker) {
+      markerCount++
+      subvalue += queue + marker
+      queue = ''
+    } else if (character === space) {
+      queue += character
+    } else if (
+      markerCount >= maxCount &&
+      (!character || character === lineFeed)
+    ) {
+      subvalue += queue
+
+      if (silent) {
+        return true
+      }
+
+      return eat(subvalue)({type: 'thematicBreak'})
+    } else {
+      return
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenize/url.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenize/url.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var decode = __webpack_require__(/*! parse-entities */ "./node_modules/parse-entities/index.js")
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var locate = __webpack_require__(/*! ../locate/url */ "./node_modules/remark-parse/lib/locate/url.js")
+
+module.exports = url
+url.locator = locate
+url.notInLink = true
+
+var quotationMark = '"'
+var apostrophe = "'"
+var leftParenthesis = '('
+var rightParenthesis = ')'
+var comma = ','
+var dot = '.'
+var colon = ':'
+var semicolon = ';'
+var lessThan = '<'
+var atSign = '@'
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+
+var http = 'http://'
+var https = 'https://'
+var mailto = 'mailto:'
+
+var protocols = [http, https, mailto]
+
+var protocolsLength = protocols.length
+
+function url(eat, value, silent) {
+  var self = this
+  var subvalue
+  var content
+  var character
+  var index
+  var position
+  var protocol
+  var match
+  var length
+  var queue
+  var parenCount
+  var nextCharacter
+  var tokenizers
+  var exit
+
+  if (!self.options.gfm) {
+    return
+  }
+
+  subvalue = ''
+  index = -1
+
+  while (++index < protocolsLength) {
+    protocol = protocols[index]
+    match = value.slice(0, protocol.length)
+
+    if (match.toLowerCase() === protocol) {
+      subvalue = match
+      break
+    }
+  }
+
+  if (!subvalue) {
+    return
+  }
+
+  index = subvalue.length
+  length = value.length
+  queue = ''
+  parenCount = 0
+
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (whitespace(character) || character === lessThan) {
+      break
+    }
+
+    if (
+      character === dot ||
+      character === comma ||
+      character === colon ||
+      character === semicolon ||
+      character === quotationMark ||
+      character === apostrophe ||
+      character === rightParenthesis ||
+      character === rightSquareBracket
+    ) {
+      nextCharacter = value.charAt(index + 1)
+
+      if (!nextCharacter || whitespace(nextCharacter)) {
+        break
+      }
+    }
+
+    if (character === leftParenthesis || character === leftSquareBracket) {
+      parenCount++
+    }
+
+    if (character === rightParenthesis || character === rightSquareBracket) {
+      parenCount--
+
+      if (parenCount < 0) {
+        break
+      }
+    }
+
+    queue += character
+    index++
+  }
+
+  if (!queue) {
+    return
+  }
+
+  subvalue += queue
+  content = subvalue
+
+  if (protocol === mailto) {
+    position = queue.indexOf(atSign)
+
+    if (position === -1 || position === length - 1) {
+      return
+    }
+
+    content = content.substr(mailto.length)
+  }
+
+  /* istanbul ignore if - never used (yet) */
+  if (silent) {
+    return true
+  }
+
+  exit = self.enterLink()
+
+  // Temporarily remove all tokenizers except text in url.
+  tokenizers = self.inlineTokenizers
+  self.inlineTokenizers = {text: tokenizers.text}
+
+  content = self.tokenizeInline(content, eat.now())
+
+  self.inlineTokenizers = tokenizers
+  exit()
+
+  return eat(subvalue)({
+    type: 'link',
+    title: null,
+    url: decode(subvalue, {nonTerminated: false}),
+    children: content
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/tokenizer.js":
+/*!****************************************************!*\
+  !*** ./node_modules/remark-parse/lib/tokenizer.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = factory
+
+// Construct a tokenizer.  This creates both `tokenizeInline` and `tokenizeBlock`.
+function factory(type) {
+  return tokenize
+
+  // Tokenizer for a bound `type`.
+  function tokenize(value, location) {
+    var self = this
+    var offset = self.offset
+    var tokens = []
+    var methods = self[type + 'Methods']
+    var tokenizers = self[type + 'Tokenizers']
+    var line = location.line
+    var column = location.column
+    var index
+    var length
+    var method
+    var name
+    var matched
+    var valueLength
+
+    // Trim white space only lines.
+    if (!value) {
+      return tokens
+    }
+
+    // Expose on `eat`.
+    eat.now = now
+    eat.file = self.file
+
+    // Sync initial offset.
+    updatePosition('')
+
+    // Iterate over `value`, and iterate over all tokenizers.  When one eats
+    // something, re-iterate with the remaining value.  If no tokenizer eats,
+    // something failed (should not happen) and an exception is thrown.
+    while (value) {
+      index = -1
+      length = methods.length
+      matched = false
+
+      while (++index < length) {
+        name = methods[index]
+        method = tokenizers[name]
+
+        if (
+          method &&
+          /* istanbul ignore next */ (!method.onlyAtStart || self.atStart) &&
+          (!method.notInList || !self.inList) &&
+          (!method.notInBlock || !self.inBlock) &&
+          (!method.notInLink || !self.inLink)
+        ) {
+          valueLength = value.length
+
+          method.apply(self, [eat, value])
+
+          matched = valueLength !== value.length
+
+          if (matched) {
+            break
+          }
+        }
+      }
+
+      /* istanbul ignore if */
+      if (!matched) {
+        self.file.fail(new Error('Infinite loop'), eat.now())
+      }
+    }
+
+    self.eof = now()
+
+    return tokens
+
+    // Update line, column, and offset based on `value`.
+    function updatePosition(subvalue) {
+      var lastIndex = -1
+      var index = subvalue.indexOf('\n')
+
+      while (index !== -1) {
+        line++
+        lastIndex = index
+        index = subvalue.indexOf('\n', index + 1)
+      }
+
+      if (lastIndex === -1) {
+        column += subvalue.length
+      } else {
+        column = subvalue.length - lastIndex
+      }
+
+      if (line in offset) {
+        if (lastIndex !== -1) {
+          column += offset[line]
+        } else if (column <= offset[line]) {
+          column = offset[line] + 1
+        }
+      }
+    }
+
+    // Get offset.  Called before the first character is eaten to retrieve the
+    // range’s offsets.
+    function getOffset() {
+      var indentation = []
+      var pos = line + 1
+
+      // Done.  Called when the last character is eaten to retrieve the range’s
+      // offsets.
+      return function() {
+        var last = line + 1
+
+        while (pos < last) {
+          indentation.push((offset[pos] || 0) + 1)
+
+          pos++
+        }
+
+        return indentation
+      }
+    }
+
+    // Get the current position.
+    function now() {
+      var pos = {line: line, column: column}
+
+      pos.offset = self.toOffset(pos)
+
+      return pos
+    }
+
+    // Store position information for a node.
+    function Position(start) {
+      this.start = start
+      this.end = now()
+    }
+
+    // Throw when a value is incorrectly eaten.  This shouldn’t happen but will
+    // throw on new, incorrect rules.
+    function validateEat(subvalue) {
+      /* istanbul ignore if */
+      if (value.substring(0, subvalue.length) !== subvalue) {
+        // Capture stack-trace.
+        self.file.fail(
+          new Error(
+            'Incorrectly eaten value: please report this warning on https://git.io/vg5Ft'
+          ),
+          now()
+        )
+      }
+    }
+
+    // Mark position and patch `node.position`.
+    function position() {
+      var before = now()
+
+      return update
+
+      // Add the position to a node.
+      function update(node, indent) {
+        var prev = node.position
+        var start = prev ? prev.start : before
+        var combined = []
+        var n = prev && prev.end.line
+        var l = before.line
+
+        node.position = new Position(start)
+
+        // If there was already a `position`, this node was merged.  Fixing
+        // `start` wasn’t hard, but the indent is different.  Especially
+        // because some information, the indent between `n` and `l` wasn’t
+        // tracked.  Luckily, that space is (should be?) empty, so we can
+        // safely check for it now.
+        if (prev && indent && prev.indent) {
+          combined = prev.indent
+
+          if (n < l) {
+            while (++n < l) {
+              combined.push((offset[n] || 0) + 1)
+            }
+
+            combined.push(before.column)
+          }
+
+          indent = combined.concat(indent)
+        }
+
+        node.position.indent = indent || []
+
+        return node
+      }
+    }
+
+    // Add `node` to `parent`s children or to `tokens`.  Performs merges where
+    // possible.
+    function add(node, parent) {
+      var children = parent ? parent.children : tokens
+      var prev = children[children.length - 1]
+      var fn
+
+      if (
+        prev &&
+        node.type === prev.type &&
+        (node.type === 'text' || node.type === 'blockquote') &&
+        mergeable(prev) &&
+        mergeable(node)
+      ) {
+        fn = node.type === 'text' ? mergeText : mergeBlockquote
+        node = fn.call(self, prev, node)
+      }
+
+      if (node !== prev) {
+        children.push(node)
+      }
+
+      if (self.atStart && tokens.length !== 0) {
+        self.exitStart()
+      }
+
+      return node
+    }
+
+    // Remove `subvalue` from `value`.  `subvalue` must be at the start of
+    // `value`.
+    function eat(subvalue) {
+      var indent = getOffset()
+      var pos = position()
+      var current = now()
+
+      validateEat(subvalue)
+
+      apply.reset = reset
+      reset.test = test
+      apply.test = test
+
+      value = value.substring(subvalue.length)
+
+      updatePosition(subvalue)
+
+      indent = indent()
+
+      return apply
+
+      // Add the given arguments, add `position` to the returned node, and
+      // return the node.
+      function apply(node, parent) {
+        return pos(add(pos(node), parent), indent)
+      }
+
+      // Functions just like apply, but resets the content: the line and
+      // column are reversed, and the eaten value is re-added.   This is
+      // useful for nodes with a single type of content, such as lists and
+      // tables.  See `apply` above for what parameters are expected.
+      function reset() {
+        var node = apply.apply(null, arguments)
+
+        line = current.line
+        column = current.column
+        value = subvalue + value
+
+        return node
+      }
+
+      // Test the position, after eating, and reverse to a not-eaten state.
+      function test() {
+        var result = pos({})
+
+        line = current.line
+        column = current.column
+        value = subvalue + value
+
+        return result.position
+      }
+    }
+  }
+}
+
+// Check whether a node is mergeable with adjacent nodes.
+function mergeable(node) {
+  var start
+  var end
+
+  if (node.type !== 'text' || !node.position) {
+    return true
+  }
+
+  start = node.position.start
+  end = node.position.end
+
+  // Only merge nodes which occupy the same size as their `value`.
+  return (
+    start.line !== end.line || end.column - start.column === node.value.length
+  )
+}
+
+// Merge two text nodes: `node` into `prev`.
+function mergeText(prev, node) {
+  prev.value += node.value
+
+  return prev
+}
+
+// Merge two blockquotes: `node` into `prev`, unless in CommonMark mode.
+function mergeBlockquote(prev, node) {
+  if (this.options.commonmark) {
+    return node
+  }
+
+  prev.children = prev.children.concat(node.children)
+
+  return prev
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/unescape.js":
+/*!***************************************************!*\
+  !*** ./node_modules/remark-parse/lib/unescape.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = factory
+
+var backslash = '\\'
+
+// Factory to de-escape a value, based on a list at `key` in `ctx`.
+function factory(ctx, key) {
+  return unescape
+
+  // De-escape a string using the expression at `key` in `ctx`.
+  function unescape(value) {
+    var prev = 0
+    var index = value.indexOf(backslash)
+    var escape = ctx[key]
+    var queue = []
+    var character
+
+    while (index !== -1) {
+      queue.push(value.slice(prev, index))
+      prev = index + 1
+      character = value.charAt(prev)
+
+      // If the following character is not a valid escape, add the slash.
+      if (!character || escape.indexOf(character) === -1) {
+        queue.push(backslash)
+      }
+
+      index = value.indexOf(backslash, prev + 1)
+    }
+
+    queue.push(value.slice(prev))
+
+    return queue.join('')
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/util/get-indentation.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/util/get-indentation.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = indentation
+
+var tab = '\t'
+var space = ' '
+
+var spaceSize = 1
+var tabSize = 4
+
+// Gets indentation information for a line.
+function indentation(value) {
+  var index = 0
+  var indent = 0
+  var character = value.charAt(index)
+  var stops = {}
+  var size
+
+  while (character === tab || character === space) {
+    size = character === tab ? tabSize : spaceSize
+
+    indent += size
+
+    if (size > 1) {
+      indent = Math.floor(indent / size) * size
+    }
+
+    stops[indent] = index
+    character = value.charAt(++index)
+  }
+
+  return {indent: indent, stops: stops}
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/util/html.js":
+/*!****************************************************!*\
+  !*** ./node_modules/remark-parse/lib/util/html.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var attributeName = '[a-zA-Z_:][a-zA-Z0-9:._-]*'
+var unquoted = '[^"\'=<>`\\u0000-\\u0020]+'
+var singleQuoted = "'[^']*'"
+var doubleQuoted = '"[^"]*"'
+var attributeValue =
+  '(?:' + unquoted + '|' + singleQuoted + '|' + doubleQuoted + ')'
+var attribute =
+  '(?:\\s+' + attributeName + '(?:\\s*=\\s*' + attributeValue + ')?)'
+var openTag = '<[A-Za-z][A-Za-z0-9\\-]*' + attribute + '*\\s*\\/?>'
+var closeTag = '<\\/[A-Za-z][A-Za-z0-9\\-]*\\s*>'
+var comment = '<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->'
+var processing = '<[?].*?[?]>'
+var declaration = '<![A-Za-z]+\\s+[^>]*>'
+var cdata = '<!\\[CDATA\\[[\\s\\S]*?\\]\\]>'
+
+exports.openCloseTag = new RegExp('^(?:' + openTag + '|' + closeTag + ')')
+
+exports.tag = new RegExp(
+  '^(?:' +
+    openTag +
+    '|' +
+    closeTag +
+    '|' +
+    comment +
+    '|' +
+    processing +
+    '|' +
+    declaration +
+    '|' +
+    cdata +
+    ')'
+)
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/util/interrupt.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/util/interrupt.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = interrupt
+
+function interrupt(interruptors, tokenizers, ctx, params) {
+  var length = interruptors.length
+  var index = -1
+  var interruptor
+  var config
+
+  while (++index < length) {
+    interruptor = interruptors[index]
+    config = interruptor[1] || {}
+
+    if (
+      config.pedantic !== undefined &&
+      config.pedantic !== ctx.options.pedantic
+    ) {
+      continue
+    }
+
+    if (
+      config.commonmark !== undefined &&
+      config.commonmark !== ctx.options.commonmark
+    ) {
+      continue
+    }
+
+    if (tokenizers[interruptor[0]].apply(ctx, params)) {
+      return true
+    }
+  }
+
+  return false
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/util/normalize.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/remark-parse/lib/util/normalize.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var collapseWhiteSpace = __webpack_require__(/*! collapse-white-space */ "./node_modules/collapse-white-space/index.js")
+
+module.exports = normalize
+
+// Normalize an identifier.  Collapses multiple white space characters into a
+// single space, and removes casing.
+function normalize(value) {
+  return collapseWhiteSpace(value).toLowerCase()
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-parse/lib/util/remove-indentation.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/remark-parse/lib/util/remove-indentation.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var trim = __webpack_require__(/*! trim */ "./node_modules/trim/index.js")
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+var getIndent = __webpack_require__(/*! ./get-indentation */ "./node_modules/remark-parse/lib/util/get-indentation.js")
+
+module.exports = indentation
+
+var tab = '\t'
+var lineFeed = '\n'
+var space = ' '
+var exclamationMark = '!'
+
+// Remove the minimum indent from every line in `value`.  Supports both tab,
+// spaced, and mixed indentation (as well as possible).
+function indentation(value, maximum) {
+  var values = value.split(lineFeed)
+  var position = values.length + 1
+  var minIndent = Infinity
+  var matrix = []
+  var index
+  var indentation
+  var stops
+  var padding
+
+  values.unshift(repeat(space, maximum) + exclamationMark)
+
+  while (position--) {
+    indentation = getIndent(values[position])
+
+    matrix[position] = indentation.stops
+
+    if (trim(values[position]).length === 0) {
+      continue
+    }
+
+    if (indentation.indent) {
+      if (indentation.indent > 0 && indentation.indent < minIndent) {
+        minIndent = indentation.indent
+      }
+    } else {
+      minIndent = Infinity
+
+      break
+    }
+  }
+
+  if (minIndent !== Infinity) {
+    position = values.length
+
+    while (position--) {
+      stops = matrix[position]
+      index = minIndent
+
+      while (index && !(index in stops)) {
+        index--
+      }
+
+      if (
+        trim(values[position]).length !== 0 &&
+        minIndent &&
+        index !== minIndent
+      ) {
+        padding = tab
+      } else {
+        padding = ''
+      }
+
+      values[position] =
+        padding + values[position].slice(index in stops ? stops[index] + 1 : 0)
+    }
+  }
+
+  values.shift()
+
+  return values.join(lineFeed)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-react/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/remark-react/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = react
+
+var toHAST = __webpack_require__(/*! mdast-util-to-hast */ "./node_modules/mdast-util-to-hast/index.js")
+var sanitize = __webpack_require__(/*! hast-util-sanitize */ "./node_modules/hast-util-sanitize/index.js")
+var toH = __webpack_require__(/*! hast-to-hyperscript */ "./node_modules/hast-to-hyperscript/index.js")
+var tableCellStyle = __webpack_require__(/*! @mapbox/hast-util-table-cell-style */ "./node_modules/@mapbox/hast-util-table-cell-style/index.js")
+
+var globalReact
+var globalCreateElement
+var globalFragment
+
+/* istanbul ignore next - Hard to test */
+try {
+  globalReact = __webpack_require__(/*! react */ "./node_modules/react/index.js")
+  globalCreateElement = globalReact.createElement
+  globalFragment = globalReact.Fragment
+} catch (error) {}
+
+var own = {}.hasOwnProperty
+
+function react(options) {
+  var settings = options || {}
+  var createElement = settings.createElement || globalCreateElement
+  var Fragment = settings.fragment || globalFragment
+  var clean = settings.sanitize !== false
+  var scheme =
+    clean && typeof settings.sanitize !== 'boolean' ? settings.sanitize : null
+  var toHastOptions = settings.toHast || {}
+  var components = settings.remarkReactComponents || {}
+
+  this.Compiler = compile
+
+  // Wrapper around `createElement` to pass components in.
+  function h(name, props, children) {
+    return createElement(
+      own.call(components, name) ? components[name] : name,
+      props,
+      children
+    )
+  }
+
+  // Compile mdast to React.
+  function compile(node) {
+    var tree = toHAST(node, toHastOptions)
+    var root
+
+    if (clean) {
+      tree = sanitize(tree, scheme)
+    }
+
+    root = toH(h, tableCellStyle(tree), settings.prefix)
+
+    // If this compiled to a `<div>`, but fragment are possible, use those.
+    if (root.type === 'div' && Fragment) {
+      root = createElement(Fragment, {}, root.props.children)
+    }
+
+    return root
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/remark-stringify/index.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var unherit = __webpack_require__(/*! unherit */ "./node_modules/unherit/index.js")
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var Compiler = __webpack_require__(/*! ./lib/compiler.js */ "./node_modules/remark-stringify/lib/compiler.js")
+
+module.exports = stringify
+stringify.Compiler = Compiler
+
+function stringify(options) {
+  var Local = unherit(Compiler)
+  Local.prototype.options = xtend(
+    Local.prototype.options,
+    this.data('settings'),
+    options
+  )
+  this.Compiler = Local
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/compiler.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/compiler.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var toggle = __webpack_require__(/*! state-toggle */ "./node_modules/state-toggle/index.js")
+
+module.exports = Compiler
+
+// Construct a new compiler.
+function Compiler(tree, file) {
+  this.inLink = false
+  this.inTable = false
+  this.tree = tree
+  this.file = file
+  this.options = xtend(this.options)
+  this.setOptions({})
+}
+
+var proto = Compiler.prototype
+
+// Enter and exit helpers. */
+proto.enterLink = toggle('inLink', false)
+proto.enterTable = toggle('inTable', false)
+proto.enterLinkReference = __webpack_require__(/*! ./util/enter-link-reference */ "./node_modules/remark-stringify/lib/util/enter-link-reference.js")
+
+// Configuration.
+proto.options = __webpack_require__(/*! ./defaults */ "./node_modules/remark-stringify/lib/defaults.js")
+proto.setOptions = __webpack_require__(/*! ./set-options */ "./node_modules/remark-stringify/lib/set-options.js")
+
+proto.compile = __webpack_require__(/*! ./macro/compile */ "./node_modules/remark-stringify/lib/macro/compile.js")
+proto.visit = __webpack_require__(/*! ./macro/one */ "./node_modules/remark-stringify/lib/macro/one.js")
+proto.all = __webpack_require__(/*! ./macro/all */ "./node_modules/remark-stringify/lib/macro/all.js")
+proto.block = __webpack_require__(/*! ./macro/block */ "./node_modules/remark-stringify/lib/macro/block.js")
+proto.visitOrderedItems = __webpack_require__(/*! ./macro/ordered-items */ "./node_modules/remark-stringify/lib/macro/ordered-items.js")
+proto.visitUnorderedItems = __webpack_require__(/*! ./macro/unordered-items */ "./node_modules/remark-stringify/lib/macro/unordered-items.js")
+
+// Expose visitors.
+proto.visitors = {
+  root: __webpack_require__(/*! ./visitors/root */ "./node_modules/remark-stringify/lib/visitors/root.js"),
+  text: __webpack_require__(/*! ./visitors/text */ "./node_modules/remark-stringify/lib/visitors/text.js"),
+  heading: __webpack_require__(/*! ./visitors/heading */ "./node_modules/remark-stringify/lib/visitors/heading.js"),
+  paragraph: __webpack_require__(/*! ./visitors/paragraph */ "./node_modules/remark-stringify/lib/visitors/paragraph.js"),
+  blockquote: __webpack_require__(/*! ./visitors/blockquote */ "./node_modules/remark-stringify/lib/visitors/blockquote.js"),
+  list: __webpack_require__(/*! ./visitors/list */ "./node_modules/remark-stringify/lib/visitors/list.js"),
+  listItem: __webpack_require__(/*! ./visitors/list-item */ "./node_modules/remark-stringify/lib/visitors/list-item.js"),
+  inlineCode: __webpack_require__(/*! ./visitors/inline-code */ "./node_modules/remark-stringify/lib/visitors/inline-code.js"),
+  code: __webpack_require__(/*! ./visitors/code */ "./node_modules/remark-stringify/lib/visitors/code.js"),
+  html: __webpack_require__(/*! ./visitors/html */ "./node_modules/remark-stringify/lib/visitors/html.js"),
+  thematicBreak: __webpack_require__(/*! ./visitors/thematic-break */ "./node_modules/remark-stringify/lib/visitors/thematic-break.js"),
+  strong: __webpack_require__(/*! ./visitors/strong */ "./node_modules/remark-stringify/lib/visitors/strong.js"),
+  emphasis: __webpack_require__(/*! ./visitors/emphasis */ "./node_modules/remark-stringify/lib/visitors/emphasis.js"),
+  break: __webpack_require__(/*! ./visitors/break */ "./node_modules/remark-stringify/lib/visitors/break.js"),
+  delete: __webpack_require__(/*! ./visitors/delete */ "./node_modules/remark-stringify/lib/visitors/delete.js"),
+  link: __webpack_require__(/*! ./visitors/link */ "./node_modules/remark-stringify/lib/visitors/link.js"),
+  linkReference: __webpack_require__(/*! ./visitors/link-reference */ "./node_modules/remark-stringify/lib/visitors/link-reference.js"),
+  imageReference: __webpack_require__(/*! ./visitors/image-reference */ "./node_modules/remark-stringify/lib/visitors/image-reference.js"),
+  definition: __webpack_require__(/*! ./visitors/definition */ "./node_modules/remark-stringify/lib/visitors/definition.js"),
+  image: __webpack_require__(/*! ./visitors/image */ "./node_modules/remark-stringify/lib/visitors/image.js"),
+  footnote: __webpack_require__(/*! ./visitors/footnote */ "./node_modules/remark-stringify/lib/visitors/footnote.js"),
+  footnoteReference: __webpack_require__(/*! ./visitors/footnote-reference */ "./node_modules/remark-stringify/lib/visitors/footnote-reference.js"),
+  footnoteDefinition: __webpack_require__(/*! ./visitors/footnote-definition */ "./node_modules/remark-stringify/lib/visitors/footnote-definition.js"),
+  table: __webpack_require__(/*! ./visitors/table */ "./node_modules/remark-stringify/lib/visitors/table.js"),
+  tableCell: __webpack_require__(/*! ./visitors/table-cell */ "./node_modules/remark-stringify/lib/visitors/table-cell.js")
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/defaults.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/defaults.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  gfm: true,
+  commonmark: false,
+  pedantic: false,
+  entities: 'false',
+  setext: false,
+  closeAtx: false,
+  looseTable: false,
+  spacedTable: true,
+  paddedTable: true,
+  stringLength: stringLength,
+  incrementListMarker: true,
+  fences: false,
+  fence: '`',
+  bullet: '-',
+  listItemIndent: 'tab',
+  rule: '*',
+  ruleSpaces: true,
+  ruleRepetition: 3,
+  strong: '*',
+  emphasis: '_'
+}
+
+function stringLength(value) {
+  return value.length
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/escape.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/escape.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var decimal = __webpack_require__(/*! is-decimal */ "./node_modules/is-decimal/index.js")
+var alphanumeric = __webpack_require__(/*! is-alphanumeric */ "./node_modules/is-alphanumeric/index.js")
+var whitespace = __webpack_require__(/*! is-whitespace-character */ "./node_modules/is-whitespace-character/index.js")
+var escapes = __webpack_require__(/*! markdown-escapes */ "./node_modules/markdown-escapes/index.js")
+var prefix = __webpack_require__(/*! ./util/entity-prefix-length */ "./node_modules/remark-stringify/lib/util/entity-prefix-length.js")
+
+module.exports = factory
+
+var tab = '\t'
+var lineFeed = '\n'
+var space = ' '
+var numberSign = '#'
+var ampersand = '&'
+var leftParenthesis = '('
+var rightParenthesis = ')'
+var asterisk = '*'
+var plusSign = '+'
+var dash = '-'
+var dot = '.'
+var colon = ':'
+var lessThan = '<'
+var greaterThan = '>'
+var leftSquareBracket = '['
+var backslash = '\\'
+var rightSquareBracket = ']'
+var underscore = '_'
+var graveAccent = '`'
+var verticalBar = '|'
+var tilde = '~'
+var exclamationMark = '!'
+
+var entities = {
+  '<': '&lt;',
+  ':': '&#x3A;',
+  '&': '&amp;',
+  '|': '&#x7C;',
+  '~': '&#x7E;'
+}
+
+var shortcut = 'shortcut'
+var mailto = 'mailto'
+var https = 'https'
+var http = 'http'
+
+var blankExpression = /\n\s*$/
+
+// Factory to escape characters.
+function factory(options) {
+  return escape
+
+  // Escape punctuation characters in a node’s value.
+  function escape(value, node, parent) {
+    var self = this
+    var gfm = options.gfm
+    var commonmark = options.commonmark
+    var pedantic = options.pedantic
+    var markers = commonmark ? [dot, rightParenthesis] : [dot]
+    var siblings = parent && parent.children
+    var index = siblings && siblings.indexOf(node)
+    var prev = siblings && siblings[index - 1]
+    var next = siblings && siblings[index + 1]
+    var length = value.length
+    var escapable = escapes(options)
+    var position = -1
+    var queue = []
+    var escaped = queue
+    var afterNewLine
+    var character
+    var wordCharBefore
+    var wordCharAfter
+    var offset
+    var replace
+
+    if (prev) {
+      afterNewLine = text(prev) && blankExpression.test(prev.value)
+    } else {
+      afterNewLine =
+        !parent || parent.type === 'root' || parent.type === 'paragraph'
+    }
+
+    while (++position < length) {
+      character = value.charAt(position)
+      replace = false
+
+      if (character === '\n') {
+        afterNewLine = true
+      } else if (
+        character === backslash ||
+        character === graveAccent ||
+        character === asterisk ||
+        (character === exclamationMark &&
+          value.charAt(position + 1) === leftSquareBracket) ||
+        character === leftSquareBracket ||
+        character === lessThan ||
+        (character === ampersand && prefix(value.slice(position)) > 0) ||
+        (character === rightSquareBracket && self.inLink) ||
+        (gfm && character === tilde && value.charAt(position + 1) === tilde) ||
+        (gfm &&
+          character === verticalBar &&
+          (self.inTable || alignment(value, position))) ||
+        (character === underscore &&
+          // Delegate leading/trailing underscores to the multinode version below.
+          position > 0 &&
+          position < length - 1 &&
+          (pedantic ||
+            !alphanumeric(value.charAt(position - 1)) ||
+            !alphanumeric(value.charAt(position + 1)))) ||
+        (gfm && !self.inLink && character === colon && protocol(queue.join('')))
+      ) {
+        replace = true
+      } else if (afterNewLine) {
+        if (
+          character === greaterThan ||
+          character === numberSign ||
+          character === asterisk ||
+          character === dash ||
+          character === plusSign
+        ) {
+          replace = true
+        } else if (decimal(character)) {
+          offset = position + 1
+
+          while (offset < length) {
+            if (!decimal(value.charAt(offset))) {
+              break
+            }
+
+            offset++
+          }
+
+          if (markers.indexOf(value.charAt(offset)) !== -1) {
+            next = value.charAt(offset + 1)
+
+            if (!next || next === space || next === tab || next === lineFeed) {
+              queue.push(value.slice(position, offset))
+              position = offset
+              character = value.charAt(position)
+              replace = true
+            }
+          }
+        }
+      }
+
+      if (afterNewLine && !whitespace(character)) {
+        afterNewLine = false
+      }
+
+      queue.push(replace ? one(character) : character)
+    }
+
+    // Multi-node versions.
+    if (siblings && text(node)) {
+      // Check for an opening parentheses after a link-reference (which can be
+      // joined by white-space).
+      if (prev && prev.referenceType === shortcut) {
+        position = -1
+        length = escaped.length
+
+        while (++position < length) {
+          character = escaped[position]
+
+          if (character === space || character === tab) {
+            continue
+          }
+
+          if (character === leftParenthesis || character === colon) {
+            escaped[position] = one(character)
+          }
+
+          break
+        }
+
+        // If the current node is all spaces / tabs, preceded by a shortcut,
+        // and followed by a text starting with `(`, escape it.
+        if (
+          text(next) &&
+          position === length &&
+          next.value.charAt(0) === leftParenthesis
+        ) {
+          escaped.push(backslash)
+        }
+      }
+
+      // Ensure non-auto-links are not seen as links.  This pattern needs to
+      // check the preceding nodes too.
+      if (
+        gfm &&
+        !self.inLink &&
+        text(prev) &&
+        value.charAt(0) === colon &&
+        protocol(prev.value.slice(-6))
+      ) {
+        escaped[0] = one(colon)
+      }
+
+      // Escape ampersand if it would otherwise start an entity.
+      if (
+        text(next) &&
+        value.charAt(length - 1) === ampersand &&
+        prefix(ampersand + next.value) !== 0
+      ) {
+        escaped[escaped.length - 1] = one(ampersand)
+      }
+
+      // Escape exclamation marks immediately followed by links.
+      if (
+        next &&
+        next.type === 'link' &&
+        value.charAt(length - 1) === exclamationMark
+      ) {
+        escaped[escaped.length - 1] = one(exclamationMark)
+      }
+
+      // Escape double tildes in GFM.
+      if (
+        gfm &&
+        text(next) &&
+        value.charAt(length - 1) === tilde &&
+        next.value.charAt(0) === tilde
+      ) {
+        escaped.splice(escaped.length - 1, 0, backslash)
+      }
+
+      // Escape underscores, but not mid-word (unless in pedantic mode).
+      wordCharBefore = text(prev) && alphanumeric(prev.value.slice(-1))
+      wordCharAfter = text(next) && alphanumeric(next.value.charAt(0))
+
+      if (length === 1) {
+        if (
+          value === underscore &&
+          (pedantic || !wordCharBefore || !wordCharAfter)
+        ) {
+          escaped.unshift(backslash)
+        }
+      } else {
+        if (
+          value.charAt(0) === underscore &&
+          (pedantic || !wordCharBefore || !alphanumeric(value.charAt(1)))
+        ) {
+          escaped.unshift(backslash)
+        }
+
+        if (
+          value.charAt(length - 1) === underscore &&
+          (pedantic ||
+            !wordCharAfter ||
+            !alphanumeric(value.charAt(length - 2)))
+        ) {
+          escaped.splice(escaped.length - 1, 0, backslash)
+        }
+      }
+    }
+
+    return escaped.join('')
+
+    function one(character) {
+      return escapable.indexOf(character) === -1
+        ? entities[character]
+        : backslash + character
+    }
+  }
+}
+
+// Check if `index` in `value` is inside an alignment row.
+function alignment(value, index) {
+  var start = value.lastIndexOf(lineFeed, index)
+  var end = value.indexOf(lineFeed, index)
+  var char
+
+  end = end === -1 ? value.length : end
+
+  while (++start < end) {
+    char = value.charAt(start)
+
+    if (
+      char !== colon &&
+      char !== dash &&
+      char !== space &&
+      char !== verticalBar
+    ) {
+      return false
+    }
+  }
+
+  return true
+}
+
+// Check if `node` is a text node.
+function text(node) {
+  return node && node.type === 'text'
+}
+
+// Check if `value` ends in a protocol.
+function protocol(value) {
+  var val = value.slice(-6).toLowerCase()
+  return val === mailto || val.slice(-5) === https || val.slice(-4) === http
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/macro/all.js":
+/*!********************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/macro/all.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = all
+
+// Visit all children of `parent`.
+function all(parent) {
+  var self = this
+  var children = parent.children
+  var length = children.length
+  var results = []
+  var index = -1
+
+  while (++index < length) {
+    results[index] = self.visit(children[index], parent)
+  }
+
+  return results
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/macro/block.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/macro/block.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = block
+
+var lineFeed = '\n'
+
+var blank = lineFeed + lineFeed
+var triple = blank + lineFeed
+var comment = blank + '<!---->' + blank
+
+// Stringify a block node with block children (e.g., `root` or `blockquote`).
+// Knows about code following a list, or adjacent lists with similar bullets,
+// and places an extra line feed between them.
+function block(node) {
+  var self = this
+  var options = self.options
+  var fences = options.fences
+  var gap = options.commonmark ? comment : triple
+  var values = []
+  var children = node.children
+  var length = children.length
+  var index = -1
+  var prev
+  var child
+
+  while (++index < length) {
+    prev = child
+    child = children[index]
+
+    if (prev) {
+      // A list preceding another list that are equally ordered, or a
+      // list preceding an indented code block, need a gap between them,
+      // so as not to see them as one list, or content of the list,
+      // respectively.
+      //
+      // In commonmark, only something that breaks both up can do that,
+      // so we opt for an empty, invisible comment.  In other flavours,
+      // two blank lines are fine.
+      if (
+        prev.type === 'list' &&
+        ((child.type === 'list' && prev.ordered === child.ordered) ||
+          (child.type === 'code' && (!child.lang && !fences)))
+      ) {
+        values.push(gap)
+      } else {
+        values.push(blank)
+      }
+    }
+
+    values.push(self.visit(child, node))
+  }
+
+  return values.join('')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/macro/compile.js":
+/*!************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/macro/compile.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var compact = __webpack_require__(/*! mdast-util-compact */ "./node_modules/mdast-util-compact/index.js")
+
+module.exports = compile
+
+// Stringify the given tree.
+function compile() {
+  return this.visit(compact(this.tree, this.options.commonmark))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/macro/one.js":
+/*!********************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/macro/one.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = one
+
+function one(node, parent) {
+  var self = this
+  var visitors = self.visitors
+
+  // Fail on unknown nodes.
+  if (typeof visitors[node.type] !== 'function') {
+    self.file.fail(
+      new Error(
+        'Missing compiler for node of type `' + node.type + '`: `' + node + '`'
+      ),
+      node
+    )
+  }
+
+  return visitors[node.type].call(self, node, parent)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/macro/ordered-items.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/macro/ordered-items.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = orderedItems
+
+var lineFeed = '\n'
+var dot = '.'
+
+var blank = lineFeed + lineFeed
+
+// Visit ordered list items.
+//
+// Starts the list with
+// `node.start` and increments each following list item
+// bullet by one:
+//
+//     2. foo
+//     3. bar
+//
+// In `incrementListMarker: false` mode, does not increment
+// each marker and stays on `node.start`:
+//
+//     1. foo
+//     1. bar
+function orderedItems(node) {
+  var self = this
+  var fn = self.visitors.listItem
+  var increment = self.options.incrementListMarker
+  var values = []
+  var start = node.start
+  var children = node.children
+  var length = children.length
+  var index = -1
+  var bullet
+
+  start = start == null ? 1 : start
+
+  while (++index < length) {
+    bullet = (increment ? start + index : start) + dot
+    values[index] = fn.call(self, children[index], node, index, bullet)
+  }
+
+  return values.join(node.spread ? blank : lineFeed)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/macro/unordered-items.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/macro/unordered-items.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = unorderedItems
+
+var lineFeed = '\n'
+
+var blank = lineFeed + lineFeed
+
+// Visit unordered list items.  Uses `options.bullet` as each item’s bullet.
+function unorderedItems(node) {
+  var self = this
+  var bullet = self.options.bullet
+  var fn = self.visitors.listItem
+  var children = node.children
+  var length = children.length
+  var index = -1
+  var values = []
+
+  while (++index < length) {
+    values[index] = fn.call(self, children[index], node, index, bullet)
+  }
+
+  return values.join(node.spread ? blank : lineFeed)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/set-options.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/set-options.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var encode = __webpack_require__(/*! stringify-entities */ "./node_modules/stringify-entities/index.js")
+var defaults = __webpack_require__(/*! ./defaults */ "./node_modules/remark-stringify/lib/defaults.js")
+var escapeFactory = __webpack_require__(/*! ./escape */ "./node_modules/remark-stringify/lib/escape.js")
+var identity = __webpack_require__(/*! ./util/identity */ "./node_modules/remark-stringify/lib/util/identity.js")
+
+module.exports = setOptions
+
+// Map of applicable enums.
+var maps = {
+  entities: {true: true, false: true, numbers: true, escape: true},
+  bullet: {'*': true, '-': true, '+': true},
+  rule: {'-': true, _: true, '*': true},
+  listItemIndent: {tab: true, mixed: true, 1: true},
+  emphasis: {_: true, '*': true},
+  strong: {_: true, '*': true},
+  fence: {'`': true, '~': true}
+}
+
+// Expose `validate`.
+var validate = {
+  boolean: validateBoolean,
+  string: validateString,
+  number: validateNumber,
+  function: validateFunction
+}
+
+// Set options.  Does not overwrite previously set options.
+function setOptions(options) {
+  var self = this
+  var current = self.options
+  var ruleRepetition
+  var key
+
+  if (options == null) {
+    options = {}
+  } else if (typeof options === 'object') {
+    options = xtend(options)
+  } else {
+    throw new Error('Invalid value `' + options + '` for setting `options`')
+  }
+
+  for (key in defaults) {
+    validate[typeof defaults[key]](options, key, current[key], maps[key])
+  }
+
+  ruleRepetition = options.ruleRepetition
+
+  if (ruleRepetition && ruleRepetition < 3) {
+    raise(ruleRepetition, 'options.ruleRepetition')
+  }
+
+  self.encode = encodeFactory(String(options.entities))
+  self.escape = escapeFactory(options)
+
+  self.options = options
+
+  return self
+}
+
+// Validate a value to be boolean. Defaults to `def`.  Raises an exception with
+// `context[name]` when not a boolean.
+function validateBoolean(context, name, def) {
+  var value = context[name]
+
+  if (value == null) {
+    value = def
+  }
+
+  if (typeof value !== 'boolean') {
+    raise(value, 'options.' + name)
+  }
+
+  context[name] = value
+}
+
+// Validate a value to be boolean. Defaults to `def`.  Raises an exception with
+// `context[name]` when not a boolean.
+function validateNumber(context, name, def) {
+  var value = context[name]
+
+  if (value == null) {
+    value = def
+  }
+
+  if (isNaN(value)) {
+    raise(value, 'options.' + name)
+  }
+
+  context[name] = value
+}
+
+// Validate a value to be in `map`. Defaults to `def`.  Raises an exception
+// with `context[name]` when not in `map`.
+function validateString(context, name, def, map) {
+  var value = context[name]
+
+  if (value == null) {
+    value = def
+  }
+
+  value = String(value)
+
+  if (!(value in map)) {
+    raise(value, 'options.' + name)
+  }
+
+  context[name] = value
+}
+
+// Validate a value to be function. Defaults to `def`.  Raises an exception
+// with `context[name]` when not a function.
+function validateFunction(context, name, def) {
+  var value = context[name]
+
+  if (value == null) {
+    value = def
+  }
+
+  if (typeof value !== 'function') {
+    raise(value, 'options.' + name)
+  }
+
+  context[name] = value
+}
+
+// Factory to encode HTML entities.  Creates a no-operation function when
+// `type` is `'false'`, a function which encodes using named references when
+// `type` is `'true'`, and a function which encodes using numbered references
+// when `type` is `'numbers'`.
+function encodeFactory(type) {
+  var options = {}
+
+  if (type === 'false') {
+    return identity
+  }
+
+  if (type === 'true') {
+    options.useNamedReferences = true
+  }
+
+  if (type === 'escape') {
+    options.escapeOnly = true
+    options.useNamedReferences = true
+  }
+
+  return wrapped
+
+  // Encode HTML entities using the bound options.
+  function wrapped(value) {
+    return encode(value, options)
+  }
+}
+
+// Throw an exception with in its `message` `value` and `name`.
+function raise(value, name) {
+  throw new Error('Invalid value `' + value + '` for setting `' + name + '`')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/util/copy-identifier-encoding.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/util/copy-identifier-encoding.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entityPrefixLength = __webpack_require__(/*! ./entity-prefix-length */ "./node_modules/remark-stringify/lib/util/entity-prefix-length.js")
+
+module.exports = copy
+
+var ampersand = '&'
+
+var punctuationExppresion = /[-!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~_]/
+
+// For shortcut and collapsed reference links, the contents is also an
+// identifier, so we need to restore the original encoding and escaping
+// that were present in the source string.
+//
+// This function takes the unescaped & unencoded value from shortcut’s
+// child nodes and the identifier and encodes the former according to
+// the latter.
+function copy(value, identifier) {
+  var length = value.length
+  var count = identifier.length
+  var result = []
+  var position = 0
+  var index = 0
+  var start
+
+  while (index < length) {
+    // Take next non-punctuation characters from `value`.
+    start = index
+
+    while (index < length && !punctuationExppresion.test(value.charAt(index))) {
+      index += 1
+    }
+
+    result.push(value.slice(start, index))
+
+    // Advance `position` to the next punctuation character.
+    while (
+      position < count &&
+      !punctuationExppresion.test(identifier.charAt(position))
+    ) {
+      position += 1
+    }
+
+    // Take next punctuation characters from `identifier`.
+    start = position
+
+    while (
+      position < count &&
+      punctuationExppresion.test(identifier.charAt(position))
+    ) {
+      if (identifier.charAt(position) === ampersand) {
+        position += entityPrefixLength(identifier.slice(position))
+      }
+
+      position += 1
+    }
+
+    result.push(identifier.slice(start, position))
+
+    // Advance `index` to the next non-punctuation character.
+    while (index < length && punctuationExppresion.test(value.charAt(index))) {
+      index += 1
+    }
+  }
+
+  return result.join('')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/util/enclose-title.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/util/enclose-title.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = enclose
+
+var quotationMark = '"'
+var apostrophe = "'"
+
+// There is currently no way to support nested delimiters across Markdown.pl,
+// CommonMark, and GitHub (RedCarpet).  The following code supports Markdown.pl
+// and GitHub.
+// CommonMark is not supported when mixing double- and single quotes inside a
+// title.
+function enclose(title) {
+  var delimiter =
+    title.indexOf(quotationMark) === -1 ? quotationMark : apostrophe
+  return delimiter + title + delimiter
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/util/enclose-uri.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/util/enclose-uri.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var count = __webpack_require__(/*! ccount */ "./node_modules/ccount/index.js")
+
+module.exports = enclose
+
+var leftParenthesis = '('
+var rightParenthesis = ')'
+var lessThan = '<'
+var greaterThan = '>'
+
+var expression = /\s/
+
+// Wrap `url` in angle brackets when needed, or when
+// forced.
+// In links, images, and definitions, the URL part needs
+// to be enclosed when it:
+//
+// - has a length of `0`
+// - contains white-space
+// - has more or less opening than closing parentheses
+function enclose(uri, always) {
+  if (
+    always ||
+    uri.length === 0 ||
+    expression.test(uri) ||
+    count(uri, leftParenthesis) !== count(uri, rightParenthesis)
+  ) {
+    return lessThan + uri + greaterThan
+  }
+
+  return uri
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/util/enter-link-reference.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/util/enter-link-reference.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var identity = __webpack_require__(/*! ./identity */ "./node_modules/remark-stringify/lib/util/identity.js")
+
+module.exports = enter
+
+// Shortcut and collapsed link references need no escaping and encoding during
+// the processing of child nodes (it must be implied from identifier).
+//
+// This toggler turns encoding and escaping off for shortcut and collapsed
+// references.
+//
+// Implies `enterLink`.
+function enter(compiler, node) {
+  var encode = compiler.encode
+  var escape = compiler.escape
+  var exitLink = compiler.enterLink()
+
+  if (node.referenceType !== 'shortcut' && node.referenceType !== 'collapsed') {
+    return exitLink
+  }
+
+  compiler.escape = identity
+  compiler.encode = identity
+
+  return exit
+
+  function exit() {
+    compiler.encode = encode
+    compiler.escape = escape
+    exitLink()
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/util/entity-prefix-length.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/util/entity-prefix-length.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var decode = __webpack_require__(/*! parse-entities */ "./node_modules/parse-entities/index.js")
+
+module.exports = length
+
+var ampersand = '&'
+
+// Returns the length of HTML entity that is a prefix of the given string
+// (excluding the ampersand), 0 if it does not start with an entity.
+function length(value) {
+  var prefix
+
+  /* istanbul ignore if - Currently also tested for at implemention, but we
+   * keep it here because that’s proper. */
+  if (value.charAt(0) !== ampersand) {
+    return 0
+  }
+
+  prefix = value.split(ampersand, 2).join(ampersand)
+
+  return prefix.length - decode(prefix).length
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/util/identity.js":
+/*!************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/util/identity.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = identity
+
+function identity(value) {
+  return value
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/util/label.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/util/label.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = label
+
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+
+var shortcut = 'shortcut'
+var collapsed = 'collapsed'
+
+// Stringify a reference label.
+// Because link references are easily, mistakingly, created (for example,
+// `[foo]`), reference nodes have an extra property depicting how it looked in
+// the original document, so stringification can cause minimal changes.
+function label(node) {
+  var type = node.referenceType
+
+  if (type === shortcut) {
+    return ''
+  }
+
+  return (
+    leftSquareBracket +
+    (type === collapsed ? '' : node.label || node.identifier) +
+    rightSquareBracket
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/util/pad.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/util/pad.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+
+module.exports = pad
+
+var lineFeed = '\n'
+var space = ' '
+
+var tabSize = 4
+
+// Pad `value` with `level * tabSize` spaces.  Respects lines.  Ignores empty
+// lines.
+function pad(value, level) {
+  var values = value.split(lineFeed)
+  var index = values.length
+  var padding = repeat(space, level * tabSize)
+
+  while (index--) {
+    if (values[index].length !== 0) {
+      values[index] = padding + values[index]
+    }
+  }
+
+  return values.join(lineFeed)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/blockquote.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/blockquote.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = blockquote
+
+var lineFeed = '\n'
+var space = ' '
+var greaterThan = '>'
+
+function blockquote(node) {
+  var values = this.block(node).split(lineFeed)
+  var result = []
+  var length = values.length
+  var index = -1
+  var value
+
+  while (++index < length) {
+    value = values[index]
+    result[index] = (value ? space : '') + value
+  }
+
+  return greaterThan + result.join(lineFeed + greaterThan)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/break.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/break.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = lineBreak
+
+var backslash = '\\'
+var lineFeed = '\n'
+var space = ' '
+
+var commonmark = backslash + lineFeed
+var normal = space + space + lineFeed
+
+function lineBreak() {
+  return this.options.commonmark ? commonmark : normal
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/code.js":
+/*!************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/code.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var streak = __webpack_require__(/*! longest-streak */ "./node_modules/longest-streak/index.js")
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+var pad = __webpack_require__(/*! ../util/pad */ "./node_modules/remark-stringify/lib/util/pad.js")
+
+module.exports = code
+
+var lineFeed = '\n'
+var space = ' '
+
+// Stringify code.
+// Creates indented code when:
+//
+// - No language tag exists
+// - Not in `fences: true` mode
+// - A non-empty value exists
+//
+// Otherwise, GFM fenced code is created:
+//
+// ````markdown
+// ```js
+// foo();
+// ```
+// ````
+//
+// When in ``fence: `~` `` mode, uses tildes as fences:
+//
+// ```markdown
+// ~~~js
+// foo();
+// ~~~
+// ```
+//
+// Knows about internal fences:
+//
+// `````markdown
+// ````markdown
+// ```javascript
+// foo();
+// ```
+// ````
+// `````
+function code(node, parent) {
+  var self = this
+  var value = node.value
+  var options = self.options
+  var marker = options.fence
+  var info = node.lang || ''
+  var fence
+
+  if (info && node.meta) {
+    info += space + node.meta
+  }
+
+  info = self.encode(self.escape(info, node))
+
+  // Without (needed) fences.
+  if (!info && !options.fences && value) {
+    // Throw when pedantic, in a list item which isn’t compiled using a tab.
+    if (
+      parent &&
+      parent.type === 'listItem' &&
+      options.listItemIndent !== 'tab' &&
+      options.pedantic
+    ) {
+      self.file.fail(
+        'Cannot indent code properly. See https://git.io/fxKR8',
+        node.position
+      )
+    }
+
+    return pad(value, 1)
+  }
+
+  fence = repeat(marker, Math.max(streak(value, marker) + 1, 3))
+
+  return fence + info + lineFeed + value + lineFeed + fence
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/definition.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/definition.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var uri = __webpack_require__(/*! ../util/enclose-uri */ "./node_modules/remark-stringify/lib/util/enclose-uri.js")
+var title = __webpack_require__(/*! ../util/enclose-title */ "./node_modules/remark-stringify/lib/util/enclose-title.js")
+
+module.exports = definition
+
+var space = ' '
+var colon = ':'
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+
+// Stringify an URL definition.
+//
+// Is smart about enclosing `url` (see `encloseURI()`) and `title` (see
+// `encloseTitle()`).
+//
+// ```markdown
+// [foo]: <foo at bar dot com> 'An "example" e-mail'
+// ```
+function definition(node) {
+  var content = uri(node.url)
+
+  if (node.title) {
+    content += space + title(node.title)
+  }
+
+  return (
+    leftSquareBracket +
+    (node.label || node.identifier) +
+    rightSquareBracket +
+    colon +
+    space +
+    content
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/delete.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/delete.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = strikethrough
+
+var tilde = '~'
+
+var fence = tilde + tilde
+
+function strikethrough(node) {
+  return fence + this.all(node).join('') + fence
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/emphasis.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/emphasis.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = emphasis
+
+var underscore = '_'
+var asterisk = '*'
+
+// Stringify an `emphasis`.
+//
+// The marker used is configurable through `emphasis`, which defaults to an
+// underscore (`'_'`) but also accepts an asterisk (`'*'`):
+//
+// ```markdown
+// *foo*
+// ```
+//
+// In `pedantic` mode, text which itself contains an underscore will cause the
+// marker to default to an asterisk instead:
+//
+// ```markdown
+// *foo_bar*
+// ```
+function emphasis(node) {
+  var marker = this.options.emphasis
+  var content = this.all(node).join('')
+
+  // When in pedantic mode, prevent using underscore as the marker when there
+  // are underscores in the content.
+  if (
+    this.options.pedantic &&
+    marker === underscore &&
+    content.indexOf(marker) !== -1
+  ) {
+    marker = asterisk
+  }
+
+  return marker + content + marker
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/footnote-definition.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/footnote-definition.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+
+var lineFeed = '\n'
+var space = ' '
+var colon = ':'
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+var caret = '^'
+
+var tabSize = 4
+var blank = lineFeed + lineFeed
+var indent = repeat(space, tabSize)
+
+module.exports = footnoteDefinition
+
+function footnoteDefinition(node) {
+  var content = this.all(node).join(blank + indent)
+
+  return (
+    leftSquareBracket +
+    caret +
+    (node.label || node.identifier) +
+    rightSquareBracket +
+    colon +
+    space +
+    content
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/footnote-reference.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/footnote-reference.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = footnoteReference
+
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+var caret = '^'
+
+function footnoteReference(node) {
+  return (
+    leftSquareBracket +
+    caret +
+    (node.label || node.identifier) +
+    rightSquareBracket
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/footnote.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/footnote.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = footnote
+
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+var caret = '^'
+
+function footnote(node) {
+  return (
+    leftSquareBracket + caret + this.all(node).join('') + rightSquareBracket
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/heading.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/heading.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+
+module.exports = heading
+
+var lineFeed = '\n'
+var space = ' '
+var numberSign = '#'
+var dash = '-'
+var equalsTo = '='
+
+// Stringify a heading.
+//
+// In `setext: true` mode and when `depth` is smaller than three, creates a
+// setext header:
+//
+// ```markdown
+// Foo
+// ===
+// ```
+//
+// Otherwise, an ATX header is generated:
+//
+// ```markdown
+// ### Foo
+// ```
+//
+// In `closeAtx: true` mode, the header is closed with hashes:
+//
+// ```markdown
+// ### Foo ###
+// ```
+function heading(node) {
+  var self = this
+  var depth = node.depth
+  var setext = self.options.setext
+  var closeAtx = self.options.closeAtx
+  var content = self.all(node).join('')
+  var prefix
+
+  if (setext && depth < 3) {
+    return (
+      content + lineFeed + repeat(depth === 1 ? equalsTo : dash, content.length)
+    )
+  }
+
+  prefix = repeat(numberSign, node.depth)
+
+  return prefix + space + content + (closeAtx ? space + prefix : '')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/html.js":
+/*!************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/html.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = html
+
+function html(node) {
+  return node.value
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/image-reference.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/image-reference.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var label = __webpack_require__(/*! ../util/label */ "./node_modules/remark-stringify/lib/util/label.js")
+
+module.exports = imageReference
+
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+var exclamationMark = '!'
+
+function imageReference(node) {
+  return (
+    exclamationMark +
+    leftSquareBracket +
+    (this.encode(node.alt, node) || '') +
+    rightSquareBracket +
+    label(node)
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/image.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/image.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var uri = __webpack_require__(/*! ../util/enclose-uri */ "./node_modules/remark-stringify/lib/util/enclose-uri.js")
+var title = __webpack_require__(/*! ../util/enclose-title */ "./node_modules/remark-stringify/lib/util/enclose-title.js")
+
+module.exports = image
+
+var space = ' '
+var leftParenthesis = '('
+var rightParenthesis = ')'
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+var exclamationMark = '!'
+
+// Stringify an image.
+//
+// Is smart about enclosing `url` (see `encloseURI()`) and `title` (see
+// `encloseTitle()`).
+//
+// ```markdown
+// ![foo](</fav icon.png> 'My "favourite" icon')
+// ```
+//
+// Supports named entities in `url`, `alt`, and `title` when in
+// `settings.encode` mode.
+function image(node) {
+  var self = this
+  var content = uri(self.encode(node.url || '', node))
+  var exit = self.enterLink()
+  var alt = self.encode(self.escape(node.alt || '', node))
+
+  exit()
+
+  if (node.title) {
+    content += space + title(self.encode(node.title, node))
+  }
+
+  return (
+    exclamationMark +
+    leftSquareBracket +
+    alt +
+    rightSquareBracket +
+    leftParenthesis +
+    content +
+    rightParenthesis
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/inline-code.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/inline-code.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var streak = __webpack_require__(/*! longest-streak */ "./node_modules/longest-streak/index.js")
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+
+module.exports = inlineCode
+
+var space = ' '
+var graveAccent = '`'
+
+// Stringify inline code.
+//
+// Knows about internal ticks (`\``), and ensures one more tick is used to
+// enclose the inline code:
+//
+// ````markdown
+// ```foo ``bar`` baz```
+// ````
+//
+// Even knows about inital and final ticks:
+//
+// ``markdown
+// `` `foo ``
+// `` foo` ``
+// ```
+function inlineCode(node) {
+  var value = node.value
+  var ticks = repeat(graveAccent, streak(value, graveAccent) + 1)
+  var start = ticks
+  var end = ticks
+
+  if (value.charAt(0) === graveAccent) {
+    start += space
+  }
+
+  if (value.charAt(value.length - 1) === graveAccent) {
+    end = space + end
+  }
+
+  return start + value + end
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/link-reference.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/link-reference.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var copy = __webpack_require__(/*! ../util/copy-identifier-encoding */ "./node_modules/remark-stringify/lib/util/copy-identifier-encoding.js")
+var label = __webpack_require__(/*! ../util/label */ "./node_modules/remark-stringify/lib/util/label.js")
+
+module.exports = linkReference
+
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+
+var shortcut = 'shortcut'
+var collapsed = 'collapsed'
+
+function linkReference(node) {
+  var self = this
+  var type = node.referenceType
+  var exit = self.enterLinkReference(self, node)
+  var value = self.all(node).join('')
+
+  exit()
+
+  if (type === shortcut || type === collapsed) {
+    value = copy(value, node.label || node.identifier)
+  }
+
+  return leftSquareBracket + value + rightSquareBracket + label(node)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/link.js":
+/*!************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/link.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var uri = __webpack_require__(/*! ../util/enclose-uri */ "./node_modules/remark-stringify/lib/util/enclose-uri.js")
+var title = __webpack_require__(/*! ../util/enclose-title */ "./node_modules/remark-stringify/lib/util/enclose-title.js")
+
+module.exports = link
+
+var space = ' '
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+var leftParenthesis = '('
+var rightParenthesis = ')'
+
+// Expression for a protocol:
+// See <http://en.wikipedia.org/wiki/URI_scheme#Generic_syntax>.
+var protocol = /^[a-z][a-z+.-]+:\/?/i
+
+// Stringify a link.
+//
+// When no title exists, the compiled `children` equal `url`, and `url` starts
+// with a protocol, an auto link is created:
+//
+// ```markdown
+// <http://example.com>
+// ```
+//
+// Otherwise, is smart about enclosing `url` (see `encloseURI()`) and `title`
+// (see `encloseTitle()`).
+// ```
+//
+// ```markdown
+// [foo](<foo at bar dot com> 'An "example" e-mail')
+// ```
+//
+// Supports named entities in the `url` and `title` when in `settings.encode`
+// mode.
+function link(node) {
+  var self = this
+  var content = self.encode(node.url || '', node)
+  var exit = self.enterLink()
+  var escaped = self.encode(self.escape(node.url || '', node))
+  var value = self.all(node).join('')
+
+  exit()
+
+  if (node.title == null && protocol.test(content) && escaped === value) {
+    // Backslash escapes do not work in autolinks, so we do not escape.
+    return uri(self.encode(node.url), true)
+  }
+
+  content = uri(content)
+
+  if (node.title) {
+    content += space + title(self.encode(self.escape(node.title, node), node))
+  }
+
+  return (
+    leftSquareBracket +
+    value +
+    rightSquareBracket +
+    leftParenthesis +
+    content +
+    rightParenthesis
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/list-item.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/list-item.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+var pad = __webpack_require__(/*! ../util/pad */ "./node_modules/remark-stringify/lib/util/pad.js")
+
+module.exports = listItem
+
+var lineFeed = '\n'
+var space = ' '
+var leftSquareBracket = '['
+var rightSquareBracket = ']'
+var lowercaseX = 'x'
+
+var ceil = Math.ceil
+var blank = lineFeed + lineFeed
+
+var tabSize = 4
+
+// Stringify a list item.
+//
+// Prefixes the content with a checked checkbox when `checked: true`:
+//
+// ```markdown
+// [x] foo
+// ```
+//
+// Prefixes the content with an unchecked checkbox when `checked: false`:
+//
+// ```markdown
+// [ ] foo
+// ```
+function listItem(node, parent, position, bullet) {
+  var self = this
+  var style = self.options.listItemIndent
+  var marker = bullet || self.options.bullet
+  var spread = node.spread == null ? true : node.spread
+  var checked = node.checked
+  var children = node.children
+  var length = children.length
+  var values = []
+  var index = -1
+  var value
+  var indent
+  var spacing
+
+  while (++index < length) {
+    values[index] = self.visit(children[index], node)
+  }
+
+  value = values.join(spread ? blank : lineFeed)
+
+  if (typeof checked === 'boolean') {
+    // Note: I’d like to be able to only add the space between the check and
+    // the value, but unfortunately github does not support empty list-items
+    // with a checkbox :(
+    value =
+      leftSquareBracket +
+      (checked ? lowercaseX : space) +
+      rightSquareBracket +
+      space +
+      value
+  }
+
+  if (style === '1' || (style === 'mixed' && value.indexOf(lineFeed) === -1)) {
+    indent = marker.length + 1
+    spacing = space
+  } else {
+    indent = ceil((marker.length + 1) / tabSize) * tabSize
+    spacing = repeat(space, indent - marker.length)
+  }
+
+  return value
+    ? marker + spacing + pad(value, indent / tabSize).slice(indent)
+    : marker
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/list.js":
+/*!************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/list.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = list
+
+function list(node) {
+  var fn = node.ordered ? this.visitOrderedItems : this.visitUnorderedItems
+  return fn.call(this, node)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/paragraph.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/paragraph.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = paragraph
+
+function paragraph(node) {
+  return this.all(node).join('')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/root.js":
+/*!************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/root.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = root
+
+var lineFeed = '\n'
+
+// Stringify a root.
+// Adds a final newline to ensure valid POSIX files. */
+function root(node) {
+  return this.block(node) + lineFeed
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/strong.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/strong.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+
+module.exports = strong
+
+// Stringify a `strong`.
+//
+// The marker used is configurable by `strong`, which defaults to an asterisk
+// (`'*'`) but also accepts an underscore (`'_'`):
+//
+// ```markdown
+// __foo__
+// ```
+function strong(node) {
+  var marker = repeat(this.options.strong, 2)
+  return marker + this.all(node).join('') + marker
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/table-cell.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/table-cell.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = tableCell
+
+function tableCell(node) {
+  return this.all(node).join('')
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/table.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/table.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var markdownTable = __webpack_require__(/*! markdown-table */ "./node_modules/markdown-table/index.js")
+
+module.exports = table
+
+var space = ' '
+var verticalBar = '|'
+
+// Stringify table.
+//
+// Creates a fenced table by default, but not in `looseTable: true` mode:
+//
+// ```markdown
+//  Foo | Bar
+// :-: | ---
+// Baz | Qux
+//
+// NOTE: Be careful with `looseTable: true` mode, as a loose table inside an
+// indented code block on GitHub renders as an actual table!
+//
+// Creates a spaced table by default, but not in `spacedTable: false`:
+//
+// ```markdown
+// |Foo|Bar|
+// |:-:|---|
+// |Baz|Qux|
+// ```
+function table(node) {
+  var self = this
+  var options = self.options
+  var loose = options.looseTable
+  var spaced = options.spacedTable
+  var pad = options.paddedTable
+  var stringLength = options.stringLength
+  var rows = node.children
+  var index = rows.length
+  var exit = self.enterTable()
+  var result = []
+  var start
+  var end
+
+  while (index--) {
+    result[index] = self.all(rows[index])
+  }
+
+  exit()
+
+  if (loose) {
+    start = ''
+    end = ''
+  } else if (spaced) {
+    start = verticalBar + space
+    end = space + verticalBar
+  } else {
+    start = verticalBar
+    end = verticalBar
+  }
+
+  return markdownTable(result, {
+    align: node.align,
+    pad: pad,
+    start: start,
+    end: end,
+    stringLength: stringLength,
+    delimiter: spaced ? space + verticalBar + space : verticalBar
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/text.js":
+/*!************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/text.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = text
+
+// Stringify text.
+// Supports named entities in `settings.encode: true` mode:
+//
+// ```markdown
+// AT&amp;T
+// ```
+//
+// Supports numbered entities in `settings.encode: numbers` mode:
+//
+// ```markdown
+// AT&#x26;T
+// ```
+function text(node, parent) {
+  return this.encode(this.escape(node.value, node, parent), node)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark-stringify/lib/visitors/thematic-break.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/remark-stringify/lib/visitors/thematic-break.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var repeat = __webpack_require__(/*! repeat-string */ "./node_modules/repeat-string/index.js")
+
+module.exports = thematic
+
+var space = ' '
+
+// Stringify a `thematic-break`.
+// The character used is configurable through `rule`: (`'_'`):
+//
+// ```markdown
+// ___
+// ```
+//
+// The number of repititions is defined through `ruleRepetition` (`6`):
+//
+// ```markdown
+// ******
+// ```
+//
+// Whether spaces delimit each character, is configured through `ruleSpaces`
+// (`true`):
+// ```markdown
+// * * *
+// ```
+function thematic() {
+  var options = this.options
+  var rule = repeat(options.rule, options.ruleRepetition)
+  return options.ruleSpaces ? rule.split('').join(space) : rule
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/remark/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/remark/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var unified = __webpack_require__(/*! unified */ "./node_modules/unified/index.js")
+var parse = __webpack_require__(/*! remark-parse */ "./node_modules/remark-parse/index.js")
+var stringify = __webpack_require__(/*! remark-stringify */ "./node_modules/remark-stringify/index.js")
+
+module.exports = unified()
+  .use(parse)
+  .use(stringify)
+  .freeze()
+
+
+/***/ }),
+
+/***/ "./node_modules/repeat-string/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/repeat-string/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * repeat-string <https://github.com/jonschlinkert/repeat-string>
+ *
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+/**
+ * Results cache
+ */
+
+var res = '';
+var cache;
+
+/**
+ * Expose `repeat`
+ */
+
+module.exports = repeat;
+
+/**
+ * Repeat the given `string` the specified `number`
+ * of times.
+ *
+ * **Example:**
+ *
+ * ```js
+ * var repeat = require('repeat-string');
+ * repeat('A', 5);
+ * //=> AAAAA
+ * ```
+ *
+ * @param {String} `string` The string to repeat
+ * @param {Number} `number` The number of times to repeat the string
+ * @return {String} Repeated string
+ * @api public
+ */
+
+function repeat(str, num) {
+  if (typeof str !== 'string') {
+    throw new TypeError('expected a string');
+  }
+
+  // cover common, quick use cases
+  if (num === 1) return str;
+  if (num === 2) return str + str;
+
+  var max = str.length * num;
+  if (cache !== str || typeof cache === 'undefined') {
+    cache = str;
+    res = '';
+  } else if (res.length >= max) {
+    return res.substr(0, max);
+  }
+
+  while (max > res.length && num > 1) {
+    if (num & 1) {
+      res += str;
+    }
+
+    num >>= 1;
+    str += str;
+  }
+
+  res += str;
+  res = res.substr(0, max);
+  return res;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/replace-ext/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/replace-ext/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var path = __webpack_require__(/*! path */ "./node_modules/path-browserify/index.js");
+
+function replaceExt(npath, ext) {
+  if (typeof npath !== 'string') {
+    return npath;
+  }
+
+  if (npath.length === 0) {
+    return npath;
+  }
+
+  var nFileName = path.basename(npath, path.extname(npath)) + ext;
+  return path.join(path.dirname(npath), nFileName);
+}
+
+module.exports = replaceExt;
+
+
+/***/ }),
+
+/***/ "./node_modules/space-separated-tokens/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/space-separated-tokens/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var trim = __webpack_require__(/*! trim */ "./node_modules/trim/index.js")
+
+exports.parse = parse
+exports.stringify = stringify
+
+var empty = ''
+var space = ' '
+var whiteSpace = /[ \t\n\r\f]+/g
+
+function parse(value) {
+  var input = trim(String(value || empty))
+  return input === empty ? [] : input.split(whiteSpace)
+}
+
+function stringify(values) {
+  return trim(values.join(space))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/state-toggle/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/state-toggle/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = factory
+
+/* Construct a state `toggler`: a function which inverses
+ * `property` in context based on its current value.
+ * The by `toggler` returned function restores that value. */
+function factory(key, state, ctx) {
+  return enter
+
+  function enter() {
+    var context = ctx || this
+    var current = context[key]
+
+    context[key] = !state
+
+    return exit
+
+    function exit() {
+      context[key] = current
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/stringify-entities/dangerous.json":
+/*!********************************************************!*\
+  !*** ./node_modules/stringify-entities/dangerous.json ***!
+  \********************************************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, default */
+/***/ (function(module) {
+
+module.exports = ["cent","copy","divide","gt","lt","not","para","times"];
+
+/***/ }),
+
+/***/ "./node_modules/stringify-entities/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/stringify-entities/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entities = __webpack_require__(/*! character-entities-html4 */ "./node_modules/character-entities-html4/index.json")
+var legacy = __webpack_require__(/*! character-entities-legacy */ "./node_modules/character-entities-legacy/index.json")
+var hexadecimal = __webpack_require__(/*! is-hexadecimal */ "./node_modules/is-hexadecimal/index.js")
+var alphanumerical = __webpack_require__(/*! is-alphanumerical */ "./node_modules/is-alphanumerical/index.js")
+var dangerous = __webpack_require__(/*! ./dangerous.json */ "./node_modules/stringify-entities/dangerous.json")
+
+/* Expose. */
+module.exports = encode
+encode.escape = escape
+
+var own = {}.hasOwnProperty
+
+/* List of enforced escapes. */
+var escapes = ['"', "'", '<', '>', '&', '`']
+
+/* Map of characters to names. */
+var characters = construct()
+
+/* Default escapes. */
+var defaultEscapes = toExpression(escapes)
+
+/* Surrogate pairs. */
+var surrogatePair = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g
+
+/* Non-ASCII characters. */
+// eslint-disable-next-line no-control-regex, unicorn/no-hex-escape
+var bmp = /[\x01-\t\x0B\f\x0E-\x1F\x7F\x81\x8D\x8F\x90\x9D\xA0-\uFFFF]/g
+
+/* Encode special characters in `value`. */
+function encode(value, options) {
+  var settings = options || {}
+  var subset = settings.subset
+  var set = subset ? toExpression(subset) : defaultEscapes
+  var escapeOnly = settings.escapeOnly
+  var omit = settings.omitOptionalSemicolons
+
+  value = value.replace(set, function(char, pos, val) {
+    return one(char, val.charAt(pos + 1), settings)
+  })
+
+  if (subset || escapeOnly) {
+    return value
+  }
+
+  return value
+    .replace(surrogatePair, replaceSurrogatePair)
+    .replace(bmp, replaceBmp)
+
+  function replaceSurrogatePair(pair, pos, val) {
+    return toHexReference(
+      (pair.charCodeAt(0) - 0xd800) * 0x400 +
+        pair.charCodeAt(1) -
+        0xdc00 +
+        0x10000,
+      val.charAt(pos + 2),
+      omit
+    )
+  }
+
+  function replaceBmp(char, pos, val) {
+    return one(char, val.charAt(pos + 1), settings)
+  }
+}
+
+/* Shortcut to escape special characters in HTML. */
+function escape(value) {
+  return encode(value, {
+    escapeOnly: true,
+    useNamedReferences: true
+  })
+}
+
+/* Encode `char` according to `options`. */
+function one(char, next, options) {
+  var shortest = options.useShortestReferences
+  var omit = options.omitOptionalSemicolons
+  var named
+  var numeric
+
+  if ((shortest || options.useNamedReferences) && own.call(characters, char)) {
+    named = toNamed(characters[char], next, omit, options.attribute)
+  }
+
+  if (shortest || !named) {
+    numeric = toHexReference(char.charCodeAt(0), next, omit)
+  }
+
+  if (named && (!shortest || named.length < numeric.length)) {
+    return named
+  }
+
+  return numeric
+}
+
+/* Transform `code` into an entity. */
+function toNamed(name, next, omit, attribute) {
+  var value = '&' + name
+
+  if (
+    omit &&
+    own.call(legacy, name) &&
+    dangerous.indexOf(name) === -1 &&
+    (!attribute || (next && next !== '=' && !alphanumerical(next)))
+  ) {
+    return value
+  }
+
+  return value + ';'
+}
+
+/* Transform `code` into a hexadecimal character reference. */
+function toHexReference(code, next, omit) {
+  var value = '&#x' + code.toString(16).toUpperCase()
+  return omit && next && !hexadecimal(next) ? value : value + ';'
+}
+
+/* Create an expression for `characters`. */
+function toExpression(characters) {
+  return new RegExp('[' + characters.join('') + ']', 'g')
+}
+
+/* Construct the map. */
+function construct() {
+  var chars = {}
+  var name
+
+  for (name in entities) {
+    chars[entities[name]] = name
+  }
+
+  return chars
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -6359,6 +22887,1413 @@ module.exports = function (css) {
 	// send back the fixed css
 	return fixedCss;
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/style-to-object/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/style-to-object/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var parse = __webpack_require__(/*! css/lib/parse */ "./node_modules/css/lib/parse/index.js");
+
+/**
+ * Parses inline style.
+ *
+ * Example: 'color:red' => { color: 'red' }
+ *
+ * @param  {String}      style      - The inline style.
+ * @param  {Function}    [iterator] - The iterator function.
+ * @return {null|Object}
+ */
+module.exports = function parseInlineStyle(style, iterator) {
+  if (!style || typeof style !== 'string') return null;
+
+  // make sure to wrap declarations in placeholder
+  var declarations = parse('p{' + style + '}').stylesheet.rules[0].declarations;
+  var declaration, property, value;
+
+  var output = null;
+  var hasIterator = typeof iterator === 'function';
+
+  for (var i = 0, len = declarations.length; i < len; i++) {
+    declaration = declarations[i];
+    property = declaration.property;
+    value = declaration.value;
+
+    if (hasIterator) {
+      iterator(property, value, declaration);
+    } else if (value) {
+      output || (output = {});
+      output[property] = value;
+    }
+  }
+
+  return output;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/trim-lines/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/trim-lines/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = trimLines
+
+var ws = /[ \t]*\n+[ \t]*/g
+var newline = '\n'
+
+function trimLines(value) {
+  return String(value).replace(ws, newline)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/trim-trailing-lines/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/trim-trailing-lines/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = trimTrailingLines
+
+var line = '\n'
+
+/* Remove final newline characters from `value`. */
+function trimTrailingLines(value) {
+  var val = String(value)
+  var index = val.length
+
+  while (val.charAt(--index) === line) {
+    /* Empty */
+  }
+
+  return val.slice(0, index + 1)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/trim/index.js":
+/*!************************************!*\
+  !*** ./node_modules/trim/index.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+exports = module.exports = trim;
+
+function trim(str){
+  return str.replace(/^\s*|\s*$/g, '');
+}
+
+exports.left = function(str){
+  return str.replace(/^\s*/, '');
+};
+
+exports.right = function(str){
+  return str.replace(/\s*$/, '');
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/trough/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/trough/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var wrap = __webpack_require__(/*! ./wrap.js */ "./node_modules/trough/wrap.js")
+
+module.exports = trough
+
+trough.wrap = wrap
+
+var slice = [].slice
+
+/* Create new middleware. */
+function trough() {
+  var fns = []
+  var middleware = {}
+
+  middleware.run = run
+  middleware.use = use
+
+  return middleware
+
+  /* Run `fns`.  Last argument must be
+   * a completion handler. */
+  function run() {
+    var index = -1
+    var input = slice.call(arguments, 0, -1)
+    var done = arguments[arguments.length - 1]
+
+    if (typeof done !== 'function') {
+      throw new Error('Expected function as last argument, not ' + done)
+    }
+
+    next.apply(null, [null].concat(input))
+
+    /* Run the next `fn`, if any. */
+    function next(err) {
+      var fn = fns[++index]
+      var params = slice.call(arguments, 0)
+      var values = params.slice(1)
+      var length = input.length
+      var pos = -1
+
+      if (err) {
+        done(err)
+        return
+      }
+
+      /* Copy non-nully input into values. */
+      while (++pos < length) {
+        if (values[pos] === null || values[pos] === undefined) {
+          values[pos] = input[pos]
+        }
+      }
+
+      input = values
+
+      /* Next or done. */
+      if (fn) {
+        wrap(fn, next).apply(null, input)
+      } else {
+        done.apply(null, [null].concat(input))
+      }
+    }
+  }
+
+  /* Add `fn` to the list. */
+  function use(fn) {
+    if (typeof fn !== 'function') {
+      throw new Error('Expected `fn` to be a function, not ' + fn)
+    }
+
+    fns.push(fn)
+
+    return middleware
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/trough/wrap.js":
+/*!*************************************!*\
+  !*** ./node_modules/trough/wrap.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var slice = [].slice
+
+module.exports = wrap
+
+/* Wrap `fn`.  Can be sync or async; return a promise,
+ * receive a completion handler, return new values and
+ * errors. */
+function wrap(fn, callback) {
+  var invoked
+
+  return wrapped
+
+  function wrapped() {
+    var params = slice.call(arguments, 0)
+    var callback = fn.length > params.length
+    var result
+
+    if (callback) {
+      params.push(done)
+    }
+
+    try {
+      result = fn.apply(null, params)
+    } catch (err) {
+      /* Well, this is quite the pickle.  `fn` received
+       * a callback and invoked it (thus continuing the
+       * pipeline), but later also threw an error.
+       * We’re not about to restart the pipeline again,
+       * so the only thing left to do is to throw the
+       * thing instea. */
+      if (callback && invoked) {
+        throw err
+      }
+
+      return done(err)
+    }
+
+    if (!callback) {
+      if (result && typeof result.then === 'function') {
+        result.then(then, done)
+      } else if (result instanceof Error) {
+        done(result)
+      } else {
+        then(result)
+      }
+    }
+  }
+
+  /* Invoke `next`, only once. */
+  function done() {
+    if (!invoked) {
+      invoked = true
+
+      callback.apply(null, arguments)
+    }
+  }
+
+  /* Invoke `done` with one value.
+   * Tracks if an error is passed, too. */
+  function then(value) {
+    done(null, value)
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/typography-breakpoint-constants/dist/index.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/typography-breakpoint-constants/dist/index.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var LARGER_DISPLAY_WIDTH = exports.LARGER_DISPLAY_WIDTH = "1600px";
+var LARGE_DISPLAY_WIDTH = exports.LARGE_DISPLAY_WIDTH = "1280px";
+var DEFAULT_WIDTH = exports.DEFAULT_WIDTH = "980px";
+var TABLET_WIDTH = exports.TABLET_WIDTH = "768px";
+var MOBILE_WIDTH = exports.MOBILE_WIDTH = "480px";
+
+var LARGER_DISPLAY_MEDIA_QUERY = exports.LARGER_DISPLAY_MEDIA_QUERY = "@media only screen and (max-width:1600px)";
+var LARGE_DISPLAY_MEDIA_QUERY = exports.LARGE_DISPLAY_MEDIA_QUERY = "@media only screen and (max-width:1280px)";
+var DEFAULT_MEDIA_QUERY = exports.DEFAULT_MEDIA_QUERY = "@media only screen and (max-width:980px)";
+var TABLET_MEDIA_QUERY = exports.TABLET_MEDIA_QUERY = "@media only screen and (max-width:768px)";
+var MOBILE_MEDIA_QUERY = exports.MOBILE_MEDIA_QUERY = "@media only screen and (max-width:480px)";
+
+var MIN_LARGER_DISPLAY_MEDIA_QUERY = exports.MIN_LARGER_DISPLAY_MEDIA_QUERY = "@media (min-width:1600px)";
+var MIN_LARGE_DISPLAY_MEDIA_QUERY = exports.MIN_LARGE_DISPLAY_MEDIA_QUERY = "@media (min-width:1280px)";
+var MIN_DEFAULT_MEDIA_QUERY = exports.MIN_DEFAULT_MEDIA_QUERY = "@media (min-width:980px)";
+var MIN_TABLET_MEDIA_QUERY = exports.MIN_TABLET_MEDIA_QUERY = "@media (min-width:768px)";
+var MIN_MOBILE_MEDIA_QUERY = exports.MIN_MOBILE_MEDIA_QUERY = "@media (min-width:480px)";
+
+/***/ }),
+
+/***/ "./node_modules/typography-theme-doelger/dist/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/typography-theme-doelger/dist/index.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _grayPercentage = __webpack_require__(/*! gray-percentage */ "./node_modules/gray-percentage/index.js");
+
+var _grayPercentage2 = _interopRequireDefault(_grayPercentage);
+
+var _typographyBreakpointConstants = __webpack_require__(/*! typography-breakpoint-constants */ "./node_modules/typography-breakpoint-constants/dist/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var theme = {
+  title: "Doelger",
+  baseFontSize: "17px",
+  baseLineHeight: 1.45,
+  blockMarginBottom: 0.8,
+  googleFonts: [{
+    name: "Arvo",
+    styles: ["700"]
+  }, {
+    name: "Cabin",
+    styles: ["400", "400i", "700"]
+  }],
+  headerFontFamily: ["Arvo", "sans-serif"],
+  bodyFontFamily: ["Cabin", "serif"],
+  headerColor: "hsla(0,0%,0%,0.9)",
+  bodyColor: "hsla(0,0%,0%,0.8)",
+  headerWeight: "700",
+  bodyWeight: 400,
+  boldWeight: 700,
+  overrideStyles: function overrideStyles(_ref, options) {
+    var adjustFontSizeTo = _ref.adjustFontSizeTo,
+        scale = _ref.scale,
+        rhythm = _ref.rhythm;
+
+    var linkColor = "#ff483b";
+    return _defineProperty({
+      a: {
+        color: linkColor,
+        textDecoration: "none",
+        textShadow: ".03em 0 #fff,-.03em 0 #fff,0 .03em #fff,0 -.03em #fff,.06em 0 #fff,-.06em 0 #fff,.09em 0 #fff,-.09em 0 #fff,.12em 0 #fff,-.12em 0 #fff,.15em 0 #fff,-.15em 0 #fff", // eslint-disable-line
+        backgroundImage: "linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 1px, " + linkColor + " 1px, " + linkColor + " 2px, rgba(0, 0, 0, 0) 2px)" // eslint-disable-line
+      },
+      "a:hover,a:active": {
+        textShadow: "none",
+        backgroundImage: "none"
+      },
+      "h1,h2,h3,h4,h5,h6": {
+        lineHeight: 1.2,
+        marginTop: rhythm(1.5),
+        marginBottom: rhythm(0.5)
+      },
+      // Blockquote styles.
+      blockquote: _extends({}, scale(1 / 5), {
+        borderLeft: rhythm(6 / 16) + " solid " + linkColor,
+        color: (0, _grayPercentage2.default)(35),
+        paddingLeft: rhythm(10 / 16),
+        fontStyle: "italic",
+        marginLeft: 0,
+        marginRight: 0
+      }),
+      "blockquote > :last-child": {
+        marginBottom: 0
+      },
+      "blockquote cite": _extends({}, adjustFontSizeTo(options.baseFontSize), {
+        color: options.bodyColor,
+        fontStyle: "normal",
+        fontWeight: options.bodyWeight
+      }),
+      "blockquote cite:before": {
+        content: '"— "'
+      }
+    }, _typographyBreakpointConstants.MOBILE_MEDIA_QUERY, {
+      blockquote: {
+        borderLeft: rhythm(3 / 16) + " solid " + linkColor,
+        paddingLeft: rhythm(9 / 16),
+        fontStyle: "italic",
+        marginLeft: rhythm(-3 / 4),
+        marginRight: 0
+      }
+    });
+  }
+};
+
+exports.default = theme;
+
+/***/ }),
+
+/***/ "./node_modules/typography/dist/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/typography/dist/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var t=Object.getOwnPropertySymbols,e=Object.prototype.hasOwnProperty,r=Object.prototype.propertyIsEnumerable;var n,o,i=function(){try{if(!Object.assign)return!1;var t=new String("abc");if(t[5]="de","5"===Object.getOwnPropertyNames(t)[0])return!1;for(var e={},r=0;r<10;r++)e["_"+String.fromCharCode(r)]=r;if("0123456789"!==Object.getOwnPropertyNames(e).map(function(t){return e[t]}).join(""))return!1;var n={};return"abcdefghijklmnopqrst".split("").forEach(function(t){n[t]=t}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},n)).join("")}catch(t){return!1}}()?Object.assign:function(n,o){for(var i,a,u=function(t){if(null===t||void 0===t)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(t)}(n),c=1;c<arguments.length;c++){for(var l in i=Object(arguments[c]))e.call(i,l)&&(u[l]=i[l]);if(t){a=t(i);for(var f=0;f<a.length;f++)r.call(i,a[f])&&(u[a[f]]=i[a[f]])}}return u},a=function(t,e){e||(e=[0,""]),t=String(t);var r=parseFloat(t,10);return e[0]=r,e[1]=t.match(/[\d.\-\+]*\s*(.*)/)[1]||"",e},u=function(t){return a(t)[0]},c=function(t){return null==t&&(t=t),function(e,r,n,o){null==n&&(n=t),null==o&&(o=n);var i=a(e)[1];if(i===r)return e;var c=u(e);if("px"!==i)if("em"===i)c=u(e)*u(n);else if("rem"===i)c=u(e)*u(t);else{if("ex"!==i)return e;c=u(e)*u(n)*2}var l=c;if("px"!==r)if("em"===r)l=c/u(o);else if("rem"===r)l=c/u(t);else{if("ex"!==r)return e;l=c/u(o)/2}return parseFloat(l.toFixed(5))+r}},l=a,f=function(t){return l(t)[1]},s=function(t){return l(t)[0]},p={baseFontSize:"16px",baseLineHeight:1.5,rhythmUnit:"rem",defaultRhythmBorderWidth:"1px",defaultRhythmBorderStyle:"solid",roundToNearestHalfLine:!0,minLinePadding:"2px"},v=function(t,e){var r,n=c(e.baseFontSize),o=s(n(t,"px")),i=s(e.baseLineHeightInPx),a=s(n(e.minLinePadding,"px"));return(r=e.roundToNearestHalfLine?Math.ceil(2*o/i)/2:Math.ceil(o/i))*i-o<2*a&&(r+=e.roundToNearestHalfLine?.5:1),r},h=function(t){var e=c(t.baseFontSize);return function(r,n,o){null==r&&(r=1),null==n&&(n=t.baseFontSize),null==o&&(o=0);var i=r*s(t.baseLineHeightInPx)-o+"px",a=e(i,t.rhythmUnit,n);return"px"===f(a)&&(a=Math.floor(s(a))+f(a)),parseFloat(s(a).toFixed(5))+f(a)}},d="[object Number]",b=Object.prototype.toString;n=function(t){return"number"==typeof t||function(t){return!!t&&"object"==typeof t}(t)&&b.call(t)==d},o={"minor second":16/15,"major second":9/8,"minor third":1.2,"major third":4/3,"diminished fourth":Math.sqrt(2),"perfect fifth":1.5,"minor sixth":1.6,golden:1.61803398875,phi:1.61803398875,"major sixth":5/3,"minor seventh":16/9,"major seventh":15/8,octave:2,"major tenth":2.5,"major eleventh":8/3,"major twelfth":3,"double octave":4};function g(t){return!isNaN(parseFloat(t))&&isFinite(t)}var y=function(t,e,r){if(void 0===e&&(e=0),void 0===r&&(r=!1),"cool"===e?e=237:"slate"===e?e=122:"warm"===e&&(e=69),!g(e))throw new Error("Hue is not a number");if(!g(t))throw new Error("Lightness is not a number");t>100&&(t=100),t<0&&(t=0);var n=0;if(0!==e){n=19.92978+-.3651759*t+.001737214*Math.pow(t,2)}var o=0;return r?(o=t/100,t="100%,"):(o=(100-t)/100,t="0%,"),"hsla("+e+","+n+"%,"+t+o+")"},m="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};function j(t,e){return t(e={exports:{}},e.exports),e.exports}var _="object"==typeof m&&m&&m.Object===Object&&m,w="object"==typeof self&&self&&self.Object===Object&&self,O=_||w||Function("return this")(),S=O.Symbol,x=Object.prototype,z=x.hasOwnProperty,F=x.toString,k=S?S.toStringTag:void 0;var A=function(t){var e=z.call(t,k),r=t[k];try{t[k]=void 0;var n=!0}catch(t){}var o=F.call(t);return n&&(e?t[k]=r:delete t[k]),o},L=Object.prototype.toString;var B=function(t){return L.call(t)},P="[object Null]",T="[object Undefined]",M=S?S.toStringTag:void 0;var E=function(t){return null==t?void 0===t?T:P:M&&M in Object(t)?A(t):B(t)};var H=function(t){var e=typeof t;return null!=t&&("object"==e||"function"==e)},N="[object AsyncFunction]",W="[object Function]",C="[object GeneratorFunction]",I="[object Proxy]";var R,$=function(t){if(!H(t))return!1;var e=E(t);return e==W||e==C||e==N||e==I},U=O["__core-js_shared__"],D=(R=/[^.]+$/.exec(U&&U.keys&&U.keys.IE_PROTO||""))?"Symbol(src)_1."+R:"";var q=function(t){return!!D&&D in t},V=Function.prototype.toString;var J=function(t){if(null!=t){try{return V.call(t)}catch(t){}try{return t+""}catch(t){}}return""},Z=/^\[object .+?Constructor\]$/,G=Function.prototype,K=Object.prototype,Y=RegExp("^"+G.toString.call(K.hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$");var Q=function(t){return!(!H(t)||q(t))&&($(t)?Y:Z).test(J(t))};var X=function(t,e){return null==t?void 0:t[e]};var tt=function(t,e){var r=X(t,e);return Q(r)?r:void 0},et=function(){try{var t=tt(Object,"defineProperty");return t({},"",{}),t}catch(t){}}();var rt=function(t,e,r){"__proto__"==e&&et?et(t,e,{configurable:!0,enumerable:!0,value:r,writable:!0}):t[e]=r};var nt=function(t,e){return t===e||t!=t&&e!=e},ot=Object.prototype.hasOwnProperty;var it=function(t,e,r){var n=t[e];ot.call(t,e)&&nt(n,r)&&(void 0!==r||e in t)||rt(t,e,r)},at=Array.isArray;var ut=function(t){return null!=t&&"object"==typeof t},ct="[object Symbol]";var lt=function(t){return"symbol"==typeof t||ut(t)&&E(t)==ct},ft=/\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,st=/^\w*$/;var pt=function(t,e){if(at(t))return!1;var r=typeof t;return!("number"!=r&&"symbol"!=r&&"boolean"!=r&&null!=t&&!lt(t))||st.test(t)||!ft.test(t)||null!=e&&t in Object(e)},vt=tt(Object,"create");var ht=function(t){var e=this.has(t)&&delete this.__data__[t];return this.size-=e?1:0,e},dt="__lodash_hash_undefined__",bt=Object.prototype.hasOwnProperty;var gt=function(t){var e=this.__data__;if(vt){var r=e[t];return r===dt?void 0:r}return bt.call(e,t)?e[t]:void 0},yt=Object.prototype.hasOwnProperty;var mt=function(t){var e=this.__data__;return vt?void 0!==e[t]:yt.call(e,t)},jt="__lodash_hash_undefined__";var _t=function(t,e){var r=this.__data__;return this.size+=this.has(t)?0:1,r[t]=vt&&void 0===e?jt:e,this};function wt(t){var e=-1,r=null==t?0:t.length;for(this.clear();++e<r;){var n=t[e];this.set(n[0],n[1])}}wt.prototype.clear=function(){this.__data__=vt?vt(null):{},this.size=0},wt.prototype.delete=ht,wt.prototype.get=gt,wt.prototype.has=mt,wt.prototype.set=_t;var Ot=wt;var St=function(t,e){for(var r=t.length;r--;)if(nt(t[r][0],e))return r;return-1},xt=Array.prototype.splice;var zt=function(t){var e=this.__data__,r=St(e,t);return!(r<0||(r==e.length-1?e.pop():xt.call(e,r,1),--this.size,0))};var Ft=function(t){var e=this.__data__,r=St(e,t);return r<0?void 0:e[r][1]};var kt=function(t){return St(this.__data__,t)>-1};var At=function(t,e){var r=this.__data__,n=St(r,t);return n<0?(++this.size,r.push([t,e])):r[n][1]=e,this};function Lt(t){var e=-1,r=null==t?0:t.length;for(this.clear();++e<r;){var n=t[e];this.set(n[0],n[1])}}Lt.prototype.clear=function(){this.__data__=[],this.size=0},Lt.prototype.delete=zt,Lt.prototype.get=Ft,Lt.prototype.has=kt,Lt.prototype.set=At;var Bt=Lt,Pt=tt(O,"Map");var Tt=function(t){var e=typeof t;return"string"==e||"number"==e||"symbol"==e||"boolean"==e?"__proto__"!==t:null===t};var Mt=function(t,e){var r=t.__data__;return Tt(e)?r["string"==typeof e?"string":"hash"]:r.map};var Et=function(t){var e=Mt(this,t).delete(t);return this.size-=e?1:0,e};var Ht=function(t){return Mt(this,t).get(t)};var Nt=function(t){return Mt(this,t).has(t)};var Wt=function(t,e){var r=Mt(this,t),n=r.size;return r.set(t,e),this.size+=r.size==n?0:1,this};function Ct(t){var e=-1,r=null==t?0:t.length;for(this.clear();++e<r;){var n=t[e];this.set(n[0],n[1])}}Ct.prototype.clear=function(){this.size=0,this.__data__={hash:new Ot,map:new(Pt||Bt),string:new Ot}},Ct.prototype.delete=Et,Ct.prototype.get=Ht,Ct.prototype.has=Nt,Ct.prototype.set=Wt;var It=Ct,Rt="Expected a function";function $t(t,e){if("function"!=typeof t||null!=e&&"function"!=typeof e)throw new TypeError(Rt);var r=function(){var n=arguments,o=e?e.apply(this,n):n[0],i=r.cache;if(i.has(o))return i.get(o);var a=t.apply(this,n);return r.cache=i.set(o,a)||i,a};return r.cache=new($t.Cache||It),r}$t.Cache=It;var Ut=$t,Dt=500;var qt=/[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g,Vt=/\\(\\)?/g,Jt=function(t){var e=Ut(t,function(t){return r.size===Dt&&r.clear(),t}),r=e.cache;return e}(function(t){var e=[];return 46===t.charCodeAt(0)&&e.push(""),t.replace(qt,function(t,r,n,o){e.push(n?o.replace(Vt,"$1"):r||t)}),e});var Zt=function(t,e){for(var r=-1,n=null==t?0:t.length,o=Array(n);++r<n;)o[r]=e(t[r],r,t);return o},Gt=1/0,Kt=S?S.prototype:void 0,Yt=Kt?Kt.toString:void 0;var Qt=function t(e){if("string"==typeof e)return e;if(at(e))return Zt(e,t)+"";if(lt(e))return Yt?Yt.call(e):"";var r=e+"";return"0"==r&&1/e==-Gt?"-0":r};var Xt=function(t){return null==t?"":Qt(t)};var te=function(t,e){return at(t)?t:pt(t,e)?[t]:Jt(Xt(t))},ee=9007199254740991,re=/^(?:0|[1-9]\d*)$/;var ne=function(t,e){var r=typeof t;return!!(e=null==e?ee:e)&&("number"==r||"symbol"!=r&&re.test(t))&&t>-1&&t%1==0&&t<e},oe=1/0;var ie=function(t){if("string"==typeof t||lt(t))return t;var e=t+"";return"0"==e&&1/t==-oe?"-0":e};var ae=function(t,e,r,n){if(!H(t))return t;for(var o=-1,i=(e=te(e,t)).length,a=i-1,u=t;null!=u&&++o<i;){var c=ie(e[o]),l=r;if(o!=a){var f=u[c];void 0===(l=n?n(f,c,u):void 0)&&(l=H(f)?f:ne(e[o+1])?[]:{})}it(u,c,l),u=u[c]}return t};var ue=function(t,e,r){return null==t?t:ae(t,e,r)};var ce=function(t,e){for(var r=-1,n=null==t?0:t.length;++r<n&&!1!==e(t[r],r,t););return t};var le=function(t){return function(e,r,n){for(var o=-1,i=Object(e),a=n(e),u=a.length;u--;){var c=a[t?u:++o];if(!1===r(i[c],c,i))break}return e}}();var fe=function(t,e){for(var r=-1,n=Array(t);++r<t;)n[r]=e(r);return n},se="[object Arguments]";var pe=function(t){return ut(t)&&E(t)==se},ve=Object.prototype,he=ve.hasOwnProperty,de=ve.propertyIsEnumerable,be=pe(function(){return arguments}())?pe:function(t){return ut(t)&&he.call(t,"callee")&&!de.call(t,"callee")};var ge=function(){return!1},ye=j(function(t,e){var r=e&&!e.nodeType&&e,n=r&&t&&!t.nodeType&&t,o=n&&n.exports===r?O.Buffer:void 0;t.exports=(o?o.isBuffer:void 0)||ge}),me=9007199254740991;var je=function(t){return"number"==typeof t&&t>-1&&t%1==0&&t<=me},_e={};_e["[object Float32Array]"]=_e["[object Float64Array]"]=_e["[object Int8Array]"]=_e["[object Int16Array]"]=_e["[object Int32Array]"]=_e["[object Uint8Array]"]=_e["[object Uint8ClampedArray]"]=_e["[object Uint16Array]"]=_e["[object Uint32Array]"]=!0,_e["[object Arguments]"]=_e["[object Array]"]=_e["[object ArrayBuffer]"]=_e["[object Boolean]"]=_e["[object DataView]"]=_e["[object Date]"]=_e["[object Error]"]=_e["[object Function]"]=_e["[object Map]"]=_e["[object Number]"]=_e["[object Object]"]=_e["[object RegExp]"]=_e["[object Set]"]=_e["[object String]"]=_e["[object WeakMap]"]=!1;var we=function(t){return ut(t)&&je(t.length)&&!!_e[E(t)]};var Oe=function(t){return function(e){return t(e)}},Se=j(function(t,e){var r=e&&!e.nodeType&&e,n=r&&t&&!t.nodeType&&t,o=n&&n.exports===r&&_.process,i=function(){try{var t=n&&n.require&&n.require("util").types;return t||o&&o.binding&&o.binding("util")}catch(t){}}();t.exports=i}),xe=Se&&Se.isTypedArray,ze=xe?Oe(xe):we,Fe=Object.prototype.hasOwnProperty;var ke=function(t,e){var r=at(t),n=!r&&be(t),o=!r&&!n&&ye(t),i=!r&&!n&&!o&&ze(t),a=r||n||o||i,u=a?fe(t.length,String):[],c=u.length;for(var l in t)!e&&!Fe.call(t,l)||a&&("length"==l||o&&("offset"==l||"parent"==l)||i&&("buffer"==l||"byteLength"==l||"byteOffset"==l)||ne(l,c))||u.push(l);return u},Ae=Object.prototype;var Le=function(t){var e=t&&t.constructor;return t===("function"==typeof e&&e.prototype||Ae)};var Be=function(t,e){return function(r){return t(e(r))}},Pe=Be(Object.keys,Object),Te=Object.prototype.hasOwnProperty;var Me=function(t){if(!Le(t))return Pe(t);var e=[];for(var r in Object(t))Te.call(t,r)&&"constructor"!=r&&e.push(r);return e};var Ee=function(t){return null!=t&&je(t.length)&&!$(t)};var He=function(t){return Ee(t)?ke(t):Me(t)};var Ne=function(t,e){return function(r,n){if(null==r)return r;if(!Ee(r))return t(r,n);for(var o=r.length,i=e?o:-1,a=Object(r);(e?i--:++i<o)&&!1!==n(a[i],i,a););return r}}(function(t,e){return t&&le(t,e,He)});var We=function(t){return t};var Ce=function(t){return"function"==typeof t?t:We};var Ie=function(t,e){return(at(t)?ce:Ne)(t,Ce(e))},Re="[object Number]";var $e=function(t){return"number"==typeof t||ut(t)&&E(t)==Re},Ue="[object String]";var De=function(t){return"string"==typeof t||!at(t)&&ut(t)&&E(t)==Ue};var qe=function(t){var e=this.__data__,r=e.delete(t);return this.size=e.size,r};var Ve=function(t){return this.__data__.get(t)};var Je=function(t){return this.__data__.has(t)},Ze=200;var Ge=function(t,e){var r=this.__data__;if(r instanceof Bt){var n=r.__data__;if(!Pt||n.length<Ze-1)return n.push([t,e]),this.size=++r.size,this;r=this.__data__=new It(n)}return r.set(t,e),this.size=r.size,this};function Ke(t){var e=this.__data__=new Bt(t);this.size=e.size}Ke.prototype.clear=function(){this.__data__=new Bt,this.size=0},Ke.prototype.delete=qe,Ke.prototype.get=Ve,Ke.prototype.has=Je,Ke.prototype.set=Ge;var Ye=Ke;var Qe=function(t,e,r){(void 0===r||nt(t[e],r))&&(void 0!==r||e in t)||rt(t,e,r)},Xe=j(function(t,e){var r=e&&!e.nodeType&&e,n=r&&t&&!t.nodeType&&t,o=n&&n.exports===r?O.Buffer:void 0,i=o?o.allocUnsafe:void 0;t.exports=function(t,e){if(e)return t.slice();var r=t.length,n=i?i(r):new t.constructor(r);return t.copy(n),n}}),tr=O.Uint8Array;var er=function(t){var e=new t.constructor(t.byteLength);return new tr(e).set(new tr(t)),e};var rr=function(t,e){var r=e?er(t.buffer):t.buffer;return new t.constructor(r,t.byteOffset,t.length)};var nr=function(t,e){var r=-1,n=t.length;for(e||(e=Array(n));++r<n;)e[r]=t[r];return e},or=Object.create,ir=function(){function t(){}return function(e){if(!H(e))return{};if(or)return or(e);t.prototype=e;var r=new t;return t.prototype=void 0,r}}(),ar=Be(Object.getPrototypeOf,Object);var ur=function(t){return"function"!=typeof t.constructor||Le(t)?{}:ir(ar(t))};var cr=function(t){return ut(t)&&Ee(t)},lr="[object Object]",fr=Function.prototype,sr=Object.prototype,pr=fr.toString,vr=sr.hasOwnProperty,hr=pr.call(Object);var dr=function(t){if(!ut(t)||E(t)!=lr)return!1;var e=ar(t);if(null===e)return!0;var r=vr.call(e,"constructor")&&e.constructor;return"function"==typeof r&&r instanceof r&&pr.call(r)==hr};var br=function(t,e){return"__proto__"==e?void 0:t[e]};var gr=function(t,e,r,n){var o=!r;r||(r={});for(var i=-1,a=e.length;++i<a;){var u=e[i],c=n?n(r[u],t[u],u,r,t):void 0;void 0===c&&(c=t[u]),o?rt(r,u,c):it(r,u,c)}return r};var yr=function(t){var e=[];if(null!=t)for(var r in Object(t))e.push(r);return e},mr=Object.prototype.hasOwnProperty;var jr=function(t){if(!H(t))return yr(t);var e=Le(t),r=[];for(var n in t)("constructor"!=n||!e&&mr.call(t,n))&&r.push(n);return r};var _r=function(t){return Ee(t)?ke(t,!0):jr(t)};var wr=function(t){return gr(t,_r(t))};var Or=function(t,e,r,n,o,i,a){var u=br(t,r),c=br(e,r),l=a.get(c);if(l)Qe(t,r,l);else{var f=i?i(u,c,r+"",t,e,a):void 0,s=void 0===f;if(s){var p=at(c),v=!p&&ye(c),h=!p&&!v&&ze(c);f=c,p||v||h?at(u)?f=u:cr(u)?f=nr(u):v?(s=!1,f=Xe(c,!0)):h?(s=!1,f=rr(c,!0)):f=[]:dr(c)||be(c)?(f=u,be(u)?f=wr(u):(!H(u)||n&&$(u))&&(f=ur(c))):s=!1}s&&(a.set(c,f),o(f,c,n,i,a),a.delete(c)),Qe(t,r,f)}};var Sr=function t(e,r,n,o,i){e!==r&&le(r,function(a,u){if(H(a))i||(i=new Ye),Or(e,r,u,n,t,o,i);else{var c=o?o(br(e,u),a,u+"",e,r,i):void 0;void 0===c&&(c=a),Qe(e,u,c)}},_r)};var xr=function(t,e,r){switch(r.length){case 0:return t.call(e);case 1:return t.call(e,r[0]);case 2:return t.call(e,r[0],r[1]);case 3:return t.call(e,r[0],r[1],r[2])}return t.apply(e,r)},zr=Math.max;var Fr=function(t,e,r){return e=zr(void 0===e?t.length-1:e,0),function(){for(var n=arguments,o=-1,i=zr(n.length-e,0),a=Array(i);++o<i;)a[o]=n[e+o];o=-1;for(var u=Array(e+1);++o<e;)u[o]=n[o];return u[e]=r(a),xr(t,this,u)}};var kr=function(t){return function(){return t}},Ar=800,Lr=16,Br=Date.now;var Pr=function(t){var e=0,r=0;return function(){var n=Br(),o=Lr-(n-r);if(r=n,o>0){if(++e>=Ar)return arguments[0]}else e=0;return t.apply(void 0,arguments)}}(et?function(t,e){return et(t,"toString",{configurable:!0,enumerable:!1,value:kr(e),writable:!0})}:We);var Tr=function(t,e){return Pr(Fr(t,e,We),t+"")};var Mr=function(t,e,r){if(!H(r))return!1;var n=typeof e;return!!("number"==n?Ee(r)&&ne(e,r.length):"string"==n&&e in r)&&nt(r[e],t)};var Er=function(t){return Tr(function(e,r){var n=-1,o=r.length,i=o>1?r[o-1]:void 0,a=o>2?r[2]:void 0;for(i=t.length>3&&"function"==typeof i?(o--,i):void 0,a&&Mr(r[0],r[1],a)&&(i=o<3?void 0:i,o=1),e=Object(e);++n<o;){var u=r[n];u&&t(e,u,n,i)}return e})}(function(t,e,r){Sr(t,e,r)});var Hr=function(t,e,r,n){var o=-1,i=null==t?0:t.length;for(n&&i&&(r=t[++o]);++o<i;)r=e(r,t[o],o,t);return r},Nr="__lodash_hash_undefined__";var Wr=function(t){return this.__data__.has(t)};function Cr(t){var e=-1,r=null==t?0:t.length;for(this.__data__=new It;++e<r;)this.add(t[e])}Cr.prototype.add=Cr.prototype.push=function(t){return this.__data__.set(t,Nr),this},Cr.prototype.has=Wr;var Ir=Cr;var Rr=function(t,e){for(var r=-1,n=null==t?0:t.length;++r<n;)if(e(t[r],r,t))return!0;return!1};var $r=function(t,e){return t.has(e)},Ur=1,Dr=2;var qr=function(t,e,r,n,o,i){var a=r&Ur,u=t.length,c=e.length;if(u!=c&&!(a&&c>u))return!1;var l=i.get(t);if(l&&i.get(e))return l==e;var f=-1,s=!0,p=r&Dr?new Ir:void 0;for(i.set(t,e),i.set(e,t);++f<u;){var v=t[f],h=e[f];if(n)var d=a?n(h,v,f,e,t,i):n(v,h,f,t,e,i);if(void 0!==d){if(d)continue;s=!1;break}if(p){if(!Rr(e,function(t,e){if(!$r(p,e)&&(v===t||o(v,t,r,n,i)))return p.push(e)})){s=!1;break}}else if(v!==h&&!o(v,h,r,n,i)){s=!1;break}}return i.delete(t),i.delete(e),s};var Vr=function(t){var e=-1,r=Array(t.size);return t.forEach(function(t,n){r[++e]=[n,t]}),r};var Jr=function(t){var e=-1,r=Array(t.size);return t.forEach(function(t){r[++e]=t}),r},Zr=1,Gr=2,Kr="[object Boolean]",Yr="[object Date]",Qr="[object Error]",Xr="[object Map]",tn="[object Number]",en="[object RegExp]",rn="[object Set]",nn="[object String]",on="[object Symbol]",an="[object ArrayBuffer]",un="[object DataView]",cn=S?S.prototype:void 0,ln=cn?cn.valueOf:void 0;var fn=function(t,e,r,n,o,i,a){switch(r){case un:if(t.byteLength!=e.byteLength||t.byteOffset!=e.byteOffset)return!1;t=t.buffer,e=e.buffer;case an:return!(t.byteLength!=e.byteLength||!i(new tr(t),new tr(e)));case Kr:case Yr:case tn:return nt(+t,+e);case Qr:return t.name==e.name&&t.message==e.message;case en:case nn:return t==e+"";case Xr:var u=Vr;case rn:if(u||(u=Jr),t.size!=e.size&&!(n&Zr))return!1;var c=a.get(t);if(c)return c==e;n|=Gr,a.set(t,e);var l=qr(u(t),u(e),n,o,i,a);return a.delete(t),l;case on:if(ln)return ln.call(t)==ln.call(e)}return!1};var sn=function(t,e){for(var r=-1,n=e.length,o=t.length;++r<n;)t[o+r]=e[r];return t};var pn=function(t,e,r){var n=e(t);return at(t)?n:sn(n,r(t))};var vn=function(t,e){for(var r=-1,n=null==t?0:t.length,o=0,i=[];++r<n;){var a=t[r];e(a,r,t)&&(i[o++]=a)}return i};var hn=Object.prototype.propertyIsEnumerable,dn=Object.getOwnPropertySymbols,bn=dn?function(t){return null==t?[]:(t=Object(t),vn(dn(t),function(e){return hn.call(t,e)}))}:function(){return[]};var gn=function(t){return pn(t,He,bn)},yn=1,mn=Object.prototype.hasOwnProperty;var jn=function(t,e,r,n,o,i){var a=r&yn,u=gn(t),c=u.length;if(c!=gn(e).length&&!a)return!1;for(var l=c;l--;){var f=u[l];if(!(a?f in e:mn.call(e,f)))return!1}var s=i.get(t);if(s&&i.get(e))return s==e;var p=!0;i.set(t,e),i.set(e,t);for(var v=a;++l<c;){var h=t[f=u[l]],d=e[f];if(n)var b=a?n(d,h,f,e,t,i):n(h,d,f,t,e,i);if(!(void 0===b?h===d||o(h,d,r,n,i):b)){p=!1;break}v||(v="constructor"==f)}if(p&&!v){var g=t.constructor,y=e.constructor;g!=y&&"constructor"in t&&"constructor"in e&&!("function"==typeof g&&g instanceof g&&"function"==typeof y&&y instanceof y)&&(p=!1)}return i.delete(t),i.delete(e),p},_n=tt(O,"DataView"),wn=tt(O,"Promise"),On=tt(O,"Set"),Sn=tt(O,"WeakMap"),xn=J(_n),zn=J(Pt),Fn=J(wn),kn=J(On),An=J(Sn),Ln=E;(_n&&"[object DataView]"!=Ln(new _n(new ArrayBuffer(1)))||Pt&&"[object Map]"!=Ln(new Pt)||wn&&"[object Promise]"!=Ln(wn.resolve())||On&&"[object Set]"!=Ln(new On)||Sn&&"[object WeakMap]"!=Ln(new Sn))&&(Ln=function(t){var e=E(t),r="[object Object]"==e?t.constructor:void 0,n=r?J(r):"";if(n)switch(n){case xn:return"[object DataView]";case zn:return"[object Map]";case Fn:return"[object Promise]";case kn:return"[object Set]";case An:return"[object WeakMap]"}return e});var Bn=Ln,Pn=1,Tn="[object Arguments]",Mn="[object Array]",En="[object Object]",Hn=Object.prototype.hasOwnProperty;var Nn=function(t,e,r,n,o,i){var a=at(t),u=at(e),c=a?Mn:Bn(t),l=u?Mn:Bn(e),f=(c=c==Tn?En:c)==En,s=(l=l==Tn?En:l)==En,p=c==l;if(p&&ye(t)){if(!ye(e))return!1;a=!0,f=!1}if(p&&!f)return i||(i=new Ye),a||ze(t)?qr(t,e,r,n,o,i):fn(t,e,c,r,n,o,i);if(!(r&Pn)){var v=f&&Hn.call(t,"__wrapped__"),h=s&&Hn.call(e,"__wrapped__");if(v||h){var d=v?t.value():t,b=h?e.value():e;return i||(i=new Ye),o(d,b,r,n,i)}}return!!p&&(i||(i=new Ye),jn(t,e,r,n,o,i))};var Wn=function t(e,r,n,o,i){return e===r||(null==e||null==r||!ut(e)&&!ut(r)?e!=e&&r!=r:Nn(e,r,n,o,t,i))},Cn=1,In=2;var Rn=function(t,e,r,n){var o=r.length,i=o,a=!n;if(null==t)return!i;for(t=Object(t);o--;){var u=r[o];if(a&&u[2]?u[1]!==t[u[0]]:!(u[0]in t))return!1}for(;++o<i;){var c=(u=r[o])[0],l=t[c],f=u[1];if(a&&u[2]){if(void 0===l&&!(c in t))return!1}else{var s=new Ye;if(n)var p=n(l,f,c,t,e,s);if(!(void 0===p?Wn(f,l,Cn|In,n,s):p))return!1}}return!0};var $n=function(t){return t==t&&!H(t)};var Un=function(t){for(var e=He(t),r=e.length;r--;){var n=e[r],o=t[n];e[r]=[n,o,$n(o)]}return e};var Dn=function(t,e){return function(r){return null!=r&&r[t]===e&&(void 0!==e||t in Object(r))}};var qn=function(t){var e=Un(t);return 1==e.length&&e[0][2]?Dn(e[0][0],e[0][1]):function(r){return r===t||Rn(r,t,e)}};var Vn=function(t,e){for(var r=0,n=(e=te(e,t)).length;null!=t&&r<n;)t=t[ie(e[r++])];return r&&r==n?t:void 0};var Jn=function(t,e,r){var n=null==t?void 0:Vn(t,e);return void 0===n?r:n};var Zn=function(t,e){return null!=t&&e in Object(t)};var Gn=function(t,e,r){for(var n=-1,o=(e=te(e,t)).length,i=!1;++n<o;){var a=ie(e[n]);if(!(i=null!=t&&r(t,a)))break;t=t[a]}return i||++n!=o?i:!!(o=null==t?0:t.length)&&je(o)&&ne(a,o)&&(at(t)||be(t))};var Kn=function(t,e){return null!=t&&Gn(t,e,Zn)},Yn=1,Qn=2;var Xn=function(t,e){return pt(t)&&$n(e)?Dn(ie(t),e):function(r){var n=Jn(r,t);return void 0===n&&n===e?Kn(r,t):Wn(e,n,Yn|Qn)}};var to=function(t){return function(e){return null==e?void 0:e[t]}};var eo=function(t){return function(e){return Vn(e,t)}};var ro=function(t){return pt(t)?to(ie(t)):eo(t)};var no=function(t){return"function"==typeof t?t:null==t?We:"object"==typeof t?at(t)?Xn(t[0],t[1]):qn(t):ro(t)};var oo=function(t,e,r,n,o){return o(t,function(t,o,i){r=n?(n=!1,t):e(r,t,o,i)}),r};var io=function(t,e,r){var n=at(t)?Hr:oo,o=arguments.length<3;return n(t,no(e,4),r,o,Ne)},ao=function(t,e,r){var n;return void 0===t&&(t={}),n=at(e)?e:[e],Ie(n,function(e){Ie(r,function(r,n){ue(t,e+"."+n,r)})}),t},uo=["inherit","default","serif","sans-serif","monospace","fantasy","cursive","-apple-system"],co=function(t){return-1!==uo.indexOf(t)?t:"'"+t+"'"};var lo,fo=j(function(t,e){Object.defineProperty(e,"__esModule",{value:!0}),e.default="html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}"}),so=(lo=fo)&&lo.__esModule&&Object.prototype.hasOwnProperty.call(lo,"default")?lo.default:lo,po=function(t){return io(t,function(t,e,r){return t+=r+"{",Ie(e,function(e,r){if(H(e)){var n={};n[r]=e,t+=po(n)}else{var o=function(t,e){if("string"!=typeof t)throw new TypeError("Expected a string");return t.replace(/([a-z\d])([A-Z])/g,"$1"+(e=void 0===e?"_":e)+"$2").replace(/([A-Z]+)([A-Z][a-z\d]+)/g,"$1"+e+"$2").toLowerCase()}(r,"-")+":"+e+";";["Webkit","ms","Moz","O"].forEach(function(t){r.slice(0,t.length)===t&&(o="-"+o)}),t+=o}}),t+="}"},"")};module.exports=function(t){var e,r,a,u,l=i({},{baseFontSize:"16px",baseLineHeight:1.45,headerLineHeight:1.1,scaleRatio:2,googleFonts:[],headerFontFamily:["-apple-system","BlinkMacSystemFont","Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","sans-serif"],bodyFontFamily:["georgia","serif"],headerColor:"inherit",bodyColor:"hsla(0,0%,0%,0.8)",headerWeight:"bold",bodyWeight:"normal",boldWeight:"bold",includeNormalize:!0,blockMarginBottom:1},t),d=(e=l,r=JSON.parse(JSON.stringify(p)),a=Object.assign({},r,e),u=c(a.baseFontSize),f(a.baseLineHeight)?(s(u(a.baseFontSize,"px")),a.baseLineHeightInPx=u(a.baseLineHeight,"px")):a.baseLineHeightInPx=s(a.baseFontSize)*a.baseLineHeight+"px",{rhythm:h(a),establishBaseline:function(){return c((t=a).baseFontSize),{fontSize:s(t.baseFontSize)/16*100+"%",lineHeight:t.baseLineHeight.toString()};var t},linesForFontSize:function(t){return v(t,a)},adjustFontSizeTo:function(t,e,r){return null==e&&(e="auto"),function(t,e,r,n){null==r&&(r=n.baseFontSize),"%"===f(t)&&(t=s(n.baseFontSize)*(s(t)/100)+"px");var o=c(n.baseFontSize);t=o(t,"px",r=o(r,"px"));var i=h(n);return"auto"===e&&(e=v(t,n)),{fontSize:o(t,n.rhythmUnit,r),lineHeight:i(e,r)}}(t,e,r,a)}});return d.scale=function(t){var e=parseInt(l.baseFontSize,10),r=function(t,e){var r;return null==t&&(t=0),null==e&&(e="golden"),r=n(e)?e:null!=o[e]?o[e]:o.golden,Math.pow(r,t)}(t,l.scaleRatio)*e+"px";return d.adjustFontSizeTo(r)},Object.assign({},{options:l},d,{createStyles:function(){return this.toString()},toJSON:function(){return function(t,e){var r={},n=t.establishBaseline();r=ao(r,"html",{font:n.fontSize+"/"+n.lineHeight+" "+e.bodyFontFamily.map(co).join(","),boxSizing:"border-box",overflowY:"scroll"}),r=ao(r,["*","*:before","*:after"],{boxSizing:"inherit"}),r=ao(r,"body",{color:e.bodyColor,fontFamily:e.bodyFontFamily.map(co).join(","),fontWeight:e.bodyWeight,wordWrap:"break-word",fontKerning:"normal",MozFontFeatureSettings:'"kern", "liga", "clig", "calt"',msFontFeatureSettings:'"kern", "liga", "clig", "calt"',WebkitFontFeatureSettings:'"kern", "liga", "clig", "calt"',fontFeatureSettings:'"kern", "liga", "clig", "calt"'}),r=ao(r,"img",{maxWidth:"100%"});var o="";o=$e(e.blockMarginBottom)?t.rhythm(e.blockMarginBottom):De(e.blockMarginBottom)?e.blockMarginBottom:t.rhythm(1),r=ao(r,["h1","h2","h3","h4","h5","h6","hgroup","ul","ol","dl","dd","p","figure","pre","table","fieldset","blockquote","form","noscript","iframe","img","hr","address"],{marginLeft:0,marginRight:0,marginTop:0,paddingBottom:0,paddingLeft:0,paddingRight:0,paddingTop:0,marginBottom:o}),r=ao(r,"blockquote",{marginRight:t.rhythm(1),marginBottom:o,marginLeft:t.rhythm(1)}),r=ao(r,["b","strong","dt","th"],{fontWeight:e.boldWeight}),r=ao(r,"hr",{background:y(80),border:"none",height:"1px",marginBottom:"calc("+o+" - 1px)"}),r=ao(r,["ol","ul"],{listStylePosition:"outside",listStyleImage:"none",marginLeft:t.rhythm(1)}),r=ao(r,"li",{marginBottom:"calc("+o+" / 2)"}),r=ao(r,["ol li","ul li"],{paddingLeft:0}),r=ao(r,["li > ol","li > ul"],{marginLeft:t.rhythm(1),marginBottom:"calc("+o+" / 2)",marginTop:"calc("+o+" / 2)"}),r=ao(r,["blockquote *:last-child","li *:last-child","p *:last-child"],{marginBottom:0}),r=ao(r,["li > p"],{marginBottom:"calc("+o+" / 2)"}),r=ao(r,["code","kbd","pre","samp"],Object.assign({},t.adjustFontSizeTo("85%"))),(r=ao(r,["abbr","acronym"],{borderBottom:"1px dotted "+y(50),cursor:"help"}))["abbr[title]"]={borderBottom:"1px dotted "+y(50),cursor:"help",textDecoration:"none"},r=ao(r,["table"],Object.assign({},t.adjustFontSizeTo(e.baseFontSize),{borderCollapse:"collapse",width:"100%"})),r=ao(r,["thead"],{textAlign:"left"}),r=ao(r,["td,th"],{textAlign:"left",borderBottom:"1px solid "+y(88),fontFeatureSettings:'"tnum"',MozFontFeatureSettings:'"tnum"',msFontFeatureSettings:'"tnum"',WebkitFontFeatureSettings:'"tnum"',paddingLeft:t.rhythm(2/3),paddingRight:t.rhythm(2/3),paddingTop:t.rhythm(.5),paddingBottom:"calc("+t.rhythm(.5)+" - 1px)"}),r=ao(r,"th:first-child,td:first-child",{paddingLeft:0}),r=ao(r,"th:last-child,td:last-child",{paddingRight:0}),r=ao(r,["h1","h2","h3","h4","h5","h6"],{color:e.headerColor,fontFamily:e.headerFontFamily.map(co).join(","),fontWeight:e.headerWeight,textRendering:"optimizeLegibility"});var i=t.scale(1),a=t.scale(.6),u=t.scale(.4),c=t.scale(0),l=t.scale(-.2),f=t.scale(-.3);return Ie([i,a,u,c,l,f],function(t,n){r=ue(r,"h"+(n+1)+".fontSize",t.fontSize),r=ue(r,"h"+(n+1)+".lineHeight",e.headerLineHeight)}),at(e.plugins)&&(r=io(e.plugins,function(r,n){return Er(r,n(t,e,r))},r)),e.overrideStyles&&$(e.overrideStyles)&&(r=Er(r,e.overrideStyles(t,e,r))),e.overrideThemeStyles&&$(e.overrideThemeStyles)&&(r=Er(r,e.overrideThemeStyles(t,e,r))),r}(d,l)},toString:function(){return function(t,e,r){var n=po(r);return e.includeNormalize&&(n=""+so+n),n}(0,l,this.toJSON())},injectStyles:function(){if("undefined"!=typeof document)if(document.getElementById("typography.js"))document.getElementById("typography.js").innerHTML=this.toString();else{var t=document.createElement("style");t.id="typography.js",t.innerHTML=this.toString();var e=document.head;e.firstChild?e.insertBefore(t,e.firstChild):e.appendChild(t)}}})};
+//# sourceMappingURL=index.js.map
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/unherit/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/unherit/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var xtend = __webpack_require__(/*! xtend */ "./node_modules/xtend/immutable.js")
+var inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js")
+
+module.exports = unherit
+
+/* Create a custom constructor which can be modified
+ * without affecting the original class. */
+function unherit(Super) {
+  var result
+  var key
+  var value
+
+  inherits(Of, Super)
+  inherits(From, Of)
+
+  /* Clone values. */
+  result = Of.prototype
+
+  for (key in result) {
+    value = result[key]
+
+    if (value && typeof value === 'object') {
+      result[key] = 'concat' in value ? value.concat() : xtend(value)
+    }
+  }
+
+  return Of
+
+  /* Constructor accepting a single argument,
+   * which itself is an `arguments` object. */
+  function From(parameters) {
+    return Super.apply(this, parameters)
+  }
+
+  /* Constructor accepting variadic arguments. */
+  function Of() {
+    if (!(this instanceof Of)) {
+      return new From(arguments)
+    }
+
+    return Super.apply(this, arguments)
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/unified/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/unified/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var extend = __webpack_require__(/*! extend */ "./node_modules/extend/index.js")
+var bail = __webpack_require__(/*! bail */ "./node_modules/bail/index.js")
+var vfile = __webpack_require__(/*! vfile */ "./node_modules/vfile/index.js")
+var trough = __webpack_require__(/*! trough */ "./node_modules/trough/index.js")
+var string = __webpack_require__(/*! x-is-string */ "./node_modules/x-is-string/index.js")
+var plain = __webpack_require__(/*! is-plain-obj */ "./node_modules/is-plain-obj/index.js")
+
+// Expose a frozen processor.
+module.exports = unified().freeze()
+
+var slice = [].slice
+var own = {}.hasOwnProperty
+
+// Process pipeline.
+var pipeline = trough()
+  .use(pipelineParse)
+  .use(pipelineRun)
+  .use(pipelineStringify)
+
+function pipelineParse(p, ctx) {
+  ctx.tree = p.parse(ctx.file)
+}
+
+function pipelineRun(p, ctx, next) {
+  p.run(ctx.tree, ctx.file, done)
+
+  function done(err, tree, file) {
+    if (err) {
+      next(err)
+    } else {
+      ctx.tree = tree
+      ctx.file = file
+      next()
+    }
+  }
+}
+
+function pipelineStringify(p, ctx) {
+  ctx.file.contents = p.stringify(ctx.tree, ctx.file)
+}
+
+// Function to create the first processor.
+function unified() {
+  var attachers = []
+  var transformers = trough()
+  var namespace = {}
+  var frozen = false
+  var freezeIndex = -1
+
+  // Data management.
+  processor.data = data
+
+  // Lock.
+  processor.freeze = freeze
+
+  // Plugins.
+  processor.attachers = attachers
+  processor.use = use
+
+  // API.
+  processor.parse = parse
+  processor.stringify = stringify
+  processor.run = run
+  processor.runSync = runSync
+  processor.process = process
+  processor.processSync = processSync
+
+  // Expose.
+  return processor
+
+  // Create a new processor based on the processor in the current scope.
+  function processor() {
+    var destination = unified()
+    var length = attachers.length
+    var index = -1
+
+    while (++index < length) {
+      destination.use.apply(null, attachers[index])
+    }
+
+    destination.data(extend(true, {}, namespace))
+
+    return destination
+  }
+
+  // Freeze: used to signal a processor that has finished configuration.
+  //
+  // For example, take unified itself.  It’s frozen.  Plugins should not be
+  // added to it.  Rather, it should be extended, by invoking it, before
+  // modifying it.
+  //
+  // In essence, always invoke this when exporting a processor.
+  function freeze() {
+    var values
+    var plugin
+    var options
+    var transformer
+
+    if (frozen) {
+      return processor
+    }
+
+    while (++freezeIndex < attachers.length) {
+      values = attachers[freezeIndex]
+      plugin = values[0]
+      options = values[1]
+      transformer = null
+
+      if (options === false) {
+        continue
+      }
+
+      if (options === true) {
+        values[1] = undefined
+      }
+
+      transformer = plugin.apply(processor, values.slice(1))
+
+      if (typeof transformer === 'function') {
+        transformers.use(transformer)
+      }
+    }
+
+    frozen = true
+    freezeIndex = Infinity
+
+    return processor
+  }
+
+  // Data management.  Getter / setter for processor-specific informtion.
+  function data(key, value) {
+    if (string(key)) {
+      // Set `key`.
+      if (arguments.length === 2) {
+        assertUnfrozen('data', frozen)
+
+        namespace[key] = value
+
+        return processor
+      }
+
+      // Get `key`.
+      return (own.call(namespace, key) && namespace[key]) || null
+    }
+
+    // Set space.
+    if (key) {
+      assertUnfrozen('data', frozen)
+      namespace = key
+      return processor
+    }
+
+    // Get space.
+    return namespace
+  }
+
+  // Plugin management.
+  //
+  // Pass it:
+  // *   an attacher and options,
+  // *   a preset,
+  // *   a list of presets, attachers, and arguments (list of attachers and
+  //     options).
+  function use(value) {
+    var settings
+
+    assertUnfrozen('use', frozen)
+
+    if (value === null || value === undefined) {
+      // Empty.
+    } else if (typeof value === 'function') {
+      addPlugin.apply(null, arguments)
+    } else if (typeof value === 'object') {
+      if ('length' in value) {
+        addList(value)
+      } else {
+        addPreset(value)
+      }
+    } else {
+      throw new Error('Expected usable value, not `' + value + '`')
+    }
+
+    if (settings) {
+      namespace.settings = extend(namespace.settings || {}, settings)
+    }
+
+    return processor
+
+    function addPreset(result) {
+      addList(result.plugins)
+
+      if (result.settings) {
+        settings = extend(settings || {}, result.settings)
+      }
+    }
+
+    function add(value) {
+      if (typeof value === 'function') {
+        addPlugin(value)
+      } else if (typeof value === 'object') {
+        if ('length' in value) {
+          addPlugin.apply(null, value)
+        } else {
+          addPreset(value)
+        }
+      } else {
+        throw new Error('Expected usable value, not `' + value + '`')
+      }
+    }
+
+    function addList(plugins) {
+      var length
+      var index
+
+      if (plugins === null || plugins === undefined) {
+        // Empty.
+      } else if (typeof plugins === 'object' && 'length' in plugins) {
+        length = plugins.length
+        index = -1
+
+        while (++index < length) {
+          add(plugins[index])
+        }
+      } else {
+        throw new Error('Expected a list of plugins, not `' + plugins + '`')
+      }
+    }
+
+    function addPlugin(plugin, value) {
+      var entry = find(plugin)
+
+      if (entry) {
+        if (plain(entry[1]) && plain(value)) {
+          value = extend(entry[1], value)
+        }
+
+        entry[1] = value
+      } else {
+        attachers.push(slice.call(arguments))
+      }
+    }
+  }
+
+  function find(plugin) {
+    var length = attachers.length
+    var index = -1
+    var entry
+
+    while (++index < length) {
+      entry = attachers[index]
+
+      if (entry[0] === plugin) {
+        return entry
+      }
+    }
+  }
+
+  // Parse a file (in string or vfile representation) into a unist node using
+  // the `Parser` on the processor.
+  function parse(doc) {
+    var file = vfile(doc)
+    var Parser
+
+    freeze()
+    Parser = processor.Parser
+    assertParser('parse', Parser)
+
+    if (newable(Parser)) {
+      return new Parser(String(file), file).parse()
+    }
+
+    return Parser(String(file), file) // eslint-disable-line new-cap
+  }
+
+  // Run transforms on a unist node representation of a file (in string or
+  // vfile representation), async.
+  function run(node, file, cb) {
+    assertNode(node)
+    freeze()
+
+    if (!cb && typeof file === 'function') {
+      cb = file
+      file = null
+    }
+
+    if (!cb) {
+      return new Promise(executor)
+    }
+
+    executor(null, cb)
+
+    function executor(resolve, reject) {
+      transformers.run(node, vfile(file), done)
+
+      function done(err, tree, file) {
+        tree = tree || node
+        if (err) {
+          reject(err)
+        } else if (resolve) {
+          resolve(tree)
+        } else {
+          cb(null, tree, file)
+        }
+      }
+    }
+  }
+
+  // Run transforms on a unist node representation of a file (in string or
+  // vfile representation), sync.
+  function runSync(node, file) {
+    var complete = false
+    var result
+
+    run(node, file, done)
+
+    assertDone('runSync', 'run', complete)
+
+    return result
+
+    function done(err, tree) {
+      complete = true
+      bail(err)
+      result = tree
+    }
+  }
+
+  // Stringify a unist node representation of a file (in string or vfile
+  // representation) into a string using the `Compiler` on the processor.
+  function stringify(node, doc) {
+    var file = vfile(doc)
+    var Compiler
+
+    freeze()
+    Compiler = processor.Compiler
+    assertCompiler('stringify', Compiler)
+    assertNode(node)
+
+    if (newable(Compiler)) {
+      return new Compiler(node, file).compile()
+    }
+
+    return Compiler(node, file) // eslint-disable-line new-cap
+  }
+
+  // Parse a file (in string or vfile representation) into a unist node using
+  // the `Parser` on the processor, then run transforms on that node, and
+  // compile the resulting node using the `Compiler` on the processor, and
+  // store that result on the vfile.
+  function process(doc, cb) {
+    freeze()
+    assertParser('process', processor.Parser)
+    assertCompiler('process', processor.Compiler)
+
+    if (!cb) {
+      return new Promise(executor)
+    }
+
+    executor(null, cb)
+
+    function executor(resolve, reject) {
+      var file = vfile(doc)
+
+      pipeline.run(processor, {file: file}, done)
+
+      function done(err) {
+        if (err) {
+          reject(err)
+        } else if (resolve) {
+          resolve(file)
+        } else {
+          cb(null, file)
+        }
+      }
+    }
+  }
+
+  // Process the given document (in string or vfile representation), sync.
+  function processSync(doc) {
+    var complete = false
+    var file
+
+    freeze()
+    assertParser('processSync', processor.Parser)
+    assertCompiler('processSync', processor.Compiler)
+    file = vfile(doc)
+
+    process(file, done)
+
+    assertDone('processSync', 'process', complete)
+
+    return file
+
+    function done(err) {
+      complete = true
+      bail(err)
+    }
+  }
+}
+
+// Check if `func` is a constructor.
+function newable(value) {
+  return typeof value === 'function' && keys(value.prototype)
+}
+
+// Check if `value` is an object with keys.
+function keys(value) {
+  var key
+  for (key in value) {
+    return true
+  }
+  return false
+}
+
+// Assert a parser is available.
+function assertParser(name, Parser) {
+  if (typeof Parser !== 'function') {
+    throw new Error('Cannot `' + name + '` without `Parser`')
+  }
+}
+
+// Assert a compiler is available.
+function assertCompiler(name, Compiler) {
+  if (typeof Compiler !== 'function') {
+    throw new Error('Cannot `' + name + '` without `Compiler`')
+  }
+}
+
+// Assert the processor is not frozen.
+function assertUnfrozen(name, frozen) {
+  if (frozen) {
+    throw new Error(
+      'Cannot invoke `' +
+        name +
+        '` on a frozen processor.\nCreate a new processor first, by invoking it: use `processor()` instead of `processor`.'
+    )
+  }
+}
+
+// Assert `node` is a unist node.
+function assertNode(node) {
+  if (!node || !string(node.type)) {
+    throw new Error('Expected node, got `' + node + '`')
+  }
+}
+
+// Assert that `complete` is `true`.
+function assertDone(name, asyncName, complete) {
+  if (!complete) {
+    throw new Error(
+      '`' + name + '` finished async. Use `' + asyncName + '` instead'
+    )
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/unist-builder/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/unist-builder/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js")
+
+module.exports = u
+
+function u(type, props, value) {
+  var node
+
+  if (
+    (value === null || value === undefined) &&
+    (typeof props !== 'object' || Array.isArray(props))
+  ) {
+    value = props
+    props = {}
+  }
+
+  node = assign({type: String(type)}, props)
+
+  if (Array.isArray(value)) {
+    node.children = value
+  } else if (value !== null && value !== undefined) {
+    node.value = String(value)
+  }
+
+  return node
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/unist-util-generated/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/unist-util-generated/index.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* Expose. */
+module.exports = generated
+
+/* Detect if a node was available in the original document. */
+function generated(node) {
+  var position = optional(optional(node).position)
+  var start = optional(position.start)
+  var end = optional(position.end)
+
+  return !start.line || !start.column || !end.line || !end.column
+}
+
+/* Return `value` if it’s an object, an empty object
+ * otherwise. */
+function optional(value) {
+  return value && typeof value === 'object' ? value : {}
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/unist-util-is/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/unist-util-is/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* eslint-disable max-params */
+
+/* Expose. */
+module.exports = is
+
+/* Assert if `test` passes for `node`.
+ * When a `parent` node is known the `index` of node */
+function is(test, node, index, parent, context) {
+  var hasParent = parent !== null && parent !== undefined
+  var hasIndex = index !== null && index !== undefined
+  var check = convert(test)
+
+  if (
+    hasIndex &&
+    (typeof index !== 'number' || index < 0 || index === Infinity)
+  ) {
+    throw new Error('Expected positive finite index or child node')
+  }
+
+  if (hasParent && (!is(null, parent) || !parent.children)) {
+    throw new Error('Expected parent node')
+  }
+
+  if (!node || !node.type || typeof node.type !== 'string') {
+    return false
+  }
+
+  if (hasParent !== hasIndex) {
+    throw new Error('Expected both parent and index')
+  }
+
+  return Boolean(check.call(context, node, index, parent))
+}
+
+function convert(test) {
+  if (typeof test === 'string') {
+    return typeFactory(test)
+  }
+
+  if (test === null || test === undefined) {
+    return ok
+  }
+
+  if (typeof test === 'object') {
+    return ('length' in test ? anyFactory : matchesFactory)(test)
+  }
+
+  if (typeof test === 'function') {
+    return test
+  }
+
+  throw new Error('Expected function, string, or object as test')
+}
+
+function convertAll(tests) {
+  var results = []
+  var length = tests.length
+  var index = -1
+
+  while (++index < length) {
+    results[index] = convert(tests[index])
+  }
+
+  return results
+}
+
+/* Utility assert each property in `test` is represented
+ * in `node`, and each values are strictly equal. */
+function matchesFactory(test) {
+  return matches
+
+  function matches(node) {
+    var key
+
+    for (key in test) {
+      if (node[key] !== test[key]) {
+        return false
+      }
+    }
+
+    return true
+  }
+}
+
+function anyFactory(tests) {
+  var checks = convertAll(tests)
+  var length = checks.length
+
+  return matches
+
+  function matches() {
+    var index = -1
+
+    while (++index < length) {
+      if (checks[index].apply(this, arguments)) {
+        return true
+      }
+    }
+
+    return false
+  }
+}
+
+/* Utility to convert a string into a function which checks
+ * a given node’s type for said string. */
+function typeFactory(test) {
+  return type
+
+  function type(node) {
+    return Boolean(node && node.type === test)
+  }
+}
+
+/* Utility to return true. */
+function ok() {
+  return true
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/unist-util-position/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/unist-util-position/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* Expose. */
+var position = exports
+
+position.start = factory('start')
+position.end = factory('end')
+
+/* Factory to get a `type` point in the positional info of a node. */
+function factory(type) {
+  point.displayName = type
+
+  return point
+
+  /* Get a point in `node.position` at a bound `type`. */
+  function point(node) {
+    var point = (node && node.position && node.position[type]) || {}
+
+    return {
+      line: point.line || null,
+      column: point.column || null,
+      offset: isNaN(point.offset) ? null : point.offset
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/unist-util-remove-position/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/unist-util-remove-position/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var visit = __webpack_require__(/*! unist-util-visit */ "./node_modules/unist-util-visit/index.js")
+
+module.exports = removePosition
+
+/* Remove `position`s from `tree`. */
+function removePosition(node, force) {
+  visit(node, force ? hard : soft)
+  return node
+}
+
+function hard(node) {
+  delete node.position
+}
+
+function soft(node) {
+  node.position = undefined
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/unist-util-stringify-position/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/unist-util-stringify-position/index.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var own = {}.hasOwnProperty
+
+module.exports = stringify
+
+function stringify(value) {
+  /* Nothing. */
+  if (!value || typeof value !== 'object') {
+    return null
+  }
+
+  /* Node. */
+  if (own.call(value, 'position') || own.call(value, 'type')) {
+    return position(value.position)
+  }
+
+  /* Position. */
+  if (own.call(value, 'start') || own.call(value, 'end')) {
+    return position(value)
+  }
+
+  /* Point. */
+  if (own.call(value, 'line') || own.call(value, 'column')) {
+    return point(value)
+  }
+
+  /* ? */
+  return null
+}
+
+function point(point) {
+  if (!point || typeof point !== 'object') {
+    point = {}
+  }
+
+  return index(point.line) + ':' + index(point.column)
+}
+
+function position(pos) {
+  if (!pos || typeof pos !== 'object') {
+    pos = {}
+  }
+
+  return point(pos.start) + '-' + point(pos.end)
+}
+
+function index(value) {
+  return value && typeof value === 'number' ? value : 1
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/unist-util-visit-parents/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/unist-util-visit-parents/index.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = visitParents
+
+var is = __webpack_require__(/*! unist-util-is */ "./node_modules/unist-util-is/index.js")
+
+var CONTINUE = true
+var SKIP = 'skip'
+var EXIT = false
+
+visitParents.CONTINUE = CONTINUE
+visitParents.SKIP = SKIP
+visitParents.EXIT = EXIT
+
+function visitParents(tree, test, visitor, reverse) {
+  if (typeof test === 'function' && typeof visitor !== 'function') {
+    reverse = visitor
+    visitor = test
+    test = null
+  }
+
+  one(tree, null, [])
+
+  // Visit a single node.
+  function one(node, index, parents) {
+    var result
+
+    if (!test || is(test, node, index, parents[parents.length - 1] || null)) {
+      result = visitor(node, parents)
+
+      if (result === EXIT) {
+        return result
+      }
+    }
+
+    if (node.children && result !== SKIP) {
+      return all(node.children, parents.concat(node)) === EXIT ? EXIT : result
+    }
+
+    return result
+  }
+
+  // Visit children in `parent`.
+  function all(children, parents) {
+    var min = -1
+    var step = reverse ? -1 : 1
+    var index = (reverse ? children.length : min) + step
+    var child
+    var result
+
+    while (index > min && index < children.length) {
+      child = children[index]
+      result = child && one(child, index, parents)
+
+      if (result === EXIT) {
+        return result
+      }
+
+      index = typeof result === 'number' ? result : index + step
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/unist-util-visit/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/unist-util-visit/index.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = visit
+
+var visitParents = __webpack_require__(/*! unist-util-visit-parents */ "./node_modules/unist-util-visit-parents/index.js")
+
+var CONTINUE = visitParents.CONTINUE
+var SKIP = visitParents.SKIP
+var EXIT = visitParents.EXIT
+
+visit.CONTINUE = CONTINUE
+visit.SKIP = SKIP
+visit.EXIT = EXIT
+
+function visit(tree, test, visitor, reverse) {
+  if (typeof test === 'function' && typeof visitor !== 'function') {
+    reverse = visitor
+    visitor = test
+    test = null
+  }
+
+  visitParents(tree, test, overload, reverse)
+
+  function overload(node, parents) {
+    var parent = parents[parents.length - 1]
+    var index = parent ? parent.children.indexOf(node) : null
+    return visitor(node, index, parent)
+  }
+}
 
 
 /***/ }),
@@ -10255,6 +28190,552 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "./node_modules/vfile-location/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/vfile-location/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = factory
+
+function factory(file) {
+  var contents = indices(String(file))
+
+  return {
+    toPosition: offsetToPositionFactory(contents),
+    toOffset: positionToOffsetFactory(contents)
+  }
+}
+
+// Factory to get the line and column-based `position` for `offset` in the bound
+// indices.
+function offsetToPositionFactory(indices) {
+  return offsetToPosition
+
+  // Get the line and column-based `position` for `offset` in the bound indices.
+  function offsetToPosition(offset) {
+    var index = -1
+    var length = indices.length
+
+    if (offset < 0) {
+      return {}
+    }
+
+    while (++index < length) {
+      if (indices[index] > offset) {
+        return {
+          line: index + 1,
+          column: offset - (indices[index - 1] || 0) + 1,
+          offset: offset
+        }
+      }
+    }
+
+    return {}
+  }
+}
+
+// Factory to get the `offset` for a line and column-based `position` in the
+// bound indices.
+function positionToOffsetFactory(indices) {
+  return positionToOffset
+
+  // Get the `offset` for a line and column-based `position` in the bound
+  // indices.
+  function positionToOffset(position) {
+    var line = position && position.line
+    var column = position && position.column
+
+    if (!isNaN(line) && !isNaN(column) && line - 1 in indices) {
+      return (indices[line - 2] || 0) + column - 1 || 0
+    }
+
+    return -1
+  }
+}
+
+// Get indices of line-breaks in `value`.
+function indices(value) {
+  var result = []
+  var index = value.indexOf('\n')
+
+  while (index !== -1) {
+    result.push(index + 1)
+    index = value.indexOf('\n', index + 1)
+  }
+
+  result.push(value.length + 1)
+
+  return result
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/vfile-message/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/vfile-message/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var stringify = __webpack_require__(/*! unist-util-stringify-position */ "./node_modules/unist-util-stringify-position/index.js")
+
+module.exports = VMessage
+
+// Inherit from `Error#`.
+function VMessagePrototype() {}
+VMessagePrototype.prototype = Error.prototype
+VMessage.prototype = new VMessagePrototype()
+
+// Message properties.
+var proto = VMessage.prototype
+
+proto.file = ''
+proto.name = ''
+proto.reason = ''
+proto.message = ''
+proto.stack = ''
+proto.fatal = null
+proto.column = null
+proto.line = null
+
+// Construct a new VMessage.
+//
+// Note: We cannot invoke `Error` on the created context, as that adds readonly
+// `line` and `column` attributes on Safari 9, thus throwing and failing the
+// data.
+function VMessage(reason, position, origin) {
+  var parts
+  var range
+  var location
+
+  if (typeof position === 'string') {
+    origin = position
+    position = null
+  }
+
+  parts = parseOrigin(origin)
+  range = stringify(position) || '1:1'
+
+  location = {
+    start: {line: null, column: null},
+    end: {line: null, column: null}
+  }
+
+  // Node.
+  if (position && position.position) {
+    position = position.position
+  }
+
+  if (position) {
+    // Position.
+    if (position.start) {
+      location = position
+      position = position.start
+    } else {
+      // Point.
+      location.start = position
+    }
+  }
+
+  if (reason.stack) {
+    this.stack = reason.stack
+    reason = reason.message
+  }
+
+  this.message = reason
+  this.name = range
+  this.reason = reason
+  this.line = position ? position.line : null
+  this.column = position ? position.column : null
+  this.location = location
+  this.source = parts[0]
+  this.ruleId = parts[1]
+}
+
+function parseOrigin(origin) {
+  var result = [null, null]
+  var index
+
+  if (typeof origin === 'string') {
+    index = origin.indexOf(':')
+
+    if (index === -1) {
+      result[1] = origin
+    } else {
+      result[0] = origin.slice(0, index)
+      result[1] = origin.slice(index + 1)
+    }
+  }
+
+  return result
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/vfile/core.js":
+/*!************************************!*\
+  !*** ./node_modules/vfile/core.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var path = __webpack_require__(/*! path */ "./node_modules/path-browserify/index.js")
+var replace = __webpack_require__(/*! replace-ext */ "./node_modules/replace-ext/index.js")
+var buffer = __webpack_require__(/*! is-buffer */ "./node_modules/vfile/node_modules/is-buffer/index.js")
+
+module.exports = VFile
+
+var own = {}.hasOwnProperty
+var proto = VFile.prototype
+
+proto.toString = toString
+
+// Order of setting (least specific to most), we need this because otherwise
+// `{stem: 'a', path: '~/b.js'}` would throw, as a path is needed before a
+// stem can be set.
+var order = ['history', 'path', 'basename', 'stem', 'extname', 'dirname']
+
+// Construct a new file.
+function VFile(options) {
+  var prop
+  var index
+  var length
+
+  if (!options) {
+    options = {}
+  } else if (typeof options === 'string' || buffer(options)) {
+    options = {contents: options}
+  } else if ('message' in options && 'messages' in options) {
+    return options
+  }
+
+  if (!(this instanceof VFile)) {
+    return new VFile(options)
+  }
+
+  this.data = {}
+  this.messages = []
+  this.history = []
+  this.cwd = process.cwd()
+
+  // Set path related properties in the correct order.
+  index = -1
+  length = order.length
+
+  while (++index < length) {
+    prop = order[index]
+
+    if (own.call(options, prop)) {
+      this[prop] = options[prop]
+    }
+  }
+
+  // Set non-path related properties.
+  for (prop in options) {
+    if (order.indexOf(prop) === -1) {
+      this[prop] = options[prop]
+    }
+  }
+}
+
+// Access full path (`~/index.min.js`).
+Object.defineProperty(proto, 'path', {
+  get: function() {
+    return this.history[this.history.length - 1]
+  },
+  set: function(path) {
+    assertNonEmpty(path, 'path')
+
+    if (path !== this.path) {
+      this.history.push(path)
+    }
+  }
+})
+
+// Access parent path (`~`).
+Object.defineProperty(proto, 'dirname', {
+  get: function() {
+    return typeof this.path === 'string' ? path.dirname(this.path) : undefined
+  },
+  set: function(dirname) {
+    assertPath(this.path, 'dirname')
+    this.path = path.join(dirname || '', this.basename)
+  }
+})
+
+// Access basename (`index.min.js`).
+Object.defineProperty(proto, 'basename', {
+  get: function() {
+    return typeof this.path === 'string' ? path.basename(this.path) : undefined
+  },
+  set: function(basename) {
+    assertNonEmpty(basename, 'basename')
+    assertPart(basename, 'basename')
+    this.path = path.join(this.dirname || '', basename)
+  }
+})
+
+// Access extname (`.js`).
+Object.defineProperty(proto, 'extname', {
+  get: function() {
+    return typeof this.path === 'string' ? path.extname(this.path) : undefined
+  },
+  set: function(extname) {
+    var ext = extname || ''
+
+    assertPart(ext, 'extname')
+    assertPath(this.path, 'extname')
+
+    if (ext) {
+      if (ext.charAt(0) !== '.') {
+        throw new Error('`extname` must start with `.`')
+      }
+
+      if (ext.indexOf('.', 1) !== -1) {
+        throw new Error('`extname` cannot contain multiple dots')
+      }
+    }
+
+    this.path = replace(this.path, ext)
+  }
+})
+
+// Access stem (`index.min`).
+Object.defineProperty(proto, 'stem', {
+  get: function() {
+    return typeof this.path === 'string'
+      ? path.basename(this.path, this.extname)
+      : undefined
+  },
+  set: function(stem) {
+    assertNonEmpty(stem, 'stem')
+    assertPart(stem, 'stem')
+    this.path = path.join(this.dirname || '', stem + (this.extname || ''))
+  }
+})
+
+// Get the value of the file.
+function toString(encoding) {
+  var value = this.contents || ''
+  return buffer(value) ? value.toString(encoding) : String(value)
+}
+
+// Assert that `part` is not a path (i.e., does not contain `path.sep`).
+function assertPart(part, name) {
+  if (part.indexOf(path.sep) !== -1) {
+    throw new Error(
+      '`' + name + '` cannot be a path: did not expect `' + path.sep + '`'
+    )
+  }
+}
+
+// Assert that `part` is not empty.
+function assertNonEmpty(part, name) {
+  if (!part) {
+    throw new Error('`' + name + '` cannot be empty')
+  }
+}
+
+// Assert `path` exists.
+function assertPath(path, name) {
+  if (!path) {
+    throw new Error('Setting `' + name + '` requires `path` to be set too')
+  }
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/vfile/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/vfile/index.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var VMessage = __webpack_require__(/*! vfile-message */ "./node_modules/vfile-message/index.js")
+var VFile = __webpack_require__(/*! ./core.js */ "./node_modules/vfile/core.js")
+
+module.exports = VFile
+
+var proto = VFile.prototype
+
+proto.message = message
+proto.info = info
+proto.fail = fail
+
+// Slight backwards compatibility.  Remove in the future.
+proto.warn = message
+
+// Create a message with `reason` at `position`.  When an error is passed in as
+// `reason`, copies the stack.
+function message(reason, position, origin) {
+  var filePath = this.path
+  var message = new VMessage(reason, position, origin)
+
+  if (filePath) {
+    message.name = filePath + ':' + message.name
+    message.file = filePath
+  }
+
+  message.fatal = false
+
+  this.messages.push(message)
+
+  return message
+}
+
+// Fail.  Creates a vmessage, associates it with the file, and throws it.
+function fail() {
+  var message = this.message.apply(this, arguments)
+
+  message.fatal = true
+
+  throw message
+}
+
+// Info.  Creates a vmessage, associates it with the file, and marks the
+// fatality as null.
+function info() {
+  var message = this.message.apply(this, arguments)
+
+  message.fatal = null
+
+  return message
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/vfile/node_modules/is-buffer/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vfile/node_modules/is-buffer/index.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+module.exports = function isBuffer (obj) {
+  return obj != null && obj.constructor != null &&
+    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/web-namespaces/index.json":
+/*!************************************************!*\
+  !*** ./node_modules/web-namespaces/index.json ***!
+  \************************************************/
+/*! exports provided: html, mathml, svg, xlink, xml, xmlns, default */
+/***/ (function(module) {
+
+module.exports = {"html":"http://www.w3.org/1999/xhtml","mathml":"http://www.w3.org/1998/Math/MathML","svg":"http://www.w3.org/2000/svg","xlink":"http://www.w3.org/1999/xlink","xml":"http://www.w3.org/XML/1998/namespace","xmlns":"http://www.w3.org/2000/xmlns/"};
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ "./node_modules/x-is-string/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/x-is-string/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var toString = Object.prototype.toString
+
+module.exports = isString
+
+function isString(obj) {
+    return toString.call(obj) === "[object String]"
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/xtend/immutable.js":
+/*!*****************************************!*\
+  !*** ./node_modules/xtend/immutable.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = extend
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function extend() {
+    var target = {}
+
+    for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i]
+
+        for (var key in source) {
+            if (hasOwnProperty.call(source, key)) {
+                target[key] = source[key]
+            }
+        }
+    }
+
+    return target
+}
+
+
+/***/ }),
+
 /***/ "./src/actionable-item/ActionableItem.jsx":
 /*!************************************************!*\
   !*** ./src/actionable-item/ActionableItem.jsx ***!
@@ -10600,7 +29081,8 @@ var types = function types(name) {
     success: "btn btn-success",
     danger: "btn btn-danger",
     warning: "btn btn-warning",
-    info: "btn btn-info"
+    info: "btn btn-info",
+    primary: "btn btn-primary"
   };
   if (typeof _typeNames[name] == 'undefined') throw new Error('Invalid button type: ' + name);
   return _typeNames[name];
@@ -11070,7 +29552,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! exports provided: ActionableItem, BreadCrumb, Button, CheckBox, DropLink, List, Loading, Panel, Sidebar, ProgressKPI, MenuItem, Modal, LoadBar, setLoading, PanelNavbar, TimeLine, Theme, Forgot, Login, UserError */
+/*! exports provided: ActionableItem, BreadCrumb, Button, CheckBox, DropLink, List, Loading, Panel, Sidebar, ProgressKPI, MenuItem, Modal, MarkdownParser, LoadBar, setLoading, PanelNavbar, TimeLine, Theme, Forgot, Login, UserError */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11087,6 +29569,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProgressKPI", function() { return ProgressKPI; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MenuItem", function() { return MenuItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Modal", function() { return Modal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarkdownParser", function() { return MarkdownParser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadBar", function() { return LoadBar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLoading", function() { return setLoading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PanelNavbar", function() { return PanelNavbar; });
@@ -11131,6 +29614,7 @@ var Sidebar = __webpack_require__(/*! ./sidebar */ "./src/sidebar/index.js").def
 var ProgressKPI = __webpack_require__(/*! ./kpi-progress */ "./src/kpi-progress/index.js").default;
 var MenuItem = __webpack_require__(/*! ./menu-item */ "./src/menu-item/index.js").default;
 var Modal = __webpack_require__(/*! ./modal */ "./src/modal/index.js").default;
+var MarkdownParser = __webpack_require__(/*! ./markdown-parser */ "./src/markdown-parser/index.js").default;
 var LoadBar = __webpack_require__(/*! ./load-bar */ "./src/load-bar/index.js").default;
 var setLoading = __webpack_require__(/*! ./load-bar */ "./src/load-bar/index.js").setLoading;
 var PanelNavbar = __webpack_require__(/*! ./panel-navbar */ "./src/panel-navbar/index.js").default;
@@ -12139,6 +30623,267 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./src/markdown-parser/MarkdownParser.jsx":
+/*!************************************************!*\
+  !*** ./src/markdown-parser/MarkdownParser.jsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var remark__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! remark */ "./node_modules/remark/index.js");
+/* harmony import */ var remark__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(remark__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _markdown_parser_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./markdown-parser.scss */ "./src/markdown-parser/markdown-parser.scss");
+/* harmony import */ var _markdown_parser_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_markdown_parser_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _prism_okaidia_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prism-okaidia.scss */ "./src/markdown-parser/prism-okaidia.scss");
+/* harmony import */ var _prism_okaidia_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_prism_okaidia_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var remark_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! remark-react */ "./node_modules/remark-react/index.js");
+/* harmony import */ var remark_react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(remark_react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var remark_emoji__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! remark-emoji */ "./node_modules/remark-emoji/index.js");
+/* harmony import */ var remark_emoji__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(remark_emoji__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _PrismLowLight_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./PrismLowLight.jsx */ "./src/markdown-parser/PrismLowLight.jsx");
+/* harmony import */ var _components_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components.jsx */ "./src/markdown-parser/components.jsx");
+
+
+
+ //import 'prismjs/themes/prism.css';
+
+
+
+
+
+
+
+var MarkdownParser = function MarkdownParser(_ref) {
+  var source = _ref.source;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bc-readme"
+  }, remark__WEBPACK_IMPORTED_MODULE_1___default()().use(remark_emoji__WEBPACK_IMPORTED_MODULE_6___default.a).use(remark_react__WEBPACK_IMPORTED_MODULE_5___default.a, {
+    remarkReactComponents: {
+      img: _components_jsx__WEBPACK_IMPORTED_MODULE_8__["Image"],
+      a: _components_jsx__WEBPACK_IMPORTED_MODULE_8__["Anchor"],
+      code: _PrismLowLight_jsx__WEBPACK_IMPORTED_MODULE_7__["default"],
+      pre: function pre(props) {
+        return typeof props.children[0] != 'string' ? Object(_PrismLowLight_jsx__WEBPACK_IMPORTED_MODULE_7__["default"])(props.children[0].props) : Object(_PrismLowLight_jsx__WEBPACK_IMPORTED_MODULE_7__["default"])(props);
+      }
+    },
+    sanitize: false
+  }).processSync(text).contents);
+};
+
+MarkdownParser.propTypes = {
+  source: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string.isRequired
+};
+MarkdownParser.defaultProps = {
+  source: null
+};
+/* harmony default export */ __webpack_exports__["default"] = (MarkdownParser);
+
+/***/ }),
+
+/***/ "./src/markdown-parser/PrismLowLight.jsx":
+/*!***********************************************!*\
+  !*** ./src/markdown-parser/PrismLowLight.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var refractor_core_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! refractor/core.js */ "./node_modules/refractor/core.js");
+/* harmony import */ var refractor_core_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(refractor_core_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var refractor_lang_jsx_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! refractor/lang/jsx.js */ "./node_modules/refractor/lang/jsx.js");
+/* harmony import */ var refractor_lang_jsx_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(refractor_lang_jsx_js__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+var h = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  //use jsx
+  refractor_core_js__WEBPACK_IMPORTED_MODULE_2___default.a.register(refractor_lang_jsx_js__WEBPACK_IMPORTED_MODULE_3___default.a);
+  var nodes = refractor_core_js__WEBPACK_IMPORTED_MODULE_2___default.a.highlight(props.children[0], 'jsx');
+  var value = nodes.map(mapWithDepth(0));
+  var code = h('code', {
+    className: props.className || 'language-jsx'
+  }, value);
+  return typeof props.className == 'undefined' ? code : h('pre', {
+    className: props.className
+  }, code);
+});
+
+function mapChild(child, i, depth) {
+  if (child.tagName) {
+    if (Array.isArray(child.properties.className)) child.properties.className = child.properties.className.join(' ');
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(child.tagName, assign({
+      key: 'lo-' + depth + '-' + i
+    }, child.properties), child.children && child.children.map(mapWithDepth(depth + 1)));
+  }
+
+  return child.value;
+}
+
+function mapWithDepth(depth) {
+  return function mapChildrenWithDepth(child, i) {
+    return mapChild(child, i, depth);
+  };
+}
+
+function assign(dst, src) {
+  for (var key in src) {
+    dst[key] = src[key];
+  }
+
+  return dst;
+}
+
+/***/ }),
+
+/***/ "./src/markdown-parser/components.jsx":
+/*!********************************************!*\
+  !*** ./src/markdown-parser/components.jsx ***!
+  \********************************************/
+/*! exports provided: Image, Anchor, Link */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Image", function() { return Image; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Anchor", function() { return Anchor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return Link; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+ //props.children[0]
+
+var Image = function Image(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "d-block text-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: props.src,
+    alt: props.alt
+  }));
+};
+Image.propTypes = {
+  src: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  alt: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node), prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node])
+}; //props.children[0]
+
+var Anchor = function Anchor(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    target: "_blank",
+    rel: "noopener noreferrer",
+    href: props.href
+  }, props.children[0]);
+};
+Anchor.propTypes = {
+  href: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node), prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node]).isRequired
+};
+var Link = function Link(_ref) {
+  var onClick = _ref.onClick,
+      slug = _ref.slug,
+      children = _ref.children;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#" + slug
+  }, children);
+};
+Link.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired,
+  slug: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
+  onClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+
+/***/ }),
+
+/***/ "./src/markdown-parser/index.js":
+/*!**************************************!*\
+  !*** ./src/markdown-parser/index.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MarkdownParser_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MarkdownParser.jsx */ "./src/markdown-parser/MarkdownParser.jsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _MarkdownParser_jsx__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/***/ }),
+
+/***/ "./src/markdown-parser/markdown-parser.scss":
+/*!**************************************************!*\
+  !*** ./src/markdown-parser/markdown-parser.scss ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./markdown-parser.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/markdown-parser/markdown-parser.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/markdown-parser/prism-okaidia.scss":
+/*!************************************************!*\
+  !*** ./src/markdown-parser/prism-okaidia.scss ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./prism-okaidia.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/markdown-parser/prism-okaidia.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./src/menu-item/MenuItem.jsx":
 /*!************************************!*\
   !*** ./src/menu-item/MenuItem.jsx ***!
@@ -12706,7 +31451,7 @@ function (_React$Component) {
         },
         className: "title",
         href: "#"
-      }, "Menu"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.props.label))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidebar-content" + (Footer ? ' with-footer' : '')
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidebar-menu"
@@ -12732,6 +31477,7 @@ Sidebar.propTypes = {
   style: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
   children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node.isRequired,
   className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  label: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
   menu: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.function]),
   onBrandClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
   footer: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
@@ -12744,7 +31490,8 @@ Sidebar.defaultProps = {
   onBrandClick: null,
   footer: null,
   menu: null,
-  className: ""
+  className: "",
+  label: "Menu"
 };
 /* harmony default export */ __webpack_exports__["default"] = (Sidebar);
 
@@ -12811,12 +31558,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _theme_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./theme.scss */ "./src/theme/theme.scss");
 /* harmony import */ var _theme_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_theme_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var typography__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! typography */ "./node_modules/typography/dist/index.js");
+/* harmony import */ var typography__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(typography__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var typography_theme_doelger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! typography-theme-doelger */ "./node_modules/typography-theme-doelger/dist/index.js");
+/* harmony import */ var typography_theme_doelger__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(typography_theme_doelger__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
-var Theme = function Theme(_ref) {
-  var children = _ref.children;
+
+
+typography_theme_doelger__WEBPACK_IMPORTED_MODULE_4___default.a.overrideThemeStyles = function (_ref, options) {
+  var rhythm = _ref.rhythm;
+  return {
+    'a': {
+      backgroundImage: "linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 1px, #7ab3ff 1px, #7ab3ff 2px, rgba(0, 0, 0, 0) 2px)",
+      textShadow: "none"
+    }
+  };
+};
+
+var typography = new typography__WEBPACK_IMPORTED_MODULE_3___default.a(typography_theme_doelger__WEBPACK_IMPORTED_MODULE_4___default.a); // Or insert styles directly into the <head> (works well for client-only
+// JS web apps.
+
+typography.injectStyles();
+
+var Theme = function Theme(_ref2) {
+  var children = _ref2.children;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "theme"
   }, children);

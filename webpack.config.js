@@ -12,7 +12,7 @@ module.exports = {
             use: ['babel-loader']
         },
         {
-          test: /\.scss$/, use: [{
+          test: /\.(css|scss)$/, use: [{
               loader: "style-loader" // creates style nodes from JS strings
           }, {
               loader: "css-loader" // translates CSS into CommonJS
@@ -25,7 +25,11 @@ module.exports = {
             loader: 'file-loader',
             options: { name: '[name].[ext]' } 
           }
-        } //for images
+        }, //for images
+        {
+          test: /\.(woff|woff2|eot|ttf|svg)$/,
+          use: 'url-loader'
+        }
     ]
   },
   devtool: 'source-map',

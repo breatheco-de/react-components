@@ -9,7 +9,8 @@ const types = (name) => {
 		success: "btn btn-success",
 		danger: "btn btn-danger",
 		warning: "btn btn-warning",
-		info: "btn btn-info"
+		info: "btn btn-info",
+		primary: "btn btn-primary"
 	};
 	if(typeof _typeNames[name] == 'undefined') throw new Error('Invalid button type: '+name);
 	return _typeNames[name];
