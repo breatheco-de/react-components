@@ -138,8 +138,16 @@ storiesOf('Load bar', module).add('default configuration', () => (<Theme.Theme>
  */
  
 storiesOf('MarkdownParser', module).add('default configuration', () => (<Theme.Theme>
-    <MarkdownParser source={text('source',markdown)} />
-</Theme.Theme>));
+    <div className="row mt-5">
+      <div className="col-12 col-sm-8 col-lg-6 mx-auto">
+        <MarkdownParser source={text('source',markdown)} />
+      </div>
+    </div>
+</Theme.Theme>), {
+    knobs: {
+      escapeHTML: false
+    }
+  });
 
 
 /**

@@ -22,7 +22,7 @@ const MarkdownParser = ({ source }) => (<div className="bc-readme">
                                     PrismRenderer(props.children[0].props) : PrismRenderer(props)
             },
             sanitize: false
-        }).processSync(text).contents
+        }).processSync(source).contents
         
     }
 </div>);

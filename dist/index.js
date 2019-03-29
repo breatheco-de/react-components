@@ -2647,7 +2647,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".bc-readme {\n  padding: 5px; }\n  .bc-readme pre {\n    padding: 5px;\n    background: #23241f;\n    border-radius: 5px; }\n", ""]);
+exports.push([module.i, ".bc-readme {\n  padding: 5px; }\n  .bc-readme pre {\n    padding: 5px;\n    background: #23241f;\n    border-radius: 5px; }\n  .bc-readme :not(pre) > code[class*=\"language-\"] {\n    padding: .3em; }\n  .bc-readme h1, .bc-readme h2, .bc-readme h3, .bc-readme h4, .bc-readme h5 {\n    margin: 20px 0px 25px 0px; }\n    .bc-readme h1 code[class*=\"language-\"], .bc-readme h1 pre[class*=\"language-\"], .bc-readme h2 code[class*=\"language-\"], .bc-readme h2 pre[class*=\"language-\"], .bc-readme h3 code[class*=\"language-\"], .bc-readme h3 pre[class*=\"language-\"], .bc-readme h4 code[class*=\"language-\"], .bc-readme h4 pre[class*=\"language-\"], .bc-readme h5 code[class*=\"language-\"], .bc-readme h5 pre[class*=\"language-\"] {\n      font-size: 80%; }\n", ""]);
 
 // exports
 
@@ -30673,7 +30673,7 @@ var MarkdownParser = function MarkdownParser(_ref) {
       }
     },
     sanitize: false
-  }).processSync(text).contents);
+  }).processSync(source).contents);
 };
 
 MarkdownParser.propTypes = {
