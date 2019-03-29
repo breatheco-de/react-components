@@ -1,0 +1,48 @@
+@import '../theme/colors';
+@import '../theme/utility';
+.bc-filter{
+    &:hover{
+        .display-component{padding: 0;}
+        .placeholder{
+            background: $grey-100;
+            cursor: pointer;
+            padding: 5px;
+        }
+    } 
+    .display-component{
+        @include box;
+        position: relative;
+    }
+    .options-component{
+        @include box;
+        position: absolute;
+        margin: 0;
+        bottom: -10px;
+        left: -1px;
+        min-width: 250px;
+        transform: translateY(100%);
+        display: none;
+        p:first-child{ text-align: right; margin: 0px 5px; padding: 0; }
+        a{ font-size: 80%; }
+        ul{ padding: 0; margin: 0; }
+        ul li{ 
+            padding: 0; margin: 0; @include box; 
+            &:hover{
+                background: $grey-100;
+                cursor: pointer;
+            }
+            &.selected{
+                background: $really-light-blue;
+            }
+            i:hover{
+                background: $grey-200;
+                border-radius: 5px;
+            }
+        }
+    }
+    &.open{
+        .options-component{
+            display: inline-block;
+        }
+    }
+}

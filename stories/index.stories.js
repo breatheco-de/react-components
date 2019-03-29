@@ -8,7 +8,7 @@ import { days, menuItems, actionableMenu, markdown } from './data.js';
 
 import { Theme, ActionableItem, DropLink, Button, CheckBox, BreadCrumb,
  List, TimeLine, Sidebar, Panel, ProgressKPI, Login, Forgot, Loading,
- LoadBar, MenuItem, MarkdownParser } from '../src/index';
+ LoadBar, MenuItem, MarkdownParser, Filter } from '../src/index';
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
@@ -20,7 +20,7 @@ import { text, boolean, number, array, object, select } from '@storybook/addon-k
 
 storiesOf('ActionableItem', module).add('default configuration', () => (<Theme.Theme>
     <ActionableItem label={text('Label', 'Make dinner')}
-      onDropdownSelect={action('actionable-select')}
+      onDropdownSelect={(value) => action('onDropdownSelect')(value)}
       dropdown={object('Options', actionableMenu)}
       done={boolean('Done', true)}
     />
@@ -40,7 +40,7 @@ storiesOf('BreatheCrumb', module).add('default configuration', () => (<Theme.The
     <BreadCrumb 
       levels={object('Levels', levels)}
       logoURL={null}
-      onClick={action('breadcrumb-click')}
+      onClick={(value) => action('onSelect')(value)}
     />
 </Theme.Theme>));
 
@@ -54,9 +54,11 @@ const droplinkOptions = [
     { label: 'Other sample action', url: 'hello'}
 ];
 storiesOf('DropLink', module).add('default configuration', () => (<Theme.Theme>
-    <DropLink label={text('Label', 'Click me to see the options available for this action')}
-      dropdown={object('Options', droplinkOptions)}
-      onSelect={action('droplink-select')}
+    <DropLink 
+      label={text('label', 'Click me to see the options available for this action')}
+      className={text('className', '')}
+      dropdown={object('dropdown', droplinkOptions)}
+      onSelect={(value) => action('onSelect')(value)}
     > I am a dropdown</DropLink>
 </Theme.Theme>));
 
@@ -67,10 +69,14 @@ storiesOf('DropLink', module).add('default configuration', () => (<Theme.Theme>
  */
 
 storiesOf('CheckBox', module).add('default configuration', () => (<Theme.Theme>
-    <CheckBox 
-      label={text('Label', 'Finish replits about react.js')} 
-      onClick={action('checkbox-click')}
-    />
+    <div class="col-6 mx-auto">
+      <CheckBox 
+        label={text('label', 'Finish replits about react.js')}
+        withToggler={boolean('withToggler',false)} 
+        checked={boolean('checked', true)} 
+        onClick={(value) => action('onClick')(value)}
+      />
+    </div>
 </Theme.Theme>),{
   notes: { markdown: 'welele' }
 });
@@ -90,7 +96,7 @@ storiesOf('Button', module).add('default configuration', () => (<Theme.Theme>
       dropdown={[
         { label: 'First action', url: 'hello' }
       ]}
-      onClick={action('checkbox-click')}
+      onClick={(value) => action('onClick')(value)}
     >
       Click Me
     </Button>
@@ -105,11 +111,11 @@ storiesOf('Button', module).add('default configuration', () => (<Theme.Theme>
 storiesOf('List', module).add('default configuration', () => (<Theme.Theme>
     <List> 
       <ActionableItem label={text('Label', 'Make dinner')}
-        onDropdownSelect={action('actionable-select')}
+        onDropdownSelect={(value) => action('onDropdownSelect')(value)}
         dropdown={object('Options', actionableMenu)}
       />
       <ActionableItem label={text('Label', 'Make dinner')}
-        onDropdownSelect={action('actionable-select')}
+        onDropdownSelect={(value) => action('onDropdownSelect')(value)}
         dropdown={object('Options', actionableMenu)}
       />
     </List>
@@ -149,6 +155,81 @@ storiesOf('MarkdownParser', module).add('default configuration', () => (<Theme.T
     }
   });
 
+/**
+ *  Filter
+ */
+ 
+storiesOf('Filter', module).add('gender example', () => (<Theme.Theme>
+    <div className="mx-auto mt-5" style={{ maxWidth: "300px" }}>
+      <Filter 
+        label={text('label','Gender')} 
+        onChange={(value) => action('onChange')(value)}
+        placeholder={text('placeholder','Select one gender')} 
+        multiselect={boolean('multiselect',false)} 
+        options={object('options',[
+          {label: 'Male', value: 'male'},
+          {label: 'Female', value: 'female'}
+        ])} 
+      />
+    </div>
+</Theme.Theme>));
+
+/**
+ *  Filter
+ */
+ 
+storiesOf('Filter', module).add('tags example', () => (<Theme.Theme>
+    <div className="mx-auto mt-5" style={{ maxWidth: "300px" }}>
+      <Filter 
+        label={text('label','Tags')} 
+        onChange={(value) => action('onChange')(value)}
+        placeholder={text('placeholder','Select one or more tags')} 
+        multiselect={boolean('multiselect',true)} 
+        options={object('options',[
+          {label: 'html', value: 'html'},
+          {label: 'react.js', value: 'react.js'},
+          {label: 'javascript', value: 'javascript'},
+          {label: 'rest', value: 'rest'},
+          {label: 'flask', value: 'flask'},
+          {label: 'django', value: 'django'},
+          {label: 'css', value: 'css'}
+        ])} 
+      />
+    </div>
+</Theme.Theme>));
+
+/**
+ *  Filter
+ */
+ 
+storiesOf('Filter', module).add('with custom component', () => (<Theme.Theme>
+    <div className="mx-auto mt-5" style={{ maxWidth: "300px" }}>
+      <Filter 
+        label={text('label','Tags')} 
+        placeholder={text('placeholder','Select one or more tags')} 
+        multiselect={boolean('multiselect',true)} 
+        onChange={(opt) => action('onChange')(opt)}
+        options={object('options',[
+          {label: 'html', value: 'html'},
+          {label: 'react.js', value: 'react.js'},
+          {label: 'javascript', value: 'javascript'},
+          {label: 'rest', value: 'rest'},
+          {label: 'flask', value: 'flask'},
+          {label: 'django', value: 'django'},
+          {label: 'css', value: 'css'}
+        ])}
+        optionComponent={({data, onSelect, selected, onDeselect}) => (<CheckBox 
+            label={data.label}
+            checked={selected}
+            withToggler={boolean('withToggler',false)} 
+      			className={selected && 'selected'} 
+      			onClick={(e) => selected ? onDeselect(data) : onSelect(data)}
+      		/>)
+          }
+      />
+    </div>
+</Theme.Theme>));
+
 
 /**
  *  Timeline
@@ -157,7 +238,7 @@ storiesOf('MarkdownParser', module).add('default configuration', () => (<Theme.T
 storiesOf('TimeLine', module).add('default configuration', () => (<Theme.Theme>
     <TimeLine 
       days={object('Days', days)} 
-      onClick={action('timline-day-click')}
+			onClick={(value) => action('onClick')(value)}
     /> 
 </Theme.Theme>));
 
@@ -168,10 +249,10 @@ storiesOf('TimeLine', module).add('default configuration', () => (<Theme.Theme>
 storiesOf('Sidebar', module).add('default configuration', () => (<Theme.Theme>
     <Sidebar
       menu={() => <ul className="px-3">
-				<MenuItem label="Syllabus" slug="syllabus" iconName="graduationCap" collapsed={false} onClick={action('menu-item-click')} />
-				<MenuItem label="Attendancy" slug="attendancy" iconName="trash" collapsed={false} onClick={action('menu-item-click')} />
+				<MenuItem label="Syllabus" slug="syllabus" iconName="graduationCap" collapsed={false} onClick={(value) => action('onClick')(value)} />
+				<MenuItem label="Attendancy" slug="attendancy" iconName="trash" collapsed={false} onClick={(value) => action('onClick')(value)} />
 			</ul>}
-			onBrandClick={action('brand-click')}
+			onBrandClick={(value) => action('onBrandClick')(value)}
     > 
       <h1>This is the content of the page</h1>
     </Sidebar> 
@@ -187,7 +268,7 @@ storiesOf('Sidebar', module).add('with timeline', () => (<Theme.Theme>
         days={days} 
         height="100%"
       />}
-			onBrandClick={action('brand-click')}
+			onBrandClick={(value) => action('onBrandClick')(value)}
     > 
       <h1>This is the content of the page</h1>
     </Sidebar> 
@@ -203,7 +284,7 @@ storiesOf('Sidebar', module).add('with footer', () => (<Theme.Theme>
         days={days} 
         height="100%"
       />}
-			onBrandClick={action('brand-click')}
+			onBrandClick={(value) => action('onBrandClick')(value)}
       footer={() => <div className="sidebar-footer">
         <a href="#">
           <i className="fa fa-bell"></i>
@@ -235,7 +316,7 @@ storiesOf('Sidebar', module).add('with small footer', () => (<Theme.Theme>
         days={days} 
         height="100%"
       />}
-			onBrandClick={action('brand-click')}
+			onBrandClick={(value) => action('onBrandClick')(value)}
       footer={() => <div className="sidebar-footer">
         <a href="#">
           <i className="fa fa-power-off"></i>
@@ -254,7 +335,7 @@ storiesOf('MenuItem', module).add('default configuration', () => (<Theme.Theme>
       label={text('label', 'First option of the menu')} 
       iconName={text('icon', 'cog')} 
       collapsed={boolean('collapsed', true)} 
-      onClick={action('menu-item-click')}
+			onClick={(value) => action('onClick')(value)}
     /> 
 </Theme.Theme>));
 
@@ -289,8 +370,8 @@ storiesOf('ProgressKPI', module).add('default configuration', () => (<Theme.Them
 
 storiesOf('Login', module).add('default configuration', () => (<Theme.Theme>
     <Login 
-      onSubmit={action('login-submission-click')}
-      onForgot={action('forgot-click')}
+			onSubmit={(value) => action('onSubmit')(value)}
+			onForgot={(value) => action('onForgot')(value)}
       logoHeight={text('logoHeight', '100px')}
       appName={text('appName', 'BreatheCode Test App v0.1')}
       logoURL={text('logoURL', 'http://assets.breatheco.de/apis/img/icon/breathecode.png')}
@@ -303,8 +384,8 @@ storiesOf('Login', module).add('default configuration', () => (<Theme.Theme>
 
 storiesOf('Forgot', module).add('default configuration', () => (<Theme.Theme>
     <Forgot 
-      onSubmit={action('login-submission-click')}
-      onBackToLogin={action('back-to-login-click')}
+			onClick={(value) => action('onSubmit')(value)}
+			onBackToLogin={(value) => action('onBackToLogin')(value)}
       logoHeight={text('logoHeight', '100px')}
       appName={text('appName', 'BreatheCode Test App v0.1')}
       logoURL={text('logoURL', 'http://assets.breatheco.de/apis/img/icon/breathecode.png')}

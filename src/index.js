@@ -1,11 +1,13 @@
 "use strict";
 
 export var ActionableItem = require("./actionable-item").default;
+export var Anchor = require("./anchor").default;
 export var BreadCrumb = require("./breadcrumb").default;
 export var Button = require("./button").default;
 export var CheckBox = require("./checkbox").default;
 export var DropLink = require("./droplink").default;
 export var List = require("./list").default;
+export var Filter = require("./filter").default;
 export var Loading = require("./loading").default;
 export var Panel = require("./panel").default;
 export var Sidebar = require("./sidebar").default;

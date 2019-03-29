@@ -5,7 +5,7 @@ import './menu-item.scss';
 
 const MenuItem = ({ onClick, collapsed, slug, label, iconName }) => (
 	<li
-		onClick={() => (onClick) && onClick()}
+		onClick={() => (onClick) && onClick(slug)}
 		className={"bc-menu-item "+(collapsed ? "collapsed" : "")}>
 			<i id={slug} className={icon(iconName) + " menuicon"} />
 			<span>{label}</span>

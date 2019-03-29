@@ -11,54 +11,70 @@ class CheckBox extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			checked: false
+			checked: false,
+			mirroredChecked: false
 		};
 	}
 
-	componentWillReceiveProps() {
-		if (this.state.checked !== this.props.checked)
-			this.setState({ checked: this.props.checked });
+	static getDerivedStateFromProps(props, state) {
+		if (props.checked !== state.checked) {
+			const checked = state.mirroredChecked == state.checked ? props.checked : state.checked;
+			return {
+				checked,
+				mirroredChecked: checked,
+				withToggler: props.withToggler
+			};
+		}
+		return {
+			checked: state.checked,
+			mirroredChecked: state.checked,
+			withToggler: props.withToggler
+		};
+	}
+	setChecked(checked){
+		this.setState({ checked });
+		if(this.props.onClick) this.props.onClick(checked);
+	}
+	componentDidMount() {
+		this.setChecked(this.props.checked);
 	}
 
-	onClick = () => {
-		this.setState({
-			checked: !this.state.checked
-		});
-		if (this.props.onClick) this.props.onClick(!this.state.checked);
-	};
-
 	render() {
-		const notchecked = !this.state.checked ? "d-none" : "";
-		const checked = this.state.checked ? "d-none" : "";
-		const Render = this.props.render;
+		const { checked } = this.state;
+		const { className, withToggler } = this.props;
 		return (
-			<div className="checkbox">
-				<span className={notchecked} onClick={this.onClick}>
-					<i className="far fa-check-square" />
-				</span>
-				<span className={checked} onClick={this.onClick}>
-					<i className="far fa-square" />
-				</span>
-				{Render ? (
-					<Render />
-				) : (
-					<label htmlFor="checkbox">{this.props.label}</label>
-				)}
+			<div className={"bc-checkbox "+className}>
+				{ !withToggler ? 
+					<i 
+						className={`far fa${checked ? `-check` : ''}-square`}
+						onClick={() => this.setChecked(!checked)}
+					/>
+					:
+					<div className="btn-group btn-group-toggle float-right" data-toggle="buttons">
+						<button type="button" onClick={() => this.setChecked(false)} className={`btn btn-sm ${!checked ? 'btn-default active' : 'btn-light'}`}>
+							<i className="fas fa-times" />
+						</button>
+						<button type="button" onClick={() => this.setChecked(true)} className={`btn btn-sm ${checked ? 'btn-default active' : 'btn-light'}`}>
+							<i className="fas fa-check" />
+						</button>
+					</div>
+				}
+				<label htmlFor="checkbox">{this.props.label}</label>
 			</div>
 		);
 	}
 }
 CheckBox.propTypes = {
-	//you can pass your own component to render the to-do
-	render: PropTypes.func,
-	//what happends on click
 	onClick: PropTypes.func,
+	withToggler: PropTypes.bool,
 	checked: PropTypes.bool,
-	label: PropTypes.string
+	label: PropTypes.string,
+	className: PropTypes.string
 };
 CheckBox.defaultProps = {
+	withToggler: false,
 	label: "<No label defined>",
-	checked: false,
-	render: null
+	className: "",
+	checked: null,
 };
 export default CheckBox;
