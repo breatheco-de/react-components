@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "webpack --config webpack.config.js --mode development",
     "build": "build-storybook",
-    "storybook": "start-storybook -p 8081",
+    "storybook": "start-storybook -p 3000 --ci",
     "build-storybook": "build-storybook",
     "deploy": "build-storybook && node deploy-github.js"
   },

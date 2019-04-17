@@ -7,7 +7,7 @@ import { days, menuItems, actionableMenu, markdown } from './data.js';
 
 import { Theme, ActionableItem, DropLink, Button, CheckBox, BreadCrumb,
  List, TimeLine, Sidebar, Panel, ProgressKPI, Login, Forgot, Loading,
- LoadBar, MenuItem, MarkdownParser, Filter } from '../src/index';
+ LoadBar, MenuItem, MarkdownParser, Filter, Icon } from '../src/index';
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
@@ -390,3 +390,30 @@ storiesOf('Forgot', module).add('default configuration', () => (<Theme.Theme>
       logoURL={text('logoURL', 'http://assets.breatheco.de/apis/img/icon/breathecode.png')}
     />
 </Theme.Theme>));
+
+
+/**
+ *  Icons
+ */
+
+storiesOf('Icons', module).add('all icons', () => (<div>Icons<ul className="list-inline">
+    <li className="list-inline-item"><Icon type="exclamationTriangle" /></li>
+    <li className="list-inline-item"><Icon type="cog" /></li>
+    <li className="list-inline-item"><Icon type="check" /></li>
+    <li className="list-inline-item"><Icon type="graduationCap" /></li>
+    <li className="list-inline-item"><Icon type="list" /></li>
+    <li className="list-inline-item"><Icon type="search" /></li>
+    <li className="list-inline-item"><Icon type="envelope" /></li>
+    <li className="list-inline-item"><Icon type="sync" /></li>
+    <li className="list-inline-item"><Icon type="bell" /></li>
+    <li className="list-inline-item"><Icon type="play" /></li>
+    <li className="list-inline-item"><Icon type="bars" /></li>
+    <li className="list-inline-item"><Icon type="pencil" /></li>
+    <li className="list-inline-item"><Icon type="question" /></li>
+    <li className="list-inline-item"><Icon type="times" /></li>
+    <li className="list-inline-item"><Icon type="arrowRight" /></li>
+    <li className="list-inline-item"><Icon type="arrowLeft" /></li>
+    <li className="list-inline-item"><Icon type="trash" /></li>
+    <li className="list-inline-item"><Icon type="circle" /></li>
+    <li className="list-inline-item"><Icon type="circleFilled" /></li>
+</ul></div>));

@@ -8,6 +8,7 @@ export var CheckBox = require("./checkbox").default;
 export var DropLink = require("./droplink").default;
 export var List = require("./list").default;
 export var Filter = require("./filter").default;
+export var Icon = require("./icon").default;
 export var Loading = require("./loading").default;
 export var Panel = require("./panel").default;
 export var Sidebar = require("./sidebar").default;
