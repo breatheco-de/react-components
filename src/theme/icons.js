@@ -35,6 +35,7 @@ import faTrash from '@fortawesome/fontawesome-free-solid/faTrash';
 import faList from '@fortawesome/fontawesome-free-solid/faList';
 import faCircle from '@fortawesome/fontawesome-free-solid/faCircle';
 import faCircleRegular from '@fortawesome/fontawesome-free-regular/faCircle';
+import faPencil from '@fortawesome/fontawesome-free-solid/faPencilAlt';
 /**
  * 3) Tell font-awesome that you want to replace your icons with SVGs (recomended for performance)
 */
@@ -49,7 +50,8 @@ fontawesome.library.add(
     faCheck, faGraduationCap, faPlay, faSpinner, faSearch, faGithub, faEnvelope,
     faCog, faSync, faEllipsisV, faExternalLinkAlt, faArrowRight, faArrowLeft,
     faAngleDoubleDown, faAngleDoubleUp, faQuestion, faExclamationCircle,
-    faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash, faList, faCircle, faCircleRegular
+    faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash, faList, faCircle, 
+    faCircleRegular, faPencil
 );
 
 
@@ -70,6 +72,7 @@ export const icon = (name) => {
         play: 'fas fa-play',
         powerOff: 'fas fa-power-off',
         bars: 'fas fa-bars',
+        pencil: 'fas fa-pencil-alt',
         question: 'fas fa-question',
         times: 'fas fa-times',
         arrowRight: 'fas fa-arrow-right',

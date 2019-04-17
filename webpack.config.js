@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: [
     './src/index.js'
   ],
@@ -56,6 +57,10 @@ module.exports = {
     //   root: 'react'
     // }
   },
+  optimization: {
+		// We no not want to minimize our code.
+		minimize: false
+	},
   devServer: {
     contentBase: './dist'
   }
