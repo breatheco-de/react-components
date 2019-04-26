@@ -38,6 +38,7 @@ import faCircleRegular from '@fortawesome/fontawesome-free-regular/faCircle';
 import faPencil from '@fortawesome/fontawesome-free-solid/faPencilAlt';
 import faExclamationTriangle from '@fortawesome/fontawesome-free-solid/faExclamationTriangle';
 import faCode from '@fortawesome/fontawesome-free-solid/faCode';
+import faQrcode from '@fortawesome/fontawesome-free-solid/faQrcode';
 import faExchangeAlt from '@fortawesome/fontawesome-free-solid/faExchangeAlt';
 
 /**
@@ -55,7 +56,7 @@ fontawesome.library.add(
     faCog, faSync, faEllipsisV, faExternalLinkAlt, faArrowRight, faArrowLeft,
     faAngleDoubleDown, faAngleDoubleUp, faQuestion, faExclamationCircle,
     faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash, faList, faCircle,
-    faCircleRegular, faPencil, faExclamationTriangle, faCode, faExchangeAlt
+    faCircleRegular, faPencil, faExclamationTriangle, faCode, faExchangeAlt, faQrcode
 );
 
 
@@ -87,7 +88,8 @@ export const icon = (name) => {
         exclamationTriangle: 'fas fa-exclamation-triangle',
         code: 'fas fa-code',
         youtube: 'fab fa-youtube',
-        exchange: 'fas fa-exchange-alt'
+        exchange: 'fas fa-exchange-alt',
+        qrcode: "fas fa-qrcode"
     };
     if(typeof _icons[name] === 'undefined') throw new Error('Invalid icon name: '+name);
     else return _icons[name];
