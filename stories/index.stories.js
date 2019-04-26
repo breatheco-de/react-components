@@ -24,36 +24,36 @@ storiesOf('ActionableItem', module).add('default configuration', () => (<Theme.T
       done={boolean('Done', true)}
     />
 </Theme.Theme>));
-  
-  
-  
+
+
+
 /**
  *  BreatheCrumb
  */
-  
+
 const levels = [
     { label: 'Home', slug: 'home' },
     { label: 'Contact Us', slug: 'contact-us' }
 ];
 storiesOf('BreatheCrumb', module).add('default configuration', () => (<Theme.Theme>
-    <BreadCrumb 
+    <BreadCrumb
       levels={object('Levels', levels)}
       logoURL={null}
       onClick={(value) => action('onSelect')(value)}
     />
 </Theme.Theme>));
 
-  
+
 /**
  *  DropLink
  */
-  
+
 const droplinkOptions = [
     { label: 'Mark as read', url: 'hello' },
     { label: 'Other sample action', url: 'hello'}
 ];
 storiesOf('DropLink', module).add('default configuration', () => (<Theme.Theme>
-    <DropLink 
+    <DropLink
       label={text('label', 'Click me to see the options available for this action')}
       className={text('className', '')}
       dropdown={object('dropdown', droplinkOptions)}
@@ -69,27 +69,27 @@ storiesOf('DropLink', module).add('default configuration', () => (<Theme.Theme>
 
 storiesOf('CheckBox', module).add('default configuration', () => (<Theme.Theme>
     <div class="col-6 mx-auto">
-      <CheckBox 
+      <CheckBox
         label={text('label', 'Finish replits about react.js')}
-        withToggler={boolean('withToggler',false)} 
-        checked={boolean('checked', true)} 
+        withToggler={boolean('withToggler',false)}
+        checked={boolean('checked', true)}
         onClick={(value) => action('onClick')(value)}
       />
     </div>
 </Theme.Theme>),{
   notes: { markdown: 'welele' }
 });
- 
- 
- 
- 
+
+
+
+
 /**
  *  Button
  */
- 
+
 storiesOf('Button', module).add('default configuration', () => (<Theme.Theme>
-    <Button 
-      className={text('className', 'w-50')} 
+    <Button
+      className={text('className', 'w-50')}
       icon={text('icon', 'trash')}
       type={select('Type', ['light'], 'light')}
       dropdown={[
@@ -102,13 +102,13 @@ storiesOf('Button', module).add('default configuration', () => (<Theme.Theme>
 </Theme.Theme>));
 
 
- 
+
 /**
  *  List
  */
- 
+
 storiesOf('List', module).add('default configuration', () => (<Theme.Theme>
-    <List> 
+    <List>
       <ActionableItem label={text('Label', 'Make dinner')}
         onDropdownSelect={(value) => action('onDropdownSelect')(value)}
         dropdown={object('Options', actionableMenu)}
@@ -123,17 +123,17 @@ storiesOf('List', module).add('default configuration', () => (<Theme.Theme>
 /**
  *  Loading
  */
- 
+
 storiesOf('Loading', module).add('default configuration', () => (<Theme.Theme>
-    <Loading 
-      show={boolean('show', true)} 
-    /> 
+    <Loading
+      show={boolean('show', true)}
+    />
 </Theme.Theme>));
 
 /**
  *  LoadBar
  */
- 
+
 storiesOf('Load bar', module).add('default configuration', () => (<Theme.Theme>
     <LoadBar />
 </Theme.Theme>));
@@ -141,7 +141,7 @@ storiesOf('Load bar', module).add('default configuration', () => (<Theme.Theme>
 /**
  *  LoadBar
  */
- 
+
 storiesOf('MarkdownParser', module).add('default configuration', () => (<Theme.Theme>
     <div className="row mt-5">
       <div className="col-12 col-sm-8 col-lg-6 mx-auto">
@@ -157,18 +157,18 @@ storiesOf('MarkdownParser', module).add('default configuration', () => (<Theme.T
 /**
  *  Filter
  */
- 
+
 storiesOf('Filter', module).add('gender example', () => (<Theme.Theme>
     <div className="mx-auto mt-5" style={{ maxWidth: "300px" }}>
-      <Filter 
-        label={text('label','Gender')} 
+      <Filter
+        label={text('label','Gender')}
         onChange={(value) => action('onChange')(value)}
-        placeholder={text('placeholder','Select one gender')} 
-        multiselect={boolean('multiselect',false)} 
+        placeholder={text('placeholder','Select one gender')}
+        multiselect={boolean('multiselect',false)}
         options={object('options',[
           {label: 'Male', value: 'male'},
           {label: 'Female', value: 'female'}
-        ])} 
+        ])}
       />
     </div>
 </Theme.Theme>));
@@ -176,14 +176,14 @@ storiesOf('Filter', module).add('gender example', () => (<Theme.Theme>
 /**
  *  Filter
  */
- 
+
 storiesOf('Filter', module).add('tags example', () => (<Theme.Theme>
     <div className="mx-auto mt-5" style={{ maxWidth: "300px" }}>
-      <Filter 
-        label={text('label','Tags')} 
+      <Filter
+        label={text('label','Tags')}
         onChange={(value) => action('onChange')(value)}
-        placeholder={text('placeholder','Select one or more tags')} 
-        multiselect={boolean('multiselect',true)} 
+        placeholder={text('placeholder','Select one or more tags')}
+        multiselect={boolean('multiselect',true)}
         options={object('options',[
           {label: 'html', value: 'html'},
           {label: 'react.js', value: 'react.js'},
@@ -192,7 +192,7 @@ storiesOf('Filter', module).add('tags example', () => (<Theme.Theme>
           {label: 'flask', value: 'flask'},
           {label: 'django', value: 'django'},
           {label: 'css', value: 'css'}
-        ])} 
+        ])}
       />
     </div>
 </Theme.Theme>));
@@ -200,13 +200,13 @@ storiesOf('Filter', module).add('tags example', () => (<Theme.Theme>
 /**
  *  Filter
  */
- 
+
 storiesOf('Filter', module).add('with custom component', () => (<Theme.Theme>
     <div className="mx-auto mt-5" style={{ maxWidth: "300px" }}>
-      <Filter 
-        label={text('label','Tags')} 
-        placeholder={text('placeholder','Select one or more tags')} 
-        multiselect={boolean('multiselect',true)} 
+      <Filter
+        label={text('label','Tags')}
+        placeholder={text('placeholder','Select one or more tags')}
+        multiselect={boolean('multiselect',true)}
         onChange={(opt) => action('onChange')(opt)}
         options={object('options',[
           {label: 'html', value: 'html'},
@@ -217,11 +217,11 @@ storiesOf('Filter', module).add('with custom component', () => (<Theme.Theme>
           {label: 'django', value: 'django'},
           {label: 'css', value: 'css'}
         ])}
-        optionComponent={({data, onSelect, selected, onDeselect}) => (<CheckBox 
+        optionComponent={({data, onSelect, selected, onDeselect}) => (<CheckBox
             label={data.label}
             checked={selected}
-            withToggler={boolean('withToggler',false)} 
-      			className={selected && 'selected'} 
+            withToggler={boolean('withToggler',false)}
+      			className={selected && 'selected'}
       			onClick={(e) => selected ? onDeselect(data) : onSelect(data)}
       		/>)
           }
@@ -235,10 +235,10 @@ storiesOf('Filter', module).add('with custom component', () => (<Theme.Theme>
  */
 
 storiesOf('TimeLine', module).add('default configuration', () => (<Theme.Theme>
-    <TimeLine 
-      days={object('Days', days)} 
+    <TimeLine
+      days={object('Days', days)}
 			onClick={(value) => action('onClick')(value)}
-    /> 
+    />
 </Theme.Theme>));
 
 /**
@@ -252,9 +252,9 @@ storiesOf('Sidebar', module).add('default configuration', () => (<Theme.Theme>
 				<MenuItem label="Attendancy" slug="attendancy" iconName="trash" collapsed={false} onClick={(value) => action('onClick')(value)} />
 			</ul>}
 			onBrandClick={(value) => action('onBrandClick')(value)}
-    > 
+    >
       <h1>This is the content of the page</h1>
-    </Sidebar> 
+    </Sidebar>
 </Theme.Theme>));
 
 /**
@@ -263,14 +263,14 @@ storiesOf('Sidebar', module).add('default configuration', () => (<Theme.Theme>
 
 storiesOf('Sidebar', module).add('with timeline', () => (<Theme.Theme>
     <Sidebar
-      menu={() => <TimeLine 
-        days={days} 
+      menu={() => <TimeLine
+        days={days}
         height="100%"
       />}
 			onBrandClick={(value) => action('onBrandClick')(value)}
-    > 
+    >
       <h1>This is the content of the page</h1>
-    </Sidebar> 
+    </Sidebar>
 </Theme.Theme>));
 
 /**
@@ -279,8 +279,8 @@ storiesOf('Sidebar', module).add('with timeline', () => (<Theme.Theme>
 
 storiesOf('Sidebar', module).add('with footer', () => (<Theme.Theme>
     <Sidebar
-      menu={() => <TimeLine 
-        days={days} 
+      menu={() => <TimeLine
+        days={days}
         height="100%"
       />}
 			onBrandClick={(value) => action('onBrandClick')(value)}
@@ -300,9 +300,9 @@ storiesOf('Sidebar', module).add('with footer', () => (<Theme.Theme>
         <a href="#">
           <i className="fa fa-power-off"></i>
         </a>
-      </div>}> 
+      </div>}>
       <h1>This is the content of the page</h1>
-    </Sidebar> 
+    </Sidebar>
 </Theme.Theme>));
 /**
  *  Sidebar
@@ -311,8 +311,8 @@ storiesOf('Sidebar', module).add('with footer', () => (<Theme.Theme>
 storiesOf('Sidebar', module).add('with small footer', () => (<Theme.Theme>
     <Sidebar
       label={text('label', "BreatheCode Menu")}
-      menu={() => <TimeLine 
-        days={days} 
+      menu={() => <TimeLine
+        days={days}
         height="100%"
       />}
 			onBrandClick={(value) => action('onBrandClick')(value)}
@@ -320,9 +320,9 @@ storiesOf('Sidebar', module).add('with small footer', () => (<Theme.Theme>
         <a href="#">
           <i className="fa fa-power-off"></i>
         </a>
-      </div>}> 
+      </div>}>
       <h1>This is the content of the page</h1>
-    </Sidebar> 
+    </Sidebar>
 </Theme.Theme>));
 
 /**
@@ -330,12 +330,12 @@ storiesOf('Sidebar', module).add('with small footer', () => (<Theme.Theme>
  */
 
 storiesOf('MenuItem', module).add('default configuration', () => (<Theme.Theme>
-    <MenuItem 
-      label={text('label', 'First option of the menu')} 
-      iconName={text('icon', 'cog')} 
-      collapsed={boolean('collapsed', true)} 
+    <MenuItem
+      label={text('label', 'First option of the menu')}
+      iconName={text('icon', 'cog')}
+      collapsed={boolean('collapsed', true)}
 			onClick={(value) => action('onClick')(value)}
-    /> 
+    />
 </Theme.Theme>));
 
 /**
@@ -343,10 +343,10 @@ storiesOf('MenuItem', module).add('default configuration', () => (<Theme.Theme>
  */
 
 storiesOf('Panel', module).add('default configuration', () => (<Theme.Theme>
-    <Panel 
-      style={object('style', {padding: "10px"})} 
+    <Panel
+      style={object('style', {padding: "10px"})}
       zDepth={text('zDepth', '1')}
-    > 
+    >
     I am a Panel, you can change my deph and I will look more 3D. Similar to matirial design panels.
     </Panel>
 </Theme.Theme>));
@@ -357,7 +357,7 @@ storiesOf('Panel', module).add('default configuration', () => (<Theme.Theme>
  */
 
 storiesOf('ProgressKPI', module).add('default configuration', () => (<Theme.Theme>
-    <ProgressKPI 
+    <ProgressKPI
       progress={text('progress', '80')}
     />
 </Theme.Theme>));
@@ -368,7 +368,7 @@ storiesOf('ProgressKPI', module).add('default configuration', () => (<Theme.Them
  */
 
 storiesOf('Login', module).add('default configuration', () => (<Theme.Theme>
-    <Login 
+    <Login
 			onSubmit={(value) => action('onSubmit')(value)}
 			onForgot={(value) => action('onForgot')(value)}
       logoHeight={text('logoHeight', '100px')}
@@ -382,7 +382,7 @@ storiesOf('Login', module).add('default configuration', () => (<Theme.Theme>
  */
 
 storiesOf('Forgot', module).add('default configuration', () => (<Theme.Theme>
-    <Forgot 
+    <Forgot
 			onClick={(value) => action('onSubmit')(value)}
 			onBackToLogin={(value) => action('onBackToLogin')(value)}
       logoHeight={text('logoHeight', '100px')}
@@ -416,4 +416,7 @@ storiesOf('Icons', module).add('all icons', () => (<div>Icons<ul className="list
     <li className="list-inline-item"><Icon type="trash" /></li>
     <li className="list-inline-item"><Icon type="circle" /></li>
     <li className="list-inline-item"><Icon type="circleFilled" /></li>
+    <li className="list-inline-item"><Icon type="youtube" /></li>
+    <li className="list-inline-item"><Icon type="code" /></li>
+    <li className="list-inline-item"><Icon type="exchange" /></li>
 </ul></div>));

@@ -38,6 +38,8 @@ import faCircleRegular from '@fortawesome/fontawesome-free-regular/faCircle';
 import faPencil from '@fortawesome/fontawesome-free-solid/faPencilAlt';
 import faExclamationTriangle from '@fortawesome/fontawesome-free-solid/faExclamationTriangle';
 import faCode from '@fortawesome/fontawesome-free-solid/faCode';
+import faExchangeAlt from '@fortawesome/fontawesome-free-solid/faExchangeAlt';
+
 /**
  * 3) Tell font-awesome that you want to replace your icons with SVGs (recomended for performance)
 */
@@ -53,7 +55,7 @@ fontawesome.library.add(
     faCog, faSync, faEllipsisV, faExternalLinkAlt, faArrowRight, faArrowLeft,
     faAngleDoubleDown, faAngleDoubleUp, faQuestion, faExclamationCircle,
     faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash, faList, faCircle,
-    faCircleRegular, faPencil, faExclamationTriangle, faCode
+    faCircleRegular, faPencil, faExclamationTriangle, faCode, faExchangeAlt
 );
 
 
@@ -83,7 +85,9 @@ export const icon = (name) => {
         circle: 'fas fa-circle',
         circleFilled: 'far fa-circle',
         exclamationTriangle: 'fas fa-exclamation-triangle',
-        code: 'fas fa-code'
+        code: 'fas fa-code',
+        youtube: 'fab fa-youtube',
+        exchange: 'fas fa-exchange-alt'
     };
     if(typeof _icons[name] === 'undefined') throw new Error('Invalid icon name: '+name);
     else return _icons[name];
