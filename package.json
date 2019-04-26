@@ -1,6 +1,6 @@
 {
   "name": "@breathecode/ui-components",
-  "version": "1.0.81",
+  "version": "1.0.83",
   "description": "Collection of usefull components for react.js applications around the BreatheCode ecosystem",
   "main": "dist/index.js",
   "directories": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "webpack --config webpack.config.js --mode development",
-    "build": "build-storybook",
+    "build": "webpack --config webpack.config.js --mode production",
     "storybook": "start-storybook -p 3000 --ci",
     "build-storybook": "build-storybook",
     "deploy": "build-storybook && node deploy-github.js"
