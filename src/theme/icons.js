@@ -41,6 +41,7 @@ import faCode from '@fortawesome/fontawesome-free-solid/faCode';
 import faQrcode from '@fortawesome/fontawesome-free-solid/faQrcode';
 import faExchangeAlt from '@fortawesome/fontawesome-free-solid/faExchangeAlt';
 
+import faQuestionCircle from '@fortawesome/fontawesome-free-solid/faQuestionCircle';
 import faTachometerAlt from '@fortawesome/fontawesome-free-solid/faTachometerAlt';
 import faUserGraduate from '@fortawesome/fontawesome-free-solid/faUserGraduate';
 import faBookOpen from '@fortawesome/fontawesome-free-solid/faBookOpen';
@@ -113,9 +114,13 @@ export const icon = (name) => {
         questionCircle: 'fas fa-question-circle',
         book: 'fas fa-book',
         signOut: 'fas fa-sign-out-alt',
+        question: 'fas fa-question-circle',
 
         qrcode: "fas fa-qrcode"
     };
-    if(typeof _icons[name] === 'undefined') console.warn('Invalid icon name: '+name);
+    if(typeof _icons[name] === 'undefined'){
+        console.warn('Invalid icon name: '+name);
+        return _icons['question'];
+    }
     else return _icons[name];
 };
