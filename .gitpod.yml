@@ -1,2 +1,5 @@
+ports:
+    - port: 3000
 tasks:
-- command: npm install
+- init: npm install
+  command: npm run storybook

@@ -7,7 +7,7 @@ import { days, menuItems, actionableMenu, markdown } from './data.js';
 
 import { Theme, ActionableItem, DropLink, Button, CheckBox, BreadCrumb,
  List, TimeLine, Sidebar, Panel, ProgressKPI, Login, Forgot, Loading,
- LoadBar, MenuItem, MarkdownParser, Filter, Icon } from '../src/index';
+ LoadBar, MenuItem, MarkdownParser, Filter, Icon, Modal } from '../src/index';
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
@@ -391,6 +391,21 @@ storiesOf('Forgot', module).add('default configuration', () => (<Theme.Theme>
     />
 </Theme.Theme>));
 
+
+/**
+ *  Modal
+ */
+
+storiesOf('Modal', module).add('default configuration', () => (<Theme.Theme>
+    <Modal
+			onConfirm={(value) => action('onConfirm')(value)}
+			onCancel={(value) => action('onCancel')(value)}
+      show={boolean('show', true)}
+      title={text('title', 'Confirm your action?')}
+    >
+        <span> Here is some extra content</span>
+    </Modal>
+</Theme.Theme>));
 
 /**
  *  Icons
