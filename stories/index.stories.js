@@ -410,28 +410,11 @@ storiesOf('Modal', module).add('default configuration', () => (<Theme.Theme>
 /**
  *  Icons
  */
-
+const icons = [
+    'cog','exclamationTriangle','tachometer','graduate','bookOpen','calendarPlus','users','calendarCheck','dumbbell','questionCircle','book','signOut',
+    'check','graduationCap','list','search','envelope','sync','bell','play','bars','pencil','question','times','arrowRight','arrowLeft','trash','circle',
+    'circleFilled','youtube','code','exchange'
+];
 storiesOf('Icons', module).add('all icons', () => (<div>Icons<ul className="list-inline">
-    <li className="list-inline-item"><Icon type="exclamationTriangle" /></li>
-    <li className="list-inline-item"><Icon type="cog" /></li>
-    <li className="list-inline-item"><Icon type="check" /></li>
-    <li className="list-inline-item"><Icon type="graduationCap" /></li>
-    <li className="list-inline-item"><Icon type="list" /></li>
-    <li className="list-inline-item"><Icon type="search" /></li>
-    <li className="list-inline-item"><Icon type="envelope" /></li>
-    <li className="list-inline-item"><Icon type="sync" /></li>
-    <li className="list-inline-item"><Icon type="bell" /></li>
-    <li className="list-inline-item"><Icon type="play" /></li>
-    <li className="list-inline-item"><Icon type="bars" /></li>
-    <li className="list-inline-item"><Icon type="pencil" /></li>
-    <li className="list-inline-item"><Icon type="question" /></li>
-    <li className="list-inline-item"><Icon type="times" /></li>
-    <li className="list-inline-item"><Icon type="arrowRight" /></li>
-    <li className="list-inline-item"><Icon type="arrowLeft" /></li>
-    <li className="list-inline-item"><Icon type="trash" /></li>
-    <li className="list-inline-item"><Icon type="circle" /></li>
-    <li className="list-inline-item"><Icon type="circleFilled" /></li>
-    <li className="list-inline-item"><Icon type="youtube" /></li>
-    <li className="list-inline-item"><Icon type="code" /></li>
-    <li className="list-inline-item"><Icon type="exchange" /></li>
+    { icons.map((icon, i) => <li key={i} className="list-inline-item"><Icon type={icon} /></li>)}
 </ul></div>));
