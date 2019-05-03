@@ -116,6 +116,6 @@ export const icon = (name) => {
 
         qrcode: "fas fa-qrcode"
     };
-    if(typeof _icons[name] === 'undefined') throw new Error('Invalid icon name: '+name);
+    if(typeof _icons[name] === 'undefined') console.warn('Invalid icon name: '+name);
     else return _icons[name];
 };
