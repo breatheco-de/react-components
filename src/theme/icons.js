@@ -41,7 +41,6 @@ import faCode from '@fortawesome/fontawesome-free-solid/faCode';
 import faQrcode from '@fortawesome/fontawesome-free-solid/faQrcode';
 import faExchangeAlt from '@fortawesome/fontawesome-free-solid/faExchangeAlt';
 
-import faQuestionCircle from '@fortawesome/fontawesome-free-solid/faQuestionCircle';
 import faTachometerAlt from '@fortawesome/fontawesome-free-solid/faTachometerAlt';
 import faUserGraduate from '@fortawesome/fontawesome-free-solid/faUserGraduate';
 import faBookOpen from '@fortawesome/fontawesome-free-solid/faBookOpen';

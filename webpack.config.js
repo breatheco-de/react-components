@@ -21,10 +21,10 @@ module.exports = {
               loader: "sass-loader" // compiles Sass to CSS
           }]
         }, //css only files
-        { 
+        {
           test: /\.(png|jpg|svg|gif)$/, use: {
             loader: 'file-loader',
-            options: { name: '[name].[ext]' } 
+            options: { name: '[name].[ext]' }
           }
         }, //for images
         {
@@ -38,9 +38,10 @@ module.exports = {
     extensions: ['*', '.js', '.jsx']
   },
   output: {
-    path: path.resolve(__dirname, "dist"), 
+    path: path.resolve(__dirname, "dist"),
     filename: 'index.js',
     library: 'breathecode-react-components',
+    globalObject: 'typeof self !== \'undefined\' ? self : this',
     libraryTarget: 'umd'
   },
   externals: {
