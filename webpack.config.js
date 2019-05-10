@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
@@ -13,14 +14,18 @@ module.exports = {
             use: ['babel-loader']
         },
         {
-          test: /\.(css|scss)$/, use: [{
-              loader: "style-loader" // creates style nodes from JS strings
-          }, {
-              loader: "css-loader" // translates CSS into CommonJS
-          }, {
-              loader: "sass-loader" // compiles Sass to CSS
-          }]
-        }, //css only files
+            test: /\.(css|scss)$/,
+            use: [
+                {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                    hmr: process.env.NODE_ENV === 'development',
+                    },
+                },
+                'css-loader',
+                'sass-loader',
+            ],
+        },
         {
           test: /\.(png|jpg|svg|gif)$/, use: {
             loader: 'file-loader',
@@ -44,20 +49,14 @@ module.exports = {
     globalObject: 'typeof self !== \'undefined\' ? self : this',
     libraryTarget: 'umd'
   },
-  externals: {
-    // flux: {
-    //   commonjs: 'flux',
-    //   commonjs2: 'flux',
-    //   amd: 'flux',
-    //   root: 'flux'
-    // },
-    // react: {
-    //   commonjs: 'react',
-    //   commonjs2: 'react',
-    //   amd: 'react',
-    //   root: 'react'
-    // }
-  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
   optimization: {
 		// We no not want to minimize our code.
 		minimize: false
