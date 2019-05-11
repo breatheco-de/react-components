@@ -1,0 +1,36 @@
+.bcfilter:hover .display-component{padding: 0;}
+.bcfilter:hover .placeholder{
+    background: var(--color-grey-100);
+    cursor: pointer;
+    padding: 5px;
+}
+.bcfilter .display-component{
+    position: relative;
+}
+.bcfilter .options-component{
+        position: absolute;
+        margin: 0;
+        bottom: -10px;
+        left: -1px;
+        min-width: 250px;
+        transform: translateY(100%);
+        display: none;
+}
+.bcfilter .options-component p:first-child{ text-align: right; margin: 0px 5px; padding: 0; }
+.bcfilter .options-component a{ font-size: 80%; }
+.bcfilter .options-component ul{ padding: 0; margin: 0; }
+.bcfilter .options-component ul li{ padding: 0; margin: 0;}
+.bcfilter .options-component:hover{
+    background: var(--color-grey-100);
+    cursor: pointer;
+}
+.bcfilter .options-component.selected{
+    background: var(--color-primary-light);
+}
+.bcfilter .options-component i:hover{
+    background: var(--color-grey-200);
+    border-radius: 5px;
+}
+.bcfilter.open .options-component{
+    display: inline-block;
+}

@@ -1,1 +1,1 @@
-export { default } from "./Anchor.jsx";
+export { default } from "./Anchor.js";

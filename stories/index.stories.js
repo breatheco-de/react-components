@@ -1,13 +1,12 @@
 import React from 'react';
-
+import "bootstrap/dist/css/bootstrap.css";
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { days, menuItems, actionableMenu, markdown } from './data.js';
 
-import { Theme, ActionableItem, DropLink, Button, CheckBox, BreadCrumb,
- List, TimeLine, Sidebar, Panel, ProgressKPI, Login, Forgot, Loading,
- LoadBar, MenuItem, MarkdownParser, Filter, Icon, Modal } from '../src/index';
+import { Theme, ActionableItem, DropLink, Button, CheckBox,
+ List, TimeLine, Sidebar, Panel, Login, Forgot, Loading, MenuItem, MarkdownParser, Filter, Icon, Modal } from '../src/index';
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
@@ -25,23 +24,6 @@ storiesOf('ActionableItem', module).add('default configuration', () => (<Theme.T
     />
 </Theme.Theme>));
 
-
-
-/**
- *  BreatheCrumb
- */
-
-const levels = [
-    { label: 'Home', slug: 'home' },
-    { label: 'Contact Us', slug: 'contact-us' }
-];
-storiesOf('BreatheCrumb', module).add('default configuration', () => (<Theme.Theme>
-    <BreadCrumb
-      levels={object('Levels', levels)}
-      logoURL={null}
-      onClick={(value) => action('onSelect')(value)}
-    />
-</Theme.Theme>));
 
 
 /**
@@ -90,8 +72,8 @@ storiesOf('CheckBox', module).add('default configuration', () => (<Theme.Theme>
 storiesOf('Button', module).add('default configuration', () => (<Theme.Theme>
     <Button
       className={text('className', 'w-50')}
-      icon={text('icon', 'trash')}
-      type={select('Type', ['light'], 'light')}
+      iconName={text('iconName', 'trash')}
+      type={select('Type', ['light','secondary','success','dark','danger','warning', 'primary'], 'secondary')}
       dropdown={[
         { label: 'First action', url: 'hello' }
       ]}
@@ -127,19 +109,13 @@ storiesOf('List', module).add('default configuration', () => (<Theme.Theme>
 storiesOf('Loading', module).add('default configuration', () => (<Theme.Theme>
     <Loading
       show={boolean('show', true)}
+      color={select('color', ['light','secondary','success','dark','danger','warning', 'primary'], 'secondary')}
     />
 </Theme.Theme>));
 
-/**
- *  LoadBar
- */
-
-storiesOf('Load bar', module).add('default configuration', () => (<Theme.Theme>
-    <LoadBar />
-</Theme.Theme>));
 
 /**
- *  LoadBar
+ *  MarkdownParser
  */
 
 storiesOf('MarkdownParser', module).add('default configuration', () => (<Theme.Theme>
@@ -164,6 +140,7 @@ storiesOf('Filter', module).add('gender example', () => (<Theme.Theme>
         label={text('label','Gender')}
         onChange={(value) => action('onChange')(value)}
         placeholder={text('placeholder','Select one gender')}
+        className={text('className','')}
         multiselect={boolean('multiselect',false)}
         options={object('options',[
           {label: 'Male', value: 'male'},
@@ -351,16 +328,6 @@ storiesOf('Panel', module).add('default configuration', () => (<Theme.Theme>
     </Panel>
 </Theme.Theme>));
 
-
-/**
- *  KPI Progress
- */
-
-storiesOf('ProgressKPI', module).add('default configuration', () => (<Theme.Theme>
-    <ProgressKPI
-      progress={text('progress', '80')}
-    />
-</Theme.Theme>));
 
 
 /**

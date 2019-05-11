@@ -13,8 +13,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        loaders: ["style-loader", "css-loader", "sass-loader"],
+        test: /\.css$/,
+        use: ['style-loader','css-loader'],
         include: path.resolve(__dirname, "../")
       }
     ],

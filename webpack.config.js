@@ -1,5 +1,4 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
@@ -14,17 +13,8 @@ module.exports = {
             use: ['babel-loader']
         },
         {
-            test: /\.(css|scss)$/,
-            use: [
-                {
-                    loader: MiniCssExtractPlugin.loader,
-                    options: {
-                    hmr: process.env.NODE_ENV === 'development',
-                    },
-                },
-                'css-loader',
-                'sass-loader',
-            ],
+            test: /\.(css)$/,
+            use: ['style-loader','css-loader'],
         },
         {
           test: /\.(png|jpg|svg|gif)$/, use: {
@@ -49,14 +39,6 @@ module.exports = {
     globalObject: 'typeof self !== \'undefined\' ? self : this',
     libraryTarget: 'umd'
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
   optimization: {
 		// We no not want to minimize our code.
 		minimize: false

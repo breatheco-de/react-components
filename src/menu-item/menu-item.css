@@ -1,0 +1,10 @@
+.bc-menu-item{
+    padding: 5px;
+}
+.bc-menu-item .menuicon{
+    margin-right: 10px;
+}
+.bc-menu-item:hover{
+    background: var(--color-grey-300);
+    cursor: pointer;
+}

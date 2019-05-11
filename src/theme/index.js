@@ -1,1 +1,1 @@
-export { default } from "./Theme.jsx";
+export { default } from "./Theme.js";

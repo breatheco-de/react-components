@@ -1,1 +1,1 @@
-export { default } from "./MarkdownParser.jsx";
+export { default } from "./MarkdownParser.js";
