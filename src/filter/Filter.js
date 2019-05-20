@@ -10,7 +10,6 @@ class Filter extends React.Component {
 			selectedValues: [],
 			opened: false
 		};
-        console.log("CSS Module styles: ",s);
 	}
 	changeSelectedValues(selectedValues){
 		this.setState({ selectedValues });
@@ -19,11 +18,17 @@ class Filter extends React.Component {
 	render() {
 		const { label, className, options, placeholder, multiselect, optionComponent } = this.props;
 		const Option = optionComponent ? optionComponent : ({data, onSelect, selected, onDeselect}) => <li
-			className={selected ? 'selected': ''}
-			onClick={() => onSelect(data)}>{data.label}{selected &&  <i className={"fas fa-times fa-xs px-1 done ml-2"} onClick={(e) => {
-				e.stopPropagation();
-				onDeselect(data);
-			}} />}
+			className={selected ? 'selected' : ''}
+			onClick={() => onSelect(data)}>
+                {data.label}
+                {selected &&  <span className="icon"><i
+                        className={"fas fa-times fa-xs"}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onDeselect(data);
+                        }}
+                    /></span>
+                }
 		</li>;
 		return (
 			<div className={`bcfilter ${className}  ${this.state.opened ? 'open' : ''}`}>
@@ -37,7 +42,7 @@ class Filter extends React.Component {
 					</div>
 					<div className={"options-component bcbox"}>
 						{multiselect && <p><Anchor onClick={() => this.setState({ selectedValues: [] })}>Unselect all</Anchor></p>}
-						<ul>
+						<ul style={{ flexDirection: this.props.direction }}>
 							{options.map((opt, i) => <Option className="bcbox" key={i}
 								data={opt}
 								selected={multiselect ?
@@ -62,6 +67,7 @@ Filter.propTypes = {
 	label: PropTypes.string.isRequired,
 	optionComponent: PropTypes.node,
 	multiselect: PropTypes.bool,
+    direction: PropTypes.string,
 	placeholder: PropTypes.string.isRequired,
 	options: PropTypes.array.isRequired,
 	onChange: PropTypes.func
@@ -70,6 +76,7 @@ Filter.defaultProps = {
 	label: "Label",
 	placeholder: "Select a gender",
 	className: "",
+	direction: "row",
 	optionComponent: null,
 	multiselect: true,
 	onChange: null,

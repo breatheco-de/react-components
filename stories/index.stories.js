@@ -161,6 +161,7 @@ storiesOf('Filter', module).add('tags example', () => (<Theme.Theme>
         onChange={(value) => action('onChange')(value)}
         placeholder={text('placeholder','Select one or more tags')}
         multiselect={boolean('multiselect',true)}
+        direction={select('direction', ['row','column-reverse','column','row-reverse'], 'row')}
         options={object('options',[
           {label: 'html', value: 'html'},
           {label: 'react.js', value: 'react.js'},
@@ -184,6 +185,7 @@ storiesOf('Filter', module).add('with custom component', () => (<Theme.Theme>
         label={text('label','Tags')}
         placeholder={text('placeholder','Select one or more tags')}
         multiselect={boolean('multiselect',true)}
+        direction={select('direction', ['row','column-reverse','column','row-reverse'], 'column')}
         onChange={(opt) => action('onChange')(opt)}
         options={object('options',[
           {label: 'html', value: 'html'},

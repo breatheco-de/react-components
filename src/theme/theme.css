@@ -3,6 +3,7 @@
     /* Main colors for the entire application */
     --color-primary: #004085; /* darkBlue */
     --color-primary-light: #7ab3ff; /* light-blue */
+    --color-primary-really-light: #e0f1ff; /* light-blue */
 
     --color-warning: #E6C452; /* darkYellow, orange */
     --color-warning-light: #fbf5eb; /* yellow-100 */
