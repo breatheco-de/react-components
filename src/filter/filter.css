@@ -18,7 +18,12 @@
 }
 .bcfilter .options-component p:first-child{ text-align: right; margin: 0px 5px; padding: 0; }
 .bcfilter .options-component a{ font-size: 80%; }
-.bcfilter .options-component ul{ padding: 0; margin: 0; display: flex; }
+.bcfilter .options-component ul{
+    padding: 0; margin: 0; display: flex; flex-wrap: wrap;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: scroll;
+}
 .bcfilter .options-component ul li{
     padding: 5px; margin: 5px;
     border-radius: 5px;

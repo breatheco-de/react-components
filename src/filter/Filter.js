@@ -42,7 +42,7 @@ class Filter extends React.Component {
 					</div>
 					<div className={"options-component bcbox"}>
 						{multiselect && <p><Anchor onClick={() => this.setState({ selectedValues: [] })}>Unselect all</Anchor></p>}
-						<ul style={{ flexDirection: this.props.direction }}>
+						<ul style={{ flexDirection: this.props.direction, width: this.props.width }}>
 							{options.map((opt, i) => <Option className="bcbox" key={i}
 								data={opt}
 								selected={multiselect ?
@@ -68,6 +68,7 @@ Filter.propTypes = {
 	optionComponent: PropTypes.node,
 	multiselect: PropTypes.bool,
     direction: PropTypes.string,
+    width: PropTypes.string,
 	placeholder: PropTypes.string.isRequired,
 	options: PropTypes.array.isRequired,
 	onChange: PropTypes.func
@@ -77,6 +78,7 @@ Filter.defaultProps = {
 	placeholder: "Select a gender",
 	className: "",
 	direction: "row",
+	width: "500px",
 	optionComponent: null,
 	multiselect: true,
 	onChange: null,

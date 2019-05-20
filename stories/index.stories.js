@@ -141,6 +141,7 @@ storiesOf('Filter', module).add('gender example', () => (<Theme.Theme>
         onChange={(value) => action('onChange')(value)}
         placeholder={text('placeholder','Select one gender')}
         className={text('className','')}
+        width={text('width','500px')}
         multiselect={boolean('multiselect',false)}
         options={object('options',[
           {label: 'Male', value: 'male'},
@@ -161,6 +162,7 @@ storiesOf('Filter', module).add('tags example', () => (<Theme.Theme>
         onChange={(value) => action('onChange')(value)}
         placeholder={text('placeholder','Select one or more tags')}
         multiselect={boolean('multiselect',true)}
+        width={text('width','500px')}
         direction={select('direction', ['row','column-reverse','column','row-reverse'], 'row')}
         options={object('options',[
           {label: 'html', value: 'html'},
@@ -185,6 +187,7 @@ storiesOf('Filter', module).add('with custom component', () => (<Theme.Theme>
         label={text('label','Tags')}
         placeholder={text('placeholder','Select one or more tags')}
         multiselect={boolean('multiselect',true)}
+        width={text('width','500px')}
         direction={select('direction', ['row','column-reverse','column','row-reverse'], 'column')}
         onChange={(opt) => action('onChange')(opt)}
         options={object('options',[
