@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
@@ -13,8 +14,19 @@ module.exports = {
             use: ['babel-loader']
         },
         {
-            test: /\.(css)$/,
-            use: ['style-loader','css-loader'],
+            test: /\.css$/,
+            use: [
+            {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                // you can specify a publicPath here
+                // by default it uses publicPath in webpackOptions.output
+                publicPath: '../',
+                hmr: process.env.NODE_ENV === 'development',
+                },
+            },
+            'css-loader',
+            ],
         },
         {
           test: /\.(png|jpg|svg|gif)$/, use: {
@@ -35,7 +47,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: 'index.js',
-    library: 'breathecode-react-components',
+    library: '@breathecode/ui-components',
     globalObject: 'typeof self !== \'undefined\' ? self : this',
     libraryTarget: 'umd'
   },
@@ -43,6 +55,14 @@ module.exports = {
 		// We no not want to minimize our code.
 		minimize: false
 	},
+    plugins: [
+        new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+        }),
+    ],
   devServer: {
     contentBase: './dist'
   }

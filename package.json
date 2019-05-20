@@ -1,6 +1,6 @@
 {
   "name": "@breathecode/ui-components",
-  "version": "1.1.61",
+  "version": "1.1.62",
   "description": "Collection of usefull components for react.js applications around the BreatheCode ecosystem",
   "main": "dist/index.js",
   "directories": {
@@ -53,6 +53,7 @@
     "css-loader": "^0.28.11",
     "gh-pages": "^2.0.1",
     "isomorphic-style-loader": "^5.0.1",
+    "mini-css-extract-plugin": "^0.6.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.0.3"
