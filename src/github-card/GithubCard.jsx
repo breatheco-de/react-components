@@ -16,8 +16,7 @@ class GithubCard extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ data });
-        //console.log(data);
-        //console.log(this.state);
+     
       });
   }
 
@@ -127,11 +126,11 @@ class GithubCard extends React.Component {
 GithubCard.propTypes = {
   // You can declare that a prop is a specific JS primitive. By default, these
   // are all optional.
-  email: PropTypes.string.isRequired,
+  
   gitUsername: PropTypes.string.isRequired
 };
 GithubCard.defaultProps = {
-  email: null,
+  
   gitUsername: null
 };
 export default GithubCard;

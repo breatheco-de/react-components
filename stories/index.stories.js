@@ -397,8 +397,7 @@ storiesOf('Forgot', module).add('default configuration', () => (<Theme.Theme>
  */
 
 storiesOf('GithubCard', module).add('default configuration', () => (<Theme.Theme>
-    <GithubCard
-    //   email={text('email', 'myemail@domain.com')}
+    <GithubCard    
       gitUsername={text('Github Username', 'plucodev')}
     />
 </Theme.Theme>));
