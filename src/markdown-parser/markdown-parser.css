@@ -1,0 +1,26 @@
+.bc-readme{
+    padding: 5px;
+}
+.bc-readme li{ list-style-type: disc; }
+.bc-readme pre{
+    padding: 5px;
+    background: #23241f;
+    border-radius: 5px;
+}
+.bc-readme :not(pre) > code[class*="language-"] {
+    padding: .3em;
+}
+.bc-readme h1,.bc-readme h2,.bc-readme h3,.bc-readme h4,.bc-readme h5{
+    margin: 20px 0px 25px 0px;
+}
+.bc-readme h1 code[class*="language-"],
+.bc-readme h2 code[class*="language-"],
+.bc-readme h3 code[class*="language-"],
+.bc-readme h4 code[class*="language-"],
+.bc-readme h5 code[class*="language-"]
+.bc-readme h1 pre[class*="language-"],
+.bc-readme h2 pre[class*="language-"],
+.bc-readme h3 pre[class*="language-"],
+.bc-readme h4 pre[class*="language-"],
+.bc-readme h5 pre[class*="language-"]
+{ font-size: 80%; }

@@ -35,6 +35,23 @@ import faTrash from '@fortawesome/fontawesome-free-solid/faTrash';
 import faList from '@fortawesome/fontawesome-free-solid/faList';
 import faCircle from '@fortawesome/fontawesome-free-solid/faCircle';
 import faCircleRegular from '@fortawesome/fontawesome-free-regular/faCircle';
+import faPencil from '@fortawesome/fontawesome-free-solid/faPencilAlt';
+import faExclamationTriangle from '@fortawesome/fontawesome-free-solid/faExclamationTriangle';
+import faCode from '@fortawesome/fontawesome-free-solid/faCode';
+import faQrcode from '@fortawesome/fontawesome-free-solid/faQrcode';
+import faExchangeAlt from '@fortawesome/fontawesome-free-solid/faExchangeAlt';
+
+import faTachometerAlt from '@fortawesome/fontawesome-free-solid/faTachometerAlt';
+import faUserGraduate from '@fortawesome/fontawesome-free-solid/faUserGraduate';
+import faBookOpen from '@fortawesome/fontawesome-free-solid/faBookOpen';
+import faCalendarPlus from '@fortawesome/fontawesome-free-solid/faCalendarPlus';
+import faUsers from '@fortawesome/fontawesome-free-solid/faUsers';
+import faCalendarCheck from '@fortawesome/fontawesome-free-solid/faCalendarCheck';
+import faDumbbell from '@fortawesome/fontawesome-free-solid/faDumbbell';
+import faQuestionCircle from '@fortawesome/fontawesome-free-solid/faQuestionCircle';
+import faBook from '@fortawesome/fontawesome-free-solid/faBook';
+import faSignOutAlt from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
+
 /**
  * 3) Tell font-awesome that you want to replace your icons with SVGs (recomended for performance)
 */
@@ -49,7 +66,10 @@ fontawesome.library.add(
     faCheck, faGraduationCap, faPlay, faSpinner, faSearch, faGithub, faEnvelope,
     faCog, faSync, faEllipsisV, faExternalLinkAlt, faArrowRight, faArrowLeft,
     faAngleDoubleDown, faAngleDoubleUp, faQuestion, faExclamationCircle,
-    faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash, faList, faCircle, faCircleRegular
+    faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash, faList, faCircle,
+    faCircleRegular, faPencil, faExclamationTriangle, faCode, faExchangeAlt, faQrcode,
+    faTachometerAlt,faUserGraduate, faBookOpen, faCalendarPlus, faUsers,
+    faCalendarCheck, faDumbbell, faQuestionCircle, faBook, faSignOutAlt
 );
 
 
@@ -70,14 +90,36 @@ export const icon = (name) => {
         play: 'fas fa-play',
         powerOff: 'fas fa-power-off',
         bars: 'fas fa-bars',
+        pencil: 'fas fa-pencil-alt',
         question: 'fas fa-question',
         times: 'fas fa-times',
         arrowRight: 'fas fa-arrow-right',
         arrowLeft: 'fas fa-arrow-left',
         trash: 'fas fa-trash',
         circle: 'fas fa-circle',
-        circleFilled: 'far fa-circle'
+        circleFilled: 'far fa-circle',
+        exclamationTriangle: 'fas fa-exclamation-triangle',
+        code: 'fas fa-code',
+        youtube: 'fab fa-youtube',
+        exchange: 'fas fa-exchange-alt',
+
+        tachometer: 'fas fa-tachometer-alt',
+        graduate: 'fas fa-user-graduate',
+        bookOpen: 'fas fa-book-open',
+        calendarPlus: 'fas fa-calendar-plus',
+        users: 'fas fa-users',
+        calendarCheck: 'fas fa-calendar-check',
+        dumbbell: 'fas fa-dumbbell',
+        questionCircle: 'fas fa-question-circle',
+        book: 'fas fa-book',
+        signOut: 'fas fa-sign-out-alt',
+        question: 'fas fa-question-circle',
+
+        qrcode: "fas fa-qrcode"
     };
-    if(typeof _icons[name] === 'undefined') throw new Error('Invalid icon name: '+name);
+    if(typeof _icons[name] === 'undefined'){
+        console.warn('Invalid icon name: '+name);
+        return _icons['question'];
+    }
     else return _icons[name];
 };

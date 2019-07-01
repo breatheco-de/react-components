@@ -1,4 +1,8 @@
 # BreatheCode Platform JS Components
+<p>
+  <a href="https://gitpod.io#https://github.com/breatheco-de/react-components.git"><img src="https://raw.githubusercontent.com/breatheco-de/react-components/master/open-in-gitpod.svg?sanitize=true" />
+  </a>
+</p>
 
 This is the main UI Library used in all BreatheCode interfaces based on react.
 > Note: This is a very early development library, please help us debug it.

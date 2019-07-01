@@ -1,9 +1,0 @@
-@import 'colors';
-
-@mixin box{
-    border: $grey-200 solid 2px;
-    display: inline-block;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 3px;
-}

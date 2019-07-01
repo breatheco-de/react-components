@@ -1,14 +1,14 @@
 import React from 'react';
-
+import "bootstrap/dist/css/bootstrap.css";
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
 
 import { days, menuItems, actionableMenu, markdown } from './data.js';
 
-import { Theme, ActionableItem, DropLink, Button, CheckBox, BreadCrumb,
- List, TimeLine, Sidebar, Panel, ProgressKPI, Login, Forgot, Loading,
- LoadBar, MenuItem, MarkdownParser, Filter, GithubCard } from '../src/index';
+import { Theme, ActionableItem, DropLink, Button, CheckBox,
+ List, TimeLine, Sidebar, Panel, Login, Forgot, Loading,
+  MenuItem, MarkdownParser, Filter, GithubCard, Icon, Modal } from '../src/index';
+
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
@@ -26,23 +26,6 @@ storiesOf('ActionableItem', module).add('default configuration', () => (<Theme.T
     />
 </Theme.Theme>));
 
-
-
-/**
- *  BreatheCrumb
- */
-
-const levels = [
-    { label: 'Home', slug: 'home' },
-    { label: 'Contact Us', slug: 'contact-us' }
-];
-storiesOf('BreatheCrumb', module).add('default configuration', () => (<Theme.Theme>
-    <BreadCrumb
-      levels={object('Levels', levels)}
-      logoURL={null}
-      onClick={(value) => action('onSelect')(value)}
-    />
-</Theme.Theme>));
 
 
 /**
@@ -91,8 +74,8 @@ storiesOf('CheckBox', module).add('default configuration', () => (<Theme.Theme>
 storiesOf('Button', module).add('default configuration', () => (<Theme.Theme>
     <Button
       className={text('className', 'w-50')}
-      icon={text('icon', 'trash')}
-      type={select('Type', ['light'], 'light')}
+      iconName={text('iconName', 'trash')}
+      type={select('Type', ['light','secondary','success','dark','danger','warning', 'primary'], 'secondary')}
       dropdown={[
         { label: 'First action', url: 'hello' }
       ]}
@@ -128,19 +111,13 @@ storiesOf('List', module).add('default configuration', () => (<Theme.Theme>
 storiesOf('Loading', module).add('default configuration', () => (<Theme.Theme>
     <Loading
       show={boolean('show', true)}
+      color={select('color', ['light','secondary','success','dark','danger','warning', 'primary'], 'secondary')}
     />
 </Theme.Theme>));
 
-/**
- *  LoadBar
- */
-
-storiesOf('Load bar', module).add('default configuration', () => (<Theme.Theme>
-    <LoadBar />
-</Theme.Theme>));
 
 /**
- *  LoadBar
+ *  MarkdownParser
  */
 
 storiesOf('MarkdownParser', module).add('default configuration', () => (<Theme.Theme>
@@ -165,6 +142,8 @@ storiesOf('Filter', module).add('gender example', () => (<Theme.Theme>
         label={text('label','Gender')}
         onChange={(value) => action('onChange')(value)}
         placeholder={text('placeholder','Select one gender')}
+        className={text('className','')}
+        width={text('width','500px')}
         multiselect={boolean('multiselect',false)}
         options={object('options',[
           {label: 'Male', value: 'male'},
@@ -185,6 +164,8 @@ storiesOf('Filter', module).add('tags example', () => (<Theme.Theme>
         onChange={(value) => action('onChange')(value)}
         placeholder={text('placeholder','Select one or more tags')}
         multiselect={boolean('multiselect',true)}
+        width={text('width','500px')}
+        direction={select('direction', ['row','column-reverse','column','row-reverse'], 'row')}
         options={object('options',[
           {label: 'html', value: 'html'},
           {label: 'react.js', value: 'react.js'},
@@ -208,6 +189,8 @@ storiesOf('Filter', module).add('with custom component', () => (<Theme.Theme>
         label={text('label','Tags')}
         placeholder={text('placeholder','Select one or more tags')}
         multiselect={boolean('multiselect',true)}
+        width={text('width','500px')}
+        direction={select('direction', ['row','column-reverse','column','row-reverse'], 'column')}
         onChange={(opt) => action('onChange')(opt)}
         options={object('options',[
           {label: 'html', value: 'html'},
@@ -353,15 +336,6 @@ storiesOf('Panel', module).add('default configuration', () => (<Theme.Theme>
 </Theme.Theme>));
 
 
-/**
- *  KPI Progress
- */
-
-storiesOf('ProgressKPI', module).add('default configuration', () => (<Theme.Theme>
-    <ProgressKPI
-      progress={text('progress', '80')}
-    />
-</Theme.Theme>));
 
 
 /**
@@ -401,3 +375,30 @@ storiesOf('GithubCard', module).add('default configuration', () => (<Theme.Theme
       gitUsername={text('Github Username', 'plucodev')}
     />
 </Theme.Theme>));
+
+/**
+ *  Modal
+ */
+
+storiesOf('Modal', module).add('default configuration', () => (<Theme.Theme>
+    <Modal
+			onConfirm={(value) => action('onConfirm')(value)}
+			onCancel={(value) => action('onCancel')(value)}
+      show={boolean('show', true)}
+      title={text('title', 'Confirm your action?')}
+    >
+        <span> Here is some extra content</span>
+    </Modal>
+</Theme.Theme>));
+
+/**
+ *  Icons
+ */
+const icons = [
+    'cog','exclamationTriangle','tachometer','graduate','bookOpen','calendarPlus','users','calendarCheck','dumbbell','questionCircle','book','signOut',
+    'check','graduationCap','list','search','envelope','sync','bell','play','bars','pencil','question','times','arrowRight','arrowLeft','trash','circle',
+    'circleFilled','youtube','code','exchange'
+];
+storiesOf('Icons', module).add('all icons', () => (<div>Icons<ul className="list-inline">
+    { icons.map((icon, i) => <li key={i} className="list-inline-item"><Icon type={icon} /></li>)}
+</ul></div>));

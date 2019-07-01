@@ -1,6 +1,8 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: [
     './src/index.js'
   ],
@@ -12,18 +14,24 @@ module.exports = {
             use: ['babel-loader']
         },
         {
-          test: /\.(css|scss)$/, use: [{
-              loader: "style-loader" // creates style nodes from JS strings
-          }, {
-              loader: "css-loader" // translates CSS into CommonJS
-          }, {
-              loader: "sass-loader" // compiles Sass to CSS
-          }]
-        }, //css only files
-        { 
+            test: /\.css$/,
+            use: [
+            {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                // you can specify a publicPath here
+                // by default it uses publicPath in webpackOptions.output
+                publicPath: '../',
+                hmr: process.env.NODE_ENV === 'development',
+                },
+            },
+            'css-loader',
+            ],
+        },
+        {
           test: /\.(png|jpg|svg|gif)$/, use: {
             loader: 'file-loader',
-            options: { name: '[name].[ext]' } 
+            options: { name: '[name].[ext]' }
           }
         }, //for images
         {
@@ -37,25 +45,24 @@ module.exports = {
     extensions: ['*', '.js', '.jsx']
   },
   output: {
-    path: path.resolve(__dirname, "dist"), 
+    path: path.resolve(__dirname, "dist"),
     filename: 'index.js',
-    library: 'breathecode-react-components',
+    library: '@breathecode/ui-components',
+    globalObject: 'typeof self !== \'undefined\' ? self : this',
     libraryTarget: 'umd'
   },
-  externals: {
-    // flux: {
-    //   commonjs: 'flux',
-    //   commonjs2: 'flux',
-    //   amd: 'flux',
-    //   root: 'flux'
-    // },
-    // react: {
-    //   commonjs: 'react',
-    //   commonjs2: 'react',
-    //   amd: 'react',
-    //   root: 'react'
-    // }
-  },
+  optimization: {
+		// We no not want to minimize our code.
+		minimize: false
+	},
+    plugins: [
+        new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+        }),
+    ],
   devServer: {
     contentBase: './dist'
   }

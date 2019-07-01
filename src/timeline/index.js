@@ -1,1 +1,1 @@
-export { default } from "./TimeLine.jsx";
+export { default } from "./TimeLine.js";

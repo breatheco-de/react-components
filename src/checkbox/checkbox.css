@@ -1,0 +1,11 @@
+.bc-checkbox{
+    padding: 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.bc-checkbox:hover{ background: var(--color-grey-300); }
+.bc-checkbox label { cursor: pointer; margin-bottom: 0px; }
+.bc-checkbox svg{margin-right: 10px;}
+.bc-checkbox button svg{margin-right: 0;}
+.bc-checkbox button.active{ border: 1px var(--color-grey-400) solid; }

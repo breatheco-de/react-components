@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./github-card.scss";
+import "./github-card.css";
 import { Link } from 'react-router-dom'
 
 class GithubCard extends React.Component {
@@ -16,7 +16,7 @@ class GithubCard extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ data });
-     
+
       });
   }
 
@@ -126,11 +126,11 @@ class GithubCard extends React.Component {
 GithubCard.propTypes = {
   // You can declare that a prop is a specific JS primitive. By default, these
   // are all optional.
-  
+
   gitUsername: PropTypes.string.isRequired
 };
 GithubCard.defaultProps = {
-  
+
   gitUsername: null
 };
 export default GithubCard;
