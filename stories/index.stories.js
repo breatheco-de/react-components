@@ -6,7 +6,9 @@ import { action } from '@storybook/addon-actions';
 import { days, menuItems, actionableMenu, markdown } from './data.js';
 
 import { Theme, ActionableItem, DropLink, Button, CheckBox,
- List, TimeLine, Sidebar, Panel, Login, Forgot, Loading, MenuItem, MarkdownParser, Filter, Icon, Modal } from '../src/index';
+ List, TimeLine, Sidebar, Panel, Login, Forgot, Loading,
+  MenuItem, MarkdownParser, Filter, GithubCard, Icon, Modal } from '../src/index';
+
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
@@ -335,6 +337,7 @@ storiesOf('Panel', module).add('default configuration', () => (<Theme.Theme>
 
 
 
+
 /**
  *  Login
  */
@@ -363,6 +366,15 @@ storiesOf('Forgot', module).add('default configuration', () => (<Theme.Theme>
     />
 </Theme.Theme>));
 
+/**
+ *  Github Card
+ */
+
+storiesOf('GithubCard', module).add('default configuration', () => (<Theme.Theme>
+    <GithubCard    
+      gitUsername={text('Github Username', 'plucodev')}
+    />
+</Theme.Theme>));
 
 /**
  *  Modal
