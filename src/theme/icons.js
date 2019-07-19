@@ -52,6 +52,9 @@ import faQuestionCircle from '@fortawesome/fontawesome-free-solid/faQuestionCirc
 import faBook from '@fortawesome/fontawesome-free-solid/faBook';
 import faSignOutAlt from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
 
+import faBoxOpen from '@fortawesome/fontawesome-free-solid/faBoxOpen';
+import faPaintBrush from '@fortawesome/fontawesome-free-solid/faPaintBrush';
+
 /**
  * 3) Tell font-awesome that you want to replace your icons with SVGs (recomended for performance)
 */
@@ -69,7 +72,8 @@ fontawesome.library.add(
     faYoutube, faTimes, faPowerOff, faBell, faBars, faTrash, faList, faCircle,
     faCircleRegular, faPencil, faExclamationTriangle, faCode, faExchangeAlt, faQrcode,
     faTachometerAlt,faUserGraduate, faBookOpen, faCalendarPlus, faUsers,
-    faCalendarCheck, faDumbbell, faQuestionCircle, faBook, faSignOutAlt
+    faCalendarCheck, faDumbbell, faQuestionCircle, faBook, faSignOutAlt,
+    faPaintBrush, faBoxOpen
 );
 
 
@@ -114,6 +118,9 @@ export const icon = (name) => {
         book: 'fas fa-book',
         signOut: 'fas fa-sign-out-alt',
         question: 'fas fa-question-circle',
+
+        boxOpen: 'fas fa-box-open',
+        paintBrush: 'fas fa-paint-brush',
 
         qrcode: "fas fa-qrcode"
     };

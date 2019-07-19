@@ -371,7 +371,7 @@ storiesOf('Forgot', module).add('default configuration', () => (<Theme.Theme>
  */
 
 storiesOf('GithubCard', module).add('default configuration', () => (<Theme.Theme>
-    <GithubCard    
+    <GithubCard
       gitUsername={text('Github Username', 'plucodev')}
     />
 </Theme.Theme>));
@@ -397,7 +397,7 @@ storiesOf('Modal', module).add('default configuration', () => (<Theme.Theme>
 const icons = [
     'cog','exclamationTriangle','tachometer','graduate','bookOpen','calendarPlus','users','calendarCheck','dumbbell','questionCircle','book','signOut',
     'check','graduationCap','list','search','envelope','sync','bell','play','bars','pencil','question','times','arrowRight','arrowLeft','trash','circle',
-    'circleFilled','youtube','code','exchange'
+    'circleFilled','youtube','code','exchange', 'boxOpen', 'paintBrush'
 ];
 storiesOf('Icons', module).add('all icons', () => (<div>Icons<ul className="list-inline">
     { icons.map((icon, i) => <li key={i} className="list-inline-item"><Icon type={icon} /></li>)}
