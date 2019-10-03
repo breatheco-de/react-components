@@ -1,10 +1,11 @@
 # BreatheCode Platform JS Components
+
 <p>
   <a href="https://gitpod.io#https://github.com/breatheco-de/react-components.git"><img src="https://raw.githubusercontent.com/breatheco-de/react-components/master/open-in-gitpod.svg?sanitize=true" />
   </a>
 </p>
 
-This is the main UI Library used in all BreatheCode interfaces based on react.
+This is the main UI Library used in all BreatheCode interfaces based on react. Click here to see the [live demo](https://breatheco-de.github.io/react-components/)
 > Note: This is a very early development library, please help us debug it.
 
 ## Philosophy
@@ -22,20 +23,4 @@ $ npm i @breathecode/ui-components --save
 import { Panel, DropLink } from '@breathecode/ui-components';
 ```
 
-## Component Table of Contents:
-
-| Component     | Description                                                                               |
-|---------------|-------------------------------------------------------------------------------------------|
-| Button        |Simple button                                                                              | 
-| Checkbox      |It's a very simple checkbot                                                                | 
-| Droplink      |It's a minimalist bootstrap dropdown                                                       | 
-| List          |Just a list of stuff                                                                       | 
-| Loading       |Loading animation                                                                          | 
-| MenuItem      |Item on the left sidebar                                                                   | 
-| Modal         |Show stuff in the center of the screen                                                     | 
-| Notifier      |Notifications in the top of the viewport                                                   | 
-| Panel         |To display a box with material design shadow level                                         | 
-| PrivateRoute  |React Route that requiers autentication to display                                         | 
-| ProgressKPI   |Small indicator of progress                                                                | 
-| Sidebar       |The Main Navegation component in BreatheCode's UI                                          | 
-| BreatheCrumb  |Show the path were the user is standing and allos the user to go back to previous levels   | 
+Click here to see the [live demo](https://breatheco-de.github.io/react-components/)
