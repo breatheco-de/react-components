@@ -1,7 +1,7 @@
 .bc-readme{
     padding: 5px;
 }
-.bc-readme li{ list-style-type: disc; }
+.bc-readme li{ list-style-type: inherit; }
 .bc-readme pre{
     padding: 5px;
     background: #23241f;
