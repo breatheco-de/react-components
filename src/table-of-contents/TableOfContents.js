@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import "./tableofcontents.css";
 import { Anchor } from '../';
+import { NormalModuleReplacementPlugin } from 'webpack';
 
 const parse = (regex, source) => {
     let tags = [];
@@ -31,8 +32,16 @@ const getTags = (replaceRegex, source) => ({
 });
 
 const TableOfContents = ({source, type, contentType, className, replaceRegex, onClick }) => {
-    let tags = getTags(replaceRegex, source)[contentType]();
-    console.log("Tags", tags);
+    
+    if(!source){
+        console.error("Missing source property on table of contents");
+        return null;
+    } 
+        
+    let tags = [];
+    if(Array.isArray(source)) tags = source;
+    else tags = getTags(replaceRegex, source)[contentType]();
+
     tags = tags.map((t,i) => <li key={i} className={`level${t.level} ml-${t.level} b-${t.level}`}>
             <Anchor onClick={() => onClick && onClick({ ...t, i })}>{t.content}</Anchor>
         </li>);
@@ -43,7 +52,7 @@ const TableOfContents = ({source, type, contentType, className, replaceRegex, on
 TableOfContents.propTypes = {
 	source: PropTypes.oneOfType([
         PropTypes.string,
-        PropTypes.object,
+        PropTypes.array,
     ]),
     type: PropTypes.string,
     className: PropTypes.string,
