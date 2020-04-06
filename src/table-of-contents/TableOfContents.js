@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import "./tableofcontents.css";
 import { Anchor } from '../';
-import { NormalModuleReplacementPlugin } from 'webpack';
 
 const parse = (regex, source) => {
     let tags = [];

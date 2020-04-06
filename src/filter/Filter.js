@@ -54,7 +54,7 @@ class Filter extends React.Component {
 						{!this.state.selectedValues || this.state.selectedValues.length == 0 ?
 							placeholder
 							:
-							`${label}: ${this.state.selectedValues.map(v => v.label).join(', ')}`
+							`${label}: ${this.state.selectedValues.map(v => v ? v.label : "undefined").join(', ')}`
 						}
 					</div>
 					<div className={"options-component bcbox"}>
@@ -64,7 +64,7 @@ class Filter extends React.Component {
 								data={opt}
 								selected={typeof this.state.selectedValues.find(o => o.value === opt.value) === 'undefined' ? false : true}
 								onSelect={() => this.changeSelectedValues(!multiselect ? [opt] : this.state.selectedValues.filter(o => o.value != opt.value).concat([opt]))}
-								onDeselect={() => this.changeSelectedValues(!multiselect ? null : this.state.selectedValues.filter(o => o.value != opt.value)) }
+								onDeselect={() => this.changeSelectedValues(!multiselect ? [] : this.state.selectedValues.filter(o => o.value != opt.value)) }
 							/>)}
 						</ul>
 					</div>

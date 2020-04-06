@@ -10,6 +10,7 @@ module.exports = {
   plugins: [
     // your custom plugins
   ],
+  node: { fs: 'empty' },
   module: {
     rules: [
       {
