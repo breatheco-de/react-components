@@ -51,10 +51,10 @@ class CheckBox extends React.Component {
 					/>
 					:
 					<div className="btn-group btn-group-toggle float-right" data-toggle="buttons">
-						<button type="button" onClick={() => this.setChecked(false)} className={`btn btn-sm ${!checked ? 'btn-default active' : 'btn-light'}`}>
+						<button type="button" onClick={() => this.setChecked(false)} className={`btn btn-sm ${!checked ? 'btn-danger active' : 'btn-light'}`}>
 							<i className="fas fa-times" />
 						</button>
-						<button type="button" onClick={() => this.setChecked(true)} className={`btn btn-sm ${checked ? 'btn-default active' : 'btn-light'}`}>
+						<button type="button" onClick={() => this.setChecked(true)} className={`btn btn-sm ${checked ? 'btn-success active' : 'btn-light'}`}>
 							<i className="fas fa-check" />
 						</button>
 					</div>

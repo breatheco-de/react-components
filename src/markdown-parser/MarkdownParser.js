@@ -8,12 +8,13 @@ import './prism-okaidia.css';
 import PropTypes from 'prop-types';
 import reactRenderer from 'remark-react';
 import emoji from 'remark-emoji';
+import toc from 'remark-toc';
 import PrismRenderer from './PrismLowLight.js';
 import { Image, Anchor, Link } from './components.js';
 
 const MarkdownParser = ({ source }) => (<div className="bc-readme">
     {
-        remark().use(emoji).use(reactRenderer, {
+        remark().use(emoji).use(toc).use(reactRenderer, {
             remarkReactComponents: {
                 img: Image,
                 a: Anchor,

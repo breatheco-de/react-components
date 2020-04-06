@@ -1,0 +1,12 @@
+.bc-icon{
+  display: inline-block;
+  text-indent: -9999px;
+  width: 20px;
+  height: 20px;
+  margin-bottom: -3px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.bc-icon.gitpod{
+  background-image: url('https://symbols.getvecta.com/stencil_81/48_gitpod-icon.16ec9e76b3.svg');
+}

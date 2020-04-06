@@ -7,8 +7,8 @@ import { days, menuItems, actionableMenu, markdown } from './data.js';
 
 import { Theme, ActionableItem, DropLink, Button, CheckBox,
  List, TimeLine, Sidebar, Panel, Login, Forgot, Loading,
-  MenuItem, MarkdownParser, Filter, GithubCard, Icon, Modal } from '../src/index';
-
+  MenuItem, MarkdownParser, Filter, GithubCard, Icon, Modal, TableOfContents } from '../src/index';
+import { icon } from "../src/theme/icons";
 
 import { text, boolean, number, array, object, select } from '@storybook/addon-knobs';
 
@@ -144,6 +144,7 @@ storiesOf('Filter', module).add('gender example', () => (<Theme.Theme>
         placeholder={text('placeholder','Select one gender')}
         className={text('className','')}
         width={text('width','500px')}
+        timout={number('timout','1500')}
         multiselect={boolean('multiselect',false)}
         options={object('options',[
           {label: 'Male', value: 'male'},
@@ -204,16 +205,44 @@ storiesOf('Filter', module).add('with custom component', () => (<Theme.Theme>
         optionComponent={({data, onSelect, selected, onDeselect}) => (<CheckBox
             label={data.label}
             checked={selected}
-            withToggler={boolean('withToggler',false)}
-      			className={selected && 'selected'}
-      			onClick={(e) => selected ? onDeselect(data) : onSelect(data)}
-      		/>)
+            withToggler={false}
+            className={selected && 'selected'}
+            onClick={(e) => selected ? onDeselect(data) : onSelect(data)}
+      	/>)
           }
       />
     </div>
 </Theme.Theme>));
 
-
+storiesOf('Filter', module).add('with toggler', () => (<Theme.Theme>
+    <div className="mx-auto mt-5" style={{ maxWidth: "300px" }}>
+      <Filter
+        label={text('label','Tags')}
+        placeholder={text('placeholder','Select one or more tags')}
+        multiselect={boolean('multiselect',true)}
+        width={text('width','500px')}
+        direction={select('direction', ['row','column-reverse','column','row-reverse'], 'column')}
+        onChange={(opt) => action('onChange')(opt)}
+        options={object('options',[
+          {label: 'html', value: 'html'},
+          {label: 'react.js', value: 'react.js'},
+          {label: 'javascript', value: 'javascript'},
+          {label: 'rest', value: 'rest'},
+          {label: 'flask', value: 'flask'},
+          {label: 'django', value: 'django'},
+          {label: 'css', value: 'css'}
+        ])}
+        optionComponent={({data, onSelect, selected, onDeselect}) => (<CheckBox
+            label={data.label}
+            checked={selected}
+            withToggler={true}
+            className={selected && 'selected'}
+            onClick={(e) => selected ? onDeselect(data) : onSelect(data)}
+      		/>)
+          }
+      />
+    </div>
+</Theme.Theme>));
 /**
  *  Timeline
  */
@@ -394,11 +423,41 @@ storiesOf('Modal', module).add('default configuration', () => (<Theme.Theme>
 /**
  *  Icons
  */
-const icons = [
-    'cog','exclamationTriangle','tachometer','graduate','bookOpen','calendarPlus','users','calendarCheck','dumbbell','questionCircle','book','signOut',
-    'check','graduationCap','list','search','envelope','sync','bell','play','bars','pencil','question','times','arrowRight','arrowLeft','trash','circle',
-    'circleFilled','youtube','code','exchange', 'boxOpen', 'paintBrush'
-];
-storiesOf('Icons', module).add('all icons', () => (<div>Icons<ul className="list-inline">
-    { icons.map((icon, i) => <li key={i} className="list-inline-item"><Icon type={icon} /></li>)}
-</ul></div>));
+
+const icons = Object.keys(icon('all'));
+storiesOf('Icons', module).add('all icons', () => (<div>
+    <h1>Icons</h1>
+    { icons.map((icon, i) => <div key={i} className="d-inline-block border m-1 p-1">{icon} <Icon type={icon} /></div>)}
+</div>));
+
+storiesOf('Icons', module).add('image url', () => (<div>
+    <Icon 
+        className={text('className', "")} 
+        type={text('type', "https://symbols.getvecta.com/stencil_81/48_gitpod-icon.16ec9e76b3.svg")} 
+        size={text('size', "25px")} 
+    />
+</div>));
+
+/**
+ *  TableOfContents
+ */
+storiesOf('TableOfContents', module).add('ordered', () => (<div>
+    <h1>Table of Contents</h1>    
+    <TableOfContents 
+        className={text('className', '')}
+        type={select('type', ['ordered', 'unordered','alpha'])}
+        contentType={select('contentType', ['markdown', 'html'])}
+        replaceRegex={text('replaceRegex', ':.*:')}
+        onClick={(value) => action('onClick')(value)}
+        source={text('source', `# Hello
+This is some text
+
+## Second title
+
+That has some other text`)}
+    />
+</div>),{
+    knobs: {
+      escapeHTML: false
+    }
+});

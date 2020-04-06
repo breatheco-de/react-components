@@ -17,6 +17,7 @@ export var Modal = require("./modal").default;
 export var GithubCard = require("./github-card").default;
 
 export var MarkdownParser = require("./markdown-parser").default;
+export var TableOfContents = require("./table-of-contents").default;
 
 //export var LoadBar = require("./load-bar").default;
 //export var setLoading = require("./load-bar").setLoading;

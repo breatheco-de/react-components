@@ -30,6 +30,9 @@
     border: 1px solid #F3F3F3;
     position: relative;
 }
+.bcfilter .options-component ul li:hover{
+    background: var(--color-grey-200);
+}
 .bcfilter .options-component ul li.selected{
     padding-right: 25px;
 }
@@ -48,7 +51,7 @@
     cursor: pointer;
 }
 .bcfilter .options-component .selected{
-    background: var(--color-primary-really-light);
+    background: var(--color-primary-really-light) !important;
 }
 .bcfilter.open .options-component{
     display: inline-block;

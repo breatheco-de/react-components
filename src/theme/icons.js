@@ -53,7 +53,13 @@ import faBook from '@fortawesome/fontawesome-free-solid/faBook';
 import faSignOutAlt from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
 
 import faBoxOpen from '@fortawesome/fontawesome-free-solid/faBoxOpen';
+import faClock from '@fortawesome/fontawesome-free-regular/faClock';
 import faPaintBrush from '@fortawesome/fontawesome-free-solid/faPaintBrush';
+import faStar from '@fortawesome/fontawesome-free-solid/faStar';
+// import faSmileWink from '@fortawesome/fontawesome-free-solid/faSmileWink';
+import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
+import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
+
 
 /**
  * 3) Tell font-awesome that you want to replace your icons with SVGs (recomended for performance)
@@ -73,7 +79,7 @@ fontawesome.library.add(
     faCircleRegular, faPencil, faExclamationTriangle, faCode, faExchangeAlt, faQrcode,
     faTachometerAlt,faUserGraduate, faBookOpen, faCalendarPlus, faUsers,
     faCalendarCheck, faDumbbell, faQuestionCircle, faBook, faSignOutAlt,
-    faPaintBrush, faBoxOpen
+    faPaintBrush, faBoxOpen, faClock, faStar, faHeart, faDownload
 );
 
 
@@ -121,10 +127,19 @@ export const icon = (name) => {
 
         boxOpen: 'fas fa-box-open',
         paintBrush: 'fas fa-paint-brush',
+        github: "fab fa-github",
+        clock: "far fa-clock",
+        star: "fas fa-star",
+        // wink: "fas fa-smile-wink",
+        heart: "far fa-heart",
+        download: "fas fa-download",
+        gitpod: "bc-icon gitpod",
+
 
         qrcode: "fas fa-qrcode"
     };
-    if(typeof _icons[name] === 'undefined'){
+    if(name === 'all') return _icons;
+    else if(typeof _icons[name] === 'undefined'){
         console.warn('Invalid icon name: '+name);
         return _icons['question'];
     }

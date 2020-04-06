@@ -7,11 +7,25 @@ class Filter extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			selectedValues: [],
+            selectedValues: [],
+            isHovered: false,
 			opened: false
-		};
-	}
-	changeSelectedValues(selectedValues){
+        };
+        this.timeout = null;
+    }
+    checkHovered(isHovered){
+        this.setState({ isHovered });
+        if(!isHovered){
+            if(this.timeout) clearTimeout(this.timeout());
+            setTimeout(() => {
+                if(!this.state.isHovered){
+                    this.setState({ opened: false });
+                }
+            }, this.props.timout);
+        }
+    }
+	changeSelectedValues(sv){
+        const selectedValues = Array.isArray(sv) ? sv : [sv];
 		this.setState({ selectedValues });
 		if(this.props.onChange) this.props.onChange(selectedValues);
 	}
@@ -32,25 +46,24 @@ class Filter extends React.Component {
 		</li>;
 		return (
 			<div className={`bcfilter ${className}  ${this.state.opened ? 'open' : ''}`}>
-				<div className={"display-component bcbox"}>
+				<div className={"display-component bcbox"}
+                    onMouseEnter={() => this.checkHovered(true)}
+                    onMouseLeave={() => this.checkHovered(false)}
+                >
 					<div className={"placeholder"} onClick={() => this.setState({ opened: !this.state.opened })}>
 						{!this.state.selectedValues || this.state.selectedValues.length == 0 ?
 							placeholder
 							:
-							`${label}: ${!multiselect ? this.state.selectedValues.label : this.state.selectedValues.map(v => v.label).join(', ')}`
+							`${label}: ${this.state.selectedValues.map(v => v.label).join(', ')}`
 						}
 					</div>
 					<div className={"options-component bcbox"}>
-						{multiselect && <p><Anchor onClick={() => this.setState({ selectedValues: [] })}>Unselect all</Anchor></p>}
+						{multiselect && <p><Anchor onClick={() => this.changeSelectedValues([])}>Unselect all</Anchor></p>}
 						<ul style={{ flexDirection: this.props.direction, width: this.props.width }}>
 							{options.map((opt, i) => <Option className="bcbox" key={i}
 								data={opt}
-								selected={multiselect ?
-									typeof this.state.selectedValues.find(o => o.value === opt.value) === 'undefined' ? false : true
-									:
-									!this.state.selectedValues ? false : this.state.selectedValues.value === opt.value
-								}
-								onSelect={() => this.changeSelectedValues(!multiselect ? opt : this.state.selectedValues.filter(o => o.value != opt.value).concat([opt]))}
+								selected={typeof this.state.selectedValues.find(o => o.value === opt.value) === 'undefined' ? false : true}
+								onSelect={() => this.changeSelectedValues(!multiselect ? [opt] : this.state.selectedValues.filter(o => o.value != opt.value).concat([opt]))}
 								onDeselect={() => this.changeSelectedValues(!multiselect ? null : this.state.selectedValues.filter(o => o.value != opt.value)) }
 							/>)}
 						</ul>
@@ -71,17 +84,19 @@ Filter.propTypes = {
     width: PropTypes.string,
 	placeholder: PropTypes.string.isRequired,
 	options: PropTypes.array.isRequired,
-	onChange: PropTypes.func
+	onChange: PropTypes.func,
+	timeout: PropTypes.number
 };
 Filter.defaultProps = {
 	label: "Label",
 	placeholder: "Select a gender",
 	className: "",
 	direction: "row",
+	timout: 1500,
 	width: "500px",
 	optionComponent: null,
 	multiselect: true,
 	onChange: null,
-	options: null,
+	options: [],
 };
 export default Filter;
