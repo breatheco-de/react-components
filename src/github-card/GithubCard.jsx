@@ -24,7 +24,7 @@ class GithubCard extends React.Component {
     let { data } = this.state;
     // let {username} = this.props.gitUsername;
     return (
-      <div className="card border-muted">
+      <div className="github-card card border-muted">
         <div className="card-header border-muted bg-transparent d-inline-flex p-2">
           <div className="col-3 ">
             {data && (

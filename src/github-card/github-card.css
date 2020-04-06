@@ -1,13 +1,12 @@
 /* @import '../theme/colors';
 @import '../theme/utility'; */
 
- .img-fluid {
+.github-card .img-fluid {
    width: 60px;
  }
-.card {
-  width: 500px;
+.github-card.card {
+  max-width: 500px;
 }
-a {
+.github-card a {
     background-image: none;
-
 }
