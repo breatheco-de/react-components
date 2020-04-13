@@ -441,12 +441,12 @@ storiesOf('Icons', module).add('image url', () => (<div>
 /**
  *  TableOfContents
  */
-storiesOf('TableOfContents', module).add('ordered', () => (<div>
+storiesOf('TableOfContents', module).add('markdown', () => (<div>
     <h1>Table of Contents</h1>    
     <TableOfContents 
         className={text('className', '')}
         type={select('type', ['ordered', 'unordered','alpha'])}
-        contentType={select('contentType', ['markdown', 'html'])}
+        contentType={select('contentType', ['markdown'])}
         sanitizeHeading={(inner) => inner.replace("econd", '')}
         onClick={(value) => action('onClick')(value)}
         source={text('source', `# Hello
@@ -455,6 +455,51 @@ This is some text
 ## Second title
 
 That has some other text`)}
+    />
+</div>),{
+    knobs: {
+      escapeHTML: false
+    }
+});
+
+/**
+ *  TableOfContents
+ */
+storiesOf('TableOfContents', module).add('html', () => (<div>
+    <h1>Table of Contents</h1>    
+    <TableOfContents 
+        className={text('className', '')}
+        type={select('type', ['ordered', 'unordered','alpha'])}
+        contentType={'html'}
+        sanitizeHeading={(inner) => inner.replace("econd", '')}
+        onClick={(value) => action('onClick')(value)}
+        source={text('source', `<h1> Hello</h1>
+<p>This is some text</p>
+
+<h3>Second <strong>title</strong></h3>
+
+<p>That has some other text<p>`)}
+    />
+</div>),{
+    knobs: {
+      escapeHTML: false
+    }
+});
+
+/**
+ *  TableOfContents
+ */
+storiesOf('TableOfContents', module).add('array', () => (<div>
+    <h1>Table of Contents</h1>    
+    <TableOfContents 
+        className={text('className', '')}
+        type={select('type', ['ordered', 'unordered','alpha'])}
+        sanitizeHeading={(inner) => inner.replace("econd", '')}
+        onClick={(value) => action('onClick')(value)}
+        source={object('source',[
+          {to: 'option-1', content: 'hello click me for option one', level: 1 },
+          {to: 'option-2', content: 'hello click me for option twq', level: 2 },
+        ])}
     />
 </div>),{
     knobs: {

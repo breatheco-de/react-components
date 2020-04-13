@@ -19,18 +19,22 @@ const parse = (regex, source) => {
     
     return tags;
 }
-
+const hierarchyNode = (node, sanitize) => {
+    const content = sanitize(node.content);
+    return {
+        content,
+        level: node.level.length,
+        to: content.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'')
+    }
+};
 const getTags = (source, sanitize) => ({
     markdown: function(){
         const regex = /(#{1,5})(.*)\n/gm;
-        return parse(regex, source).map(t => ({ 
-            level: t.level.length, 
-            content: sanitize(t.content)
-        }));
+        return parse(regex, source).map((n) => hierarchyNode(n, sanitize));
     },
     html: function(){
         const regex = /<[hH](\d)(?:.*)?>(.+)<\/[hH]\1>/gm;
-        return parse(regex, source);
+        return parse(regex, source).map((n) => hierarchyNode(n, sanitize))
     },
 });
 
@@ -45,11 +49,12 @@ const TableOfContents = ({source, type, contentType, className, sanitizeHeading,
     } 
         
     let tags = [];
+    console.log(contentType);
     if(Array.isArray(source)) tags = source;
     else tags = getTags(source, sanitizeHeading ? sanitizeHeading : defaultSanitize)[contentType]();
 
     tags = tags.map((t,i) => <li key={i} className={`level${t.level} ml-${t.level} b-${t.level}`}>
-            <Anchor onClick={() => onClick && onClick({ ...t, i })}>{t.content}</Anchor>
+            <Anchor to={t.to} onClick={() => onClick && onClick({ ...t, i })}>{t.content}</Anchor>
         </li>);
     return <ol className={`bc_tableofcontents ${type} ${className}`}>{tags}</ol>; 
 
