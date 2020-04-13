@@ -447,7 +447,7 @@ storiesOf('TableOfContents', module).add('ordered', () => (<div>
         className={text('className', '')}
         type={select('type', ['ordered', 'unordered','alpha'])}
         contentType={select('contentType', ['markdown', 'html'])}
-        replaceRegex={text('replaceRegex', ':.*:')}
+        sanitizeHeading={null}
         onClick={(value) => action('onClick')(value)}
         source={text('source', `# Hello
 This is some text

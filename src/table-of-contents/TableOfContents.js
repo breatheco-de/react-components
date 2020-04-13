@@ -19,10 +19,14 @@ const parse = (regex, source) => {
     
     return tags;
 }
-const getTags = (replaceRegex, source) => ({
+
+const getTags = (source, sanitize) => ({
     markdown: function(){
         const regex = /(#{1,5})(.*)\n/gm;
-        return parse(regex, source).map(t => ({ level: t.level.length, content: t.content.replace(new RegExp(replaceRegex), "") }));
+        return parse(regex, source).map(t => ({ 
+            level: t.level.length, 
+            content: sanitize(t.content)
+        }));
     },
     html: function(){
         const regex = /<[hH](\d)(?:.*)?>(.+)<\/[hH]\1>/gm;
@@ -30,7 +34,10 @@ const getTags = (replaceRegex, source) => ({
     },
 });
 
-const TableOfContents = ({source, type, contentType, className, replaceRegex, onClick }) => {
+const defaultSanitize = (innerHTML) => {
+    return innerHTML.replace(new RegExp('(:[a-z]+:)*'), "");
+};
+const TableOfContents = ({source, type, contentType, className, sanitizeHeading, onClick }) => {
     
     if(!source){
         console.error("Missing source property on table of contents");
@@ -39,7 +46,7 @@ const TableOfContents = ({source, type, contentType, className, replaceRegex, on
         
     let tags = [];
     if(Array.isArray(source)) tags = source;
-    else tags = getTags(replaceRegex, source)[contentType]();
+    else tags = getTags(source, sanitizeHeading ? sanitizeHeading : defaultSanitize)[contentType]();
 
     tags = tags.map((t,i) => <li key={i} className={`level${t.level} ml-${t.level} b-${t.level}`}>
             <Anchor onClick={() => onClick && onClick({ ...t, i })}>{t.content}</Anchor>
@@ -55,15 +62,15 @@ TableOfContents.propTypes = {
     ]),
     type: PropTypes.string,
     className: PropTypes.string,
-    replaceRegex: PropTypes.string,
     onClick: PropTypes.func,
+    sanitizeHeading: PropTypes.func,
     contentType: PropTypes.string,
 };
 TableOfContents.defaultProps = {
 	source: null,
 	onClick: null,
+	sanitizeHeading: null,
 	type: "ordered",
-	replaceRegex: '(:[a-z]+:)*',
 	contentType: "markdown",
 	className: "",
 };
