@@ -447,7 +447,7 @@ storiesOf('TableOfContents', module).add('ordered', () => (<div>
         className={text('className', '')}
         type={select('type', ['ordered', 'unordered','alpha'])}
         contentType={select('contentType', ['markdown', 'html'])}
-        sanitizeHeading={null}
+        sanitizeHeading={(inner) => inner.replace("econd", '')}
         onClick={(value) => action('onClick')(value)}
         source={text('source', `# Hello
 This is some text
