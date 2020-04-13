@@ -24,7 +24,7 @@ const hierarchyNode = (node, sanitize) => {
     return {
         content,
         level: node.level.length,
-        to: content.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'')
+        to: "#"+content.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'')
     }
 };
 const getTags = (source, sanitize) => ({
@@ -49,7 +49,6 @@ const TableOfContents = ({source, type, contentType, className, sanitizeHeading,
     } 
         
     let tags = [];
-    console.log(contentType);
     if(Array.isArray(source)) tags = source;
     else tags = getTags(source, sanitizeHeading ? sanitizeHeading : defaultSanitize)[contentType]();
 

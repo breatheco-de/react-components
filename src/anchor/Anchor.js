@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-const Anchor = ({className, children, onClick, to}) => (<a href={"#"+to} className={className && className} onClick={(e) => { e.preventDefault(); onClick && onClick(e); }}>{children}</a>);
+const Anchor = ({className, children, onClick, to}) => (<a href={to} className={className && className} onClick={(e) => { 
+    if(to.chartAt(0) !== "#") e.preventDefault(); 
+    if(onClick) onClick(e); 
+}}>{children}</a>);
 Anchor.propTypes = {
 	// You can declare that a prop is a specific JS primitive. By default, these
 	// are all optional.
@@ -11,7 +14,7 @@ Anchor.propTypes = {
 };
 Anchor.defaultProps = {
 	className: "",
-	to: "",
+	to: "#",
 	onClick: null,
 	children: null
 };

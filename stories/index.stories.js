@@ -497,8 +497,8 @@ storiesOf('TableOfContents', module).add('array', () => (<div>
         sanitizeHeading={(inner) => inner.replace("econd", '')}
         onClick={(value) => action('onClick')(value)}
         source={object('source',[
-          {to: 'option-1', content: 'hello click me for option one', level: 1 },
-          {to: 'option-2', content: 'hello click me for option twq', level: 2 },
+          {to: '#option-1', content: 'hello click me for option one', level: 1 },
+          {to: '#option-2', content: 'hello click me for option twq', level: 2 },
         ])}
     />
 </div>),{
