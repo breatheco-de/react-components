@@ -1,6 +1,6 @@
 {
   "name": "@breathecode/ui-components",
-  "version": "1.1.70",
+  "version": "1.1.71",
   "description": "Collection of usefull components for react.js applications around the BreatheCode ecosystem",
   "main": "dist/index.js",
   "directories": {
