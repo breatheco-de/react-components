@@ -123,7 +123,27 @@ storiesOf('Loading', module).add('default configuration', () => (<Theme.Theme>
 storiesOf('MarkdownParser', module).add('default configuration', () => (<Theme.Theme>
     <div className="row mt-5">
       <div className="col-12 col-sm-8 col-lg-6 mx-auto">
-        <MarkdownParser source={text('source',markdown)} />
+        <MarkdownParser 
+            commentMarker={text('commentMarker','')} 
+            context={object('context',{ foo: "var" })} 
+            source={text('source',markdown)} 
+        />
+      </div>
+    </div>
+</Theme.Theme>), {
+    knobs: {
+      escapeHTML: false
+    }
+  });
+
+storiesOf('MarkdownParser', module).add('template manager (variables)', () => (<Theme.Theme>
+    <div className="row mt-5">
+      <div className="col-12 col-sm-8 col-lg-6 mx-auto">
+        <MarkdownParser 
+            commentMarker={text('commentMarker','')} 
+            context={object('context',{ foo: "var" })} 
+            source={text('source',"This is markdown, the variable **{{ foo }}** is being loaded as template manager")} 
+        />
       </div>
     </div>
 </Theme.Theme>), {

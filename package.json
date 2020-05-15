@@ -1,6 +1,6 @@
 {
   "name": "@breathecode/ui-components",
-  "version": "1.1.75",
+  "version": "1.1.76",
   "description": "Collection of usefull components for react.js applications around the BreatheCode ecosystem",
   "main": "dist/index.js",
   "directories": {
@@ -75,10 +75,12 @@
     "refractor": "^2.8.0",
     "rehype": "^7.0.0",
     "remark": "^10.0.1",
+    "remark-comments": "^1.2.8",
     "remark-emoji": "^2.0.2",
     "remark-react": "^5.0.1",
     "remark-rehype": "^4.0.0",
     "remark-toc": "^7.0.0",
+    "remark-variables": "^1.4.9",
     "typography": "^0.16.19",
     "typography-theme-doelger": "^0.16.19",
     "validator": "^10.9.0",

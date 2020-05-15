@@ -11,28 +11,45 @@ import emoji from 'remark-emoji';
 import toc from 'remark-toc';
 import PrismRenderer from './PrismLowLight.js';
 import { Image, Anchor, Link } from './components.js';
+import remarkComments from 'remark-comments';
+// import twemoji from 'remark-twemoji';
+import variables from 'remark-variables';
 
-const MarkdownParser = ({ source }) => (<div className="bc-readme">
-    {
-        remark().use(emoji).use(toc).use(reactRenderer, {
+const MarkdownParser = ({ source, commentMarker, context }) => {
+    let processor = remark().use(emoji).use(toc)
+        .use(remarkComments, {
+            beginMarker: commentMarker,
+            endMarker: commentMarker
+        })
+        //.use(twemoji)
+        .use(reactRenderer, {
             remarkReactComponents: {
                 img: Image,
                 a: Anchor,
                 code: PrismRenderer,
                 pre: (props) => (typeof props.children[0] != 'string') ?
-                                    PrismRenderer(props.children[0].props) : PrismRenderer(props)
+                PrismRenderer(props.children[0].props) : PrismRenderer(props)
             },
             sanitize: false
-        }).processSync(source).contents
+        })
+        .use(variables);
 
-    }
-</div>);
+    if(context) for(let key in context) processor = processor.data(key, context[key]);
+
+    return (<div className="bc-readme">
+        {processor.processSync(source).contents}
+    </div>);
+};
 
 MarkdownParser.propTypes = {
     source: PropTypes.string.isRequired,
+    commentMarker: PropTypes.string,
+    context: PropTypes.object
 };
 
 MarkdownParser.defaultProps = {
-    source: null
+    source: null,
+    context: null,
+    commentMarker: ''
 };
 export default MarkdownParser;
