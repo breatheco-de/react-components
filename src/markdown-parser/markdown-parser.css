@@ -4,11 +4,12 @@
 .bc-readme li{ list-style-type: inherit; }
 .bc-readme pre{
     padding: 5px;
-    background: #23241f;
+    background: #393a37;
     border-radius: 5px;
 }
 .bc-readme :not(pre) > code[class*="language-"] {
-    padding: .3em;
+    padding: 5px;
+    font-size: 80%;
 }
 .bc-readme h1,.bc-readme h2,.bc-readme h3,.bc-readme h4,.bc-readme h5{
     margin: 20px 0px 25px 0px;

@@ -152,6 +152,38 @@ storiesOf('MarkdownParser', module).add('template manager (variables)', () => (<
     }
   });
 
+storiesOf('MarkdownParser', module).add('jumps of lines', () => (<Theme.Theme>
+    <div className="row mt-5">
+      <div className="col-12 col-sm-8 col-lg-6 mx-auto">
+        <MarkdownParser 
+            commentMarker={text('commentMarker','')} 
+            context={object('context',{ foo: "var" })} 
+            source={text('source',`
+Test your code by running \`$ pipenv run test\`
+
+## 📝 Instructions
+
+\`\`\`python
+1) Create the code needed to implement the API endpoints described further below.  
+\`\`\`
+
+2) The only two files you have to edit are:  
+
+	- src/datastructure.py: Contains the class with the rules on how to manage the fammily members.  
+	
+	- src/app.py: Contains the API, it uses the Family as datastructure. 
+	
+3) We have prepared a set of automated tests that will give you an idea if your code is correct, run the tests by typing \`$ pipenv run tests\` on the command line.  
+ `)} 
+        />
+      </div>
+    </div>
+</Theme.Theme>), {
+    knobs: {
+      escapeHTML: false
+    }
+  });
+
 /**
  *  Filter
  */
