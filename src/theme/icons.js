@@ -60,6 +60,7 @@ import faStar from '@fortawesome/fontawesome-free-solid/faStar';
 import faHeart from '@fortawesome/fontawesome-free-regular/faHeart';
 import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
+import faBug from '@fortawesome/fontawesome-free-solid/faBug';
 
 /**
  * 3) Tell font-awesome that you want to replace your icons with SVGs (recomended for performance)
@@ -79,7 +80,7 @@ fontawesome.library.add(
     faCircleRegular, faPencil, faExclamationTriangle, faCode, faExchangeAlt, faQrcode,
     faTachometerAlt,faUserGraduate, faBookOpen, faCalendarPlus, faUsers,
     faCalendarCheck, faDumbbell, faQuestionCircle, faBook, faSignOutAlt,
-    faPaintBrush, faBoxOpen, faClock, faStar, faHeart, faDownload
+    faPaintBrush, faBoxOpen, faClock, faStar, faHeart, faDownload, faBug
 );
 
 
@@ -98,6 +99,7 @@ export const icon = (name) => {
         sync: 'fas fa-sync',
         bell: 'fas fa-bell',
         play: 'fas fa-play',
+        bug: 'fas fa-bug',
         powerOff: 'fas fa-power-off',
         bars: 'fas fa-bars',
         pencil: 'fas fa-pencil-alt',
